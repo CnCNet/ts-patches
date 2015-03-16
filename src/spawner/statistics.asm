@@ -8,6 +8,16 @@
 @JMP 0x005B4FAE _Execute_DoList_Send_Statistics_Game_Leave
 @JMP 0x005B4FD3 _Execute_DoList_Send_Statistics_Game_Leave2
 
+@JMP 0x00609810 UseInternalMapNameInsteadFilename
+
+
+UseInternalMapNameInsteadFilename:
+    mov ecx, dword[0x7E2438]
+    add ecx, 0x904
+    push ecx
+    jmp 0x00609815
+
+
 _Execute_DoList_Send_Statistics_Game_Leave2:
     mov edx, [SessionType]
 
