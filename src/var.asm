@@ -42,5 +42,6 @@ var:
     .InvisibleSouthDisruptorWave RESB 1
     .SetProcessAffinityMask     RESD 1
     .NoWindowFrame                RESB 1
+    .MeSurrendered                RESB 1
 
 [section .text]
