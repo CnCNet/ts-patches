@@ -4,6 +4,7 @@
 
 @CLEAR 0x0046283A 0x90 0x00462842 ; Temporary solution, need to find out if we are dead
 @JMP 0x0046283A SurrenderDialogOkClick ; Temporary solution, need to find out if we are dead
+@JMP 0x004627F3 SurrenderDialogOkClick2 ; Temporary solution, need to find out if we are dead
 
 ForceSurrenderOnAbort:
     cmp dword[var.SpawnerActive], 1
@@ -20,7 +21,6 @@ ForceSurrenderOnAbort:
     jne 0x004B6D20
     jmp 0x004B6D0D
 
-    ;004626C1
 AutoSurrenderOnConnectionLost:
     cmp dword[var.SpawnerActive], 1
     jnz .out
@@ -39,3 +39,8 @@ SurrenderDialogOkClick:
     test eax, eax
     je 0x004628E3
     jmp 0x00462842
+
+SurrenderDialogOkClick2:
+    mov byte[var.MeSurrendered], 1
+    mov eax, dword[0x7E2284]
+    jmp 0x004627F8
