@@ -74,6 +74,7 @@
 %define Frame                                       0x007E4924
 %define GameIDNumber                                0x00867014
 %define PlayerColor                                 0x007E24DC
+%define TournamentGame                              0x00867008
 
 ; Random
 %define Seed                                        0x007E4934

@@ -33,6 +33,8 @@ retn ; For some reason the game executes the first function found in the extende
 %include "src/spawner/build_off_ally.asm"
 ;%include "src/spawner/auto_ss.asm"
 %include "src/only_the_host_may_change_gamespeed.asm"
+%include "src/spawner/auto-surrender.asm"
+
 
 ; other
 %include "src/trigger_actions_extended.asm"
