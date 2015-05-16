@@ -11,7 +11,7 @@ ForceSurrenderOnAbort:
     jnz .out
     cmp dword[SessionType], 3
     jnz .out
-    cmp byte[var.MeSurrendered], 1
+    cmp byte[var.MeSurrendered], 1 ; This should check if we are dead and if that's the case jmp .out
     jz .out
     mov dword[0x7E4940], 2
     jmp 0x004B6D2A
