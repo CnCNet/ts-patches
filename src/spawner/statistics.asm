@@ -9,6 +9,33 @@
 @JMP 0x005B4FD3 _Execute_DoList_Send_Statistics_Game_Leave2
 
 @JMP 0x00609810 UseInternalMapNameInsteadFilename
+@JMP 0x006097FD AddACCNField
+
+
+AddACCNField:
+    call 0x005A22D0
+
+    push 0x10
+    call 0x006B51D7 ; OperatorNew
+    add esp, 4
+    cmp eax, edi
+    je .fail
+    mov ecx, dword[PlayerPtr]
+    lea ecx, [ecx+0x10DE4] ; 0x10DE4 = HC_PLAYER_NAME
+    push ecx
+    push str_AccountNameField
+    mov ecx, eax
+    call 0x00498AD0 ; FieldClass__FieldClass_String
+    jmp .noFail
+    
+.fail:
+    xor eax, eax
+    
+.noFail:
+    push eax
+    lea ecx, [esp+0x18]
+    call 0x005A22D0 ;PacketClass__Add_Field
+    jmp 0x00609802
 
 
 UseInternalMapNameInsteadFilename:

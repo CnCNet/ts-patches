@@ -729,7 +729,10 @@ Initialize_Spawn:
     jne .nosetport
     SpawnINI_Get_Int str_Settings, str_Port, 1234
     mov word [ListenPort], ax
+    jmp .portset
 .nosetport:
+    mov word [ListenPort], 0
+.portset:
      
     SpawnINI_Get_Bool str_Settings, str_Firestorm, 0
     
