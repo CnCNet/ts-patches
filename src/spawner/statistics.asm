@@ -11,6 +11,51 @@
 @JMP 0x00609810 UseInternalMapNameInsteadFilename
 @JMP 0x006097FD AddACCNField
 
+@JMP 0x00609F40 _Send_Statistics_Packet_Write_New_Fields
+
+
+_Send_Statistics_Packet_Write_New_Fields:
+
+	push    eax
+	lea     ecx, [esp+0x18]
+	call    0x005A22D0 ; PacketClass::Add_Field(FieldClass *)
+
+	; write 'SPC'
+	mov     byte [0x0070FD0C], 0x53
+	mov     byte [0x0070FD0D], 0x50
+	mov     byte [0x0070FD0E], 0x43
+	
+	; player number
+	mov     byte [0x0070FD0F], bl
+	
+	mov     edi, [esi+0x20] ; value
+	mov		edi, [var.IsSpectatorArray+edi*4]
+	
+	push    10h
+	call    0x006B51D7 ; operator new(uint)
+	add     esp, 4
+	test    eax, eax
+	jz      .new_failed
+	push    edi
+	push    0x0070FD0C
+	mov     ecx, eax
+	call    0x00498A70  ; FieldClass::FieldClass(char *,ulong)
+	jmp     short .ret
+	
+	
+.new_failed:
+	xor     eax, eax
+
+.ret:
+
+	; Reset field name to 'COL'
+	mov     byte [0x0070FD0C], 0x43
+	mov     byte [0x0070FD0D], 0x4f
+	mov     byte [0x0070FD0E], 0x4c
+
+	push    eax
+	lea     ecx, [esp+0x18]
+	jmp		0x00609F45
 
 AddACCNField:
     call 0x005A22D0
