@@ -35,17 +35,78 @@ _Send_Statistics_Packet_Write_New_Fields:
 	call    0x006B51D7 ; operator new(uint)
 	add     esp, 4
 	test    eax, eax
-	jz      .new_failed
+	jz      .new_failed1
+	push    edi
+	push    0x0070FD0C
+	mov     ecx, eax
+	call    0x00498A70  ; FieldClass::FieldClass(char *,ulong)
+	jmp     short .Write_Alliances
+	
+	
+.new_failed1:
+	xor     eax, eax
+
+.Write_Alliances:
+
+	push    eax
+	lea     ecx, [esp+0x18]
+	call    0x005A22D0 ; PacketClass::Add_Field(FieldClass *)
+
+	; write 'ALY' 
+	mov     byte [0x0070FD0C], 0x41
+	mov     byte [0x0070FD0D], 0x4c
+	mov     byte [0x0070FD0E], 0x59
+	
+	; player number
+	mov     byte [0x0070FD0F], bl
+	
+	mov     edi, [esi+0x578] ; value
+	
+	push    10h
+	call    0x006B51D7 ; operator new(uint)
+	add     esp, 4
+	test    eax, eax
+	jz      .new_failed2
+	push    edi
+	push    0x0070FD0C
+	mov     ecx, eax
+	call    0x00498A70  ; FieldClass::FieldClass(char *,ulong)
+	jmp     short .Write_Spawns
+	
+.new_failed2:
+	xor     eax, eax	
+	
+.Write_Spawns:
+
+	push    eax
+	lea     ecx, [esp+0x18]
+	call    0x005A22D0 ; PacketClass::Add_Field(FieldClass *)
+
+	; write 'SPA' 
+	mov     byte [0x0070FD0C], 0x53
+	mov     byte [0x0070FD0D], 0x50
+	mov     byte [0x0070FD0E], 0x41
+	
+	; player number
+	mov     byte [0x0070FD0F], bl
+	
+	mov     edi, [esi+0x20] ; value
+	mov		edi, [var.SpawnLocationsArray+edi*4]
+	
+	push    10h
+	call    0x006B51D7 ; operator new(uint)
+	add     esp, 4
+	test    eax, eax
+	jz      .new_failed3
 	push    edi
 	push    0x0070FD0C
 	mov     ecx, eax
 	call    0x00498A70  ; FieldClass::FieldClass(char *,ulong)
 	jmp     short .ret
 	
+.new_failed3:
+	xor     eax, eax	
 	
-.new_failed:
-	xor     eax, eax
-
 .ret:
 
 	; Reset field name to 'COL'
