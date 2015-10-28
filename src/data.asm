@@ -1,5 +1,6 @@
 [org 0xA69000]
 
+str_MyIdField db "MYID",0
 str_AccountNameField db "ACCN",0
 str_NoWindowFrame db "NoWindowFrame",0
 str_kernel32dll db "Kernel32.dll",0

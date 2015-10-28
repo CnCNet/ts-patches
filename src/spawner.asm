@@ -59,6 +59,9 @@
 @JMP 0x005DBCC3 _Read_Scenario_Custom_Load_Screen_Spawner
 @JMP 0x005DD523 _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting
 
+;always write mp stats
+@CLEAR 0x0046353C 0x90 0x00463542
+
 _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
     cmp dword [var.IsSpawnArgPresent], 0
     jz  .Ret

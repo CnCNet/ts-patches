@@ -10,6 +10,7 @@
 
 @JMP 0x00609810 UseInternalMapNameInsteadFilename
 @JMP 0x006097FD AddACCNField
+@JMP 0x00609D73 AddMyIdField
 
 @JMP 0x00609F40 _Send_Statistics_Packet_Write_New_Fields
 
@@ -118,6 +119,41 @@ _Send_Statistics_Packet_Write_New_Fields:
 	lea     ecx, [esp+0x18]
 	jmp		0x00609F45
 
+    
+AddMyIdField:
+    add bl, 0x30
+    
+    mov eax, dword[PlayerPtr]
+    cmp eax, esi
+    jnz .out
+ 
+    push 0x10
+    call 0x006B51D7 ; OperatorNew
+    add esp, 4
+    test eax, eax
+    jz .fail
+    
+    xor ecx, ecx
+    mov cl, bl
+    sub cl, '0'  
+    push ecx
+    push str_MyIdField
+    mov ecx, eax
+    call 0x00498A70 ; FieldClass::FieldClass
+    jmp .noFail
+    
+.fail:
+    xor eax, eax
+
+.noFail:
+    push eax
+    lea ecx, [esp+0x18]
+    call 0x005A22D0 ;PacketClass__Add_Field
+    
+.out:
+    push 0x10
+    jmp 0x00609D78
+    
 AddACCNField:
     call 0x005A22D0
 
