@@ -1,5 +1,4 @@
-spawn.bat
-# temporary files due to linking
-/src/*.inc
-# patched executables
-/*.exe
+*.o
+tibsun.exe
+# *local* configuration file, seriously
+config.mk

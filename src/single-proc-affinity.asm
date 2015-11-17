@@ -1,3 +1,18 @@
+extern LoadLibraryA
+extern GetProcAddress
+extern GetCurrentProcess
+
+global var.SetProcessAffinityMask
+global SetSingleProcAffinity
+
+section .rdata
+    str_kernel32dll: db "kernel32.dll",0
+    str_SetProcessAffinityMask: db "SetProcessAffinityMask",0
+
+section .bss
+    var.SetProcessAffinityMask: resd 1
+
+section .text
 
 SetSingleProcAffinity:
     pushad
