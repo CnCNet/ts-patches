@@ -1,3 +1,4 @@
+extern __strcmpi
 %macro strcmp_i 2
     push    %1             ; Str2
     push    %2             ; Str1

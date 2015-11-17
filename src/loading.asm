@@ -34,14 +34,11 @@ _WinMain_Read_SUN_INI_Read_Extra_Options:
     
 .DoNotSetSingleProcAffinity:
 
-; need more ported code to enable these -hifi
-%if 0
     INIClass_Get_Bool INIClass_SUN_INI, str_Video, str_NoWindowFrame, 0
     mov byte [var.NoWindowFrame], al
     
     INIClass_Get_Bool INIClass_SUN_INI, str_Video, str_UseGraphicsPatch, 1
     mov byte [var.UseGraphicsPatch], al
-%endif
     
     INIClass_Get_Bool INIClass_SUN_INI, str_Options, str_NoCD, 1
     cmp al, 0

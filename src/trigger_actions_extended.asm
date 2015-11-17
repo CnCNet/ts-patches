@@ -1,9 +1,14 @@
+%include "src/patch.inc"
+
+extern var.UsedSpawnsArray
+extern HouseClassArray
+
 ; 0x40 = first parameter, 0x24 = second parameter, 0x28, third parameter, 0x2C = fourth parameter, 0x30 = fifth parameter
 ; the trigger action type should be 0 (as set map INI) for the extended triggers added, determines how the rest of the
 ; INI line is read for the rest of the trigger
 ; [Actions] 01000000=1,7,1,01000005,0,0,0,0,A
 ; [Actions] TRIGGER_ACTION_ID=AMOUNT_OF_ACTIONS,TRIGGER_ACTION_ID,TRIGGER_ACTION_TYPE,PARAM1,PARAM2,PARAM3,PARAM4,PARAM5,WAYPOINT_LETTER(?)
-@JMP 0x006198C7 _Trigger_Action_Extend_Change_House
+@LJMP 0x006198C7, _Trigger_Action_Extend_Change_House
 
 _Trigger_Action_Extend_Change_House:
     mov eax, ecx

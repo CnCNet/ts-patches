@@ -1,4 +1,13 @@
-@JMP 0x00686210 SetNoWindowFrame
+%include "src/patch.inc"
+
+global var.NoWindowFrame
+
+@LJMP 0x00686210, SetNoWindowFrame
+
+section .bss
+    var.NoWindowFrame resb 1
+
+section .text
 
 SetNoWindowFrame:
     cmp byte [var.NoWindowFrame], 1

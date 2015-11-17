@@ -1,4 +1,17 @@
-@JMP 0x00509D2F _Message_Input_Display_Messages_Typed_By_Yourself
+%include "src/patch.inc"
+
+extern PlayerPtr
+extern Get_Message_Delay_Or_Duration
+extern MessageListClass_this
+extern MessageListClass__Add_Message
+extern _sprintf
+
+@LJMP 0x00509D2F, _Message_Input_Display_Messages_Typed_By_Yourself
+
+section .rdata
+    str_message_fmt: db "%s: %s",0
+
+section .text
 
 _Message_Input_Display_Messages_Typed_By_Yourself:
 %push

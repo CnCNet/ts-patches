@@ -1,13 +1,40 @@
-@JMP 0x00658658 _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX
-@JMP 0x00434843 _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX
-@JMP 0x004D7B9A _InfantryClass__Read_INI_Get_HouseType_From_Name_SpawnX
-@JMP 0x006585C0 _UnitClass__Read_INI_SpawnX_Get_UnitClassArray_Count_In_Prologue
-@JMP 0x006589C8 _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition
+%include "src/patch.inc"
+%include "src/macros/string_macros.asm"
+
+global var.UsedSpawnsArray
+
+extern HouseType_From_Name
+extern UnitClassArray_Count
+extern HouseClassArray
+extern _strtok
+
+@LJMP 0x00658658, _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX
+@LJMP 0x00434843, _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX
+@LJMP 0x004D7B9A, _InfantryClass__Read_INI_Get_HouseType_From_Name_SpawnX
+@LJMP 0x006585C0, _UnitClass__Read_INI_SpawnX_Get_UnitClassArray_Count_In_Prologue
+@LJMP 0x006589C8, _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition
 ;@JMP 0x005DD92A _Read_Scenario_INI_Dont_Load_Custom_Houses_List_In_Multiplayer
-@JMP 0x0043485F 0x00434874 ; jump past check in BuildingClass::Read_INI() preventing multiplayer building spawning for player
-@JMP 0x006589ED _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index
-@JMP 0x00658A05 _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition2
-@JMP 0x006589E1 _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index2
+@LJMP 0x0043485F, 0x00434874 ; jump past check in BuildingClass::Read_INI() preventing multiplayer building spawning for player
+@LJMP 0x006589ED, _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index
+@LJMP 0x00658A05, _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition2
+@LJMP 0x006589E1, _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index2
+
+section .rdata
+    str_Spawn1              db "Spawn1",0
+    str_Spawn2              db "Spawn2",0
+    str_Spawn3              db "Spawn3",0
+    str_Spawn4              db "Spawn4",0
+    str_Spawn5              db "Spawn5",0
+    str_Spawn6              db "Spawn6",0
+    str_Spawn7              db "Spawn7",0
+    str_Spawn8              db "Spawn8",0
+    str_Delim               db ",",0
+
+section .bss
+    var.OldUnitClassArrayCount:    RESD 1
+    var.UsedSpawnsArray:           RESD 8
+
+section .text
 
 _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index2:
     mov edx, ecx

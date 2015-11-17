@@ -1,4 +1,9 @@
-@JMP 0x005DB49C _Start_Scenario_Force_Briefing_Screen
+%include "src/patch.inc"
+
+extern SessionType
+extern ScenarioStuff
+
+@LJMP 0x005DB49C, _Start_Scenario_Force_Briefing_Screen
 
 _Start_Scenario_Force_Briefing_Screen:
     cmp dword [SessionType], 0

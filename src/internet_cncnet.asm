@@ -1,4 +1,13 @@
-@JMP 0x004E23A7 _Select_Game_WOL_Disable_For_CnCNet
+%include "src/patch.inc"
+
+extern SessionType
+
+@LJMP 0x004E23A7, _Select_Game_WOL_Disable_For_CnCNet
+
+section .rdata
+    str_InternetDisabled db"This version of Tiberian Sun only supports online play on CnCNet 5  (www.cncnet.org)",0
+
+section .text
 
 _Select_Game_WOL_Disable_For_CnCNet:
     mov dword [SessionType], 0

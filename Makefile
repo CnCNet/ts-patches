@@ -11,10 +11,20 @@ OBJS        = \
               src/hp03.o \
               src/loading.o \
               src/savegame.o \
-              src/no-cd.o \
+              src/fix_mouse_not_found_error.o \
               src/single-proc-affinity.o \
-              src/no_blowfish_dll.o \
+              src/trigger_actions_extended.o \
+              src/briefing_screen_mission_start.o \
               src/briefing_restate_map_file.o \
+              src/no-cd.o \
+              src/display_messages_typed_by_yourself.o \
+              src/graphics_patch.o \
+              src/multiplayer_units_placing.o \
+              src/reinforcements_player_specific.o \
+              src/no_options_menu_animation.o \
+              src/internet_cncnet.o \
+              src/tiberium_stuff.o \
+              src/no_window_frame.o \
               src/sym.o \
               rsrc.o
 

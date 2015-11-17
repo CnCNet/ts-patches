@@ -1,8 +1,29 @@
+%include "src/patch.inc"
+%include "src/macros/string_macros.asm"
+
+extern TeamTypesArray
+extern TeamTypesArray_Count
+extern var.UsedSpawnsArray
+extern HouseClassArray
+extern HouseType_From_Name
+
 ;; @JMP 0x05DD9BB 0x005DD9C4 ; Call TeamTypes__Read_INI later
-@JMP 0x0044B0CF _Get_HouseType_From_Index_Spawn_Fake
-@JMP 0x00628600 _TeamTypeClass__Read_INI_Fake_House_Name_Skip
-@JMP 0x005DDB2B _Read_Scenario_INI_Reinforcements_House_Hack
-@JMP 0x005BF068 _Do_Reinforcements_Stuff_Skip_Null_House_TeamType
+@LJMP 0x0044B0CF, _Get_HouseType_From_Index_Spawn_Fake
+@LJMP 0x00628600, _TeamTypeClass__Read_INI_Fake_House_Name_Skip
+@LJMP 0x005DDB2B, _Read_Scenario_INI_Reinforcements_House_Hack
+@LJMP 0x005BF068, _Do_Reinforcements_Stuff_Skip_Null_House_TeamType
+
+section .rdata
+    str_Spawn1              db "Spawn1",0
+    str_Spawn2              db "Spawn2",0
+    str_Spawn3              db "Spawn3",0
+    str_Spawn4              db "Spawn4",0
+    str_Spawn5              db "Spawn5",0
+    str_Spawn6              db "Spawn6",0
+    str_Spawn7              db "Spawn7",0
+    str_Spawn8              db "Spawn8",0
+
+section .text
 
 _Do_Reinforcements_Stuff_Skip_Null_House_TeamType:
     jz 0x005BF681
