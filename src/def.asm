@@ -2,6 +2,8 @@
 %define LEFT_STRIP 0x00749874
 %define RIGHT_STRIP 0x00749C48
 
+%define AddressList_length 8
+
 ; definitions of common structures
 struc sockaddr_in
     .sin_family     RESW 1

@@ -1,4 +1,16 @@
-@JMP 0x004762EA _Build_Off_Ally
+%include "src/patch.inc"
+
+global var.BuildOffAlly
+
+extern HouseClassArray
+extern HouseClass__Is_Ally
+
+@LJMP 0x004762EA, _Build_Off_Ally
+
+section .bss
+    var.BuildOffAlly resb 1
+
+section .text
 
 ; returns 1 or 0 in EAX
 Is_Mutual_Ally:

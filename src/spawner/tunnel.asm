@@ -14,6 +14,25 @@
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
 
+%include "src/def.asm"
+
+global var.TunnelId
+global var.TunnelIp
+global var.TunnelPort
+
+global Tunnel_SendTo
+global Tunnel_RecvFrom
+
+extern sendto
+extern recvfrom
+
+section .bss
+    var.TunnelId                   RESD 1
+    var.TunnelIp                   RESD 1
+    var.TunnelPort                 RESD 1
+
+section .text
+
 Tunnel_SendTo:
 %push
     push ebp

@@ -14,8 +14,23 @@
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
 
-@CALL 0x006A2525 NetHack_SendTo
-@CALL 0x006A25F9 NetHack_RecvFrom
+%include "src/patch.inc"
+%include "src/def.asm"
+
+global var.AddressList
+global var.PortHack
+
+extern Tunnel_SendTo
+extern Tunnel_RecvFrom
+
+@CALL 0x006A2525, NetHack_SendTo
+@CALL 0x006A25F9, NetHack_RecvFrom
+
+section .bss
+    var.AddressList                RESB (ListAddress_size * AddressList_length)
+    var.PortHack                   RESD 1
+
+section .text
 
 NetHack_SendTo:
 %push
