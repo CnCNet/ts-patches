@@ -1,12 +1,45 @@
-@JMP 0x005DE8F9 _Create_Units_Dont_Create_For_Dead_Houses
-@JMP 0x005B9CFE _sub_5B9B90_Set_Up_Spectator_Player_Stuff
-@JMP 0x004BC608 _HouseClass__AI_Spectator_Stuff
-@JMP 0x00633E76 _TechnoClass__Visual_Character_Spectator_Stuff
-@JMP 0x00438520 _BuildingClass__Visual_Character_Spectator_Stuff
-@JMP 0x004C968E _sub_4C9560_Spectator_Stuff
-@JMP 0x005DE717 _Create_Units_Dont_Count_Spectators_When_Counting_Players
-@JMP 0x004BF71B _HouseClass__MPlayer_Defeated_Ignore_Spectator_In_Skirmish
-@JMP 0x00479974 _DisplayClass__Encroach_Shadow_Spectator
+%include "src/patch.inc"
+%include "src/def.asm"
+
+global var.IsSpectatorArray
+global var.SpectatorStuffInit
+global Load_Spectators_Spawner
+
+extern PlayerPtr
+extern SessionType
+extern MouseClass_Map
+extern Message_Input_Player_Dead
+extern HouseClassArray
+extern INIClass__GetBool
+
+extern var.INIClass_SPAWN
+
+@LJMP 0x005DE8F9, _Create_Units_Dont_Create_For_Dead_Houses
+@LJMP 0x005B9CFE, _sub_5B9B90_Set_Up_Spectator_Player_Stuff
+@LJMP 0x004BC608, _HouseClass__AI_Spectator_Stuff
+@LJMP 0x00633E76, _TechnoClass__Visual_Character_Spectator_Stuff
+@LJMP 0x00438520, _BuildingClass__Visual_Character_Spectator_Stuff
+@LJMP 0x004C968E, _sub_4C9560_Spectator_Stuff
+@LJMP 0x005DE717, _Create_Units_Dont_Count_Spectators_When_Counting_Players
+@LJMP 0x004BF71B, _HouseClass__MPlayer_Defeated_Ignore_Spectator_In_Skirmish
+@LJMP 0x00479974, _DisplayClass__Encroach_Shadow_Spectator
+
+section .bss
+    var.IsSpectatorArray           RESD 8
+    var.SpectatorStuffInit         RESB 1
+
+section .rdata
+    str_Multi1          db "Multi1",0
+    str_Multi2          db "Multi2",0
+    str_Multi3          db "Multi3",0
+    str_Multi4          db "Multi4",0
+    str_Multi5          db "Multi5",0
+    str_Multi6          db "Multi6",0
+    str_Multi7          db "Multi7",0
+    str_Multi8          db "Multi8",0
+    str_IsSpectator     db "IsSpectator",0
+
+section .text
 
 _DisplayClass__Encroach_Shadow_Spectator:
 

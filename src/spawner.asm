@@ -1,66 +1,277 @@
-%macro SpawnINI_Get_Int 3
-    push %3 
-    push %2
-    push %1
-    mov ecx, var.INIClass_SPAWN
-    call INIClass__GetInt
-%endmacro 
+%include "src/patch.inc"
+%include "src/def.asm"
 
-%macro SpawnINI_Get_Bool 3
-    push %3 
-    push %2
-    push %1
-    mov ecx, var.INIClass_SPAWN
-    call INIClass__GetBool
-%endmacro
-   
-%macro SpawnINI_Get_String 5
-    push %5
-    push %4
-    push %3
-    push %2
-    push %1
-    mov ecx, var.INIClass_SPAWN
-    call INIClass__GetString
-%endmacro
+global var.SpawnerActive
+global var.INIClass_SPAWN
 
-%macro SpawnINI_Get_Fixed 4
-    push %4
-    push %3 
-    push %2
-    push %1
-    mov ecx, var.INIClass_SPAWN
-    call INIClass__GetFixed
+extern SessionType
+extern INIClass__GetInt
+extern ScenarioStuff
+extern SelectedDifficulty
+extern INIClass__GetBool
+extern SessionClass__Read_Scenario_Descriptions
+extern timeGetTime
+extern memset
+extern GetCommandLineA
+extern stristr_
+extern Assign_Houses
+extern HouseClassArray
+extern HouseClassArray_Count
+extern Get_MP_Color
+extern HouseClass__Make_Ally
+extern HouseClass__Assign_Handicap
+extern FileClass__FileClass
+extern FileClass__Is_Available
+extern INIClass__INIClass
+extern INIClass__Load
+extern LoadLibraryA
+extern GetProcAddress
+extern Load_Spectators_Spawner
+extern GameActive
+extern WOLGameID
+extern UnitCount
+extern TechLevel
+extern AIPlayers
+extern AIDifficulty
+extern HarvesterTruce
+extern BridgeDestroy
+extern FogOfWar
+extern Crates
+extern ShortGame
+extern Bases
+extern AlliesAllowed
+extern MCVRedeploy
+extern Credits
+extern GameSpeed
+extern MultiEngineer
+extern INIClass__GetString
+extern htonl
+extern ListenPort
+extern SessionClass_this
+extern ScenarioName
+extern Seed
+extern Init_Random
+extern new
+extern UDPInterfaceClass__UDPInterfaceClass
+extern WinsockInterface_this
+extern WinsockInterfaceClass__Init
+extern UDPInterfaceClass__Open_Socket
+extern WinsockInterfaceClass__Start_Listening
+extern WinsockInterfaceClass__Discard_In_Buffers
+extern WinsockInterfaceClass__Discard_Out_Buffers
+extern IPXManagerClass_this
+extern IPXManagerClass__Set_Timing
+extern MaxAhead
+extern FrameSendRate
+extern MaxMaxAhead
+extern LatencyFudge
+extern RequestedFPS
+extern ProtocolVersion
+extern Init_Network
+extern Load_Game
+extern Start_Scenario
+extern INIClass__GetFixed
+extern SessionClass__Create_Connections
+extern WWMouseClas_Mouse
+extern MouseClass_Map
+extern WWMouseClas_Mouse
+extern IPXAddressClass__IPXAddressClass
+extern PlayerColor
+extern NameNodeVector
+extern NameNodeVector_Add
+extern _sprintf
+extern NameNodes_CurrentSize
+extern HumanPlayers
 
-%endmacro
+extern var.PortHack
+extern var.BuildOffAlly
+extern var.IsHost
+extern var.TunnelIp
+extern var.TunnelPort
+extern var.TunnelId
+extern var.AddressList
 
-@JMP 0x004E1DE0 _Select_Game_Init_Spawner
-@JMP 0x00609470 _Send_Statistics_Packet_Return_If_Skirmish
-@JMP 0x005E08E3 _Read_Scenario_INI_Assign_Houses_And_Spawner_House_Settings
-@JMP 0x004BDDB1 _HouseClass__Make_Ally_STFU_when_Allying_In_Loading_Screen_Spawner
-@JMP 0x004E078C _Init_Game_Check_Spawn_Arg_No_Intro
+@LJMP 0x004E1DE0, _Select_Game_Init_Spawner
+@LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
+@LJMP 0x005E08E3, _Read_Scenario_INI_Assign_Houses_And_Spawner_House_Settings
+@LJMP 0x004BDDB1, _HouseClass__Make_Ally_STFU_when_Allying_In_Loading_Screen_Spawner
+@LJMP 0x004E078C, _Init_Game_Check_Spawn_Arg_No_Intro
 
 ; Inside HouseClass::Mplayer_Defeated skip some checks which makes game continue
 ; even if there are only allied AI players left, in skirmish
-@JMP 0x004BF7B6 0x004BF7BF
-@JMP 0x004BF7F0 0x004BF7F9
+@LJMP 0x004BF7B6, 0x004BF7BF
+@LJMP 0x004BF7F0, 0x004BF7F9
 
-@JMP 0x005ED477 _sub_5ED470_Dont_Read_Scenario_Descriptions_When_Spawner_Active
+@LJMP 0x005ED477, _sub_5ED470_Dont_Read_Scenario_Descriptions_When_Spawner_Active
 
-@JMP 0x004C06EF _HouseClass__AI_Attack_Stuff_Alliance_Check
+@LJMP 0x004C06EF, _HouseClass__AI_Attack_Stuff_Alliance_Check
 
-@JMP 0x005DE3D7 _Assign_Houses_AI_Countries
+@LJMP 0x005DE3D7, _Assign_Houses_AI_Countries
 
-@JMP 0x004C3630 _HouseClass__Computer_Paranoid_Disable_With_Spawner
+@LJMP 0x004C3630, _HouseClass__Computer_Paranoid_Disable_With_Spawner
 
-@JMP 0x005DDAF1 _Read_Scenario_INI_Dont_Create_Units_Earlier
-@JMP 0x005DDEDD _Read_Scenario_INI_Dont_Create_Units_Earlier_Dont_Create_Twice
-@JMP 0x0065860D _UnitClass__Read_INI_Jump_Out_When_Units_Section_Missing
-@JMP 0x005DBCC3 _Read_Scenario_Custom_Load_Screen_Spawner
-@JMP 0x005DD523 _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting
+@LJMP 0x005DDAF1, _Read_Scenario_INI_Dont_Create_Units_Earlier
+@LJMP 0x005DDEDD, _Read_Scenario_INI_Dont_Create_Units_Earlier_Dont_Create_Twice
+@LJMP 0x0065860D, _UnitClass__Read_INI_Jump_Out_When_Units_Section_Missing
+@LJMP 0x005DBCC3, _Read_Scenario_Custom_Load_Screen_Spawner
+@LJMP 0x005DD523, _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting
 
 ;always write mp stats
-@CLEAR 0x0046353C 0x90 0x00463542
+@CLEAR 0x0046353C, 0x90, 0x00463542
+
+section .bss
+    var.SpawnerActive              RESD 1
+    var.INIClass_SPAWN             RESB 256 ; FIXME: make this a local variable
+    var.inet_addr                  RESD 1
+
+    var.IsDoingAlliancesSpawner    RESB 1
+    var.IsSpawnArgPresent           RESD 1
+
+    var.HouseColorsArray           RESD 8
+    var.HouseCountriesArray        RESD 8
+    var.HouseHandicapsArray        RESD 8
+    var.SpawnLocationsArray        RESD 8
+    var.IsSpectatorArray           RESD 8
+    var.UsedSpawnsArray            RESD 8
+    
+    var.SaveGameNameBuf            RESB 60
+    
+    var.DoingAutoSS                RESD 1
+    var.Anticheat1                 RESD 1
+    var.AntiCheatArray             RESB (StripClass_Size * 2)
+    
+    var.SpectatorStuffInit         RESB 1
+    var.OldUnitClassArrayCount     RESD 1
+    
+    var.CustomLoadScreen           RESB 256
+    
+    var.SaveGameLoadPathWide       RESB 512
+    var.SaveGameLoadPath           RESB 256
+
+section .rdata
+    str_MyIdField db "MYID",0
+    str_AccountNameField db "ACCN",0
+    str_NoWindowFrame db "NoWindowFrame",0
+    str_kernel32dll db "Kernel32.dll",0
+    str_SetProcessAffinityMask db "SetProcessAffinityMask",0
+    str_SingleProcAffinity db "SingleProcAffinity",0
+    str_GameID          db "GameID", 0
+    str_gcanyonmap      db "blitz_test.map", 0 
+    str_debugplayer     db "debugplayer",0
+    str_debugplayer2    db "debugplayer2",0
+    str_wsock32_dll     db "wsock32.dll",0
+    str_inet_addr       db "inet_addr",0
+    str_localhost       db "127.0.0.1",0
+    str_spawn_ini       db "SPAWN.INI",0
+    str_Settings        db "Settings",0
+    str_UnitCount       db "UnitCount",0
+    str_Scenario        db "Scenario",0
+    str_Empty           db "",0
+    str_GameSpeed       db "GameSpeed",0
+    str_Seed            db "Seed",0
+    str_TechLevel       db "TechLevel",0
+    str_AIPlayers       db "AIPlayers",0
+    str_AIDifficulty    db "AIDifficulty",0
+    str_HarvesterTruce  db "HarvesterTruce",0
+    str_BridgeDestroy   db "BridgeDestroy",0
+    str_FogOfWar        db "FogOfWar",0
+    str_Crates          db "Crates",0
+    str_ShortGame       db "ShortGame",0
+    str_Bases           db "Bases",0
+    str_MCVRedeploy     db "MCVRedeploy",0
+    str_Credits         db "Credits",0
+    str_Name            db "Name",0
+    str_Side            db "Side",0
+    str_Color           db "Color",0
+    str_OtherSectionFmt db "Other%d",0
+    str_Port            db "Port",0
+    str_Ip              db "Ip",0
+    str_SpawnArg        db "-SPAWN",0
+    str_MultiEngineer   db "MultiEngineer",0
+    str_Firestorm       db "Firestorm",0
+    str_HouseColors     db "HouseColors",0
+    str_HouseCountries  db "HouseCountries",0
+    str_HouseHandicaps  db "HouseHandicaps",0
+    str_Tunnel          db "Tunnel",0
+    str_SpawnLocations  db "SpawnLocations",0
+    str_IsSinglePlayer  db "IsSinglePlayer",0
+    str_LoadSaveGame    db "LoadSaveGame",0
+    str_SaveGameName    db "SaveGameName",0
+    str_MultipleFactory db "MultipleFactory",0
+    str_AlliesAllowed   db "AlliesAllowed",0
+    str_SidebarHack     db "SidebarHack",0
+    str_BuildOffAlly    db "BuildOffAlly",0
+    str_CustomLoadScreen db "CustomLoadScreen",0
+    str_Host             db "Host",0
+
+    str_DifficultyModeComputer db "DifficultyModeComputer",0
+    str_DifficultyModeHuman db "DifficultyModeHuman",0
+
+    str_Multi1          db "Multi1",0
+    str_Multi2          db "Multi2",0
+    str_Multi3          db "Multi3",0
+    str_Multi4          db "Multi4",0
+    str_Multi5          db "Multi5",0
+    str_Multi6          db "Multi6",0
+    str_Multi7          db "Multi7",0
+    str_Multi8          db "Multi8",0
+
+    str_HouseAllyOne 		db "HouseAllyOne",0
+    str_HouseAllyTwo 		db "HouseAllyTwo",0
+    str_HouseAllyThree 		db "HouseAllyThree",0
+    str_HouseAllyFour 		db "HouseAllyFour",0
+    str_HouseAllyFive 		db "HouseAllyFive",0
+    str_HouseAllySix 		db "HouseAllySix",0
+    str_HouseAllySeven	 	db "HouseAllySeven",0
+
+    str_Multi1_Alliances db "Multi1_Alliances",0
+    str_Multi2_Alliances db "Multi2_Alliances",0
+    str_Multi3_Alliances db "Multi3_Alliances",0
+    str_Multi4_Alliances db "Multi4_Alliances",0
+    str_Multi5_Alliances db "Multi5_Alliances",0
+    str_Multi6_Alliances db "Multi6_Alliances",0
+    str_Multi7_Alliances db "Multi7_Alliances",0
+    str_Multi8_Alliances db "Multi8_Alliances",0
+
+    str_Spawn1              db "Spawn1",0
+    str_Spawn2              db "Spawn2",0
+    str_Spawn3              db "Spawn3",0
+    str_Spawn4              db "Spawn4",0
+    str_Spawn5              db "Spawn5",0
+    str_Spawn6              db "Spawn6",0
+    str_Spawn7              db "Spawn7",0
+    str_Spawn8              db "Spawn8",0
+
+    str_message_fmt db "%s: %s",0
+
+    str_AutoSSFileNameFormat db"AUTOSS\\AutoSS-%d-%d_%d.PCX",0
+    str_AutoSSDir db"./AutoSS",0
+
+    str_stats_dmp: db "stats.dmp",0
+
+    str_UseGraphicsPatch: db "UseGraphicsPatch",0
+
+    str_ForceLowestDetailLevel db"ForceLowestDetailLevel",0
+    str_InvisibleSouthDisruptorWave db"InvisibleSouthDisruptorWave",0
+
+    str_Video_Windowed: db"Video.Windowed",0
+    str_Video_WindowedScreenHeight db"Video.WindowedScreenHeight",0
+    str_Video_WindowedScreenWidth db"Video.WindowedScreenWidth",0
+
+    str_InternetDisabled db"This version of Tiberian Sun only supports online play on CnCNet 5  (www.cncnet.org)",0
+
+    str_NoCD db"NoCD",0
+
+    str_SaveGameLoadFolder      db"Saved Games\%s",0,0,0,0,0,0,0,0
+    str_SaveGameFolderFormat    db"Saved Games\*.%3s",0
+    str_SaveGameFolderFormat2   db"Saved Games\SAVE%04lX.%3s",0 
+    str_SaveGamesFolder        db"Saved Games",0
+
+    str_bue_li24_pcx      db"bue_li24.pcx",0
+    str_bue_mi24_pcx      db"bue_mi24.pcx",0
+    str_bue_ri24_pcx      db"bue_ri24.pcx",0
+
+section .text
 
 _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
     cmp dword [var.IsSpawnArgPresent], 0

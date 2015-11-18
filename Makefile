@@ -13,8 +13,10 @@ OBJS        = \
               src/savegame.o \
               src/fix_mouse_not_found_error.o \
               src/single-proc-affinity.o \
+              src/spawner.o \
               src/spawner/tunnel.o \
               src/spawner/nethack.o \
+              src/spawner/spectators.o \
               src/spawner/build_off_ally.o \
               src/anticheat_test.o \
               src/only_the_host_may_change_gamespeed.o \
