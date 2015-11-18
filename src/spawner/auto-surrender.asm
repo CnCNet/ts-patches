@@ -1,10 +1,20 @@
-@CLEAR 0x004B6D04 0x90 0x004B6D0D
-@JMP 0x004B6D04 ForceSurrenderOnAbort
-@JMP 0x00494F08 AutoSurrenderOnConnectionLost
+%include "src/patch.inc"
 
-@CLEAR 0x0046283A 0x90 0x00462842 ; Temporary solution, need to find out if we are dead
-@JMP 0x0046283A SurrenderDialogOkClick ; Temporary solution, need to find out if we are dead
-@JMP 0x004627F3 SurrenderDialogOkClick2 ; Temporary solution, need to find out if we are dead
+extern var.SpawnerActive
+extern SessionType
+
+@CLEAR 0x004B6D04, 0x90, 0x004B6D0D
+@LJMP 0x004B6D04, ForceSurrenderOnAbort
+@LJMP 0x00494F08, AutoSurrenderOnConnectionLost
+
+@CLEAR 0x0046283A, 0x90, 0x00462842 ; Temporary solution, need to find out if we are dead
+@LJMP 0x0046283A, SurrenderDialogOkClick ; Temporary solution, need to find out if we are dead
+@LJMP 0x004627F3, SurrenderDialogOkClick2 ; Temporary solution, need to find out if we are dead
+
+section .bss
+    var.MeSurrendered                RESB 1
+
+section .text
 
 ForceSurrenderOnAbort:
     cmp dword[var.SpawnerActive], 1

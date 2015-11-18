@@ -1,19 +1,38 @@
-@JMP 0x004BAC2C _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff
-@JMP 0x0060A79C _Send_Statistics_Packet_Write_Statistics_Dump
-@JMP 0x005B4333 _sub_5B4290_Send_Statistics_Spawner
-@JMP 0x005B1E94 _Queue_AI_Multiplayer_Send_Statistics_Spawner
-@JMP 0x00509220 _sub_508A40_Send_Statistics_Spawner1
-@JMP 0x0050927A _sub_508A40_Send_Statistics_Spawner2
+%include "src/patch.inc"
 
-@JMP 0x005B4FAE _Execute_DoList_Send_Statistics_Game_Leave
-@JMP 0x005B4FD3 _Execute_DoList_Send_Statistics_Game_Leave2
+extern var.IsSpectatorArray
+extern var.SpawnLocationsArray
+extern var.SpawnerActive
+extern PlayerPtr
+extern SessionType
+extern StatisticsPacketSent
+extern FileClass__FileClass
+extern FileClass__Open
+extern FileClass__Write
+extern FileClass__Close
 
-@JMP 0x00609810 UseInternalMapNameInsteadFilename
-@JMP 0x006097FD AddACCNField
-@JMP 0x00609D73 AddMyIdField
+@LJMP 0x004BAC2C, _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff
+@LJMP 0x0060A79C, _Send_Statistics_Packet_Write_Statistics_Dump
+@LJMP 0x005B4333, _sub_5B4290_Send_Statistics_Spawner
+@LJMP 0x005B1E94, _Queue_AI_Multiplayer_Send_Statistics_Spawner
+@LJMP 0x00509220, _sub_508A40_Send_Statistics_Spawner1
+@LJMP 0x0050927A, _sub_508A40_Send_Statistics_Spawner2
 
-@JMP 0x00609F40 _Send_Statistics_Packet_Write_New_Fields
+@LJMP 0x005B4FAE, _Execute_DoList_Send_Statistics_Game_Leave
+@LJMP 0x005B4FD3, _Execute_DoList_Send_Statistics_Game_Leave2
 
+@LJMP 0x00609810, UseInternalMapNameInsteadFilename
+@LJMP 0x006097FD, AddACCNField
+@LJMP 0x00609D73, AddMyIdField
+
+@LJMP 0x00609F40, _Send_Statistics_Packet_Write_New_Fields
+
+section .rdata
+    str_MyIdField db "MYID",0
+    str_AccountNameField db "ACCN",0
+    str_stats_dmp: db "stats.dmp",0
+
+section .text
 
 _Send_Statistics_Packet_Write_New_Fields:
 

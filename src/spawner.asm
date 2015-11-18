@@ -3,6 +3,9 @@
 
 global var.SpawnerActive
 global var.INIClass_SPAWN
+global var.IsSpectatorArray
+global var.SpawnLocationsArray
+global var.SpawnerActive
 
 extern SessionType
 extern INIClass__GetInt
@@ -90,6 +93,8 @@ extern var.TunnelIp
 extern var.TunnelPort
 extern var.TunnelId
 extern var.AddressList
+extern var.UsedSpawnsArray
+extern var.IsSpectatorArray
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -131,8 +136,6 @@ section .bss
     var.HouseCountriesArray        RESD 8
     var.HouseHandicapsArray        RESD 8
     var.SpawnLocationsArray        RESD 8
-    var.IsSpectatorArray           RESD 8
-    var.UsedSpawnsArray            RESD 8
     
     var.SaveGameNameBuf            RESB 60
     
@@ -149,8 +152,6 @@ section .bss
     var.SaveGameLoadPath           RESB 256
 
 section .rdata
-    str_MyIdField db "MYID",0
-    str_AccountNameField db "ACCN",0
     str_NoWindowFrame db "NoWindowFrame",0
     str_kernel32dll db "Kernel32.dll",0
     str_SetProcessAffinityMask db "SetProcessAffinityMask",0
@@ -246,8 +247,6 @@ section .rdata
 
     str_AutoSSFileNameFormat db"AUTOSS\\AutoSS-%d-%d_%d.PCX",0
     str_AutoSSDir db"./AutoSS",0
-
-    str_stats_dmp: db "stats.dmp",0
 
     str_UseGraphicsPatch: db "UseGraphicsPatch",0
 

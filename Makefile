@@ -16,10 +16,13 @@ OBJS        = \
               src/spawner.o \
               src/spawner/tunnel.o \
               src/spawner/nethack.o \
+              src/spawner/selectable_spawns.o \
               src/spawner/spectators.o \
+              src/spawner/statistics.o \
               src/spawner/build_off_ally.o \
               src/anticheat_test.o \
               src/only_the_host_may_change_gamespeed.o \
+              src/spawner/auto-surrender.o \
               src/trigger_actions_extended.o \
               src/briefing_screen_mission_start.o \
               src/briefing_restate_map_file.o \
