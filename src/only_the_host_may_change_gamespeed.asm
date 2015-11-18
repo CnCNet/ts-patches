@@ -8,6 +8,8 @@ global var.IsHost
 section .bss
     var.IsHost resb 1
 
+section .text
+
 _only_the_host_may_change_gamespeed:
 	cmp byte[0x7E4580], 1
 	jnz 0x004AA64B
