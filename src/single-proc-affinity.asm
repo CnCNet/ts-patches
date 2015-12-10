@@ -4,19 +4,11 @@ cextern LoadLibraryA
 cextern GetProcAddress
 cextern GetCurrentProcess
 
-cglobal SetProcessAffinityMask
-cglobal SetSingleProcAffinity
+sstring str_kernel32dll, "kernel32.dll"
+sstring str_SetProcessAffinityMask, "SetProcessAffinityMask"
+sint SetProcessAffinityMask, 0
 
-section .rdata
-    str_kernel32dll: db "kernel32.dll",0
-    str_SetProcessAffinityMask: db "SetProcessAffinityMask",0
-
-section .bss
-    SetProcessAffinityMask: resd 1
-
-section .text
-
-SetSingleProcAffinity:
+gfunction SetSingleProcAffinity
     pushad
     push str_kernel32dll
     call [LoadLibraryA]
