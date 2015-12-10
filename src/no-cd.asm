@@ -9,7 +9,7 @@
 cglobal IsNoCD
 
 section .bss
-    IsNoCD: resd 1
+    IsNoCD: resb 1
 
 section .text
 

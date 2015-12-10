@@ -1,8 +1,8 @@
 %include "macros/extern.inc"
 
-; This header works with sym.asm which defines the Vanilla symbols
+; This header is used for patches
 ; This header will be split up as it becomes larger
 
 ; ### Functions ###
 
-cextern INIClass__GetBool
+cextern LoadSunIni

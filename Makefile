@@ -9,9 +9,10 @@ NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/
 
 OBJS        = \
+              src/loading.o \
+              src/loading-func.o \
               src/in-game_message_background.o \
               src/hp03.o \
-              src/loading.o \
               src/savegame.o \
               src/fix_mouse_not_found_error.o \
               src/single-proc-affinity.o \
