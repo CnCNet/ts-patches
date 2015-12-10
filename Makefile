@@ -9,6 +9,7 @@ NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/
 
 OBJS        = \
+              src/in-game_message_background.o \
               src/hp03.o \
               src/loading.o \
               src/savegame.o \
