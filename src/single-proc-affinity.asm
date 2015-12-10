@@ -1,16 +1,18 @@
-extern LoadLibraryA
-extern GetProcAddress
-extern GetCurrentProcess
+%include "macros/datatypes.inc"
 
-global var.SetProcessAffinityMask
-global SetSingleProcAffinity
+cextern LoadLibraryA
+cextern GetProcAddress
+cextern GetCurrentProcess
+
+cglobal SetProcessAffinityMask
+cglobal SetSingleProcAffinity
 
 section .rdata
     str_kernel32dll: db "kernel32.dll",0
     str_SetProcessAffinityMask: db "SetProcessAffinityMask",0
 
 section .bss
-    var.SetProcessAffinityMask: resd 1
+    SetProcessAffinityMask: resd 1
 
 section .text
 
@@ -25,11 +27,11 @@ SetSingleProcAffinity:
     call [GetProcAddress]
     test eax, eax
     jz .out
-    mov [var.SetProcessAffinityMask], eax
+    mov [SetProcessAffinityMask], eax
     push 1
     call [GetCurrentProcess]
     push eax
-    call [var.SetProcessAffinityMask]
+    call [SetProcessAffinityMask]
 .out:
     popad
     retn

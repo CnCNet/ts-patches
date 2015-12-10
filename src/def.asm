@@ -33,7 +33,7 @@ endstruc
     push %3 
     push %2
     push %1
-    mov ecx, var.INIClass_SPAWN
+    mov ecx, INIClass_SPAWN
     call INIClass__GetInt
 %endmacro 
 
@@ -41,7 +41,7 @@ endstruc
     push %3 
     push %2
     push %1
-    mov ecx, var.INIClass_SPAWN
+    mov ecx, INIClass_SPAWN
     call INIClass__GetBool
 %endmacro
    
@@ -51,7 +51,7 @@ endstruc
     push %3
     push %2
     push %1
-    mov ecx, var.INIClass_SPAWN
+    mov ecx, INIClass_SPAWN
     call INIClass__GetString
 %endmacro
 
@@ -60,7 +60,7 @@ endstruc
     push %3 
     push %2
     push %1
-    mov ecx, var.INIClass_SPAWN
+    mov ecx, INIClass_SPAWN
     call INIClass__GetFixed
 
 %endmacro

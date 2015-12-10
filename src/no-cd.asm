@@ -1,26 +1,27 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
 @LJMP 0x004754A0, _CD_AlwaysFindTS
 @LJMP 0x0044E7A0, _CD_AlwaysAvailable
 @LJMP 0x0044E7C0, _CD_NeverAsk
 @LJMP 0x004E0469, _Init_Game_NoCD_Check
 
-global var.IsNoCD
+cglobal IsNoCD
 
 section .bss
-    var.IsNoCD: resd 1
+    IsNoCD: resd 1
 
 section .text
 
 _Init_Game_NoCD_Check:
-    cmp byte [var.IsNoCD], 1
+    cmp byte [IsNoCD], 1
     jz 0x004E06F5
     cmp eax, ebp
     jnz 0x004E06F5
     jmp 0x004E0471
 
 _CD_NeverAsk:
-    cmp byte [var.IsNoCD], 0
+    cmp byte [IsNoCD], 0
     jz .Normal_Code
 
 .NoCD:
@@ -32,7 +33,7 @@ _CD_NeverAsk:
     jmp 0x0044E7C6
 
 _CD_AlwaysAvailable:
-    cmp byte [var.IsNoCD], 0
+    cmp byte [IsNoCD], 0
     jz .Normal_Code
 
 .NoCD:
@@ -45,7 +46,7 @@ _CD_AlwaysAvailable:
     jmp 0x0044E7A7
 
 _CD_AlwaysFindTS:
-    cmp byte [var.IsNoCD], 0
+    cmp byte [IsNoCD], 0
     jz .Normal_Code
 
 .NoCD: 

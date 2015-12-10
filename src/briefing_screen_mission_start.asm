@@ -1,7 +1,8 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
-extern SessionType
-extern ScenarioStuff
+cextern SessionType
+cextern ScenarioStuff
 
 @LJMP 0x005DB49C, _Start_Scenario_Force_Briefing_Screen
 

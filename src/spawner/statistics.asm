@@ -1,15 +1,16 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
-extern var.IsSpectatorArray
-extern var.SpawnLocationsArray
-extern var.SpawnerActive
-extern PlayerPtr
-extern SessionType
-extern StatisticsPacketSent
-extern FileClass__FileClass
-extern FileClass__Open
-extern FileClass__Write
-extern FileClass__Close
+cextern IsSpectatorArray
+cextern SpawnLocationsArray
+cextern SpawnerActive
+cextern PlayerPtr
+cextern SessionType
+cextern StatisticsPacketSent
+cextern FileClass__FileClass
+cextern FileClass__Open
+cextern FileClass__Write
+cextern FileClass__Close
 
 @LJMP 0x004BAC2C, _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff
 @LJMP 0x0060A79C, _Send_Statistics_Packet_Write_Statistics_Dump
@@ -49,7 +50,7 @@ _Send_Statistics_Packet_Write_New_Fields:
 	mov     byte [0x0070FD0F], bl
 	
 	mov     edi, [esi+0x20] ; value
-	mov		edi, [var.IsSpectatorArray+edi*4]
+	mov		edi, [IsSpectatorArray+edi*4]
 	
 	push    10h
 	call    0x006B51D7 ; operator new(uint)
@@ -111,7 +112,7 @@ _Send_Statistics_Packet_Write_New_Fields:
 	mov     byte [0x0070FD0F], bl
 	
 	mov     edi, [esi+0x20] ; value
-	mov		edi, [var.SpawnLocationsArray+edi*4]
+	mov		edi, [SpawnLocationsArray+edi*4]
 	
 	push    10h
 	call    0x006B51D7 ; operator new(uint)
@@ -209,7 +210,7 @@ UseInternalMapNameInsteadFilename:
 _Execute_DoList_Send_Statistics_Game_Leave2:
     mov edx, [SessionType]
 
-    cmp dword [var.SpawnerActive], 0
+    cmp dword [SpawnerActive], 0
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
@@ -232,7 +233,7 @@ _Execute_DoList_Send_Statistics_Game_Leave2:
 _Execute_DoList_Send_Statistics_Game_Leave:
     mov edx, [SessionType]
 
-    cmp dword [var.SpawnerActive], 0
+    cmp dword [SpawnerActive], 0
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
@@ -250,7 +251,7 @@ _Execute_DoList_Send_Statistics_Game_Leave:
 
 
 _sub_508A40_Send_Statistics_Spawner2:
-    cmp dword [var.SpawnerActive], 0
+    cmp dword [SpawnerActive], 0
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
@@ -269,7 +270,7 @@ _sub_508A40_Send_Statistics_Spawner2:
     jmp .Send
 
 _sub_508A40_Send_Statistics_Spawner1:
-    cmp dword [var.SpawnerActive], 0
+    cmp dword [SpawnerActive], 0
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
@@ -288,7 +289,7 @@ _sub_508A40_Send_Statistics_Spawner1:
     jmp .Send
 
 _Queue_AI_Multiplayer_Send_Statistics_Spawner:
-    cmp dword [var.SpawnerActive], 0
+    cmp dword [SpawnerActive], 0
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
@@ -307,7 +308,7 @@ _Queue_AI_Multiplayer_Send_Statistics_Spawner:
     jmp .Send
 
 _sub_5B4290_Send_Statistics_Spawner:
-    cmp dword [var.SpawnerActive], 0
+    cmp dword [SpawnerActive], 0
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
@@ -327,7 +328,7 @@ _sub_5B4290_Send_Statistics_Spawner:
 
 
 _Send_Statistics_Packet_Write_Statistics_Dump:
-    cmp dword [var.SpawnerActive], 0
+    cmp dword [SpawnerActive], 0
     jz .Normal_Code
     
     call Write_Stats_File
@@ -383,7 +384,7 @@ Write_Stats_File:
     
     
 _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
-    cmp dword [var.SpawnerActive], 0
+    cmp dword [SpawnerActive], 0
     jz .Normal_Code
 
     cmp dword [SessionType], 0

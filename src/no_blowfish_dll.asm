@@ -1,4 +1,5 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
 @CLEAR 0x005FFE8A, 0x90, 0x005FFEA5 ; skip loading blowfish.dll NOPs UNTIL (not including) memory location 0x005FFEA5
 @CLEAR 0x005FFEC2, 0x90, 0x005FFEC9 ; skip freeing loaded blowfish.dll NOPs UNTIL (not including) memory location 0x005FFEC9

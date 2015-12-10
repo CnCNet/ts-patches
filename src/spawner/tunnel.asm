@@ -14,22 +14,23 @@
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
 
+%include "macros/datatypes.inc"
 %include "src/def.asm"
 
-global var.TunnelId
-global var.TunnelIp
-global var.TunnelPort
+cglobal TunnelId
+cglobal TunnelIp
+cglobal TunnelPort
 
-global Tunnel_SendTo
-global Tunnel_RecvFrom
+cglobal Tunnel_SendTo
+cglobal Tunnel_RecvFrom
 
-extern sendto
-extern recvfrom
+cextern sendto
+cextern recvfrom
 
 section .bss
-    var.TunnelId                   RESD 1
-    var.TunnelIp                   RESD 1
-    var.TunnelPort                 RESD 1
+    TunnelId                   RESD 1
+    TunnelIp                   RESD 1
+    TunnelPort                 RESD 1
 
 section .text
 
@@ -51,7 +52,7 @@ Tunnel_SendTo:
 %define sockfd      ebp+8
 
     ; no processing if no tunnel
-    cmp dword [var.TunnelPort], 0
+    cmp dword [TunnelPort], 0
     je .notunnel
 
     ; copy packet to our buffer
@@ -70,7 +71,7 @@ Tunnel_SendTo:
     shl edx, 16
     mov [eax], edx
 
-    mov edx, [var.TunnelId]
+    mov edx, [TunnelId]
     shr edx, 16
     or [eax], edx
 
@@ -80,13 +81,13 @@ Tunnel_SendTo:
     ; set dest_addr to tunnel address
     mov eax, [dest_addr]
     lea eax, [eax + sockaddr_in.sin_port]
-    mov edx, [var.TunnelPort]
+    mov edx, [TunnelPort]
     shr edx, 16
     mov word [eax],dx
 
     mov eax, [dest_addr]
     lea eax, [eax + sockaddr_in.sin_addr]
-    mov edx, [var.TunnelIp]
+    mov edx, [TunnelIp]
     mov dword [eax], edx
 
     mov eax, [addrlen]
@@ -146,7 +147,7 @@ Tunnel_RecvFrom:
 %define sockfd      ebp+8
 
     ; no processing if no tunnel
-    cmp dword [var.TunnelPort], 0
+    cmp dword [TunnelPort], 0
     je .notunnel
 
     ; call recvfrom first to get the packet

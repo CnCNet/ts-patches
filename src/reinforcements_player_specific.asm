@@ -1,11 +1,12 @@
-%include "src/patch.inc"
-%include "src/macros/string_macros.asm"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
+%include "string_macros.asm"
 
-extern TeamTypesArray
-extern TeamTypesArray_Count
-extern var.UsedSpawnsArray
-extern HouseClassArray
-extern HouseType_From_Name
+cextern TeamTypesArray
+cextern TeamTypesArray_Count
+cextern UsedSpawnsArray
+cextern HouseClassArray
+cextern HouseType_From_Name
 
 ;; @JMP 0x05DD9BB 0x005DD9C4 ; Call TeamTypes__Read_INI later
 @LJMP 0x0044B0CF, _Get_HouseType_From_Index_Spawn_Fake
@@ -74,7 +75,7 @@ _Read_Scenario_INI_Reinforcements_House_Hack:
 .Set_HouseType_For_Spawn:
     sub eax, 50
     
-    mov eax, [var.UsedSpawnsArray+eax*4]
+    mov eax, [UsedSpawnsArray+eax*4]
     cmp eax, -1
     jz .Set_To_Null
     

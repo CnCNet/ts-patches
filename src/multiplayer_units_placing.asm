@@ -1,12 +1,13 @@
-%include "src/patch.inc"
-%include "src/macros/string_macros.asm"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
+%include "string_macros.asm"
 
-global var.UsedSpawnsArray
+cglobal UsedSpawnsArray
 
-extern HouseType_From_Name
-extern UnitClassArray_Count
-extern HouseClassArray
-extern _strtok
+cextern HouseType_From_Name
+cextern UnitClassArray_Count
+cextern HouseClassArray
+cextern _strtok
 
 @LJMP 0x00658658, _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX
 @LJMP 0x00434843, _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX
@@ -31,27 +32,27 @@ section .rdata
     str_Delim               db ",",0
 
 section .bss
-    var.OldUnitClassArrayCount:    RESD 1
-    var.UsedSpawnsArray:           RESD 8
+    OldUnitClassArrayCount:    RESD 1
+    UsedSpawnsArray:           RESD 8
 
 section .text
 
 _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index2:
     mov edx, ecx
-    add edx, [var.OldUnitClassArrayCount]
+    add edx, [OldUnitClassArrayCount]
     mov edx, [esi+edx*4]
     cmp eax, 0FFFFFFFFh
     jmp 0x006589E7
 
 _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition2:
     mov edi, [UnitClassArray_Count]
-    sub edi, [var.OldUnitClassArrayCount]
+    sub edi, [OldUnitClassArrayCount]
     jmp 0x00658A0B
 
 
 ; Need to add OldArrayCount to the current index stored in EAX
 _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index:
-    add eax, [var.OldUnitClassArrayCount]
+    add eax, [OldUnitClassArrayCount]
     mov eax, [esi+eax*4]
     mov [edx+364h], eax ; LinkedTo?
     jmp 0x006589F6
@@ -70,14 +71,14 @@ _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index:
 ; loop check needs to be i < UnitClassArray_Count - OldUnitClassArray_Count
 _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition:
     mov edi, [UnitClassArray_Count]
-    sub edi, [var.OldUnitClassArrayCount]
+    sub edi, [OldUnitClassArrayCount]
     jmp 0x006589CE
     
 _UnitClass__Read_INI_SpawnX_Get_UnitClassArray_Count_In_Prologue:
     push eax
 
     mov dword eax, [UnitClassArray_Count]
-    mov dword [var.OldUnitClassArrayCount], eax
+    mov dword [OldUnitClassArrayCount], eax
     
     pop eax
     sub esp, 192
@@ -88,7 +89,7 @@ _InfantryClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     cmp eax, -1
     jz .Normal_Code
     
-    mov eax, [var.UsedSpawnsArray+eax*4]
+    mov eax, [UsedSpawnsArray+eax*4]
     cmp eax, -1
     jz .Normal_Code
     
@@ -109,7 +110,7 @@ _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     
     jz .Normal_Code
     
-    mov eax, [var.UsedSpawnsArray+eax*4]
+    mov eax, [UsedSpawnsArray+eax*4]
     cmp eax, -1
     jz .Normal_Code
     
@@ -132,7 +133,7 @@ _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     cmp eax, -1
     jz .Normal_Code
     
-    mov eax, [var.UsedSpawnsArray+eax*4]
+    mov eax, [UsedSpawnsArray+eax*4]
     cmp eax, -1
     jz .Normal_Code
     

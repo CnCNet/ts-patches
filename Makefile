@@ -5,7 +5,8 @@ OUTPUT      = tibsun.exe
 LDS         = tibsun.lds
 IMPORTS     = 0x2EC050 280
 LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=windows
-NFLAGS      = -f elf
+NFLAGS      = -f elf -Iinc/
+CFLAGS      = -std=c99 -Iinc/
 
 OBJS        = \
               src/hp03.o \
@@ -13,14 +14,13 @@ OBJS        = \
               src/savegame.o \
               src/fix_mouse_not_found_error.o \
               src/single-proc-affinity.o \
-              src/spawner.o \
+              src/spawner/spawner.o \
               src/spawner/tunnel.o \
               src/spawner/nethack.o \
               src/spawner/selectable_spawns.o \
               src/spawner/spectators.o \
               src/spawner/statistics.o \
               src/spawner/build_off_ally.o \
-              src/anticheat_test.o \
               src/only_the_host_may_change_gamespeed.o \
               src/spawner/auto-surrender.o \
               src/trigger_actions_extended.o \
@@ -35,7 +35,8 @@ OBJS        = \
               src/internet_cncnet.o \
               src/tiberium_stuff.o \
               src/no_window_frame.o \
-              src/sym.o \
+              src/short_connection_timeout.o \
+              sym.o \
               rsrc.o
 
 PETOOL     ?= petool

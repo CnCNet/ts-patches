@@ -7,7 +7,7 @@ _WaveClass_Draw_South_Disruptor_Wave:
     push eax
     mov ecx, esi
     
-    cmp byte [var.InvisibleSouthDisruptorWave], 1
+    cmp byte [InvisibleSouthDisruptorWave], 1
     jz .Dont_Draw_Southward
     
     jmp 0x00671118
@@ -20,7 +20,7 @@ _Read_SUN_INI_InvisibleSouthDisruptorWave:
     push eax
     
     INIClass_Get_Bool INIClass_SUN_INI, str_Options, str_InvisibleSouthDisruptorWave, 0
-    mov [var.InvisibleSouthDisruptorWave], al
+    mov [InvisibleSouthDisruptorWave], al
     pop eax
     jmp 0x00589D3E
     

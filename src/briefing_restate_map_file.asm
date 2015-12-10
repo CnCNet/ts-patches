@@ -1,6 +1,7 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
-extern FileClass__Is_Available
+cextern FileClass__Is_Available
 
 @LJMP 0x005C0930, _Restate_Briefing_Jump_To_Map_Briefing_First
 @LJMP 0x005C0AA4, _Restate_Briefing_Jump_To_Mission_INI_Briefing_Next

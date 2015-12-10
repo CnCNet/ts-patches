@@ -1,6 +1,7 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
-extern SessionType
+cextern SessionType
 
 @LJMP 0x004E23A7, _Select_Game_WOL_Disable_For_CnCNet
 

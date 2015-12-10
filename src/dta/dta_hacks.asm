@@ -15,12 +15,12 @@ _Delete_Save_Game_Game_Folder_Format_String_Change:
     
     push    eax
     push    str_SaveGameLoadFolder
-    push    var.SaveGameLoadPath
+    push    SaveGameLoadPath
     call    _sprintf
     add     esp, 0x0c
     
     popad
-    mov     eax, var.SaveGameLoadPath
+    mov     eax, SaveGameLoadPath
     push    eax
     jmp     0x00505A25
     
@@ -40,13 +40,13 @@ _Save_Game_Save_Game_Folder_Format_String_Change1:
      
     push    esi
     push    str_SaveGameLoadFolder
-    push    var.SaveGameLoadPathWide   
+    push    SaveGameLoadPathWide   
     call    _sprintf
     add     esp, 0x0c
     
     popad
     
-    mov     esi, var.SaveGameLoadPathWide  
+    mov     esi, SaveGameLoadPathWide  
     xor     edi, edi
     jmp     0x005D5003
     
@@ -70,13 +70,13 @@ _Load_Game_Save_Game_Folder_Format_String_Change1:
      
     push    esi
     push    str_SaveGameLoadFolder
-    push    var.SaveGameLoadPathWide   
+    push    SaveGameLoadPathWide   
     call    [0x006CA464] ; WsSprintf
     add     esp, 0x0c
     
     popad
     
-    mov     esi, var.SaveGameLoadPathWide  
+    mov     esi, SaveGameLoadPathWide  
     push    40h
     jmp     0x005D6942
 
@@ -95,13 +95,13 @@ _Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory:
    
     push    ecx
     push    str_SaveGameLoadFolder
-    push    var.SaveGameLoadPathWide   
+    push    SaveGameLoadPathWide   
     call    [0x006CA464] ; WsSprintf
     add     esp, 0x0c
     
     popad
     
-    mov     ecx, var.SaveGameLoadPathWide
+    mov     ecx, SaveGameLoadPathWide
      
     lea     eax, [esp+8]
     jmp     0x005D7E9B

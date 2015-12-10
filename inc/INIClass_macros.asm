@@ -1,5 +1,6 @@
-extern INIClass__GetInt
-extern INIClass__GetBool
+
+cextern INIClass__GetInt
+cextern INIClass__GetBool
 
 ; args: <INIClass this>, <INI section string>, <INI key string>, <default value if missing>
 %macro INIClass_Get_Int 4

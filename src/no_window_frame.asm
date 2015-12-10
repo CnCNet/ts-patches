@@ -1,16 +1,17 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
-global var.NoWindowFrame
+cglobal NoWindowFrame
 
 @LJMP 0x00686210, SetNoWindowFrame
 
 section .bss
-    var.NoWindowFrame resb 1
+    NoWindowFrame resb 1
 
 section .text
 
 SetNoWindowFrame:
-    cmp byte [var.NoWindowFrame], 1
+    cmp byte [NoWindowFrame], 1
     jnz .out
     push 0x860A0000
     jmp 0x00686215

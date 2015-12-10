@@ -14,21 +14,22 @@
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
 
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 %include "src/def.asm"
 
-global var.AddressList
-global var.PortHack
+cglobal AddressList
+cglobal PortHack
 
-extern Tunnel_SendTo
-extern Tunnel_RecvFrom
+cextern Tunnel_SendTo
+cextern Tunnel_RecvFrom
 
 @CALL 0x006A2525, NetHack_SendTo
 @CALL 0x006A25F9, NetHack_RecvFrom
 
 section .bss
-    var.AddressList                RESB (ListAddress_size * AddressList_length)
-    var.PortHack                   RESD 1
+    AddressList                RESB (ListAddress_size * AddressList_length)
+    PortHack                   RESD 1
 
 section .text
 
@@ -67,12 +68,12 @@ NetHack_SendTo:
     mov word [edx], 2
 
     ; sin_port
-    mov ax, word [ecx * ListAddress_size + var.AddressList + ListAddress.port]
+    mov ax, word [ecx * ListAddress_size + AddressList + ListAddress.port]
     lea edx, [TempDest + sockaddr_in.sin_port]
     mov word [edx], ax
 
     ; sin_addr
-    mov eax, dword [ecx * ListAddress_size + var.AddressList + ListAddress.ip]
+    mov eax, dword [ecx * ListAddress_size + AddressList + ListAddress.ip]
     lea edx, [TempDest + sockaddr_in.sin_addr]
     mov dword [edx], eax
 
@@ -149,16 +150,16 @@ NetHack_RecvFrom:
     ; compare ip
     mov edx, [src_addr]
     mov edx, [edx + sockaddr_in.sin_addr]
-    cmp edx, [ecx * ListAddress_size + var.AddressList + ListAddress.ip]
+    cmp edx, [ecx * ListAddress_size + AddressList + ListAddress.ip]
     jne .next
 
-    cmp dword [var.PortHack], 1
+    cmp dword [PortHack], 1
     je .skipPort
     ; compare port
     mov edx,[src_addr]
     mov dx, [edx + sockaddr_in.sin_port]
     and edx, 0xffff
-    cmp dx, [ecx * ListAddress_size + var.AddressList + ListAddress.port]
+    cmp dx, [ecx * ListAddress_size + AddressList + ListAddress.port]
     jne .next
 .skipPort:
 

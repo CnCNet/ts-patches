@@ -1,4 +1,5 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
 ;@CLEAR 0x004D3F8A 0x00 0x004D3F8B ; power=0 hard-coded to damage 1 at 0x004D3F84, set it to 00 instead
 ; hard-coded power=17 for Vinifera at 0x00644DCA

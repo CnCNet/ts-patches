@@ -1,14 +1,15 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
-global var.BuildOffAlly
+cglobal BuildOffAlly
 
-extern HouseClassArray
-extern HouseClass__Is_Ally
+cextern HouseClassArray
+cextern HouseClass__Is_Ally
 
 @LJMP 0x004762EA, _Build_Off_Ally
 
 section .bss
-    var.BuildOffAlly resb 1
+    BuildOffAlly resb 1
 
 section .text
 
@@ -54,7 +55,7 @@ Is_Mutual_Ally:
 _Build_Off_Ally:
     mov ecx, [esp+0x38]
     
-    cmp byte [var.BuildOffAlly], 1
+    cmp byte [BuildOffAlly], 1
     jz .Check_Ally
 
     cmp [edx+20h], ecx

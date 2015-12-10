@@ -1,4 +1,5 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
 ; hifi <3 CCHyper, he's a nice chap!
 
@@ -24,3 +25,9 @@ _spy_cameo_palette:
 ;   corrupted, resulting in the Aircraft never landing. This is now fixed.
 @SJMP 0x0040A56D, 0x0040A5C2
 @SJMP 0x0040A669, 0x0040A6BA
+
+hack 0x006010CE ; window mode
+    test al, al
+    jz hackend
+    mov byte[0x7A1790], al
+    jmp hackend

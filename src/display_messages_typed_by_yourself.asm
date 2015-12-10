@@ -1,10 +1,11 @@
-%include "src/patch.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
-extern PlayerPtr
-extern Get_Message_Delay_Or_Duration
-extern MessageListClass_this
-extern MessageListClass__Add_Message
-extern _sprintf
+cextern PlayerPtr
+cextern Get_Message_Delay_Or_Duration
+cextern MessageListClass_this
+cextern MessageListClass__Add_Message
+cextern _sprintf
 
 @LJMP 0x00509D2F, _Message_Input_Display_Messages_Typed_By_Yourself
 

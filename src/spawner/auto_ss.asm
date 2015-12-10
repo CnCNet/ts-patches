@@ -4,7 +4,7 @@
 ; TODO NEED TO CHECK FOR SESSION == 3 AND SPAWNER ACTIVE
 
 _Main_Loop_Auto_SS:
-    cmp dword [var.SpawnerActive], 1 ; only do Auto-SS when spawner is active
+    cmp dword [SpawnerActive], 1 ; only do Auto-SS when spawner is active
     jnz .Ret
 
     cmp dword [SessionType], 3 ; only do Auto-SS in LAN mode
@@ -22,9 +22,9 @@ _Main_Loop_Auto_SS:
     cmp dx, 254 ; frame to first do SS and the remainder of the division
     jnz .Ret
 
-    mov dword [var.DoingAutoSS], 1
+    mov dword [DoingAutoSS], 1
     call 0x004EAB00 ; screen capture
-    mov dword [var.DoingAutoSS], 0
+    mov dword [DoingAutoSS], 0
     
 .Ret:
     call 0x005094A0; Sync_Delay(void)
@@ -33,7 +33,7 @@ _Main_Loop_Auto_SS:
 _ScreenCaptureCommand__Activate_AutoSS_File_Name:
     lea ecx, [esp+0x114]
     
-    cmp dword [var.DoingAutoSS], 1
+    cmp dword [DoingAutoSS], 1
     jnz .Normal_Code
 
 .AutoSS_File_Name:
@@ -56,4 +56,4 @@ _ScreenCaptureCommand__Activate_AutoSS_File_Name:
 .Normal_Code:
     jmp 0x004EAC40
     
-; var.DoingAutoSS
+; DoingAutoSS
