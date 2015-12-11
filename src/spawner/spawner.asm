@@ -1,5 +1,6 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
+%include "TiberianSun.inc"
 %include "src/def.asm"
 
 cglobal SpawnerActive
@@ -10,11 +11,8 @@ cextern SessionType
 cextern INIClass__GetInt
 cextern ScenarioStuff
 cextern SelectedDifficulty
-cextern INIClass__GetBool
 cextern SessionClass__Read_Scenario_Descriptions
-cextern timeGetTime
 cextern memset
-cextern GetCommandLineA
 cextern stristr_
 cextern Assign_Houses
 cextern HouseClassArray
@@ -26,8 +24,6 @@ cextern FileClass__FileClass
 cextern FileClass__Is_Available
 cextern INIClass__INIClass
 cextern INIClass__Load
-cextern LoadLibraryA
-cextern GetProcAddress
 cextern Load_Spectators_Spawner
 cextern GameActive
 cextern WOLGameID
@@ -385,7 +381,7 @@ _sub_5ED470_Dont_Read_Scenario_Descriptions_When_Spawner_Active:
     call SessionClass__Read_Scenario_Descriptions
 
 .Ret:
-    call [timeGetTime]
+    call [_imp__timeGetTime]
     jmp 0x005ED482
 
     
@@ -404,7 +400,7 @@ _Init_Game_Check_Spawn_Arg_No_Intro:
     
     call Init_Game_Spawner
 
-    call [GetCommandLineA]
+    call [_imp__GetCommandLineA]
     push str_SpawnArg
     push eax
     call stristr_
@@ -837,11 +833,11 @@ Initialize_Spawn:
    
     ; get pointer to inet_addr
     push str_wsock32_dll
-    call [LoadLibraryA]
+    call [_imp__LoadLibraryA]
 
     push str_inet_addr
     push eax
-    call [GetProcAddress]
+    call [_imp__GetProcAddress]
 
     mov [inet_addr], eax
     

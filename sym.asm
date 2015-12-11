@@ -1,19 +1,5 @@
 %include "macros/setsym.inc"
 
-; winapi
-setcglob 0x006B4D6C, sendto
-setcglob 0x006B4D66, recvfrom
-setcglob 0x006B4D24, htonl
-setcglob 0x006CA24C, GetCommandLineA
-setcglob 0x006B6730, stristr_
-setcglob 0x006CA16C, LoadLibraryA
-setcglob 0x006CA174, GetProcAddress
-setcglob 0x006CA1D0, GetCurrentProcess
-setcglob 0x006B52EE, _sprintf
-setcglob 0x006CA4EC, timeGetTime ; idata pointer
-setcglob 0x006B73A0, __strcmpi
-setcglob 0x006B602A, _strtok
-
 ; Memory
 setcglob 0x006B51D7, new
 setcglob 0x006B63F0, memcpy
@@ -136,3 +122,361 @@ setcglob 0x00867014, WOLGameID
 ; Sidebar
 ;setcglob 0x00749874, LEFT_STRIP
 ;setcglob 0x00749C48, RIGHT_STRIP
+
+; clib
+setcglob 0x006B73A0, __strcmpi
+setcglob 0x006B602A, _strtok
+setcglob 0x006B52EE, _sprintf
+setcglob 0x006B6730, stristr_
+
+; winapi
+setcglob 0x006B4D6C, sendto
+setcglob 0x006B4D66, recvfrom
+setcglob 0x006B4D24, htonl
+
+setcglob 0x006CA24C, _imp__GetCommandLineA
+setcglob 0x006CA16C, _imp__LoadLibraryA
+setcglob 0x006CA174, _imp__GetProcAddress
+setcglob 0x006CA1D0, _imp__GetCurrentProcess
+setcglob 0x006CA4EC, _imp__timeGetTime
+
+
+;Address  Ordinal Name                          Library 
+;-------  ------- ----                          ------- 
+;006CA000         RegCloseKey                   ADVAPI32
+;006CA004         RegQueryValueExA              ADVAPI32
+;006CA008         RegEnumKeyExA                 ADVAPI32
+;006CA00C         RegOpenKeyExA                 ADVAPI32
+;006CA010         RegSetValueExA                ADVAPI32
+;006CA014         RegCreateKeyExA               ADVAPI32
+;006CA018         RegDeleteKeyA                 ADVAPI32
+;006CA01C         RegQueryInfoKeyA              ADVAPI32
+;006CA024         ImageList_DragShowNolock      COMCTL32
+;006CA028 17      InitCommonControls            COMCTL32
+;006CA02C         ImageList_DragMove            COMCTL32
+;006CA030         ImageList_DragEnter           COMCTL32
+;006CA034         ImageList_BeginDrag           COMCTL32
+;006CA038         ImageList_Destroy             COMCTL32
+;006CA03C         ImageList_EndDrag             COMCTL32
+;006CA044         DirectDrawCreate              DDRAW   
+;006CA04C 1       DirectSoundCreate             DSOUND  
+;006CA054         DeleteObject                  GDI32   
+;006CA058         CreateSolidBrush              GDI32   
+;006CA05C         SetTextColor                  GDI32   
+;006CA060         SetBkColor                    GDI32   
+;006CA064         SetBkMode                     GDI32   
+;006CA068         GetTextColor                  GDI32   
+;006CA06C         GetBkColor                    GDI32   
+;006CA070         GetBkMode                     GDI32   
+;006CA074         SelectObject                  GDI32   
+;006CA078         GetStockObject                GDI32   
+;006CA07C         GetTextMetricsA               GDI32   
+;006CA080         TextOutA                      GDI32   
+;006CA084         SetTextAlign                  GDI32   
+;006CA088         CreateFontA                   GDI32   
+;006CA08C         RestoreDC                     GDI32   
+;006CA090         CreateFontIndirectA           GDI32   
+;006CA094         DPtoLP                        GDI32   
+;006CA098         SetWindowOrgEx                GDI32   
+;006CA09C         SetViewportOrgEx              GDI32   
+;006CA0A0         ModifyWorldTransform          GDI32   
+;006CA0A4         SetGraphicsMode               GDI32   
+;006CA0A8         SaveDC                        GDI32   
+;006CA0AC         GetTextExtentPoint32A         GDI32   
+;006CA0B0         CreateDIBSection              GDI32   
+;006CA0B8         FileTimeToSystemTime          KERNEL32
+;006CA0BC         FileTimeToLocalFileTime       KERNEL32
+;006CA0C0         GetDateFormatA                KERNEL32
+;006CA0C4         GetTimeFormatA                KERNEL32
+;006CA0C8         SystemTimeToFileTime          KERNEL32
+;006CA0CC         CopyFileA                     KERNEL32
+;006CA0D0         CreateDirectoryA              KERNEL32
+;006CA0D4         QueryPerformanceFrequency     KERNEL32
+;006CA0D8         QueryPerformanceCounter       KERNEL32
+;006CA0DC         CompareFileTime               KERNEL32
+;006CA0E0         EscapeCommFunction            KERNEL32
+;006CA0E4         SetCommBreak                  KERNEL32
+;006CA0E8         ReadFile                      KERNEL32
+;006CA0EC         SetFilePointer                KERNEL32
+;006CA0F0         GetFileSize                   KERNEL32
+;006CA0F4         FileTimeToDosDateTime         KERNEL32
+;006CA0F8         GetFileInformationByHandle    KERNEL32
+;006CA0FC         SetFileTime                   KERNEL32
+;006CA100         DosDateTimeToFileTime         KERNEL32
+;006CA104         lstrlenA                      KERNEL32
+;006CA108         lstrcatA                      KERNEL32
+;006CA10C         ClearCommBreak                KERNEL32
+;006CA110         DeleteFileA                   KERNEL32
+;006CA114         SetCurrentDirectoryA          KERNEL32
+;006CA118         OpenMutexA                    KERNEL32
+;006CA11C         GetFileTime                   KERNEL32
+;006CA120         GlobalMemoryStatus            KERNEL32
+;006CA124         ClearCommError                KERNEL32
+;006CA128         SetCommTimeouts               KERNEL32
+;006CA12C         SetCommState                  KERNEL32
+;006CA130         GetCommState                  KERNEL32
+;006CA134         GetTickCount                  KERNEL32
+;006CA138         GetSystemTime                 KERNEL32
+;006CA13C         SetupComm                     KERNEL32
+;006CA140         GetCommMask                   KERNEL32
+;006CA144         ResetEvent                    KERNEL32
+;006CA148         GetCommModemStatus            KERNEL32
+;006CA14C         GetOverlappedResult           KERNEL32
+;006CA150         GetVersionExA                 KERNEL32
+;006CA154         GetExitCodeProcess            KERNEL32
+;006CA158         CreateProcessA                KERNEL32
+;006CA15C         SetEvent                      KERNEL32
+;006CA160         GetCurrentDirectoryA          KERNEL32
+;006CA164         HeapDestroy                   KERNEL32
+;006CA168         LockResource                  KERNEL32
+;006CA170         GetModuleHandleA              KERNEL32
+;006CA178         GetDiskFreeSpaceA             KERNEL32
+;006CA17C         FindNextFileA                 KERNEL32
+;006CA180         FindFirstFileA                KERNEL32
+;006CA184         FindClose                     KERNEL32
+;006CA188         GetDriveTypeA                 KERNEL32
+;006CA18C         CreateFileA                   KERNEL32
+;006CA190         DeviceIoControl               KERNEL32
+;006CA194         GetLastError                  KERNEL32
+;006CA198         Sleep                         KERNEL32
+;006CA19C         CloseHandle                   KERNEL32
+;006CA1A0         MultiByteToWideChar           KERNEL32
+;006CA1A4         InterlockedIncrement          KERNEL32
+;006CA1A8         InterlockedDecrement          KERNEL32
+;006CA1AC         DeleteCriticalSection         KERNEL32
+;006CA1B0         GetCurrentThreadId            KERNEL32
+;006CA1B4         InitializeCriticalSection     KERNEL32
+;006CA1B8         EnterCriticalSection          KERNEL32
+;006CA1BC         WideCharToMultiByte           KERNEL32
+;006CA1C0         VirtualQuery                  KERNEL32
+;006CA1C4         VirtualProtect                KERNEL32
+;006CA1C8         FlushInstructionCache         KERNEL32
+;006CA1CC         WriteFile                     KERNEL32
+;006CA1D4         IsBadCodePtr                  KERNEL32
+;006CA1D8         IsBadReadPtr                  KERNEL32
+;006CA1DC         ExitProcess                   KERNEL32
+;006CA1E0         AllocConsole                  KERNEL32
+;006CA1E4         FreeConsole                   KERNEL32
+;006CA1E8         WaitForSingleObject           KERNEL32
+;006CA1EC         WaitForMultipleObjects        KERNEL32
+;006CA1F0         ReleaseMutex                  KERNEL32
+;006CA1F4         CreateMutexA                  KERNEL32
+;006CA1F8         FreeLibrary                   KERNEL32
+;006CA1FC         GetVolumeInformationA         KERNEL32
+;006CA200         GetModuleFileNameA            KERNEL32
+;006CA204         FindResourceA                 KERNEL32
+;006CA208         LoadResource                  KERNEL32
+;006CA20C         CreateEventA                  KERNEL32
+;006CA210         PurgeComm                     KERNEL32
+;006CA214         lstrcpyA                      KERNEL32
+;006CA218         SetUnhandledExceptionFilter   KERNEL32
+;006CA21C         TlsGetValue                   KERNEL32
+;006CA220         FreeEnvironmentStringsW       KERNEL32
+;006CA224         TlsFree                       KERNEL32
+;006CA228         TlsAlloc                      KERNEL32
+;006CA22C         TlsSetValue                   KERNEL32
+;006CA230         RaiseException                KERNEL32
+;006CA234         LCMapStringW                  KERNEL32
+;006CA238         LCMapStringA                  KERNEL32
+;006CA23C         FatalAppExitA                 KERNEL32
+;006CA240         HeapSize                      KERNEL32
+;006CA244         HeapReAlloc                   KERNEL32
+;006CA248         GetVersion                    KERNEL32
+;006CA250         GetStartupInfoA               KERNEL32
+;006CA254         RtlUnwind                     KERNEL32
+;006CA258         GetSystemTimeAsFileTime       KERNEL32
+;006CA25C         HeapAlloc                     KERNEL32
+;006CA260         SetLastError                  KERNEL32
+;006CA264         TerminateProcess              KERNEL32
+;006CA268         GetLocalTime                  KERNEL32
+;006CA26C         GetTimeZoneInformation        KERNEL32
+;006CA270         HeapFree                      KERNEL32
+;006CA274         GetCurrentThread              KERNEL32
+;006CA278         HeapCreate                    KERNEL32
+;006CA27C         VirtualFree                   KERNEL32
+;006CA280         VirtualAlloc                  KERNEL32
+;006CA284         IsBadWritePtr                 KERNEL32
+;006CA288         SetHandleCount                KERNEL32
+;006CA28C         GetStdHandle                  KERNEL32
+;006CA290         GetFileType                   KERNEL32
+;006CA294         GetCPInfo                     KERNEL32
+;006CA298         GetACP                        KERNEL32
+;006CA29C         GetOEMCP                      KERNEL32
+;006CA2A0         SetConsoleCtrlHandler         KERNEL32
+;006CA2A4         GetFileAttributesA            KERNEL32
+;006CA2A8         GetCurrentProcessId           KERNEL32
+;006CA2AC         UnhandledExceptionFilter      KERNEL32
+;006CA2B0         FreeEnvironmentStringsA       KERNEL32
+;006CA2B4         WriteConsoleA                 KERNEL32
+;006CA2B8         GetEnvironmentStrings         KERNEL32
+;006CA2BC         GetEnvironmentStringsW        KERNEL32
+;006CA2C0         LeaveCriticalSection          KERNEL32
+;006CA2C4         IsValidLocale                 KERNEL32
+;006CA2C8         IsValidCodePage               KERNEL32
+;006CA2CC         GetLocaleInfoA                KERNEL32
+;006CA2D0         EnumSystemLocalesA            KERNEL32
+;006CA2D4         GetUserDefaultLCID            KERNEL32
+;006CA2D8         GetStringTypeA                KERNEL32
+;006CA2DC         GetStringTypeW                KERNEL32
+;006CA2E0         SetStdHandle                  KERNEL32
+;006CA2E4         FlushFileBuffers              KERNEL32
+;006CA2E8         CompareStringA                KERNEL32
+;006CA2EC         CompareStringW                KERNEL32
+;006CA2F0         SetEnvironmentVariableA       KERNEL32
+;006CA2F4         LocalFree                     KERNEL32
+;006CA2F8         GetNumberOfConsoleInputEvents KERNEL32
+;006CA2FC         PeekConsoleInputA             KERNEL32
+;006CA300         GetConsoleMode                KERNEL32
+;006CA304         SetConsoleMode                KERNEL32
+;006CA308         SetEndOfFile                  KERNEL32
+;006CA30C         GetLocaleInfoW                KERNEL32
+;006CA310         lstrlenW                      KERNEL32
+;006CA314         ReadConsoleInputA             KERNEL32
+;006CA31C 2       SysAllocString                OLEAUT32
+;006CA320 6       SysFreeString                 OLEAUT32
+;006CA324 201     SetErrorInfo                  OLEAUT32
+;006CA328 12      VariantChangeType             OLEAUT32
+;006CA32C 202     CreateErrorInfo               OLEAUT32
+;006CA330 9       VariantClear                  OLEAUT32
+;006CA334 8       VariantInit                   OLEAUT32
+;006CA338 161     LoadTypeLib                   OLEAUT32
+;006CA33C 34      RevokeActiveObject            OLEAUT32
+;006CA340 33      RegisterActiveObject          OLEAUT32
+;006CA344 200     GetErrorInfo                  OLEAUT32
+;006CA34C         FindExecutableA               SHELL32 
+;006CA354         DialogBoxIndirectParamA       USER32  
+;006CA358         DialogBoxParamA               USER32  
+;006CA35C         SetDlgItemTextA               USER32  
+;006CA360         SetFocus                      USER32  
+;006CA364         EndDialog                     USER32  
+;006CA368         GetActiveWindow               USER32  
+;006CA36C         ShowCursor                    USER32  
+;006CA370         ChildWindowFromPoint          USER32  
+;006CA374         TranslateMessage              USER32  
+;006CA378         GetDlgItem                    USER32  
+;006CA37C         EnableWindow                  USER32  
+;006CA380         SetWindowTextA                USER32  
+;006CA384         ClientToScreen                USER32  
+;006CA388         GetClientRect                 USER32  
+;006CA38C         DestroyWindow                 USER32  
+;006CA390         GetKeyState                   USER32  
+;006CA394         ToAscii                       USER32  
+;006CA398         MapVirtualKeyA                USER32  
+;006CA39C         GetAsyncKeyState              USER32  
+;006CA3A0         GetSystemMetrics              USER32  
+;006CA3A4         SendDlgItemMessageA           USER32  
+;006CA3A8         GetWindowTextA                USER32  
+;006CA3AC         MoveWindow                    USER32  
+;006CA3B0         AdjustWindowRectEx            USER32  
+;006CA3B4         GetMenu                       USER32  
+;006CA3B8         SetRect                       USER32  
+;006CA3BC         SetWindowPos                  USER32  
+;006CA3C0         PostMessageA                  USER32  
+;006CA3C4         ValidateRect                  USER32  
+;006CA3C8         InvalidateRect                USER32  
+;006CA3CC         CheckDlgButton                USER32  
+;006CA3D0         CharToOemBuffA                USER32  
+;006CA3D4         ScreenToClient                USER32  
+;006CA3D8         GetWindowRect                 USER32  
+;006CA3DC         DispatchMessageA              USER32  
+;006CA3E0         IsDlgButtonChecked            USER32  
+;006CA3E4         GetDlgItemTextA               USER32  
+;006CA3E8         WaitForInputIdle              USER32  
+;006CA3EC         GetTopWindow                  USER32  
+;006CA3F0         GetForegroundWindow           USER32  
+;006CA3F4         LoadIconA                     USER32  
+;006CA3F8         RegisterHotKey                USER32  
+;006CA3FC         RedrawWindow                  USER32  
+;006CA400         GetWindowContextHelpId        USER32  
+;006CA404         WinHelpA                      USER32  
+;006CA408         SendMessageA                  USER32  
+;006CA40C         LoadCursorA                   USER32  
+;006CA410         SetCursor                     USER32  
+;006CA414         CreateDialogParamA            USER32  
+;006CA418         PostQuitMessage               USER32  
+;006CA41C         FindWindowA                   USER32  
+;006CA420         GetDlgCtrlID                  USER32  
+;006CA424         GetCapture                    USER32  
+;006CA428         SetCursorPos                  USER32  
+;006CA42C         SetForegroundWindow           USER32  
+;006CA430         CreateDialogIndirectParamA    USER32  
+;006CA434         DrawTextA                     USER32  
+;006CA438         DefWindowProcA                USER32  
+;006CA43C         CloseWindow                   USER32  
+;006CA440         GetDC                         USER32  
+;006CA444         ReleaseDC                     USER32  
+;006CA448         GetKeyNameTextA               USER32  
+;006CA44C         GetFocus                      USER32  
+;006CA450         GetNextDlgTabItem             USER32  
+;006CA454         GetUpdateRect                 USER32  
+;006CA458         MessageBoxA                   USER32  
+;006CA45C         LoadStringA                   USER32  
+;006CA460         MessageBoxIndirectA           USER32  
+;006CA464         wsprintfA                     USER32  
+;006CA468         GetWindowLongA                USER32  
+;006CA46C         SetWindowLongA                USER32  
+;006CA470         ShowWindow                    USER32  
+;006CA474         UpdateWindow                  USER32  
+;006CA478         CallWindowProcA               USER32  
+;006CA47C         WindowFromPoint               USER32  
+;006CA480         KillTimer                     USER32  
+;006CA484         SetTimer                      USER32  
+;006CA488         IntersectRect                 USER32  
+;006CA48C         GetWindow                     USER32  
+;006CA490         GetClassNameA                 USER32  
+;006CA494         EnumChildWindows              USER32  
+;006CA498         GetParent                     USER32  
+;006CA49C         BringWindowToTop              USER32  
+;006CA4A0         SetCapture                    USER32  
+;006CA4A4         ReleaseCapture                USER32  
+;006CA4A8         CreateWindowExA               USER32  
+;006CA4AC         RegisterClassA                USER32  
+;006CA4B0         IsWindowEnabled               USER32  
+;006CA4B4         PeekMessageA                  USER32  
+;006CA4B8         GetMessageA                   USER32  
+;006CA4BC         IsDialogMessageA              USER32  
+;006CA4C0         TranslateAcceleratorA         USER32  
+;006CA4C4         GetCursorPos                  USER32  
+;006CA4C8         SetActiveWindow               USER32  
+;006CA4D0         GetFileVersionInfoSizeA       VERSION 
+;006CA4D4         GetFileVersionInfoA           VERSION 
+;006CA4D8         VerQueryValueA                VERSION 
+;006CA4E0         timeBeginPeriod               WINMM   
+;006CA4E4         timeSetEvent                  WINMM   
+;006CA4E8         timeKillEvent                 WINMM    
+;006CA4F0         timeGetDevCaps                WINMM   
+;006CA4F4         timeEndPeriod                 WINMM   
+;006CA4FC 17      recvfrom                      WSOCK32 
+;006CA500 21      setsockopt                    WSOCK32 
+;006CA504 20      sendto                        WSOCK32 
+;006CA508 116     WSACleanup                    WSOCK32 
+;006CA50C 101     WSAAsyncSelect                WSOCK32 
+;006CA510 108     WSACancelAsyncRequest         WSOCK32 
+;006CA514 7       getsockopt                    WSOCK32 
+;006CA518 111     WSAGetLastError               WSOCK32 
+;006CA51C 11      inet_ntoa                     WSOCK32 
+;006CA520 15      ntohs                         WSOCK32 
+;006CA524 14      ntohl                         WSOCK32 
+;006CA528 9       htons                         WSOCK32 
+;006CA52C 115     WSAStartup                    WSOCK32 
+;006CA530 57      gethostname                   WSOCK32 
+;006CA534 52      gethostbyname                 WSOCK32 
+;006CA538 3       closesocket                   WSOCK32 
+;006CA53C 23      socket                        WSOCK32 
+;006CA540 2       bind                          WSOCK32 
+;006CA544 8       htonl                         WSOCK32 
+;006CA54C         StgCreateDocfile              ole32   
+;006CA550         CoRevokeClassObject           ole32   
+;006CA554         OleInitialize                 ole32   
+;006CA558         CoRegisterClassObject         ole32   
+;006CA55C         OleUninitialize               ole32   
+;006CA560         CoDisconnectObject            ole32   
+;006CA564         StringFromGUID2               ole32   
+;006CA568         StgOpenStorage                ole32   
+;006CA56C         CoFileTimeNow                 ole32   
+;006CA570         StringFromCLSID               ole32   
+;006CA574         CLSIDFromString               ole32   
+;006CA578         OleSaveToStream               ole32   
+;006CA57C         OleLoadFromStream             ole32   
+;006CA580         CoCreateInstance              ole32   
+;006CA584         OleRun                        ole32   
