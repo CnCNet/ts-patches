@@ -11,6 +11,7 @@ CFLAGS      = -std=c99 -Iinc/
 OBJS        = \
               src/loading.o \
               src/loading-func.o \
+              src/remove_16bit_windowed_check.o \
               src/in-game_message_background.o \
               src/hp03.o \
               src/savegame.o \
