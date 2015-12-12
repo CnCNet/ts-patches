@@ -1,8 +1,6 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-
-cextern SessionType
-cextern ScenarioStuff
+%include "TiberianSun.inc"
 
 @LJMP 0x005DB49C, _Start_Scenario_Force_Briefing_Screen
 

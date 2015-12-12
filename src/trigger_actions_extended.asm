@@ -1,8 +1,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
+%include "TiberianSun.inc"
 
 cextern UsedSpawnsArray
-cextern HouseClassArray
 
 ; 0x40 = first parameter, 0x24 = second parameter, 0x28, third parameter, 0x2C = fourth parameter, 0x30 = fifth parameter
 ; the trigger action type should be 0 (as set map INI) for the extended triggers added, determines how the rest of the

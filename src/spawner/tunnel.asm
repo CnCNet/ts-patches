@@ -15,7 +15,7 @@
 ;
 
 %include "macros/datatypes.inc"
-%include "src/def.asm"
+%include "TiberianSun.inc"
 
 cglobal TunnelId
 cglobal TunnelIp
@@ -23,9 +23,6 @@ cglobal TunnelPort
 
 cglobal Tunnel_SendTo
 cglobal Tunnel_RecvFrom
-
-cextern sendto
-cextern recvfrom
 
 section .bss
     TunnelId                   RESD 1

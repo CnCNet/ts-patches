@@ -1,10 +1,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
+%include "TiberianSun.inc"
 
 cglobal BuildOffAlly
-
-cextern HouseClassArray
-cextern HouseClass__Is_Ally
 
 @LJMP 0x004762EA, _Build_Off_Ally
 

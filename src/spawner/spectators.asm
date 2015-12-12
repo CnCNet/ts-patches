@@ -1,17 +1,11 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-%include "src/def.asm"
+%include "TiberianSun.inc"
+%include "ini.inc"
 
 cglobal IsSpectatorArray
 cglobal SpectatorStuffInit
 cglobal Load_Spectators_Spawner
-
-cextern PlayerPtr
-cextern SessionType
-cextern MouseClass_Map
-cextern Message_Input_Player_Dead
-cextern HouseClassArray
-cextern INIClass__GetBool
 
 cextern INIClass_SPAWN
 

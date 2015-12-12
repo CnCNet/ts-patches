@@ -1,13 +1,9 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-%include "string_macros.asm"
+%include "TiberianSun.inc"
+%include "string_macros.inc"
 
 cglobal UsedSpawnsArray
-
-cextern HouseType_From_Name
-cextern UnitClassArray_Count
-cextern HouseClassArray
-cextern _strtok
 
 @LJMP 0x00658658, _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX
 @LJMP 0x00434843, _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX

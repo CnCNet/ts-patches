@@ -1,16 +1,10 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
+%include "TiberianSun.inc"
 
+cextern SpawnerActive
 cextern IsSpectatorArray
 cextern SpawnLocationsArray
-cextern SpawnerActive
-cextern PlayerPtr
-cextern SessionType
-cextern StatisticsPacketSent
-cextern FileClass__FileClass
-cextern FileClass__Open
-cextern FileClass__Write
-cextern FileClass__Close
 
 @LJMP 0x004BAC2C, _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff
 @LJMP 0x0060A79C, _Send_Statistics_Packet_Write_Statistics_Dump

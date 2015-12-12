@@ -1,7 +1,6 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-
-cextern FileClass__Is_Available
+%include "TiberianSun.inc"
 
 @LJMP 0x005C0930, _Restate_Briefing_Jump_To_Map_Briefing_First
 @LJMP 0x005C0AA4, _Restate_Briefing_Jump_To_Mission_INI_Briefing_Next

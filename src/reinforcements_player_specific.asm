@@ -1,12 +1,9 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-%include "string_macros.asm"
+%include "TiberianSun.inc"
+%include "string_macros.inc"
 
-cextern TeamTypesArray
-cextern TeamTypesArray_Count
 cextern UsedSpawnsArray
-cextern HouseClassArray
-cextern HouseType_From_Name
 
 ;; @JMP 0x05DD9BB 0x005DD9C4 ; Call TeamTypes__Read_INI later
 @LJMP 0x0044B0CF, _Get_HouseType_From_Index_Spawn_Fake

@@ -1,7 +1,6 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-
-cextern SessionType
+%include "TiberianSun.inc"
 
 @LJMP 0x004E23A7, _Select_Game_WOL_Disable_For_CnCNet
 

@@ -1,11 +1,6 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-
-cextern PlayerPtr
-cextern Get_Message_Delay_Or_Duration
-cextern MessageListClass_this
-cextern MessageListClass__Add_Message
-cextern _sprintf
+%include "TiberianSun.inc"
 
 @LJMP 0x00509D2F, _Message_Input_Display_Messages_Typed_By_Yourself
 

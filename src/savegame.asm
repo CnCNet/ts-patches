@@ -1,12 +1,9 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-%include "src/def.asm"
+%include "TiberianSun.inc"
 
 cextern Anticheat1
-cextern ScenarioStuff
 cextern AntiCheatArray
-cextern memcpy
-cextern MouseClass_Map
 
 @LJMP 0x005D6B92, _Load_Game_Post_Load_Game_Hook
 @LJMP 0x005D4FF5, _Save_Game_Pre_Save_Game_Hook

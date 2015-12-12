@@ -16,7 +16,7 @@
 
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
-%include "src/def.asm"
+%include "TiberianSun.inc"
 
 cglobal AddressList
 cglobal PortHack

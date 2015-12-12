@@ -1,8 +1,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
+%include "TiberianSun.inc"
 
 cextern SpawnerActive
-cextern SessionType
 
 @CLEAR 0x004B6D04, 0x90, 0x004B6D0D
 @LJMP 0x004B6D04, ForceSurrenderOnAbort
