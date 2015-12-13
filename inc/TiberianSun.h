@@ -12,4 +12,9 @@ bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, b
 
 // ### Variables ###
 
+extern bool VideoWindowed;
 extern INIClass INIClass_SUN_INI;
+
+// ### Macros ###
+
+#define SunIni_GetBool(a,b,c) INIClass__GetBool(INIClass_SUN_INI,a,b,c)

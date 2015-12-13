@@ -119,6 +119,9 @@ setcglob 0x00748348, MouseClass_Map
 setcglob 0x007E4FD0, StatisticsPacketSent
 setcglob 0x00867014, WOLGameID
 
+; Others
+setcglob 0x007A1790, VideoWindowed
+
 ; Sidebar
 ;setcglob 0x00749874, LEFT_STRIP
 ;setcglob 0x00749C48, RIGHT_STRIP

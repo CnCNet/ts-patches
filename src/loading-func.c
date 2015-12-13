@@ -4,8 +4,11 @@
 
 void LoadSunIni()
 {
-    if (INIClass__GetBool(INIClass_SUN_INI, "Options", "SingleProcAffinity", true)) SetSingleProcAffinity();
-    NoWindowFrame = INIClass__GetBool(INIClass_SUN_INI, "Video", "NoWindowFrame", false);
-    UseGraphicsPatch = INIClass__GetBool(INIClass_SUN_INI, "Video", "UseGraphicsPatch", true);
-    IsNoCD = INIClass__GetBool(INIClass_SUN_INI, "Options", "NoCD", true);
+    IsNoCD = SunIni_GetBool("Options", "NoCD", true);
+    if (SunIni_GetBool("Options", "SingleProcAffinity", true)) 
+        SetSingleProcAffinity();
+    
+    NoWindowFrame = SunIni_GetBool("Video", "NoWindowFrame", false);
+    UseGraphicsPatch = SunIni_GetBool("Video", "UseGraphicsPatch", true);
+    VideoWindowed = SunIni_GetBool("Video", "Video.Windowed", false);
 }
