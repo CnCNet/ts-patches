@@ -11,15 +11,15 @@ SetSingleProcAffinity() {
   SetProcAffinityFunction SetProcAffinityMask;
   HANDLE CurrentProcess;
 
-  library = (*_imp__LoadLibraryA)("kernel32.dll");
+  library = LoadLibraryA("kernel32.dll");
   if (!library)
     abort;
 
-  SetProcAffinityMask = (*_imp__GetProcAddress)(library, "SetProcessAffinityMask");
+  SetProcAffinityMask = GetProcAddress(library, "SetProcessAffinityMask");
   if (!SetProcAffinityMask)
     return;
 
-  CurrentProcess = (*_imp__GetCurrentProcess)();
+  CurrentProcess = GetCurrentProcess();
   if (!CurrentProcess)
     return;
 
