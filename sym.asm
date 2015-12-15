@@ -121,6 +121,7 @@ setcglob 0x00867014, WOLGameID
 
 ; Others
 setcglob 0x007A1790, VideoWindowed
+setcglob 0x0070EC84, VideoBackBuffer
 
 ; Sidebar
 ;setcglob 0x00749874, LEFT_STRIP
