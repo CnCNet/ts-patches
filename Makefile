@@ -9,6 +9,8 @@ NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/
 
 OBJS        = \
+              src/disable_max_windowed_mode.o \
+              src/disable_dpi_scaling.o \
               src/loading.o \
               src/loading-func.o \
               src/remove_16bit_windowed_check.o \
@@ -29,7 +31,7 @@ OBJS        = \
               src/trigger_actions_extended.o \
               src/briefing_screen_mission_start.o \
               src/briefing_restate_map_file.o \
-              src/no-cd.o \
+              src/no-cd_iran.o \
               src/display_messages_typed_by_yourself.o \
               src/graphics_patch.o \
               src/multiplayer_units_placing.o \

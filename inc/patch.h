@@ -8,6 +8,8 @@
 // ### Functions ###
 
 void SetSingleProcAffinity();
+void DisableHighDpiScaling();
+void DisableMaxWindowedMode();
 
 // ### Variables ###
 

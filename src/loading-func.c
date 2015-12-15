@@ -11,4 +11,8 @@ void LoadSunIni()
     NoWindowFrame = SunIni_GetBool("Video", "NoWindowFrame", false);
     UseGraphicsPatch = SunIni_GetBool("Video", "UseGraphicsPatch", true);
     VideoWindowed = SunIni_GetBool("Video", "Video.Windowed", false);
+    if (SunIni_GetBool("Video", "DisableHighDpiScaling", false)) 
+        DisableHighDpiScaling();
+    if (SunIni_GetBool("Video", "DisableMaxWindowedMode", false)) 
+        DisableMaxWindowedMode();
 }
