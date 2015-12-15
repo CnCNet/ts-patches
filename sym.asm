@@ -138,6 +138,10 @@ setcglob 0x006B4D6C, sendto
 setcglob 0x006B4D66, recvfrom
 setcglob 0x006B4D24, htonl
 
+;WSOCK32
+setcglob 0x006CA504, _imp__sendto
+setcglob 0x006CA4FC, _imp__recvfrom
+
 setcglob 0x006CA24C, _imp__GetCommandLineA
 setcglob 0x006CA16C, _imp__LoadLibraryA
 setcglob 0x006CA174, _imp__GetProcAddress

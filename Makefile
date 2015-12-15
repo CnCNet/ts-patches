@@ -41,7 +41,6 @@ else
                     src/short_connection_timeout.o \
                     src/no_options_menu_animation.o \
                     src/spawner/spawner.o \
-                    src/spawner/tunnel.o \
                     src/spawner/nethack.o \
                     src/spawner/selectable_spawns.o \
                     src/spawner/spectators.o \
