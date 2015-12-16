@@ -63,6 +63,7 @@ cextern FileClass__Write
 cextern sendto
 cextern recvfrom
 cextern htonl
+cextern htons
 
 cextern _imp__GetCommandLineA
 cextern _imp__timeGetTime

@@ -850,14 +850,14 @@ Initialize_Spawn:
     SpawnINI_Get_Int str_Tunnel, str_Port, 0
     and eax, 0xffff
     push eax
-    call htonl
+    call htons
     mov [TunnelPort], eax
 
     ; tunnel id 
     SpawnINI_Get_Int str_Settings, str_Port, 0
     and eax, 0xffff
     push eax
-    call htonl
+    call htons
     mov [TunnelId], eax
 
     cmp dword [TunnelPort],0
@@ -1272,8 +1272,7 @@ Add_Human_Opponents:
     and eax, 0xffff
 
     push eax
-    call htonl
-    shr eax,16
+    call htons
 
     ; disable PortHack if different port than own
     cmp ax, [ListenPort]

@@ -137,6 +137,8 @@ setcglob 0x006B6730, stristr_
 setcglob 0x006B4D6C, sendto
 setcglob 0x006B4D66, recvfrom
 setcglob 0x006B4D24, htonl
+setcglob 0x006B4D2A, htons
+
 
 ;WSOCK32
 setcglob 0x006CA504, _imp__sendto
