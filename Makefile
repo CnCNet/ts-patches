@@ -46,7 +46,8 @@ else
                     src/spawner/spectators.o \
                     src/spawner/statistics.o \
                     src/spawner/auto-surrender.o \
-                    src/spawner/build_off_ally.o
+                    src/spawner/build_off_ally.o \
+                    src/override_colors.o
 endif
 
 PETOOL     ?= petool

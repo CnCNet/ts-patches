@@ -21,6 +21,7 @@ setcglob 0x004C2E40, Read_Scenario_Houses
 setcglob 0x007B3468, UnitClassArray_Count
 setcglob 0x007E4850, TeamTypesArray_Count
 setcglob 0x007E4844, TeamTypesArray     
+setcglob 0x0070D850, PlayerColorMap
 
 ; INI
 setcglob 0x004E8A30, INIClass__INIClass
