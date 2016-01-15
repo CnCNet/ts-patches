@@ -8,6 +8,10 @@ LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=win
 NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/
 
+ifdef WWDEBUG
+ CFLAGS += -D WWDEBUG
+endif
+
 OBJS        = \
               src/disable_max_windowed_mode.o \
               src/disable_dpi_scaling.o \
@@ -47,6 +51,8 @@ else
                     src/spawner/statistics.o \
                     src/spawner/auto-surrender.o \
                     src/spawner/build_off_ally.o \
+                    src/jj_barracks_glitch_fix.o \
+                    src/ts_util.o \
                     src/override_colors.o
 endif
 

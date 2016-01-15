@@ -171,6 +171,7 @@ cextern Load_Game
 ; Mouse
 cextern WWMouseClas_Mouse
 cextern MouseClass_Map
+cextern is_coord_shrouded
 
 ; Statistics
 cextern StatisticsPacketSent

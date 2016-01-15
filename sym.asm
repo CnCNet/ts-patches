@@ -17,6 +17,12 @@ setcglob 0x005EEF70, Get_MP_Color
 setcglob 0x004CDEF0, HouseType_From_Name
 setcglob 0x004C2E40, Read_Scenario_Houses
 
+; TechnoClass
+setcglob 0x0040F2A0, TechnoClass_What_Weapon_Should_I_Use
+
+; AircraftClass
+setcglob 0x0040BA40, AircraftClass__Mission_Attack
+
 ; Arrays
 setcglob 0x007B3468, UnitClassArray_Count
 setcglob 0x007E4850, TeamTypesArray_Count
@@ -39,6 +45,7 @@ setcglob 0x004499C0, FileClass__Is_Available
 setcglob 0x00449A40, FileClass__Open
 setcglob 0x00449A10, FileClass__Close
 setcglob 0x00449850, FileClass__Write
+setcglob 0x00561940, MonoClass__Printf
 
 ; Session
 setcglob 0x007E2458, SessionClass_this
@@ -116,6 +123,12 @@ setcglob 0x005D6910, Load_Game
 setcglob 0x0074C8F0, WWMouseClas_Mouse
 setcglob 0x00748348, MouseClass_Map
 
+; MapClass
+setcglob 0x0051E130, MapClass__GetCellFloorHeight
+setcglob 0x0050F210, MapClass__Get_Target_Coord
+setcglob 0x0052B870, MapClass__Cell_Is_Shrouded
+setcglob 0x007B3304, dword_7B3304
+
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent
 setcglob 0x00867014, WOLGameID
@@ -130,9 +143,12 @@ setcglob 0x0070EC84, VideoBackBuffer
 
 ; clib
 setcglob 0x006B73A0, __strcmpi
+setcglob 0x006B8E20, strcmp
 setcglob 0x006B602A, _strtok
 setcglob 0x006B52EE, _sprintf
+setcglob 0x006B6A41, vsprintf
 setcglob 0x006B6730, stristr_
+setcglob 0x006BA490, strlen
 
 ; winapi
 setcglob 0x006B4D6C, sendto
@@ -150,7 +166,8 @@ setcglob 0x006CA16C, _imp__LoadLibraryA
 setcglob 0x006CA174, _imp__GetProcAddress
 setcglob 0x006CA1D0, _imp__GetCurrentProcess
 setcglob 0x006CA4EC, _imp__timeGetTime
-
+setcglob 0x006CA28C, _imp__GetStdHandle
+setcglob 0x006CA2B4, _imp__WriteConsoleA
 
 ;Address  Ordinal Name                          Library 
 ;-------  ------- ----                          ------- 
