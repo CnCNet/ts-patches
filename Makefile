@@ -54,6 +54,7 @@ else
                     src/jj_barracks_glitch_fix.o \
                     src/ts_util.o \
                     src/alt_scout_fix.o \
+                    src/aircraft_not_reloading_fix.o \
                     src/override_colors.o
 endif
 
