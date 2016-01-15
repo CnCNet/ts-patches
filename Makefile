@@ -53,6 +53,7 @@ else
                     src/spawner/build_off_ally.o \
                     src/jj_barracks_glitch_fix.o \
                     src/ts_util.o \
+                    src/alt_scout_fix.o \
                     src/override_colors.o
 endif
 

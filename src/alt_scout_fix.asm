@@ -1,34 +1,27 @@
-;@JMP 0x00631F15 _TechnoClass_WhatAction_NoRallyPlaceInShroud
+%include "TiberianSun.inc"
+%include "macros/patch.inc"
 
-_TechnoClass_WhatAction_NoRallyPlaceInShroud:
-        mov     edx, [edi]
-        mov     ecx, edi
-        call    dword [edx+220h]
- 
+@CLEAR 0x0042EF29, 0x90, 0x0042EF2F
+@LJMP 0x0042EF29, _BuildingClass_WhatAction_NoRallyPlaceInShroud
+
+_BuildingClass_WhatAction_NoRallyPlaceInShroud:
+        mov     edx, [esi+220h]
+        cmp     dword [edx+508h], 10h ; Barracks?
+        jz      0x0042F009            ; Allowed to place rally
+
+        mov     edi, [esp+1Ch]
+        pushad
+        push    edi
+        mov     ecx, MouseClass_Map
+        call    is_coord_shrouded     ; from ts_util.c
+
         test    al, al
-        jz      0x00631F4C
- 
-        mov     al, [esp+11h]
-        test    al, al
-        jz      0x00631F3A
- 
-        mov     ebx, [esp+2Ch]
-        push    1
-        push    ebx
-        mov     ecx, 0x00748348
-        call    0x0051E380      ;MapClass::Is_Unshrouded()
- 
-        test    al, al
-        jnz     .lct_NoMove
- 
-        .lct_Out:
-        jmp     0x00631F2B
- 
-        .lct_NoMove:
-        pop     edi
-        pop     esi
-        pop     ebp
-        mov     eax, 2 ;NOMOVE
-        pop     ebx
-        add     esp, 18h
-        retn    0Ch
+        popad
+        jnz     .no_rally
+
+        mov     edx, [esi+220h]
+        jmp     0x0042EF2F
+
+.no_rally
+        mov     ebx, 2                ; no move
+        jmp     0x0042EFB4
