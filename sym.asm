@@ -28,6 +28,7 @@ setcglob 0x007B3468, UnitClassArray_Count
 setcglob 0x007E4850, TeamTypesArray_Count
 setcglob 0x007E4844, TeamTypesArray     
 setcglob 0x0070D850, PlayerColorMap
+setcglob 0x007E4058, DynamicVectorClass_AircraftClass
 
 ; INI
 setcglob 0x004E8A30, INIClass__INIClass
@@ -127,6 +128,7 @@ setcglob 0x00748348, MouseClass_Map
 setcglob 0x0051E130, MapClass__GetCellFloorHeight
 setcglob 0x0050F210, MapClass__Get_Target_Coord
 setcglob 0x0052B870, MapClass__Cell_Is_Shrouded
+setcglob 0x0050F280, MapClass__Coord_Cell
 setcglob 0x007B3304, dword_7B3304
 
 ; Statistics

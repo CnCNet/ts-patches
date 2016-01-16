@@ -6,8 +6,11 @@
    it will not lift off of the pad, but it will stop loading.
    The problem appears to be that the tethered property is not being set when the
    aircraft is reloading.
-   This fix here is a terrible hack, but it does work.
+   This fix here is a terrible hack, but it does work. This function ::What_Weapon
+   gets called at the right times so we just checked for other hints of reloading and
+   set tethered.
    The real fix should be to find the appropriate place where tethered should be set.
+   (Maybe in buildingclass:: ?)
 */
 
 // AircraftClass::vftable

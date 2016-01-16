@@ -173,6 +173,9 @@ cextern WWMouseClas_Mouse
 cextern MouseClass_Map
 cextern is_coord_shrouded
 
+; Aircraft
+cextern Loop_Test_Aircraft
+
 ; Statistics
 cextern StatisticsPacketSent
 cextern WOLGameID

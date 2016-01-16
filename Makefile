@@ -55,6 +55,7 @@ else
                     src/ts_util.o \
                     src/alt_scout_fix.o \
                     src/aircraft_not_reloading_fix.o \
+                    src/carryall_click_under_glitch.o \
                     src/override_colors.o
 endif
 

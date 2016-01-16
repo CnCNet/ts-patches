@@ -9,8 +9,9 @@ typedef char INIClass[128];
 extern bool OverrideColors;
 extern int TextBackgroundColor;
 extern uint8_t PlayerColorMap[];
-extern MouseClass **MouseClass_Map;
+extern MouseClass *MouseClass_Map;
 extern int dword_7B3304;
+extern DynamicVectorClass DynamicVectorClass_AircraftClass;
 
 // ### Functions ###
 
@@ -24,7 +25,8 @@ int  __thiscall MapClass__GetCellFloorHeight(MouseClass **Map, xyzCoordStruct *)
 CellClass * __thiscall MapClass__Get_Target_Coord(MouseClass **Map, xyzCoordStruct *);
 bool __thiscall MapClass__Cell_Is_Shrouded(MouseClass **Map, xyzCoordStruct *);
 bool __thiscall is_coord_shrouded(MouseClass **Map, wCoordStruct *xy_coords);
-
+CellClass * __thiscall MapClass__Coord_Cell(MouseClass **Map, wCoordStruct *);
+void __cdecl hook_wwdebug_printf(char const *fmt, ...);
 
 // ### Variables ###
 
