@@ -19,6 +19,8 @@ setcglob 0x004C2E40, Read_Scenario_Houses
 
 ; TechnoClass
 setcglob 0x0040F2A0, TechnoClass_What_Weapon_Should_I_Use
+setcglob 0x00632310, TechnoClass__Can_Player_Fire
+setcglob 0x005872A0, ObjectClass__InAir
 
 ; AircraftClass
 setcglob 0x0040BA40, AircraftClass__Mission_Attack

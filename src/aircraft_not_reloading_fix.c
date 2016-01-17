@@ -4,29 +4,16 @@
 
 /* When an aircraft is reloading on a helipad with 0 bullets and told to attack
    it will not lift off of the pad, but it will stop loading.
-   The problem appears to be that the tethered property is not being set when the
-   aircraft is reloading.
-   This fix here is a terrible hack, but it does work. This function ::What_Weapon
-   gets called at the right times so we just checked for other hints of reloading and
-   set tethered.
-   The real fix should be to find the appropriate place where tethered should be set.
-   (Maybe in buildingclass:: ?)
+   This fix works most of the time. Better than nothing.
 */
 
 // AircraftClass::vftable
-SETDWORD(0x006CB104, _Intercept_AircraftClass__What_Weapon_Should_I_Use);
+SETDWORD(0x006CAE94, _AircraftClass__Can_Player_Fire);
 
 int __thiscall
-Intercept_AircraftClass__What_Weapon_Should_I_Use(AircraftClass *me,void *w) {
-  // check to see if this aircraft looks like it's reloading
-  if (!me->p.f.t.Tethered
-      && me->p.f.t.Ammo == 0
-      && me->p.f.t.r.TarCom
-      && me->p.f.t.r.TarCom->p.TarCom == (RadioClass *)me
-      && me->p.f.t.r.TarCom->p.m.CurrentMission == 0x13   // Repair or Reload
-      ) {
-    me->p.f.t.Tethered = 1;
-  }
-  return TechnoClass_What_Weapon_Should_I_Use(me,w);
+AircraftClass__Can_Player_Fire(AircraftClass *me) {
+  if (me->p.f.t.Ammo == 0
+      && !ObjectClass__InAir(me))
+    return 0;
+  return TechnoClass__Can_Player_Fire(me);
 }
-

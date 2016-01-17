@@ -19,6 +19,8 @@ bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, b
 int  __thiscall INIClass__GetInt(INIClass iniClass, char *section, char *key, int defaultValue);
 uint32_t __thiscall TechnoClass_What_Weapon_Should_I_Use(void *ac, void *w);
 int __thiscall AircraftClass__Mission_Attack(AircraftClass *me);
+int __thiscall TechnoClass__Can_Player_Fire(void *);
+int __thiscall ObjectClass__InAir(void *);
 void ApplyUserColorOverrides();
 
 int  __thiscall MapClass__GetCellFloorHeight(MouseClass **Map, xyzCoordStruct *);

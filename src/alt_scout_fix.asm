@@ -22,6 +22,6 @@ _BuildingClass_WhatAction_NoRallyPlaceInShroud:
         mov     edx, [esi+220h]
         jmp     0x0042EF2F
 
-.no_rally
+.no_rally:
         mov     ebx, 2                ; no move
         jmp     0x0042EFB4
