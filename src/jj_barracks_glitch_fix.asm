@@ -1,11 +1,6 @@
 %include "TiberianSun.inc"
 %include "macros/patch.inc"
 
-@CLEAR 0x004D6FB0, 0x90, 0x004D6FB7
-@LJMP 0x004D6FB0, _jj_barracks_glitch_fix_mouse_over_object
-@CLEAR 0x004D78B0, 0x90, 0x004D78B5
-@LJMP 0x004D78B0, _jj_barracks_glitch_fix_mouse_over_terrain
-
 
 ;;; This fixes the problem of Jump Jet infantry spawning and blocking any new units from being built
 ;;; from a barracks.
@@ -13,7 +8,7 @@
 ;;; Move that JJ before it clears the barracks (aka lands) it will block the barracks from producing any new units.
 
 ;;; The fix here is just to make it so that you can't move a JJ until it "clears" the barracks.
-
+hack 0x004D6FB0, 0x004D6FB7
 _jj_barracks_glitch_fix_mouse_over_object:
         mov     al, [ecx+1FDh]  ; Tethered?
         test    al, al
@@ -29,14 +24,14 @@ _jj_barracks_glitch_fix_mouse_over_object:
 .lct_jump_out:
         mov     eax, [esp+8]
         sub     esp, 20h
-        jmp     0x004D6FB7
+        jmp     hackend
 
 .lct_no_move:
         mov     eax, 0          ; 0 = ACTION_NONE, 7 = ACTION_SELECT
         retn    8
 
 
-
+hack 0x004D78B0, 0x004D78B5
 _jj_barracks_glitch_fix_mouse_over_terrain:
         mov     al, [ecx+1FDh]
         test    al, al
@@ -53,7 +48,7 @@ _jj_barracks_glitch_fix_mouse_over_terrain:
         sub     esp, 0Ch
         push    ebx
         push    ebp
-        jmp     0x004D78B5
+        jmp     hackend
 
 .lct_no_move:
         mov     eax, 0          ; 0 = ACTION_NONE, 7 = ACTION_SELECT

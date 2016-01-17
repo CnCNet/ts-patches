@@ -1,9 +1,12 @@
 %include "TiberianSun.inc"
 %include "macros/patch.inc"
 
-@CLEAR 0x0042EF29, 0x90, 0x0042EF2F
-@LJMP 0x0042EF29, _BuildingClass_WhatAction_NoRallyPlaceInShroud
+;;; Aircraft and subterrean units are not allowed to move to shroud.
+;;; Players complain that those units can move to shroud when they are moving to a rally point
+;;; This fix disallows players to place a rally point in shroud for war factory and helipad.
+;;; Barracks is allowed to place a rally point in shroud.
 
+ hack 0x0042EF29, 0x0042EF2F
 _BuildingClass_WhatAction_NoRallyPlaceInShroud:
         mov     edx, [esi+220h]
         cmp     dword [edx+508h], 10h ; Barracks?
