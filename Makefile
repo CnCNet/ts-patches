@@ -24,7 +24,7 @@ OBJS        = \
               src/no_window_frame.o \
               sym.o \
               rsrc.o
-              
+
 ifdef SINGLEPLAYER
     OBJS        += \
                     src/no-cd_tfd.o
@@ -56,6 +56,7 @@ else
                     src/alt_scout_fix.o \
                     src/aircraft_not_reloading_fix.o \
                     src/carryall_click_under_glitch.o \
+                    src/disable_edge_scrolling.o \
                     src/override_colors.o
 endif
 

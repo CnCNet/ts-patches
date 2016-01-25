@@ -26,4 +26,5 @@ void LoadSunIni()
       ApplyUserColorOverrides();
     TextBackgroundColor = SunIni_GetInt("Options","TextBackgroundColor",0);
 
+    DisableEdgeScrolling = SunIni_GetBool("Options","DisableEdgeScrolling",false);
 }

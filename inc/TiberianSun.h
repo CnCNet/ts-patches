@@ -6,6 +6,7 @@
 // This header will be split up as it becomes larger
 
 typedef char INIClass[128];
+extern bool DisableEdgeScrolling;
 extern bool OverrideColors;
 extern int TextBackgroundColor;
 extern uint8_t PlayerColorMap[];
