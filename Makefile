@@ -57,7 +57,7 @@ else
                     src/aircraft_not_reloading_fix.o \
                     src/carryall_click_under_glitch.o \
                     src/disable_edge_scrolling.o \
-                    src/src/harvester_block_ref_exploit.o \
+                    src/harvester_block_ref_exploit.o \
                     src/override_colors.o
 endif
 
