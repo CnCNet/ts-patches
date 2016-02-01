@@ -57,6 +57,7 @@ else
                     src/harvester_block_ref_exploit.o \
                     src/fix_depot_explosion_glitch.o \
                     src/harvester_truce.o \
+                    src/crate_patches.o \
                     src/override_colors.o
 endif
 ifdef WWDEBUG
