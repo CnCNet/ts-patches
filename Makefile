@@ -56,6 +56,7 @@ else
                     src/disable_edge_scrolling.o \
                     src/harvester_block_ref_exploit.o \
                     src/fix_depot_explosion_glitch.o \
+                    src/harvester_truce.o \
                     src/override_colors.o
 endif
 ifdef WWDEBUG

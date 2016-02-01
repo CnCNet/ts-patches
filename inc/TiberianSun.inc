@@ -164,6 +164,7 @@ cextern NameNodeVector_Add
 cextern SessionClass__Read_Scenario_Descriptions
 cextern ScenarioStuff
 cextern SelectedDifficulty
+cextern SpecialClass__Special
 
 ; Save games
 cextern Load_Game
