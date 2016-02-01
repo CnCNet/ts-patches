@@ -8,9 +8,6 @@ LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=win
 NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/
 
-ifdef WWDEBUG
- CFLAGS += -D WWDEBUG
-endif
 
 OBJS        = \
               src/disable_max_windowed_mode.o \
@@ -58,7 +55,12 @@ else
                     src/carryall_click_under_glitch.o \
                     src/disable_edge_scrolling.o \
                     src/harvester_block_ref_exploit.o \
+                    src/fix_depot_explosion_glitch.o \
                     src/override_colors.o
+endif
+ifdef WWDEBUG
+    CFLAGS += -D WWDEBUG
+    OBJS        +=  src/dubuging_help.o
 endif
 
 PETOOL     ?= petool
