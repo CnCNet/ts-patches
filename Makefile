@@ -62,7 +62,7 @@ else
 endif
 ifdef WWDEBUG
     CFLAGS += -D WWDEBUG
-    OBJS        +=  src/dubuging_help.o
+    OBJS        +=  src/debugging_help.o
 endif
 
 PETOOL     ?= petool
