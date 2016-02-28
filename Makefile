@@ -10,6 +10,7 @@ CFLAGS      = -std=c99 -Iinc/
 
 
 OBJS        = \
+              src/high_res_crash.o \
               src/disable_max_windowed_mode.o \
               src/disable_dpi_scaling.o \
               src/sun.ini.o \
@@ -23,6 +24,7 @@ OBJS        = \
               rsrc.o
 
 ifdef SINGLEPLAYER
+    CFLAGS      += -D SINGLEPLAYER
     OBJS        += \
                     src/no-cd_tfd.o
 else

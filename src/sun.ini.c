@@ -22,9 +22,12 @@ void LoadSunIni()
         DisableHighDpiScaling();
     if (SunIni_GetBool("Video", "DisableMaxWindowedMode", false)) 
         DisableMaxWindowedMode();
+    
+#ifndef SINGLEPLAYER
     if (OverrideColors = SunIni_GetBool("Options","OverrideColors",false))
       ApplyUserColorOverrides();
     TextBackgroundColor = SunIni_GetInt("Options","TextBackgroundColor",0);
 
     DisableEdgeScrolling = SunIni_GetBool("Options","DisableEdgeScrolling",false);
+#endif
 }
