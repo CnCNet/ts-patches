@@ -10,7 +10,7 @@ hack 0x005F2766
     
 .noChange:
     mov dword[0x0074C24C], eax ; SidebarHeightStuff
-    jmp 0x005F276B
+    jmp hackend
 
 
 hack 0x005F60D7
@@ -20,4 +20,4 @@ hack 0x005F60D7
     
 .noChange:
     mov dword[0x0074C24C], eax ; SidebarHeightStuff
-    jmp 0x005F60DC
+    jmp hackend
