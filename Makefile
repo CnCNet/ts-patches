@@ -29,6 +29,7 @@ ifdef SINGLEPLAYER
                     src/no-cd_tfd.o
 else
     OBJS        += \
+                    src/no_blowfish_dll.o \
                     src/no-cd_iran.o \
                     src/in-game_message_background.o \
                     src/savegame.o \
