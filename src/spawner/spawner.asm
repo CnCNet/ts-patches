@@ -945,19 +945,14 @@ Initialize_Spawn:
     push 3Ch
     call IPXManagerClass__Set_Timing
 
-    SpawnINI_Get_Int str_Settings, str_FrameSendRate, 8
-    mov dword [FrameSendRate], eax
+    mov dword [MaxAhead], 20
     
-    SpawnINI_Get_Int str_Settings, str_MaxAhead, 30
-    mov dword [MaxAhead], eax
+    SpawnINI_Get_Int str_Settings, str_FrameSendRate, 4
+    mov dword [FrameSendRate], eax
     
     ; WOL settings
  ;   mov dword [MaxAhead], 40
  ;   mov dword [FrameSendRate], 10
-   
-   ; Old CnCNet settings
- ;   mov dword [MaxAhead], 20
- ;   mov dword [FrameSendRate], 4
     
     mov dword [MaxMaxAhead], 0
     mov dword [LatencyFudge], 0
