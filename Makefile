@@ -10,6 +10,7 @@ CFLAGS      = -std=c99 -Iinc/
 
 
 OBJS        = \
+              src/no_blowfish_dll.o \
               src/high_res_crash.o \
               src/disable_max_windowed_mode.o \
               src/disable_dpi_scaling.o \
@@ -20,8 +21,8 @@ OBJS        = \
               src/single-proc-affinity.o \
               src/graphics_patch.o \
               src/no_window_frame.o \
-              sym.o \
-              rsrc.o
+              res/res.o \
+              sym.o
 
 ifdef SINGLEPLAYER
     CFLAGS      += -D SINGLEPLAYER
@@ -29,7 +30,6 @@ ifdef SINGLEPLAYER
                     src/no-cd_tfd.o
 else
     OBJS        += \
-                    src/no_blowfish_dll.o \
                     src/no-cd_iran.o \
                     src/in-game_message_background.o \
                     src/savegame.o \
@@ -71,14 +71,15 @@ endif
 PETOOL     ?= petool
 STRIP      ?= strip
 NASM       ?= nasm
+WINDRES    ?= windres
 
 all: $(OUTPUT)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
-
-rsrc.o: $(INPUT)
-	$(PETOOL) re2obj $(INPUT) $@
+  
+%.o: %.rc
+	$(WINDRES) $< $@
 
 $(OUTPUT): $(LDS) $(INPUT) $(OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(OBJS)
