@@ -3,7 +3,7 @@
   <assemblyIdentity type="win32" name="tibsun.exe" version="1.0.0.0" />
   <dependency>
     <dependentAssembly>
-      <assemblyIdentity type="win32" name="BLOWFISH.DLL" version="1.0.0.0" />
+      <assemblyIdentity type="win32" name="BLOWFISH" version="1.0.0.0" />
     </dependentAssembly>
   </dependency>
 </assembly>
