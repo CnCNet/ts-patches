@@ -1,7 +1,7 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
-gbool IsNoCD, true
+gbool IsNoCD, false
 
 hack 0x004E0469 ; _Init_Game_NoCD_Check
     cmp byte [IsNoCD], 1

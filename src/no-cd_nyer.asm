@@ -1,7 +1,7 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
-gbool IsNoCD, true
+gbool IsNoCD, false
 
 hack 0x004754A0, 0x004754A6
     cmp byte[IsNoCD], 1
