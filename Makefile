@@ -10,6 +10,7 @@ CFLAGS      = -std=c99 -Iinc/
 
 
 OBJS        = \
+              src/laser_draw_it_crash.o \
               src/no_blowfish_dll.o \
               src/high_res_crash.o \
               src/disable_max_windowed_mode.o \

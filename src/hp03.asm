@@ -4,8 +4,7 @@
 ; hifi <3 CCHyper, he's a nice chap!
 
 ; - Disruptor tank drawing error that resulted in a Internal Error on some computers is fixed, hopefully...
-@LJMP 0x006703C1, _sonic_beam_fix
-_sonic_beam_fix:
+hack 0x006703C1 ;_sonic_beam_fix
     cdq
     xor     eax, edx
     sub     eax, edx
@@ -16,8 +15,7 @@ _sonic_beam_fix:
     jmp     0x6703C6
 
 ; - Cameo drawn over a factory BuildingType when infiltrated in the incorrect palette has now been fixed.
-@LJMP 0x00428B00, _spy_cameo_palette
-_spy_cameo_palette:
+hack 0x00428B00 ;_spy_cameo_palette
     mov     edx, 0x7481F0
     jmp     0x428B06
 
