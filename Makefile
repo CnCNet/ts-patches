@@ -10,6 +10,7 @@ CFLAGS      = -std=c99 -Iinc/
 
 
 OBJS        = \
+              src/no_movie_and_score_mix_dependency.o \
               src/IonBlastClass_crash.o \
               src/singleplayer_objects_on_multiplayer_map_crash.o \
               src/laser_draw_it_crash.o \
