@@ -10,6 +10,7 @@ CFLAGS      = -std=c99 -Iinc/
 
 
 OBJS        = \
+              src/singleplayer_objects_on_multiplayer_map_crash.o \
               src/laser_draw_it_crash.o \
               src/no_blowfish_dll.o \
               src/high_res_crash.o \
