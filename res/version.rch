@@ -1,7 +1,7 @@
 #define xstr(s)    str(s)
 #define str(s)    #s
 
-#define TITLE     Command & Conquer: SUBTITLE
+#define TITLE     Command & Conquer : SUBTITLE
 #define VERSION    CnC-Patch git~REV (based off WW SOFT_VERSION)
 
 1 VERSIONINFO
