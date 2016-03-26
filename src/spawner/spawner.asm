@@ -1022,8 +1022,7 @@ Initialize_Spawn:
     
     cmp dword [SessionType], 4
     jnz .Dont_Set_SessionType_To_Lan
-    
-    mov dword [SessionType], 3 
+    mov dword [SessionType], 3
       
 .Dont_Set_SessionType_To_Lan:
 

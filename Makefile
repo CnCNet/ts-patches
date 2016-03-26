@@ -70,6 +70,8 @@ else
                     src/crate_patches.o \
                     src/mpdebug.o \
                     src/Hook_Main_Loop.o \
+                    src/hotkeys.o \
+                    src/chatallies.o \
                     src/override_colors.o
 endif
 ifdef WWDEBUG

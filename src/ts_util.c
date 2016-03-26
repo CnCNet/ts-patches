@@ -66,3 +66,20 @@ strnlen(const char *s, size_t maxlen)
         }
         return (len);
 }
+
+void * __stdcall //HouseClass *
+GetHouseByUserName(char *name) {
+
+  if (name == 0)
+    return 0;
+
+  void **house = HouseClassArray;
+  for (int i = 0; i < HouseClassArray_Count; i++, house++) {
+    char *this_name = *house + 0x10DE4;
+
+    if (__strcmpi(this_name, name) == 0)
+      return *house;
+
+  }
+  return 0;
+}
