@@ -1,3 +1,20 @@
+typedef struct vtCommandClass {
+  void *Destroy;
+  void *Name;
+  void *INIname;
+  void *Category;
+  void *Description;
+  void *Execute;
+  void *unknown;
+} vtCommandClass;
+
+typedef struct CommandClass {
+  vtCommandClass *vftable;
+  void *a;
+  int32_t b;
+  int32_t c;
+} CommandClass;
+
 #pragma pack(push, 1)
 typedef struct DynamicVectorClass
 {
@@ -466,3 +483,56 @@ typedef struct AircraftClass_struct
   PropertiesAircraftClass p;
 } AircraftClass;
 #pragma pack(pop)
+
+#pragma pack(push, 1)
+typedef struct MessageListClass
+{
+  int field_0;
+  int CoordFromLeft;
+  int CoordFromTop;
+  int MaxMessages;
+  int field_10;
+  int LineSpacingInPixels;
+  char field_18;
+  char field_19;
+  char field_1A;
+  char field_1B;
+  int field_1C;
+  int field_20;
+  int TextLabels;
+  char field_28;
+  char gap_29[3];
+  int field_2C;
+  int field_30;
+  int field_34;
+  int field_38;
+  int field_3C;
+  int field_40;
+  int field_44;
+  int field_48;
+  int field_4C;
+  int field_50;
+  int field_54;
+  int field_58;
+  int field_5C;
+  char gap_60[106];
+  char field_CA;
+  char gap_CB[161];
+  int field_16C;
+  int field_170;
+  char field_174;
+  char gap_175[3];
+  int field_178;
+  int field_17C;
+  int field_180;
+  char gap_184[2268];
+  int field_A60;
+  int field_A64;
+  int field_A68;
+  __int16 field_A6C;
+  __int16 field_A6E;
+} MessageListClass;
+#pragma pack(pop)
+
+/* 161 */
+#pragma pack(push, 1)

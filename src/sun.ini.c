@@ -29,5 +29,6 @@ void LoadSunIni()
     TextBackgroundColor = SunIni_GetInt("Options","TextBackgroundColor",0);
 
     DisableEdgeScrolling = SunIni_GetBool("Options","DisableEdgeScrolling",false);
+    MultiplayerDebug = SunIni_GetBool("Options","MultiplayerDebug",false);
 #endif
 }

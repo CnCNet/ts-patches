@@ -115,6 +115,7 @@ cextern Assign_Houses
 cextern Get_MP_Color
 cextern HouseType_From_Name
 cextern Read_Scenario_Houses
+cextern GetHouseByUserName     ; Defined in ts_util.c
 
 ; Arrays
 cextern UnitClassArray_Count
@@ -131,6 +132,9 @@ cextern PlayerPtr
 cextern MessageListClass__Add_Message
 cextern Get_Message_Delay_Or_Duration
 cextern Message_Input_Player_Dead
+cextern MessageToIPaddr
+cextern MessageToPort
+cextern MessageToAFI
 
 ; Network
 cextern ListenPort
@@ -144,6 +148,7 @@ cextern WinsockInterfaceClass__Discard_Out_Buffers
 cextern IPXManagerClass_this
 cextern IPXManagerClass__Set_Timing
 cextern IPXAddressClass__IPXAddressClass
+cextern IPXManagerClass__Connection_Name
 
 cextern MaxAhead
 cextern MaxMaxAhead
@@ -173,6 +178,12 @@ cextern Load_Game
 cextern WWMouseClas_Mouse
 cextern MouseClass_Map
 cextern is_coord_shrouded
+cextern ScreenHeight
+cextern ScreenWidth
+cextern VisibleRect__FromLeft
+cextern VisibleRect__FromTop
+cextern VisibleRect__Width
+cextern VisibleRect__Height
 
 ; Aircraft
 cextern Loop_Test_Aircraft
@@ -184,6 +195,7 @@ cextern WOLGameID
 ; Sidebar
 ;cextern LEFT_STRIP
 ;cextern RIGHT_STRIP
+cextern MultiplayerDebug
 
 ; clib
 cextern __strcmpi

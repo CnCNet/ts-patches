@@ -85,6 +85,10 @@ setcglob 0x007E2284, PlayerPtr
 setcglob 0x00572FE0, MessageListClass__Add_Message
 setcglob 0x006B2330, Get_Message_Delay_Or_Duration
 setcglob 0x007E24E4, Message_Input_Player_Dead
+setcglob 0x005739E0, MessageListClass__Manage
+setcglob 0x007E36A4, MessageToIPaddr
+setcglob 0x007E36A8, MessageToPort
+setcglob 0x007E36AC, MessageToAFI
 
 ; Network
 setcglob 0x0070FCF0, ListenPort
@@ -98,6 +102,7 @@ setcglob 0x006A1110, WinsockInterfaceClass__Discard_Out_Buffers
 setcglob 0x007E45A0, IPXManagerClass_this
 setcglob 0x004F05B0, IPXManagerClass__Set_Timing
 setcglob 0x004EF040, IPXAddressClass__IPXAddressClass
+setcglob 0x004F07E0, IPXManagerClass__Connection_Name
 
 setcglob 0x007E250C, MaxAhead
 setcglob 0x007E2524, MaxMaxAhead
@@ -141,6 +146,13 @@ setcglob 0x00867014, WOLGameID
 ; Others
 setcglob 0x007A1790, VideoWindowed
 setcglob 0x0070EC84, VideoBackBuffer
+setcglob 0x007E4740, ScreenHeight
+setcglob 0x007E473C, ScreenWidth
+setcglob 0x007E288C, MultiplayerDebug
+setcglob 0x0074C260, VisibleRect__FromLeft
+setcglob 0x0074C264, VisibleRect__FromTop
+setcglob 0x0074C268, VisibleRect__Width
+setcglob 0x0074C26C, VisibleRect__Height
 
 ; Sidebar
 ;setcglob 0x00749874, LEFT_STRIP
@@ -161,6 +173,11 @@ setcglob 0x006B4D66, recvfrom
 setcglob 0x006B4D24, htonl
 setcglob 0x006B4D2A, htons
 
+;;;
+setcglob 0x007481A8, DynamicVectorClass__CommandClass
+setcglob 0x004EB940, DynamicVectorClass__CommandClass__Add
+setcglob 0x005DDFE0, MapSnapshot
+setcglob 0x004E7050, Load_Keyboard_Hotkeys
 
 ;WSOCK32
 setcglob 0x006CA504, _imp__sendto

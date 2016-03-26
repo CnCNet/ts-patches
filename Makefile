@@ -7,7 +7,9 @@ IMPORTS     = 0x2EC050 280
 LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=windows --enable-stdcall-fixup
 NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/
-
+REV         = $(shell git describe --tag)
+VERSION     = "CnC-Patch $(REV) (based off WW SOFT_VERSION)"
+WINDRES_FLAGS = --preprocessor-arg -DVERSION=$(VERSION)
 
 OBJS        = \
               src/tiberium_on_slope_crash.o \
@@ -66,6 +68,8 @@ else
                     src/fix_depot_explosion_glitch.o \
                     src/harvester_truce.o \
                     src/crate_patches.o \
+                    src/mpdebug.o \
+                    src/Hook_Main_Loop.o \
                     src/override_colors.o
 endif
 ifdef WWDEBUG
@@ -84,7 +88,7 @@ all: $(OUTPUT)
 	$(NASM) $(NFLAGS) -o $@ $<
   
 %.o: %.rc
-	$(WINDRES) $< $@
+	$(WINDRES) $(WINDRES_FLAGS) $< $@
 
 $(OUTPUT): $(LDS) $(INPUT) $(OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(OBJS)

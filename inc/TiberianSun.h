@@ -13,7 +13,16 @@ extern uint8_t PlayerColorMap[];
 extern MouseClass *MouseClass_Map;
 extern int dword_7B3304;
 extern DynamicVectorClass DynamicVectorClass_AircraftClass;
-
+extern bool MultiplayerDebug;
+extern void *DynamicVectorClass__CommandClass;
+extern CommandClass MapSnapshotCommand;
+extern CommandClass ChatToAlliesCommand;
+extern CommandClass ChatToAllCommand;
+extern CommandClass ChatToPlayerCommand;
+extern bool ChatToAlliesFlag;
+extern bool ChatToAllFlag;
+extern void **HouseClassArray;
+extern size_t HouseClassArray_Count;
 // ### Functions ###
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);
@@ -30,12 +39,20 @@ bool __thiscall MapClass__Cell_Is_Shrouded(MouseClass **Map, xyzCoordStruct *);
 bool __thiscall is_coord_shrouded(MouseClass **Map, wCoordStruct *xy_coords);
 CellClass * __thiscall MapClass__Coord_Cell(MouseClass **Map, wCoordStruct *);
 void __cdecl hook_wwdebug_printf(char const *fmt, ...);
+int __thiscall DynamicVectorClass__CommandClass__Add(void *v, CommandClass **c);
+void __thiscall MessageListClass__Manage(MessageListClass *m);
+
+void __stdcall HookInitCommands();
+void __stdcall Load_Keyboard_Hotkeys();
+
+size_t __strcmpi(const char *, const char *);
 
 // ### Variables ###
 
 extern bool VideoWindowed;
 extern bool VideoBackBuffer;
 extern INIClass INIClass_SUN_INI;
+
 
 // ### Macros ###
 
