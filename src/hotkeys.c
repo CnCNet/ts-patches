@@ -10,10 +10,12 @@ CALL(0x004E6FA9, _HookInitCommands);
 
 void __stdcall
 HookInitCommands() {
-  CommandClass *NewHotkeys[] = { &MapSnapshotCommand,
-                                 &ChatToAlliesCommand,
+  CommandClass *NewHotkeys[] = { &ChatToAlliesCommand,
                                  &ChatToAllCommand,
-                                 &ChatToPlayerCommand
+                                 &ChatToPlayerCommand,
+#ifdef WWDEBUG
+                                 &MapSnapshotCommand
+#endif
                                };
   size_t len = sizeof(NewHotkeys)/sizeof((NewHotkeys)[0]);
 
@@ -31,8 +33,13 @@ char *  __thiscall MapSnapshot_Description(void *a) { return "Makes a .map file 
 char *  __thiscall MapSnapshot_INIname(void *a)     { return "MapSnapshot"; }
 char *  __thiscall MapSnapshot_Category(void *a)    { return "New From CnCNet"; }
 char *  __thiscall MapSnapshot_Name(void *a)        { return "MapSnapshot"; }
-int     __fastcall MapSnapshot(char *name, int n);
-int     __thiscall MapSnapshot_Execute(void *a)     { return MapSnapshot("MapSnapshot.map",1); }
+
+int     __thiscall MapSnapshot_Execute(void *a)     {
+  char buf[100];
+  _sprintf(buf, "MapSnapshot_%d_%d.map", GameIDNumber, Frame);
+  MapSnapshot(buf, 1);
+  return 1;
+}
 
 vtCommandClass vtMapSnapshotCommand = {
   CommandDestroy,
