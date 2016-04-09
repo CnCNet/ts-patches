@@ -2,9 +2,12 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-sstring str_ToAllies, "To Allies:"
+sstring str_ToAllies, "(Allies): "
+sstring str_ToAll, "(All): "
+sstring str_ToOne, "(one): "
 gbool ChatToAlliesFlag, 0
 gbool ChatToAllFlag, 0
+gbool ChatToOneFlag, 0
 
 ;;; ChatToAllies will be set in hotkeys.c
 ;;; Chatting is hardcoded to look for 0x70 - 0x77 keys by default
@@ -13,15 +16,11 @@ gbool ChatToAllFlag, 0
 ;;; hacked down below.
 ;;; Also allow an alternate key for chatting to all players
 hack 0x005098F1, 0x005098FD
-        mov     cl, [ChatToAlliesFlag]
-        test    cl, cl
-        mov     eax, 0x00509A20
-        jnz     .set_chat_allies
+        cmp     byte [ChatToAlliesFlag], 1
+        je      .set_chat_allies
 
-        mov     cl, [ChatToAllFlag]
-        test    cl, cl
-        mov     eax, 0x00509A19
-        jnz     .set_chat_all
+        cmp     byte [ChatToAllFlag], 1
+        je      .set_chat_all
 
         mov     eax, [SessionClass_this]
         mov     ecx, [ebp+0]    ; Regular Code
@@ -33,17 +32,31 @@ hack 0x005098F1, 0x005098FD
         mov     edi, str_ToAllies
         jmp     .set_broadcast
  .set_chat_all:
+        mov     edi, str_ToAll
         mov     ecx, 0xC5
  .set_broadcast:
         mov     DWORD [MessageToIPaddr], 0xFFFFFFFF
         mov     DWORD [MessageToPort], 0xFFFFFFFF
         mov     DWORD [MessageToAFI], 0xFFFF
-        jmp     eax
+        jmp     0x00509A20
+
+hack 0x005738B3, 0x005738B9
+        cmp     byte [ChatToAlliesFlag], 1
+        je      .zero_message_start
+        cmp     byte [ChatToAllFlag], 1
+        je      .zero_message_start
+
+        mov     dword [ebp+0x170], ecx
+        jmp     hackend
+
+ .zero_message_start:
+        mov     dword [ebp+0x170], 0
+        jmp     hackend
 
 ;;; Unset chattoallies if the user presses esc or if the message has been
 ;;; transmitted
 hack 0x00509D36, 0x00509D3D
-        mov     BYTE [ChatToAlliesFlag], 0
+        mov     byte [ChatToAlliesFlag], 0
         mov     byte [ChatToAllFlag], 0
         push    2
         mov     ecx, MouseClass_Map
