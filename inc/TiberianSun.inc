@@ -116,6 +116,7 @@ cextern Get_MP_Color
 cextern HouseType_From_Name
 cextern Read_Scenario_Houses
 cextern GetHouseByUserName     ; Defined in ts_util.c
+cextern store_house_spawn_location
 
 ; Arrays
 cextern UnitClassArray_Count
@@ -156,6 +157,7 @@ cextern FrameSendRate
 cextern LatencyFudge
 cextern RequestedFPS
 cextern ProtocolVersion
+cextern ally_by_spawn_location
 
 cextern Init_Network
 cextern NameNodes_CurrentSize

@@ -72,6 +72,7 @@ else
                     src/Hook_Main_Loop.o \
                     src/hotkeys.o \
                     src/chatallies.o \
+                    src/spawner/auto_ally_by_spawn_loc.o \
                     src/override_colors.o
 endif
 ifdef WWDEBUG

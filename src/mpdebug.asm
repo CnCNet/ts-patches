@@ -111,10 +111,10 @@ hack 0x00509D50, 0x0050A05C
 	xor    ebx,ebx
 	cmp    cl,bl
 	jne    .loc_509d6d
-	mov    eax,[0x7e4924]
-	and    eax,0x7
-	cmp    al,0x7
-	jne    .loc_50a055
+ 	mov    eax,[0x7e4924]
+ 	and    eax,0x7
+ 	cmp    al,0x7
+ 	jne    .loc_50a055
 .loc_509d6d:
 	mov    eax,[0x7e2458]
 	cmp    eax,ebx

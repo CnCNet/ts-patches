@@ -6,6 +6,7 @@
 cglobal SpawnerActive
 cglobal INIClass_SPAWN
 cglobal SpawnLocationsArray
+cglobal SpawnLocationsHouses
 
 cextern Load_Spectators_Spawner
 cextern PortHack
@@ -53,11 +54,13 @@ section .bss
 
     IsDoingAlliancesSpawner    RESB 1
     IsSpawnArgPresent           RESD 1
+    AllyBySpawnLocation        RESD 1
 
     HouseColorsArray           RESD 8
     HouseCountriesArray        RESD 8
     HouseHandicapsArray        RESD 8
     SpawnLocationsArray        RESD 8
+    SpawnLocationsHouses       RESD 8
     
     SaveGameNameBuf            RESB 60
     
@@ -167,6 +170,7 @@ section .rdata
     str_Spawn7              db "Spawn7",0
     str_Spawn8              db "Spawn8",0
 
+    str_AllyBySpawnLocation db "AllyBySpawnLocation",0
     str_message_fmt db "%s: %s",0
 
     str_AutoSSFileNameFormat db"AUTOSS\\AutoSS-%d-%d_%d.PCX",0
@@ -659,9 +663,9 @@ _Read_Scenario_INI_Assign_Houses_And_Spawner_House_Settings:
     Set_House_Color 5, dword [HouseColorsArray+20], f
     Set_House_Color 6, dword [HouseColorsArray+24], g
     Set_House_Color 7, dword [HouseColorsArray+28], h
-        
+
     mov byte [IsDoingAlliancesSpawner], 1
-    
+
     House_Make_Allies_Spawner str_Multi1_Alliances, 0, a
     House_Make_Allies_Spawner str_Multi2_Alliances, 1, b
     House_Make_Allies_Spawner str_Multi3_Alliances, 2, c
@@ -670,7 +674,7 @@ _Read_Scenario_INI_Assign_Houses_And_Spawner_House_Settings:
     House_Make_Allies_Spawner str_Multi6_Alliances, 5, f
     House_Make_Allies_Spawner str_Multi7_Alliances, 6, g
     House_Make_Allies_Spawner str_Multi8_Alliances, 7, h
-    
+
     mov byte [IsDoingAlliancesSpawner], 0
     
     Set_House_Handicap 0, dword [HouseHandicapsArray+0], a
@@ -832,13 +836,16 @@ Initialize_Spawn:
      
     SpawnINI_Get_Bool str_Settings, str_MultiEngineer, 0
     mov byte [MultiEngineer], al
-	
-	SpawnINI_Get_Bool str_Settings, str_Host, 0
+
+    SpawnINI_Get_Bool str_Settings, str_Host, 0
     mov byte [IsHost], al
-         
+
+    SpawnINI_Get_Bool str_Settings, str_AllyBySpawnLocation, 0
+    mov byte [AllyBySpawnLocation], al
+
     lea eax, [CustomLoadScreen]
     SpawnINI_Get_String str_Settings, str_CustomLoadScreen, str_Empty, eax, 256
-    
+
     ; tunnel ip
     lea eax, [TempBuf]
     SpawnINI_Get_String str_Tunnel, str_Ip, str_Empty, eax, 32

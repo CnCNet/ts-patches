@@ -20,6 +20,8 @@ extern CommandClass MapSnapshotCommand;
 extern CommandClass ChatToAlliesCommand;
 extern CommandClass ChatToAllCommand;
 extern CommandClass ChatToPlayerCommand;
+extern CommandClass MultiplayerDebugCommand;
+extern CommandClass TextBackgroundColorCommand;
 extern bool ChatToAlliesFlag;
 extern bool ChatToAllFlag;
 extern void **HouseClassArray;
@@ -31,6 +33,9 @@ extern uint32_t GameIDNumber;
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);
 int  __thiscall INIClass__GetInt(INIClass iniClass, char *section, char *key, int defaultValue);
+char * __thiscall INIClass__GetEntry(INIClass iniClass, char *section,  int i);
+size_t __thiscall INIClass__EntryCount(INIClass iniClass, char *section);
+size_t __thiscall INIClass__GetString(INIClass iniClass, char *section, char *key, char *defaultValue, char *buf, size_t len);
 uint32_t __thiscall TechnoClass_What_Weapon_Should_I_Use(void *ac, void *w);
 int __thiscall AircraftClass__Mission_Attack(AircraftClass *me);
 int __thiscall TechnoClass__Can_Player_Fire(void *);
@@ -48,12 +53,14 @@ int __thiscall DynamicVectorClass__CommandClass__Add(void *v, CommandClass **c);
 void __thiscall MessageListClass__Manage(MessageListClass *m);
 int  __fastcall MapSnapshot(char *name, int n);
 void __stdcall Load_Keyboard_Hotkeys();
-
+void __thiscall Multiplayer_Debug_Print();
+void __thiscall HouseClass__Make_Ally_House(HouseClass *this, HouseClass *house);
 void __stdcall HookInitCommands();
-
+void ParseIntLL(char *entry_string, int_ll **head);
 void *__cdecl operator_new(size_t size);
 void __cdecl operator_delete(void *memory);
-
+size_t WWDebug_Printf(const char *, ...);
+int32_t __thiscall Random2Class__operator(void *this, int32_t a2, int32_t a3);
 int32_t _sprintf(char *dest, char *format, ...);
 size_t __strcmpi(const char *, const char *);
 //void *memcpy(char *dest, const char *src, size_t len);
@@ -62,7 +69,7 @@ size_t __strcmpi(const char *, const char *);
 extern bool VideoWindowed;
 extern bool VideoBackBuffer;
 extern INIClass INIClass_SUN_INI;
-
+extern INIClass INIClass_SPAWN;
 
 // ### Macros ###
 

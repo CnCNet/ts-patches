@@ -11,6 +11,7 @@ setcglob 0x007E1568, HouseClassArray_Count
 setcglob 0x007E21D4, HouseTypesArray
 setcglob 0x004BB460, HouseClass__Assign_Handicap
 setcglob 0x004BDB30, HouseClass__Make_Ally
+setcglob 0x004BDB50, HouseClass__Make_Ally_House
 setcglob 0x004BD9E0, HouseClass__Is_Ally
 setcglob 0x005DE210, Assign_Houses
 setcglob 0x005EEF70, Get_MP_Color
@@ -28,7 +29,7 @@ setcglob 0x0040BA40, AircraftClass__Mission_Attack
 ; Arrays
 setcglob 0x007B3468, UnitClassArray_Count
 setcglob 0x007E4850, TeamTypesArray_Count
-setcglob 0x007E4844, TeamTypesArray     
+setcglob 0x007E4844, TeamTypesArray
 setcglob 0x0070D850, PlayerColorMap
 setcglob 0x007E4058, DynamicVectorClass_AircraftClass
 
@@ -39,8 +40,9 @@ setcglob 0x004DE140, INIClass__GetBool
 setcglob 0x004DD140, INIClass__GetInt
 setcglob 0x004DDF60, INIClass__GetString
 setcglob 0x004DD9F0, INIClass__GetFixed
-
-setcglob 0x0074C378, INIClass_SUN_INI 
+setcglob 0x004DC8D0, INIClass__GetEntry
+setcglob 0X004DC6A0, INIClass__EntryCount
+setcglob 0x0074C378, INIClass_SUN_INI
 
 ; File
 setcglob 0x004497B0, FileClass__FileClass
@@ -78,6 +80,7 @@ setcglob 0x00867008, TournamentGame
 ; Random
 setcglob 0x007E4934, Seed
 setcglob 0x004E38A0, Init_Random
+setcglob 0x005BE080, Random2Class__operator
 
 ; Message
 setcglob 0x007E2C34, MessageListClass_this
@@ -153,6 +156,8 @@ setcglob 0x0074C260, VisibleRect__FromLeft
 setcglob 0x0074C264, VisibleRect__FromTop
 setcglob 0x0074C268, VisibleRect__Width
 setcglob 0x0074C26C, VisibleRect__Height
+setcglob 0x00509D50, Multiplayer_Debug_Print
+setcglob 0x004082D0, WWDebug_Printf
 
 ; Sidebar
 ;setcglob 0x00749874, LEFT_STRIP
@@ -162,12 +167,15 @@ setcglob 0x0074C26C, VisibleRect__Height
 setcglob 0x006B73A0, __strcmpi
 setcglob 0x006B8E20, strcmp
 setcglob 0x006B602A, _strtok
+setcglob 0x006B602A, strtok
 setcglob 0x006B52EE, _sprintf
 setcglob 0x006B6A41, vsprintf
 setcglob 0x006B6730, stristr_
 setcglob 0x006BA490, strlen
 setcglob 0x006B51D7, operator_new
 setcglob 0x006B51CC, operator_delete
+setcglob 0x006B67B0, sscanf
+setcglob 0x006B5F65, atoi
 
 ; winapi
 setcglob 0x006B4D6C, sendto

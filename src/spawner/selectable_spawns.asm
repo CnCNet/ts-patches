@@ -1,10 +1,12 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
+%include "TiberianSun.inc"
 
 cextern IsSpectatorArray
 cextern SpawnLocationsArray
 cextern SpawnerActive
 cextern UsedSpawnsArray
+cextern SpawnLocationsHouses
 
 @LJMP 0x005DEBCD, _Create_Units_Selectable_Spawning_Locations
 @LJMP 0x005DEAF7, _Create_Units_First_Spawn_EDI_Patch
@@ -108,16 +110,23 @@ _Create_Units_Selectable_Spawning_Locations:
     mov dword edx, [edx+eax*4] ; Get our spawn location
     
     mov dword [esp+0x20], edx ; Set spawn location to use
-    
+
+    mov edx, eax
 
     
 .Normal_Code:
     mov edi, [esp+0x10] ; HouseClass to generate for
+    pushad
+    push edx
+    push edi
+    call store_house_spawn_location  ; defined in auto_ally_by_spawn_loc.c
+    popad
     xor edx, edx
     jmp 0x005DEBD3
     
 .Set_Normal_Spawn_Then_Normal_Code:
     mov dword [UsedSpawnsArray+4*edi], eax
+    mov edx, edi
     jmp .Normal_Code
     
     

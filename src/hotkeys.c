@@ -13,7 +13,9 @@ HookInitCommands() {
   CommandClass *NewHotkeys[] = { &ChatToAlliesCommand,
                                  &ChatToAllCommand,
                                  &ChatToPlayerCommand,
+                                 &TextBackgroundColorCommand,
 #ifdef WWDEBUG
+                                 &MultiplayerDebugCommand,
                                  &MapSnapshotCommand
 #endif
                                };
@@ -116,3 +118,50 @@ vtCommandClass vtChatToPlayerCommand = {
 };
 CommandClass ChatToPlayerCommand = { &vtChatToPlayerCommand,0,17,17 };
 /* End ChatAll */
+
+/* Start MPDebugPrint */
+void    __thiscall MultiplayerDebug_nothing(void *a)  { }
+char *  __thiscall MultiplayerDebug_Description(void *a) { return "Enable Multiplayer debugging information"; }
+char *  __thiscall MultiplayerDebug_INIname(void *a)     { return "MultiplayerDebug"; }
+char *  __thiscall MultiplayerDebug_Category(void *a)    { return "New From CnCNet"; }
+char *  __thiscall MultiplayerDebug_Name(void *a)        { return "MultiPlayerDebug"; }
+int     __thiscall MultiplayerDebug_Execute(void *a)     { MultiplayerDebug ^= 1; return 1; } // Defined in chatallies.asm
+
+vtCommandClass vtMultiplayerDebugCommand = {
+  CommandDestroy,
+  MultiplayerDebug_INIname,
+  MultiplayerDebug_Name,
+  MultiplayerDebug_Category,
+  MultiplayerDebug_Description,
+  MultiplayerDebug_Execute,
+  MultiplayerDebug_nothing
+};
+CommandClass MultiplayerDebugCommand = { &vtMultiplayerDebugCommand,0,17,17 };
+/* End MultiplayerDebug */
+
+/* TextBackgroundColor */
+void    __thiscall TextBackgroundColor_nothing(void *a)  { }
+char *  __thiscall TextBackgroundColor_Description(void *a) { return "Toggle chat text background between clear and black"; }
+char *  __thiscall TextBackgroundColor_INIname(void *a)     { return "TextBackgroundColor"; }
+char *  __thiscall TextBackgroundColor_Category(void *a)    { return "New From CnCNet"; }
+char *  __thiscall TextBackgroundColor_Name(void *a)        { return "TextBackgroundColor"; }
+int     __thiscall
+TextBackgroundColor_Execute(void *a)     {
+  if (TextBackgroundColor == 0xC)
+    TextBackgroundColor = 0;
+  else
+    TextBackgroundColor = 0xC;
+  return 1;
+}
+
+vtCommandClass vtTextBackgroundColorCommand = {
+  CommandDestroy,
+  TextBackgroundColor_INIname,
+  TextBackgroundColor_Name,
+  TextBackgroundColor_Category,
+  TextBackgroundColor_Description,
+  TextBackgroundColor_Execute,
+  TextBackgroundColor_nothing
+};
+CommandClass TextBackgroundColorCommand = { &vtTextBackgroundColorCommand,0,17,17 };
+/* End */
