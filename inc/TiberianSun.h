@@ -22,6 +22,8 @@ extern CommandClass ChatToAllCommand;
 extern CommandClass ChatToPlayerCommand;
 extern CommandClass MultiplayerDebugCommand;
 extern CommandClass TextBackgroundColorCommand;
+extern bool Player_Active;
+extern char **PlayerPtr;
 extern bool ChatToAlliesFlag;
 extern bool ChatToAllFlag;
 extern void **HouseClassArray;

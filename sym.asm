@@ -17,6 +17,7 @@ setcglob 0x005DE210, Assign_Houses
 setcglob 0x005EEF70, Get_MP_Color
 setcglob 0x004CDEF0, HouseType_From_Name
 setcglob 0x004C2E40, Read_Scenario_Houses
+setcglob 0x006FB630, Player_Active
 
 ; TechnoClass
 setcglob 0x0040F2A0, TechnoClass_What_Weapon_Should_I_Use

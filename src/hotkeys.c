@@ -63,7 +63,7 @@ char *  __thiscall ChatToAllies_Description(void *a) { return "Send a message to
 char *  __thiscall ChatToAllies_INIname(void *a)     { return "ChatToAllies"; }
 char *  __thiscall ChatToAllies_Category(void *a)    { return "New From CnCNet"; }
 char *  __thiscall ChatToAllies_Name(void *a)        { return "ChatToAllies"; }
-int     __thiscall ChatToAllies_Execute(void *a)     { ChatToAlliesFlag = 1; return 1; } // Defined in chatallies.asm
+int     __thiscall ChatToAllies_Execute(void *a)     { if (!PlayerPtr[0xCB]) ChatToAlliesFlag = 1; return 1; } // Defined in chatallies.asm
 
 vtCommandClass vtChatToAlliesCommand = {
   CommandDestroy,
@@ -125,7 +125,7 @@ char *  __thiscall MultiplayerDebug_Description(void *a) { return "Enable Multip
 char *  __thiscall MultiplayerDebug_INIname(void *a)     { return "MultiplayerDebug"; }
 char *  __thiscall MultiplayerDebug_Category(void *a)    { return "New From CnCNet"; }
 char *  __thiscall MultiplayerDebug_Name(void *a)        { return "MultiPlayerDebug"; }
-int     __thiscall MultiplayerDebug_Execute(void *a)     { MultiplayerDebug ^= 1; return 1; } // Defined in chatallies.asm
+int     __thiscall MultiplayerDebug_Execute(void *a)     { MultiplayerDebug ^= 1; return 1; }
 
 vtCommandClass vtMultiplayerDebugCommand = {
   CommandDestroy,
