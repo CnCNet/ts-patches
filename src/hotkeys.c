@@ -46,7 +46,7 @@ HookInitCommands() {
     if (key.KeyCode == 0xD)
       seen_return = 1;
   }
-  if (!seen_allies && !seen_return) {
+  if (!seen_allies && !seen_backspace) {
     WWDebug_Printf("****************************didn't see ChatToAllies adding as hotkey[%d]\n",Hotkeys_ActiveCount);
     if (Hotkeys_VectorMax <= Hotkeys_ActiveCount+1)
       CCINIClass_Vector_Resize(&Hotkeys, 10);
