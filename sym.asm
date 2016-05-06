@@ -189,6 +189,11 @@ setcglob 0x007481A8, DynamicVectorClass__CommandClass
 setcglob 0x004EB940, DynamicVectorClass__CommandClass__Add
 setcglob 0x005DDFE0, MapSnapshot
 setcglob 0x004E7050, Load_Keyboard_Hotkeys
+setcglob 0x007481C0, Hotkeys
+setcglob 0x007481C0, Hotkeys_Vector
+setcglob 0x007481C4, Hotkeys_ActiveCount
+setcglob 0x007481C8, Hotkeys_VectorMax
+setcglob 0x004EBCD0, CCINIClass_Vector_Resize
 
 ;WSOCK32
 setcglob 0x006CA504, _imp__sendto

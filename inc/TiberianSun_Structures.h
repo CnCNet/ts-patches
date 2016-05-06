@@ -3,6 +3,11 @@ typedef struct int_ll {
   struct int_ll *next;
 } int_ll;
 
+typedef struct Hotkey {
+  uint32_t KeyCode;
+  void *Command;
+} Hotkey;
+
 typedef struct HouseClass  { // Fixme... define the real HouseClass
   char gap[0x10E4F];
 } HouseClass;
