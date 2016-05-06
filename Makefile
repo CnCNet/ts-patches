@@ -76,6 +76,7 @@ else
                     src/override_colors.o
 endif
 ifdef WWDEBUG
+    NFLAGS += -D WWDEBUG
     CFLAGS += -D WWDEBUG
     OBJS        +=  src/debugging_help.o
 endif
