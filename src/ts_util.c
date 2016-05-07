@@ -36,6 +36,13 @@ hook_wwdebug_printf(char const *fmt, ...)
 {
   va_list ap;
   va_start(ap,fmt);
+  static bool already_consoled = false;
+
+  if (!already_consoled) {
+    AllocConsole();
+    already_consoled = true;
+    WWDebug_Printf("Allocated the console\n");
+  }
 
   HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 

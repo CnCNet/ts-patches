@@ -206,6 +206,7 @@ setcglob 0x006CA1D0, _imp__GetCurrentProcess
 setcglob 0x006CA4EC, _imp__timeGetTime
 setcglob 0x006CA28C, _imp__GetStdHandle
 setcglob 0x006CA2B4, _imp__WriteConsoleA
+setcglob 0x006CA1E0, _imp__AllocConsole
 
 ;Address  Ordinal Name                          Library 
 ;-------  ------- ----                          ------- 
