@@ -99,7 +99,14 @@ char *  __thiscall ChatToAllies_Description(void *a) { return "Send a message to
 char *  __thiscall ChatToAllies_INIname(void *a)     { return "ChatToAllies"; }
 char *  __thiscall ChatToAllies_Category(void *a)    { return "Chat"; }
 char *  __thiscall ChatToAllies_Name(void *a)        { return "ChatToAllies"; }
-int     __thiscall ChatToAllies_Execute(void *a)     { if (!PlayerPtr[0xCB]) ChatToAlliesFlag = 1; return 1; } // Defined in chatallies.asm
+int     __thiscall ChatToAllies_Execute(void *a)     {
+  if (!(*PlayerPtr)[0xCB]) {
+    ChatToAlliesFlag = 1; // Defined in chatallies.asm
+    WWDebug_Printf("ChatToAllies enabled[%x]\n",&ChatToAllies_Execute);
+  }
+  else WWDebug_Printf("Can't chat allies, you read dead[%x]\n",ChatToAllies_Execute);
+  return 1;
+}
 
 vtCommandClass vtChatToAlliesCommand = {
   CommandDestroy,
