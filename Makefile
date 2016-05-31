@@ -76,7 +76,6 @@ else
                     src/chatallies.o \
                     src/spawner/auto_ally_by_spawn_loc.o \
                     src/wcsncpy.o \
-                    src/mumblelink.o \
                     src/manual_aim_sams.o \
                     src/override_colors.o
 endif
