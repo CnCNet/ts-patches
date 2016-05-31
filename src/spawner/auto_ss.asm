@@ -1,10 +1,22 @@
-@JMP 0x00509383 _Main_Loop_Auto_SS
-@JMP 0x004EAC39 _ScreenCaptureCommand__Activate_AutoSS_File_Name
+%include "TiberianSun.inc"
+%include "macros/patch.inc"
+%include "macros/datatypes.inc"
 
-; TODO NEED TO CHECK FOR SESSION == 3 AND SPAWNER ACTIVE
+cextern SpawnerActive
+cglobal RunAutoSS
+section .bss
+        DoingAutoSS              RESD 1
+        RunAutoSS                RESB 1
+section .rdata
+        str_AutoSSDir            db "",0
+        str_AutoSSFileNameFormat db "AutoSS-%d-%d_%d.PCX",0
 
+hack 0x00509383
 _Main_Loop_Auto_SS:
     cmp dword [SpawnerActive], 1 ; only do Auto-SS when spawner is active
+    jnz .Ret
+
+    cmp dword [RunAutoSS], 1
     jnz .Ret
 
     cmp dword [SessionType], 3 ; only do Auto-SS in LAN mode
@@ -12,36 +24,37 @@ _Main_Loop_Auto_SS:
 
     cmp dword [Frame], 0
     jz .Ret
-    
+
     mov edx, 0
     mov ebx, 3600 ; divive by 3600, 60 FPS means every 60 secs
     mov eax, [Frame]
-    
+
     idiv ebx
-    
+
     cmp dx, 254 ; frame to first do SS and the remainder of the division
     jnz .Ret
 
     mov dword [DoingAutoSS], 1
     call 0x004EAB00 ; screen capture
     mov dword [DoingAutoSS], 0
-    
+
 .Ret:
     call 0x005094A0; Sync_Delay(void)
     jmp 0x00509388
-    
+
+hack 0x004EAC39
 _ScreenCaptureCommand__Activate_AutoSS_File_Name:
     lea ecx, [esp+0x114]
-    
+
     cmp dword [DoingAutoSS], 1
     jnz .Normal_Code
 
 .AutoSS_File_Name:
-    
-    push 0 
+
+    push 0
     push str_AutoSSDir
     call [0x006CA0D0] ; CreateDirectoryA
-    
+
     lea ecx, [esp+0x114]
 
     push esi
@@ -55,5 +68,5 @@ _ScreenCaptureCommand__Activate_AutoSS_File_Name:
 
 .Normal_Code:
     jmp 0x004EAC40
-    
+
 ; DoingAutoSS

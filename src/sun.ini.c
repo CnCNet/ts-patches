@@ -10,7 +10,7 @@ bool OverrideColors;
 void LoadSunIni()
 {
     IsNoCD = SunIni_GetBool("Options", "NoCD", true);
-    if (SunIni_GetBool("Options", "SingleProcAffinity", true)) 
+    if (SunIni_GetBool("Options", "SingleProcAffinity", true))
         SetSingleProcAffinity();
 
     VideoBackBuffer = SunIni_GetBool("Video", "VideoBackBuffer", true);
@@ -18,11 +18,11 @@ void LoadSunIni()
     UseGraphicsPatch = SunIni_GetBool("Video", "UseGraphicsPatch", true);
     VideoWindowed = SunIni_GetBool("Video", "Video.Windowed", false);
 
-    if (SunIni_GetBool("Video", "DisableHighDpiScaling", false)) 
+    if (SunIni_GetBool("Video", "DisableHighDpiScaling", false))
         DisableHighDpiScaling();
-    if (SunIni_GetBool("Video", "DisableMaxWindowedMode", false)) 
+    if (SunIni_GetBool("Video", "DisableMaxWindowedMode", false))
         DisableMaxWindowedMode();
-    
+
 #ifndef SINGLEPLAYER
     if (OverrideColors = SunIni_GetBool("Options","OverrideColors",false))
       ApplyUserColorOverrides();

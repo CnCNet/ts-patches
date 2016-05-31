@@ -18,6 +18,7 @@ cextern TunnelId
 cextern AddressList
 cextern UsedSpawnsArray
 cextern IsSpectatorArray
+cextern RunAutoSS
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -131,6 +132,7 @@ section .rdata
     str_Host             db "Host",0
     str_FrameSendRate    db "FrameSendRate",0
     str_MaxAhead        db "MaxAhead",0
+    str_RunAutoSS       db "RunAutoSS",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -845,6 +847,9 @@ Initialize_Spawn:
 
     lea eax, [CustomLoadScreen]
     SpawnINI_Get_String str_Settings, str_CustomLoadScreen, str_Empty, eax, 256
+
+    SpawnINI_Get_Bool str_Settings, str_RunAutoSS, 0
+    mov byte [RunAutoSS], al
 
     ; tunnel ip
     lea eax, [TempBuf]

@@ -70,7 +70,12 @@ cextern _imp__timeGetTime
 cextern _imp__LoadLibraryA
 cextern _imp__GetProcAddress
 cextern _imp__GetCurrentProcess
+cextern SetFocus
+cextern SetWindowPos
+cextern InvalidateRect
 
+cextern WWDebug_Printf
+cextern hWndParent
 ; ### definitions of common structures ###
 
 struc sockaddr_in

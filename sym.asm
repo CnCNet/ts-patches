@@ -44,6 +44,12 @@ setcglob 0x004DD9F0, INIClass__GetFixed
 setcglob 0x004DC8D0, INIClass__GetEntry
 setcglob 0X004DC6A0, INIClass__EntryCount
 setcglob 0x0074C378, INIClass_SUN_INI
+setcglob 0x004DDBE0, INIClass__PutString
+setcglob 0x004DC180, INIClass__Save
+setcglob 0x004DB470, INIClass__Destroy
+setcglob 0x004DC550, INIClass__Find_Section
+setcglob 0x004DC770, INIClass__Find_Entry
+setcglob 0x005C6710, RulesClass__Process
 
 ; File
 setcglob 0x004497B0, FileClass__FileClass
@@ -159,6 +165,7 @@ setcglob 0x0074C268, VisibleRect__Width
 setcglob 0x0074C26C, VisibleRect__Height
 setcglob 0x00509D50, Multiplayer_Debug_Print
 setcglob 0x004082D0, WWDebug_Printf
+setcglob 0x00865040, hWndParent
 
 ; Sidebar
 ;setcglob 0x00749874, LEFT_STRIP
@@ -207,6 +214,13 @@ setcglob 0x006CA4EC, _imp__timeGetTime
 setcglob 0x006CA28C, _imp__GetStdHandle
 setcglob 0x006CA2B4, _imp__WriteConsoleA
 setcglob 0x006CA1E0, _imp__AllocConsole
+setcglob 0x006CA19C, _imp__CloseHandle
+
+setcglob 0x006CA3BC, _imp__SetWindowPos
+setcglob 0x006CA3BC, SetWindowPos
+setcglob 0x006CA360, _imp__SetFocus
+setcglob 0x006CA360, SetFocus
+setcglob 0x006CA3C8, InvalidateRect
 
 ;Address  Ordinal Name                          Library 
 ;-------  ------- ----                          ------- 

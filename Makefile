@@ -59,6 +59,7 @@ else
                     src/spawner/statistics.o \
                     src/spawner/auto-surrender.o \
                     src/spawner/build_off_ally.o \
+                    src/spawner/auto_ss.o \
                     src/jj_barracks_glitch_fix.o \
                     src/ts_util.o \
                     src/alt_scout_fix.o \
@@ -74,6 +75,8 @@ else
                     src/hotkeys.o \
                     src/chatallies.o \
                     src/spawner/auto_ally_by_spawn_loc.o \
+                    src/wcsncpy.o \
+                    src/mumblelink.o \
                     src/manual_aim_sams.o \
                     src/override_colors.o
 endif
