@@ -265,6 +265,9 @@ _Read_Scenario_INI_Dont_Create_Units_Earlier:
     mov     cl, al
     call    0x005DD290 ; Create_Units(int)
 
+    push    ebp
+    call    _ally_by_spawn_location
+
 .Ret:
     jmp 0x005DDAF6
 

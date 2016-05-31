@@ -1,12 +1,18 @@
-/* file spawn.ini
-   [AllyBySpawnLocation]
-   A=0,1
-   B=2
-   C=3,4,5
-   D=7,6
+/* int the .map/mpr file
+   [AllyBySpawnLocation1]
+   Description="East vs West"
+   A=0,2
+   B=1,3
+
+   [AllyBySpawnLocation2]
+   Description="North vs Sounth"
+   A=0,3
+   B=2,1
+
+   In the spawn.ini
+   [Settings]
+   AllyBySpawnLocation=1
 */
-
-
 
 
 #include "macros/patch.h"
@@ -21,6 +27,7 @@ typedef struct house_ll {
 } house_ll;
 
 house_ll *spawn_locations[8] = {0};
+char TeamName[128] = {0};
 
 void __stdcall
 store_house_spawn_location(HouseClass *house, int spawn) {
@@ -30,28 +37,44 @@ store_house_spawn_location(HouseClass *house, int spawn) {
   new->next = 0;
   LL_APPEND(spawn_locations[spawn], new);
 }
-CALL(0x005DEF40,_ally_by_spawn_location);
 
-int32_t __thiscall
-ally_by_spawn_location(void *a1, int32_t a2, int32_t a3) {
+void __stdcall
+ally_by_spawn_location(INIClass scenario) {
   // We're intercepting a call to Random2Class__operator(a1,a2,a3);
   // just passing those args right through in the return statement of this function
 
-  char *str_AllyBySpawn = "AllyBySpawnLocation";
+  if (!SpawnerActive)
+    return;
+
   char buf[128] = {0};
+  char AllyEntry[128] = {0};
   WWDebug_Printf("Starting Auto Allier\n");
 
+  int id = INIClass__GetInt(INIClass_SPAWN, "Settings", "AllyBySpawnLocation",-1);
+  if (id == -1) {
+    WWDebug_Printf("AllyBySpawnLocation= not found in spawn.ini [Settings]\n");
+    return;
+  }
+
+  _sprintf(AllyEntry, "AllyBySpawnLocation%d",id);
+
+  WWDebug_Printf("Allier using [%s]\n",AllyEntry);
+
   for (
-       int i = INIClass__EntryCount(INIClass_SPAWN, str_AllyBySpawn);
+       int i = INIClass__EntryCount(scenario, AllyEntry);
        i-->0;
        ) {
 
-    char *EntryName  = INIClass__GetEntry(INIClass_SPAWN, str_AllyBySpawn, i);
-    int len = INIClass__GetString(INIClass_SPAWN, str_AllyBySpawn, EntryName, 0, buf, 128);
+    char *EntryName  = INIClass__GetEntry(scenario, AllyEntry, i);
+    int len = INIClass__GetString(scenario, AllyEntry, EntryName, 0, buf, 128);
 
     if (len == 0)
       continue;
 
+    if (strcmp(EntryName, "Description") == 0) {
+      WWDebug_Printf("Description Found, Skipping!!");
+      continue;
+    }
     int_ll *loc1, *loc2, *loc1_tmp, *loc2_tmp, *spawn_ll = NULL;;
     house_ll *house1, *house2, *h1_tmp, *h2_tmp;
 
@@ -72,6 +95,12 @@ ally_by_spawn_location(void *a1, int32_t a2, int32_t a3) {
 
             if (house1->house == house2->house)
               continue;
+
+            if (house1->house == PlayerPtr) {
+              _sprintf(TeamName, "TS-%d-%s\n", GameIDNumber, EntryName);
+              WWDebug_Printf("My team = %s", TeamName);
+            }
+
             HouseClass__Make_Ally_House(house1->house, house2->house);
           }
         }
@@ -83,7 +112,7 @@ ally_by_spawn_location(void *a1, int32_t a2, int32_t a3) {
   // spawn_locations[] and spawn_ll leak
 
   // Finish the intercepted call
-  return Random2Class__operator(a1,a2,a3);
+  return;
 }
 
 void

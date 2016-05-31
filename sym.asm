@@ -180,6 +180,7 @@ setcglob 0x006B52EE, _sprintf
 setcglob 0x006B6A41, vsprintf
 setcglob 0x006B6730, stristr_
 setcglob 0x006BA490, strlen
+setcglob 0x006BE630, strcpy
 setcglob 0x006B51D7, operator_new
 setcglob 0x006B51CC, operator_delete
 setcglob 0x006B67B0, sscanf
