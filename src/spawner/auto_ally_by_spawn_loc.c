@@ -33,6 +33,8 @@ wchar_t TeamName[128] = {0};
 
 void __stdcall
 store_house_spawn_location(HouseClass *house, int spawn) {
+  if (!SpawnerActive)
+    return;
   WWDebug_Printf("Storing house [0x%x] = %d\n", house, spawn);
   house_ll *new = (house_ll *)operator_new(sizeof(house_ll));
   new->house = house;
