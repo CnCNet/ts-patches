@@ -75,6 +75,7 @@ else
                     src/hotkeys.o \
                     src/chatallies.o \
                     src/spawner/auto_ally_by_spawn_loc.o \
+                    src/mumblelink.o \
                     src/wcsncpy.o \
                     src/manual_aim_sams.o \
                     src/override_colors.o

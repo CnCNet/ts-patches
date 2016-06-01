@@ -89,3 +89,13 @@ extern INIClass INIClass_SPAWN;
 
 #define SunIni_GetBool(a,b,c) INIClass__GetBool(INIClass_SUN_INI,a,b,c)
 #define SunIni_GetInt(a,b,c) INIClass__GetInt(INIClass_SUN_INI,a,b,c)
+
+// ### Mumble ###
+extern wchar_t TeamName[128];
+extern char **WOL_SERVER_PORT; // Hijack this as a pointer to TeamName when spawner is active
+
+void initMumble();
+void updateMumble();
+
+void __stdcall set_team_name(char *s);
+void __stdcall set_team_spec();

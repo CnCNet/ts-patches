@@ -19,6 +19,7 @@ cextern AddressList
 cextern UsedSpawnsArray
 cextern IsSpectatorArray
 cextern RunAutoSS
+cextern AimableSams
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -76,6 +77,7 @@ section .bss
     
     SaveGameLoadPathWide       RESB 512
     SaveGameLoadPath           RESB 256
+    SpawnerTeamName            RESB 128
 
 section .rdata
     str_NoWindowFrame db "NoWindowFrame",0
@@ -133,6 +135,8 @@ section .rdata
     str_FrameSendRate    db "FrameSendRate",0
     str_MaxAhead        db "MaxAhead",0
     str_RunAutoSS       db "RunAutoSS",0
+    str_TeamName        db "TeamName",0
+    str_AimableSams     db "AimableSams",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -268,6 +272,7 @@ _Read_Scenario_INI_Dont_Create_Units_Earlier:
     push    ebp
     call    _ally_by_spawn_location
 
+    call    initMumble
 .Ret:
     jmp 0x005DDAF6
 
@@ -680,8 +685,18 @@ _Read_Scenario_INI_Assign_Houses_And_Spawner_House_Settings:
     House_Make_Allies_Spawner str_Multi7_Alliances, 6, g
     House_Make_Allies_Spawner str_Multi8_Alliances, 7, h
 
+    lea eax, [SpawnerTeamName]
+    SpawnINI_Get_String str_Settings, str_TeamName, 0, eax, 128
+
+    cmp DWORD[SpawnerTeamName], 0
+    je  .dont_set_name
+
+    push DWORD[SpawnerTeamName]
+    call set_team_name
+
+.dont_set_name:
     mov byte [IsDoingAlliancesSpawner], 0
-    
+
     Set_House_Handicap 0, dword [HouseHandicapsArray+0], a
     Set_House_Handicap 1, dword [HouseHandicapsArray+4], b
     Set_House_Handicap 2, dword [HouseHandicapsArray+8], c
@@ -853,6 +868,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_RunAutoSS, 0
     mov byte [RunAutoSS], al
+
+    SpawnINI_Get_Bool str_Settings, str_AimableSams, 0
+    mov byte [AimableSams], al
 
     ; tunnel ip
     lea eax, [TempBuf]

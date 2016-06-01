@@ -20,6 +20,7 @@
 #include "macros/utlist.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 typedef struct house_ll {
   HouseClass *house;
@@ -27,7 +28,8 @@ typedef struct house_ll {
 } house_ll;
 
 house_ll *spawn_locations[8] = {0};
-char TeamName[128] = {0};
+char TeamName_a[128] = {0};
+wchar_t TeamName[128] = {0};
 
 void __stdcall
 store_house_spawn_location(HouseClass *house, int spawn) {
@@ -46,6 +48,7 @@ ally_by_spawn_location(INIClass scenario) {
   if (!SpawnerActive)
     return;
 
+  WOL_SERVER_PORT = (char **)&TeamName;
   char buf[128] = {0};
   char AllyEntry[128] = {0};
   WWDebug_Printf("Starting Auto Allier\n");
@@ -72,7 +75,7 @@ ally_by_spawn_location(INIClass scenario) {
       continue;
 
     if (strcmp(EntryName, "Description") == 0) {
-      WWDebug_Printf("Description Found, Skipping!!");
+      WWDebug_Printf("[AllyBySpawn] Description Seen\n");
       continue;
     }
     int_ll *loc1, *loc2, *loc1_tmp, *loc2_tmp, *spawn_ll = NULL;;
@@ -97,8 +100,9 @@ ally_by_spawn_location(INIClass scenario) {
               continue;
 
             if (house1->house == PlayerPtr) {
-              _sprintf(TeamName, "TS-%d-%s\n", GameIDNumber, EntryName);
-              WWDebug_Printf("My team = %s", TeamName);
+              _sprintf(TeamName_a, "TS-%d-%s", GameIDNumber, EntryName);
+              MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, TeamName_a, 128, TeamName, 128);
+              WWDebug_Printf("My team name string = %s\n", TeamName_a);
             }
 
             HouseClass__Make_Ally_House(house1->house, house2->house);
@@ -110,9 +114,20 @@ ally_by_spawn_location(INIClass scenario) {
   }
   // Could have some operator_delete (aka free()) here but it's not much memory
   // spawn_locations[] and spawn_ll leak
-
-  // Finish the intercepted call
   return;
+}
+void __stdcall
+set_team_spec() {
+  _sprintf(TeamName_a, "TS-%d-%s", GameIDNumber, "Spectator");
+  MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, TeamName_a, 128, TeamName, 128);
+  WWDebug_Printf("Set TeamName to %s\n", TeamName_a);
+}
+
+void __stdcall
+set_team_name(char *s) {
+  _sprintf(TeamName_a, "TS-%d-%s", GameIDNumber, s);
+  MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, TeamName_a, 128, TeamName, 128);
+  WWDebug_Printf("Set TeamName to %s\n", TeamName_a);
 }
 
 void

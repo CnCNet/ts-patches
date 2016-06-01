@@ -83,7 +83,7 @@ setcglob 0x007E4924, Frame
 setcglob 0x00867014, GameIDNumber
 setcglob 0x007E24DC, PlayerColor
 setcglob 0x00867008, TournamentGame
-
+setcglob 0x008670BC, WOL_SERVER_PORT ; Hijacking this for Mumble
 ; Random
 setcglob 0x007E4934, Seed
 setcglob 0x004E38A0, Init_Random
@@ -216,6 +216,7 @@ setcglob 0x006CA28C, _imp__GetStdHandle
 setcglob 0x006CA2B4, _imp__WriteConsoleA
 setcglob 0x006CA1E0, _imp__AllocConsole
 setcglob 0x006CA19C, _imp__CloseHandle
+setcglob 0x006CA1A0, _imp__MultiByteToWideChar
 
 setcglob 0x006CA3BC, _imp__SetWindowPos
 setcglob 0x006CA3BC, SetWindowPos

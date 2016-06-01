@@ -209,3 +209,9 @@ cextern __strcmpi
 cextern _strtok
 cextern _sprintf
 cextern stristr_
+
+; Mumble
+cextern initMumble
+cextern updateMumble
+cextern set_team_name
+cextern set_tean_name_spec
