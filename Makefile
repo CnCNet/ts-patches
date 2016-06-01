@@ -78,6 +78,7 @@ else
                     src/mumblelink.o \
                     src/wcsncpy.o \
                     src/manual_aim_sams.o \
+                    src/gamespeed.o \
                     src/override_colors.o
 endif
 ifdef WWDEBUG
