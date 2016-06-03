@@ -26,7 +26,7 @@ LinkedMem *lm = NULL;
 extern "C" void WWDebug_Printf(const char *f, ...);
 extern "C" void initMumble();
 extern "C" void updateMumble();
-extern wchar_t *TeamName;
+extern "C" wchar_t TeamName[128];
 
 typedef void *(__stdcall *OpenFileMappingWFunc)(DWORD dwDesiredAccess, BOOL bInheritHandle, LPCTSTR lpName);
 typedef void *(__stdcall *MapViewOfFileFunc)(HANDLE hFileMapingObject, DWORD dwDesiredAccess, DWORD dwFileOffsetHigh,
@@ -57,7 +57,7 @@ initMumble() {
   WWDebug_Printf("Mumble Found and shmem open\n");
 
   if(lm->uiVersion != 2) {
-    wcsncpy(lm->name, L"Tiberian Sun CnCNet", 256);
+    wcsncpy(lm->name, L"Source engine:CnCTS", 256);
     wcsncpy(lm->description, L"CnCNet Tiberian Sun Game", 2048);
     lm->uiVersion = 2;
   }
@@ -71,7 +71,7 @@ updateMumble() {
 
   lm->uiTick++;
 
-  wcsncpy(lm->identity, TeamName, 256);
-  memcpy(lm->context, "TSCNCNET", 16);
-  lm->context_len = 16;
+  wcsncpy(lm->identity, TeamName, 128);
+  memcpy(lm->context, "[Tiberian Sun]",14);
+  lm->context_len = 14;
 }

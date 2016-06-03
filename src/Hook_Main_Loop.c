@@ -11,11 +11,9 @@ void __thiscall
 MainLoop_AfterRender(MessageListClass *msg) {
   MessageListClass__Manage(msg);
 
-  if ((Frame+4 & 7) == 0) {
-    if (PlayerPtr->gap[0xCB] == true && HaventSetSpecTeam) {
-      set_team_spec();
-      HaventSetSpecTeam = false;
-    }
-    updateMumble();
+  if (PlayerPtr->gap[0xCB] == true && HaventSetSpecTeam) {
+    set_team_spec();
+    HaventSetSpecTeam = false;
   }
+  updateMumble();
 }

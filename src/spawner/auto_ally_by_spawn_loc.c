@@ -102,9 +102,10 @@ ally_by_spawn_location(INIClass scenario) {
               continue;
 
             if (house1->house == PlayerPtr) {
-              _sprintf(TeamName_a, "TS-%d-%s", GameIDNumber, EntryName);
+              _sprintf(TeamName_a, "team:g%d-%s", GameIDNumber, EntryName);
               MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, TeamName_a, 128, TeamName, 128);
               WWDebug_Printf("My team name string = %s\n", TeamName_a);
+              updateMumble();
             }
 
             HouseClass__Make_Ally_House(house1->house, house2->house);
@@ -120,14 +121,14 @@ ally_by_spawn_location(INIClass scenario) {
 }
 void __stdcall
 set_team_spec() {
-  _sprintf(TeamName_a, "TS-%d-%s", GameIDNumber, "Spectator");
+  _sprintf(TeamName_a, "team:g%d-%s", GameIDNumber, "Spectator");
   MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, TeamName_a, 128, TeamName, 128);
   WWDebug_Printf("Set TeamName to %s\n", TeamName_a);
 }
 
 void __stdcall
 set_team_name(char *s) {
-  _sprintf(TeamName_a, "TS-%d-%s", GameIDNumber, s);
+  _sprintf(TeamName_a, "team:g%d-%s", GameIDNumber, s);
   MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, TeamName_a, 128, TeamName, 128);
   WWDebug_Printf("Set TeamName to %s\n", TeamName_a);
 }
