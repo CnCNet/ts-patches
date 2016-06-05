@@ -21,6 +21,8 @@ struct LinkedMem {
   wchar_t       description[2048];
 };
 
+bool IntegrateMumbleSpawn;
+bool IntegrateMumbleSun;
 LinkedMem *lm = NULL;
 
 extern "C" void WWDebug_Printf(const char *f, ...);

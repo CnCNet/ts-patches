@@ -11,9 +11,14 @@ void __thiscall
 MainLoop_AfterRender(MessageListClass *msg) {
   MessageListClass__Manage(msg);
 
-  if (PlayerPtr->gap[0xCB] == true && HaventSetSpecTeam) {
-    set_team_spec();
-    HaventSetSpecTeam = false;
+  if (SpawnerActive) {
+    if (PlayerPtr->gap[0xCB] == true && HaventSetSpecTeam) {
+      set_team_spec();
+      HaventSetSpecTeam = false;
+    }
+
+    if (IntegrateMumbleSun && IntegrateMumbleSpawn) {
+      updateMumble();
+    }
   }
-  updateMumble();
 }

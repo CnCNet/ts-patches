@@ -30,5 +30,6 @@ void LoadSunIni()
 
     DisableEdgeScrolling = SunIni_GetBool("Options","DisableEdgeScrolling",false);
     MultiplayerDebug = SunIni_GetBool("Options","MultiplayerDebug",false);
+    IntegrateMumbleSun = SunIni_GetBool("Options", "IntegrateMumble", false);
 #endif
 }

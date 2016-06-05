@@ -101,7 +101,8 @@ ally_by_spawn_location(INIClass scenario) {
             if (house1->house == house2->house)
               continue;
 
-            if (house1->house == PlayerPtr) {
+            if (house1->house == PlayerPtr &&
+                IntegrateMumbleSun && IntegrateMumbleSpawn) {
               _sprintf(TeamName_a, "team:g%d-%s", GameIDNumber, EntryName);
               MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, TeamName_a, 128, TeamName, 128);
               WWDebug_Printf("My team name string = %s\n", TeamName_a);
