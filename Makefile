@@ -74,6 +74,7 @@ else
                     src/Hook_Main_Loop.o \
                     src/hotkeys.o \
                     src/chatallies.o \
+                    src/disable_alt_tab.o \
                     src/spawner/auto_ally_by_spawn_loc.o \
                     src/mumblelink.o \
                     src/wcsncpy.o \

@@ -101,3 +101,7 @@ void __stdcall set_team_name(char *s);
 void __stdcall set_team_spec();
 extern bool IntegrateMumbleSun;
 extern bool IntegrateMumbleSpawn;
+
+
+// Disable alt tab
+void LoadKeyboardHook();

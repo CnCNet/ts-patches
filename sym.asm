@@ -217,7 +217,8 @@ setcglob 0x006CA2B4, _imp__WriteConsoleA
 setcglob 0x006CA1E0, _imp__AllocConsole
 setcglob 0x006CA19C, _imp__CloseHandle
 setcglob 0x006CA1A0, _imp__MultiByteToWideChar
-
+setcglob 0x006CA170, _imp__GetModuleHandleA
+setcglob 0x006CA39C, _imp__GetAsyncKeyState
 setcglob 0x006CA3BC, _imp__SetWindowPos
 setcglob 0x006CA3BC, SetWindowPos
 setcglob 0x006CA360, _imp__SetFocus
