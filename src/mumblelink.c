@@ -1,11 +1,11 @@
 #define _UNICODE
 #define UNICODE
 
+#include <stdbool.h>
 #include <windows.h>
-//#include "TiberianSun.h"
+#include "TiberianSun.h"
 
-
-struct LinkedMem {
+typedef struct LinkedMem {
   UINT32        uiVersion;
   DWORD         uiTick;
   float         fAvatarPosition[3];
@@ -19,16 +19,15 @@ struct LinkedMem {
   UINT32	context_len;
   unsigned char context[256];
   wchar_t       description[2048];
-};
+} LinkedMem;
 
 bool IntegrateMumbleSpawn;
 bool IntegrateMumbleSun;
 LinkedMem *lm = NULL;
 
-extern "C" void WWDebug_Printf(const char *f, ...);
-extern "C" void initMumble();
-extern "C" void updateMumble();
-extern "C" wchar_t TeamName[128];
+//void initMumble();
+//void updateMumble();
+wchar_t TeamName[128];
 
 typedef void *(__stdcall *OpenFileMappingWFunc)(DWORD dwDesiredAccess, BOOL bInheritHandle, LPCTSTR lpName);
 typedef void *(__stdcall *MapViewOfFileFunc)(HANDLE hFileMapingObject, DWORD dwDesiredAccess, DWORD dwFileOffsetHigh,
