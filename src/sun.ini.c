@@ -36,5 +36,6 @@ void LoadSunIni()
       WWDebug_Printf("Disabling Alt+Tab\n");
       LoadKeyboardHook();
     }
+    DragDistance = SunIni_GetInt("Options", "DragDistance", 4);
 #endif
 }

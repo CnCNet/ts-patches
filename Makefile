@@ -80,7 +80,11 @@ else
                     src/wcsncpy.o \
                     src/manual_aim_sams.o \
                     src/gamespeed.o \
+                    src/drag_distance.o \
                     src/override_colors.o
+endif
+ifdef DTA
+    CFLAGS += src/dta/dta_hacks.o
 endif
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
