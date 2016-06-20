@@ -3,13 +3,11 @@
 %include "macros/datatypes.inc"
 
 cextern SpawnerActive
-cglobal RunAutoSS
-section .bss
-        DoingAutoSS              RESD 1
-        RunAutoSS                RESB 1
-section .rdata
-        str_AutoSSDir            db "",0
-        str_AutoSSFileNameFormat db "AutoSS-%d-%d_%d.PCX",0
+gbool RunAutoSS, 0
+gint DoingAutoSS, 0
+
+sstring str_AutoSSDir, ""
+sstring str_AutoSSFileNameFormat, "AutoSS-%d-%d_%d.PCX"
 
 hack 0x00509383
 _Main_Loop_Auto_SS:

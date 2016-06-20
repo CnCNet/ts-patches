@@ -3,10 +3,7 @@
 %include "macros/datatypes.inc"
 
 cextern SpawnerActive
-cglobal AimableSams
-
-section .bss
-        AimableSams     RESB 1
+gbool AimableSams, 0
 
 hack 0x0042ED42, 0x0042ED4C
         cmp DWORD[SpawnerActive], 1
