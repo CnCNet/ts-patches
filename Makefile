@@ -84,7 +84,7 @@ else
                     src/override_colors.o
 endif
 ifdef DTA
-    CFLAGS += src/dta/dta_hacks.o
+    OBJS        +=  src/dta/dta_hacks.o
 endif
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
