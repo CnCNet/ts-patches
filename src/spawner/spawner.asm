@@ -217,6 +217,9 @@ _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
 
     pushad
 
+    SpawnINI_Get_Bool str_Settings, str_IsSinglePlayer, 0
+    cmp al, 0
+    jz .out
     SpawnINI_Get_Int str_Settings, str_DifficultyModeComputer, 1
     push eax
     
@@ -229,11 +232,14 @@ _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
     mov dword [ebx+0x608], eax ; DifficultyModeHuman
     mov dword [SelectedDifficulty], eax
     
+.out:
     popad
 
 .Ret:
-    mov eax, dword [SelectedDifficulty]
-    mov dword [0x7a2f0c], eax
+    ; The 2 commented-out lines below cause the difficulty level to change to 
+    ; Normal after completing a mission from a loaded campaign save
+    ;mov eax, dword [SelectedDifficulty]
+    ;mov dword [0x7a2f0c], eax
     mov eax, [ScenarioStuff]
     jmp 0x005DD528
 
@@ -1012,6 +1018,12 @@ Initialize_Spawn:
  
     mov byte [0x7E48FC], 0
     mov byte [0x7E4040], 0
+    push -1
+    xor edx, edx
+    mov ecx, ScenarioName
+    ; Starting the scenario sets up some connection stuff that is necessary
+    ; for multiplayer saves to work
+    call Start_Scenario 
     lea ecx, [SaveGameNameBuf]
     call Load_Game
     
