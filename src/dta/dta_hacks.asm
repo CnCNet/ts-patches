@@ -286,14 +286,14 @@ sstring str_DesertPAL, "DESERT.PAL"
 @CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
 
 ; Load sidebar MIX files for new sides properly
-@SET 0x005DD798, {mov cl, byte 0x007E2500} ; Compile warning: byte value exceeds bounds?
-@CLEAR 0x005DD79E, 0x90, 0x005DD7A1
+@SET 0x005DD798, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
+@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
 @SET 0x005DD791, nop
 
 ; Load speech MIX files for new sides properly
 @SET 0x005DD822, {xor ecx, ecx}
-@CLEAR 0x005DD824, 0x90, 0x005DD828
-@SET 0x005DD82B, {mov cl, byte 0x007E2500} ; Compile warning: byte value exceeds bounds?
+@CLEAR 0x005DD822, 0x90, 0x005DD828
+@SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 
 ; AI starting units will start in Unload mode instead of Area Guard mode (was 05 for Guard mode)
 ;@SET 0x005DEE36, push 0Fh
