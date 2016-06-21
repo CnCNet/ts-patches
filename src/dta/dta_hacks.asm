@@ -6,7 +6,7 @@
 ;    SaveGameLoadPathWide       RESB 512
 ;    SaveGameLoadPath           RESB 256
 ;
-;section .text
+;section .patch
 ;
 ;sstring str_SaveGameLoadFolder, "Saved Games\%s"
 ;sstring str_SaveGameFolderFormat, "Saved Games\*.%3s"
@@ -39,8 +39,8 @@ sstring str_ConquerMIX, "MIX\CONQUER.MIX"
 sstring str_Sounds01MIX, "MIX\SOUNDS01.MIX"
 sstring str_ScoresMIX, "MIX\SCORES.MIX"
 sstring str_TutorialINI, "INI\TUTORIAL.INI"
-sstring str_IsodesMIX, "MIX\ISODES.MIX"
 sstring str_Isodes, "MIX\ISODES"
+sstring str_IsodesMIX, "MIX\ISODES.MIX"
 sstring str_SideMIX, "MIX\SIDE%02d.MIX"
 sstring str_SideCDMIX, "MIX\SIDECD%02d.MIX"
 sstring str_Screenshots, "Screenshots\SCRN%04d.pcx"
@@ -66,12 +66,21 @@ sstring str_DesINI, "INI\DES"
 sstring str_IsotemMIX, "MIX\ISOTEM"
 sstring str_DesertMIX, "MIX\DESERT"
 sstring str_TemperatMIX, "MIX\TEMPERAT"
+sstring str_Des, "DES"
 
 sstring str_IsotemPAL, "ISOTEM.PAL"
 sstring str_IsodesPAL, "ISODES.PAL"
 sstring str_UnittemPAL, "UNITTEM.PAL"
 sstring str_UnitdesPAL, "UNITDES.PAL"
 sstring str_DesertPAL, "DESERT.PAL"
+@SET 0x006CA930, {db "DESERT",0,0,0,0}
+@SET 0x006CA940, {db "INI\DES",0,0,0}
+@SET 0x006CA94A, {db "MIX\ISDES",0}
+@SET 0x006CA954, {db "DES",0}
+@SET 0x006CA958, {db "TEMPERATE", 0,0,0,0}
+@SET 0x006CA968, {db "INI\TEM", 0,0,0}
+@SET 0x006CA972, {db "MIX\ISTEM", 0}
+@SET 0x006CA97C, {db "TEM", 0}
 
 ; String references
 @SET 0x00407081, push str_EnhanceINI ; push offset str_EnhanceINI?
@@ -112,7 +121,6 @@ sstring str_DesertPAL, "DESERT.PAL"
 @SET 0x004E4429, push str_ScoresMIX
 @SET 0x004E447A, push str_ScoresMIX
 @SET 0x004E467E, push str_TutorialINI
-;@SET 0x004E7B7A, {lea ecx, str_Isodes[esi]} ; How should this be done? lea ecx, dword_7183A0[esi]
 @SET 0x004E80D8, push str_SideMIX
 @SET 0x004E8377, push str_SideCDMIX
 @SET 0x004E8391, push str_SideCDMIX
@@ -155,12 +163,13 @@ sstring str_DesertPAL, "DESERT.PAL"
 @SET 0x004E44B6, push str_Scores01MIX
 @SET 0x004E4507, push str_Scores01MIX
 
-;@SET 0x006861ED, {mov dword [esp+48h], str_DTALong} ; dword ptr
-;@SET 0x00686215, push str_DTAGameWindow
-;@SET 0x0068621A, push str_DTAGameWindow
-;@SET 0x006862BD, push str_DTAGameWindow
-;@SET 0x006862C2, push str_DTAGameWindow
-@SET 0x00687E07, push str_SettingsINI
+;;; The game will never start with these - dkeeton
+;;  @SET 0x006861ED, {mov dword [esp+48h], str_DTALong} ; dword ptr
+;; @SET 0x00686215, push str_DTAGameWindow
+;; @SET 0x0068621A, push str_DTAGameWindow
+;; @SET 0x006862BD, push str_DTAGameWindow
+;; @SET 0x006862C2, push str_DTAGameWindow
+;; @SET 0x00687E07, push str_SettingsINI
 
 ; Remove need for MAPS%02d.MIX
 @SET 0x0044EB1E, push str_CacheMIX
@@ -186,19 +195,19 @@ sstring str_DesertPAL, "DESERT.PAL"
 ;@LJMP 0x00505A20, _Delete_Save_Game_Game_Folder_Format_String_Change
 
 ; Set default tech level to 7
-;@SET 0x006FB628, dd 7
+@SET 0x006FB628, dd 7
 ;
 ;; Addon_Available() hack
-;@SET 0x004070CF, {mov bl, 1}
+@SET 0x004070CF, {mov bl, 1}
 ;
 ;; Hack to make tiberium get affected by lighting (at the cost of remappability)
-;@SET 0x004557FF, jnb 0x004559AE ; jnb loc_4559AE
+;; @SET 0x004557FF, jnb 0x004559AE ;jnb loc_4559AE
 ;
 ;; Don't add random extra cash to the money crate value specified in Rules.ini
-;@SET 0x0045839D, {lea edx, [eax]}
+@SET 0x0045839D, {lea edx, [eax]}
 ;
 ;; Units in Area Guard mode will revert to regular Guard mode when you press S
-;@SJMP 0x00494AB5, 0x00494AE3 ; jmp short loc_494AE3
+@SJMP 0x00494AB5, 0x00494AE3 ; jmp short loc_494AE3
 
 ; # Units in Guard mode will no longer chase after enemies that move out of firing range
 ; 000A1AA8: 75 90
@@ -206,60 +215,62 @@ sstring str_DesertPAL, "DESERT.PAL"
 ; Already included in guard_mode_patch.asm?
 
 ; Disable check for MoviesXX.mix, forces function to return al=1
-;@SET 0x004E45D8, {mov al, 1}
-;@SET 0x004E45DA, nop
+@SET 0x004E45D8, {mov al, 1}
+@SET 0x004E45DA, nop
 ; Included in no_movie_and_score_mix_dependency.asm
 
 ; Disable check for MULTI.MIX, force function to return al=1
 @SJMP 0x004E42EE, 0x004E42FD ; jmp short loc_4E42FD
 
 ; Remove framework mode mmt/mms loading
-@SET 0x004F5182, jmp 0x004F528C ; jmp loc_4F528C
+@LJMP 0x004F5182, 0x004F528C    ; jmp loc_4F528C
 ;
 ; TechLevel slider limit
-;@SET 0x0055AF05, push 70001h
-;@SET 0x0055E110, push 70001h
-;
+;;; Totally Crashes
+@SET 0x0055AF05, push 70001h
+@SET 0x0055E110, push 70001h
+
 ;; "Some change in code calling to SendDlgItemMessageA" - techlevel slider limit??
-;@SET 0x0057C932, push 70001h
+@SET 0x0057C932, push 70001h
 ;
 ;; Sidebar text off by default
-;@SET 0x00589972, {mov [eax+19h], cl}
-;@SET 0x00589975, {mov [eax+1Ah], cl}
+@SET 0x00589972, {mov [eax+19h], cl}
+@SET 0x00589975, {mov [eax+1Ah], cl}
 ;
 ;; IsScoreShuffle on by default
-;@SET 0x005899F1, {mov byte [eax+35h], 1} ;byte ptr
-;@SET 0x005899F5, nop
-;@SET 0x005899F6, nop
-;@SET 0x005899F7, nop
+@SET 0x005899F1, {mov byte [eax+35h], 1} ;byte ptr
+@SET 0x005899F5, nop
+@SET 0x005899F6, nop
+@SET 0x005899F7, nop
 ;
 ;; Disable dialog "slide-open" sound effect
-;@SJMP 0x00593DBF, 0x00593DF9 ; jmp short loc_593DF9
+@SJMP 0x00593DBF, 0x00593DF9 ; jmp short loc_593DF9
 ;
 ;; Remove glowing edges from dialogs
-;@SET 0x0059D410, retn 0Ch
+@SET 0x0059D410, retn 0Ch
 
 ;; Skip useless debug logging code
 ; *******BREAKS THE SPAWNER
-;@SET 0x005FF81C, jmp 0x005FFC41
+;; @SET 0x005FF81C, jmp 0x005FFC41
 
 ; "Overlay tiberium fix thing, 4th etc"
-;@SET 0x00644DF9, {mov dword [esi+0ACh], 0Ch} ;dword ptr
+@SET 0x00644DF9, {mov dword [esi+0ACh], 0Ch} ;dword ptr
 ;
 ;; "Facings stuff"
-;@SET 0x006530EB, {cmp dword [eax+4CCh], 20h} ;dword ptr
-;@SET 0x00653106, {shr ebx, 0Ah}
-;@SET 0x0065310D, {and ebx, 1Fh}
-;
+;; Seems to cause my MCV to disapper - dkeeton
+@SET 0x006530EB, {cmp dword [eax+4CCh], 20h} ;dword ptr
+@SET 0x00653106, {shr ebx, 0Ah}
+@SET 0x0065310D, {and ebx, 1Fh}
+
 ;; IsCoreDefender selection box size
-;@SET 0x0065BD7E, {mov eax, 200h}
-;@SET 0x0065BD94, {mov dword [edi+8], 64h} ;dword ptr
-;@SET 0x0065BD9B, nop
-;@SET 0x0065BD9C, nop
+@SET 0x0065BD7E, {mov eax, 200h}
+@SET 0x0065BD94, {mov dword [edi+8], 64h} ;dword ptr
+@SET 0x0065BD9B, nop
+@SET 0x0065BD9C, nop
 ;
 ;; Rules.ini key, WalkFrames= default value
-;@SET 0x0065B9E6, {mov byte [esi+4D0h], 1} ;byte ptr
-;@SET 0x0065BF3D, {mov [esi+21h], eax}
+@SET 0x0065B9E6, {mov byte [esi+4D0h], 1} ;byte ptr
+@SET 0x0065BF3D, {mov [esi+21h], eax}
 
 ; Set global variable byte containing side ID to load files for
 @SET 0x004E2CFA, {mov byte [0x7E2500], al}
@@ -270,7 +281,7 @@ sstring str_DesertPAL, "DESERT.PAL"
 
 ; Disable check for Scores.mix 
 ; (music will still be read, but the game won't crash if the MIX file isn't found)
-; @SJMP 0x004E44A5, jmp 0x004E44B6 ; jmp short
+@SJMP 0x004E44A5, 0x004E44B6 ; jmp short
 ; Included in no_movie_and_score_mix_dependency.asm
 
 ; Load sidebar MIX files for new sides properly (for saved games)
@@ -279,7 +290,7 @@ sstring str_DesertPAL, "DESERT.PAL"
 
 ; Load speech MIX files for new sides properly (for saved games)
 ; ***** Fails to compile
-; @SJMP 0x005D6B8, 0x005D6DCE ;jmp short
+@LJMP 0x005D6B80, 0x005D6DCE     ;jmp short
 
 @SET 0x005D6DCE, {xor ecx, ecx}
 @SET 0x005D6DD0, {mov cl, [eax+1D91h]}
@@ -296,35 +307,36 @@ sstring str_DesertPAL, "DESERT.PAL"
 @SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 
 ; AI starting units will start in Unload mode instead of Area Guard mode (was 05 for Guard mode)
-;@SET 0x005DEE36, push 0Fh
+@SET 0x005DEE36, push 0Fh
 
 ; Prevent more than 75 cameos from appearing in a sidebar column and thus crashing the game
-;@SET 0x005F463B, jge 0x005F46A1 ; jge short loc_5F46A1
+;; if this is enabled I can only build a gate - dkeeton
+;; @SET 0x005F463B, jge 0x005F46A1 ; jge short loc_5F46A1
 
 ; Remove Ion Storm special effects: flight denial, immobile hover units, disabled radar,
 ; IonSensitive weapons
-;@SET 0x0040E115, {mov eax, 0}
-;@SET 0x0040E4BB, {mov eax, 0}
-;@SET 0x0042C6AC, {mov eax, 0}
-;@SET 0x0042C8F8, {mov eax, 0}
-;@SET 0x004322D1, {mov eax, 0}
-;@SET 0x004324B1, {mov eax, 0}
-;@SET 0x004A2CAC, {mov eax, 0}
-;@SET 0x004A88FC, {mov eax, 0}
-;@SET 0x004A893A, {mov eax, 0}
-;@SET 0x004C9580, {mov eax, 0} ; Remove disabled radar
-;@SET 0x004CF698, {mov eax, 0}
-;@SET 0x004D9B83, {mov eax, 0}
-;@SET 0x004EC95D, {mov ecx, 0}
-;@SET 0x004EC962, nop
-;@SET 0x004ECC80, {mov eax, 0}
-;@SET 0x004F96D6, {mov eax, 0}
-;@SET 0x004F9771, {mov eax, 0}
-;;@SET 0x0062FA96, {mov eax, 0} ; Remove IonSensitive effect
-;@SET 0x0065834E, {mov eax, 0}
+@SET 0x0040E115, {mov eax, 0}
+@SET 0x0040E4BB, {mov eax, 0}
+@SET 0x0042C6AC, {mov eax, 0}
+@SET 0x0042C8F8, {mov eax, 0}
+@SET 0x004322D1, {mov eax, 0}
+@SET 0x004324B1, {mov eax, 0}
+@SET 0x004A2CAC, {mov eax, 0}
+@SET 0x004A88FC, {mov eax, 0}
+@SET 0x004A893A, {mov eax, 0}
+@SET 0x004C9580, {mov eax, 0} ; Remove disabled radar
+@SET 0x004CF698, {mov eax, 0}
+@SET 0x004D9B83, {mov eax, 0}
+@SET 0x004EC95D, {mov ecx, 0}
+@SET 0x004EC962, nop
+@SET 0x004ECC80, {mov eax, 0}
+@SET 0x004F96D6, {mov eax, 0}
+@SET 0x004F9771, {mov eax, 0}
+@SET 0x0062FA96, {mov eax, 0} ; Remove IonSensitive effect
+@SET 0x0065834E, {mov eax, 0}
 
 ; Auto-target units of houses with MultiplayerPassive=yes
-;@CLEAR 0x0062D4B2, 0x90, 0x0062D4BA
+@CLEAR 0x0062D4B2, 0x90, 0x0062D4BA
 
 ;_Delete_Save_Game_Game_Folder_Format_String_Change:
 ;    pushad
