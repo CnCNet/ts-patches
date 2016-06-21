@@ -390,6 +390,13 @@ _Send_Statistics_Packet_Return_If_Skirmish:
     cmp dword [SessionType], 5
     jz .ret
 
+    ; Sending statistics causes loaded multiplayer games to crash when the game ends
+    pushad
+    SpawnINI_Get_Bool str_Settings, str_LoadSaveGame, 0
+    cmp al, 0
+    popad
+    jnz  .ret
+    
     sub esp, 374h
     jmp 0x00609476
     
