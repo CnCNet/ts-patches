@@ -8,6 +8,7 @@ cglobal SpectatorStuffInit
 cglobal Load_Spectators_Spawner
 
 cextern INIClass_SPAWN
+cextern SpawnerActive
 
 @LJMP 0x005DE8F9, _Create_Units_Dont_Create_For_Dead_Houses
 @LJMP 0x005B9CFE, _sub_5B9B90_Set_Up_Spectator_Player_Stuff
@@ -175,6 +176,9 @@ _Create_Units_Dont_Create_For_Dead_Houses:
     jmp 0x005DE902
     
 _sub_5B9B90_Set_Up_Spectator_Player_Stuff:
+    cmp dword [SpawnerActive], 1
+    jne .Ret
+
     mov byte [SpectatorStuffInit], 0
     
     mov ecx, dword [PlayerPtr]
