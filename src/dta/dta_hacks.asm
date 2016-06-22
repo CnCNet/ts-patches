@@ -2,16 +2,16 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-;section .bss
-;    SaveGameLoadPathWide       RESB 512
-;    SaveGameLoadPath           RESB 256
-;
-;section .patch
-;
-;sstring str_SaveGameLoadFolder, "Saved Games\%s"
-;sstring str_SaveGameFolderFormat, "Saved Games\*.%3s"
-;sstring str_SaveGameFolderFormat2, "Saved Games\SAVE%04lX.%3s"
-;sstring str_SaveGamesFolder, "Saved Games"
+section .bss
+    SaveGameLoadPathWide       RESB 512
+    SaveGameLoadPath           RESB 256
+
+section .patch
+
+sstring str_SaveGameLoadFolder, "Saved Games\%s"
+sstring str_SaveGameFolderFormat, "Saved Games\*.%3s"
+sstring str_SaveGameFolderFormat2, "Saved Games\SAVE%04lX.%3s"
+sstring str_SaveGamesFolder, "Saved Games"
 
 sstring str_EnhanceINI, "INI\ENHANCE.INI"
 sstring str_MainMIX, "MIX\MAIN.MIX"
@@ -73,6 +73,7 @@ sstring str_IsodesPAL, "ISODES.PAL"
 sstring str_UnittemPAL, "UNITTEM.PAL"
 sstring str_UnitdesPAL, "UNITDES.PAL"
 sstring str_DesertPAL, "DESERT.PAL"
+sstring str_TemperatPAL, "TEMPERAT.PAL"
 
 @SET 0x006CA930, {db "DESERT",0,0,0,0}
 @SET 0x006CA940, {db "INI\DES",0,0,0}
@@ -165,26 +166,29 @@ sstring str_DesertPAL, "DESERT.PAL"
 @SET 0x004E4507, push str_Scores01MIX
 
 ;;; The game will never start with these - dkeeton
-;;  @SET 0x006861ED, {mov dword [esp+48h], str_DTALong} ; dword ptr
-;; @SET 0x00686215, push str_DTAGameWindow
-;; @SET 0x0068621A, push str_DTAGameWindow
-;; @SET 0x006862BD, push str_DTAGameWindow
-;; @SET 0x006862C2, push str_DTAGameWindow
-;; @SET 0x00687E07, push str_SettingsINI
+@SET 0x006861ED, {mov dword [esp+48h], str_DTALong} ; dword ptr
+@SET 0x00686215, push str_DTALong
+@SET 0x0068621A, push str_DTALong
+@SET 0x006862BD, push str_DTALong
+@SET 0x006862C2, push str_DTALong
+@SET 0x00687E07, push str_SettingsINI
 
 ; Remove need for MAPS%02d.MIX
 @SET 0x0044EB1E, push str_CacheMIX
 @SET 0x004E41D0, push str_CacheMIX
 
 
+
 ; Palette renames
 ; UNITSNO.PAL -> UNITTEM.PAL
 @SET 0x004DFD65, {mov ecx, str_UnittemPAL}
 @SET 0x004E015C, {mov ecx, str_UnittemPAL}
+@SET 0x004E7D83, {mov ecx, str_UnittemPAL}
 ; UNITTEM.PAL -> UNITDES.PAL
 @SET 0x004E7D8A, {mov ecx, str_UnitdesPAL}
 ; TEMPERAT.PAL -> DESERT.PAL
 @SET 0x004DFDDF, {mov ecx, str_DesertPAL}
+
 
 ;@LJMP 0x005D7E96, _Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory
 ;@LJMP 0x00505503, _Get_SaveFile_Info_Save_Game_Folder_Format_String_Change
@@ -227,7 +231,6 @@ sstring str_DesertPAL, "DESERT.PAL"
 @LJMP 0x004F5182, 0x004F528C    ; jmp loc_4F528C
 ;
 ; TechLevel slider limit
-;;; Totally Crashes
 @SET 0x0055AF05, push 70001h
 @SET 0x0055E110, push 70001h
 
@@ -258,7 +261,6 @@ sstring str_DesertPAL, "DESERT.PAL"
 @SET 0x00644DF9, {mov dword [esi+0ACh], 0Ch} ;dword ptr
 ;
 ;; "Facings stuff"
-;; Seems to cause my MCV to disapper - dkeeton
 @SET 0x006530EB, {cmp dword [eax+4CCh], 20h} ;dword ptr
 @SET 0x00653106, {shr ebx, 0Ah}
 @SET 0x0065310D, {and ebx, 1Fh}
@@ -311,8 +313,7 @@ sstring str_DesertPAL, "DESERT.PAL"
 @SET 0x005DEE36, push 0Fh
 
 ; Prevent more than 75 cameos from appearing in a sidebar column and thus crashing the game
-;; if this is enabled I can only build a gate - dkeeton
-;; @SET 0x005F463B, jge 0x005F46A1 ; jge short loc_5F46A1
+;; @SJGE 0x005F463B, 0x005F46A1    ;jge short loc_5F46A1
 
 ; Remove Ion Storm special effects: flight denial, immobile hover units, disabled radar,
 ; IonSensitive weapons

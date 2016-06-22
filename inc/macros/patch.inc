@@ -79,6 +79,13 @@
     @ENDPATCH
 %endmacro
 
+%macro @SJGE 2
+    @PATCH (%1)
+    db 0x7D
+    dd (%2) - (%1) - 2
+    @ENDPATCH
+%endmacro
+
 %macro @NJNB 2
     @PATCH (%1)
     db 0x0F, 0x83
