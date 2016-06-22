@@ -2,11 +2,11 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-section .bss
-    SaveGameLoadPathWide       RESB 512
-    SaveGameLoadPath           RESB 256
-
-section .patch
+;; section .bss
+;;     SaveGameLoadPathWide       RESB 512
+;;     SaveGameLoadPath           RESB 256
+sstring SaveGameLoadPathWide,  "", 512
+sstring SaveGameLoadPath,      "", 256
 
 sstring str_SaveGameLoadFolder, "Saved Games\%s"
 sstring str_SaveGameFolderFormat, "Saved Games\*.%3s"
@@ -189,16 +189,6 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 ; TEMPERAT.PAL -> DESERT.PAL
 @SET 0x004DFDDF, {mov ecx, str_DesertPAL}
 
-
-;@LJMP 0x005D7E96, _Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory
-;@LJMP 0x00505503, _Get_SaveFile_Info_Save_Game_Folder_Format_String_Change
-;@LJMP 0x00505859, _sub_505840_Save_Game_Folder_Format_String_Change
-;@LJMP 0x005D693C, _Load_Game_Save_Game_Folder_Format_String_Change1
-;@LJMP 0x005D4FFD, _Save_Game_Save_Game_Folder_Format_String_Change1
-;;@JMP 0x0050528E, _sub505270_Save_Game_Folder_Format_String_Change
-;@LJMP 0x00504FFB, _LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change
-;@LJMP 0x00505A20, _Delete_Save_Game_Game_Folder_Format_String_Change
-
 ; Set default tech level to 7
 @SET 0x006FB628, dd 7
 ;
@@ -340,100 +330,118 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 ; Auto-target units of houses with MultiplayerPassive=yes
 @CLEAR 0x0062D4B2, 0x90, 0x0062D4BA
 
-;_Delete_Save_Game_Game_Folder_Format_String_Change:
-;    pushad
-;
-;    mov     eax, [esp+4]
-;    
-;    push    eax
-;    push    str_SaveGameLoadFolder
-;    push    SaveGameLoadPath
-;    call    _sprintf
-;    add     esp, 0x0c
-;    
-;    popad
-;    mov     eax, SaveGameLoadPath
-;    push    eax
-;    jmp     0x00505A25
-;    
-;
-;_Save_Game_Save_Game_Folder_Format_String_Change1:
-;    lea     eax, [esp+0x2C]
-;
-;    pushad
-;    
-;    push    str_SaveGamesFolder
-;    push    esi
-;    call    stristr_
-;    add     esp, 8
-;    
-;    cmp     eax, 0
-;    jnz     .No_Change
-;     
-;    push    esi
-;    push    str_SaveGameLoadFolder
-;    push    SaveGameLoadPathWide   
-;    call    _sprintf
-;    add     esp, 0x0c
-;    
-;    popad
-;    
-;    mov     esi, SaveGameLoadPathWide  
-;    xor     edi, edi
-;    jmp     0x005D5003
-;    
-;.No_Change:
-;    popad
-;    xor     edi, edi
-;    jmp     0x005D5003
-;
-;_LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change:
-;    push    str_SaveGameFolderFormat2
-;    jmp     0x00505000
-;
-;_sub505270_Save_Game_Folder_Format_String_Change:
-;    push    str_SaveGameFolderFormat2
-;    jmp     0x00505293
-;
-;_Load_Game_Save_Game_Folder_Format_String_Change1:
-;    lea     eax, [esp+0x24]
-;
-;    pushad
-;     
-;    push    esi
-;    push    str_SaveGameLoadFolder
-;    push    SaveGameLoadPathWide   
-;    call    [0x006CA464] ; WsSprintf
-;    add     esp, 0x0c
-;    
-;    popad
-;    
-;    mov     esi, SaveGameLoadPathWide  
-;    push    40h
-;    jmp     0x005D6942
-;
-;_sub_505840_Save_Game_Folder_Format_String_Change:
-;    push    str_SaveGameFolderFormat
-;    jmp     0x0050585E
-;
-;_Get_SaveFile_Info_Save_Game_Folder_Format_String_Change:
-;    push    str_SaveGameFolderFormat
-;    jmp     0x00505508
-;
-;_Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory:
-;    push    esi
-;
-;    pushad
-;   
-;    push    ecx
-;    push    str_SaveGameLoadFolder
-;    push    SaveGameLoadPathWide   
-;    call    [0x006CA464] ; WsSprintf
-;    add     esp, 0x0c
-;    
-;    popad
-;    
-;    mov     ecx, SaveGameLoadPathWide
-;     
-;    lea     eax, [esp+8]
-;    jmp     0x005D7E9B
+
+;;@LJMP 0x00505A20, _Delete_Save_Game_Game_Folder_Format_String_Change
+hack 0x00505A20
+_Delete_Save_Game_Game_Folder_Format_String_Change:
+    pushad
+
+    mov     eax, [esp+4]
+
+    push    eax
+    push    str_SaveGameLoadFolder
+    push    SaveGameLoadPath
+    call    _sprintf
+    add     esp, 0x0c
+
+    popad
+    mov     eax, SaveGameLoadPath
+    push    eax
+    jmp     0x00505A25
+
+;@LJMP 0x005D4FFD, _Save_Game_Save_Game_Folder_Format_String_Change1
+hack 0x005D4FFD
+_Save_Game_Save_Game_Folder_Format_String_Change1:
+    lea     eax, [esp+0x2C]
+
+    pushad
+
+    push    str_SaveGamesFolder
+    push    esi
+    call    stristr_
+    add     esp, 8
+
+    cmp     eax, 0
+    jnz     .No_Change
+
+    push    esi
+    push    str_SaveGameLoadFolder
+    push    SaveGameLoadPathWide
+    call    _sprintf
+    add     esp, 0x0c
+
+    popad
+
+    mov     esi, SaveGameLoadPathWide
+    xor     edi, edi
+    jmp     0x005D5003
+
+.No_Change:
+    popad
+    xor     edi, edi
+    jmp     0x005D5003
+
+;@LJMP 0x00504FFB, _LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change
+hack 0x00504FFB
+_LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change:
+    push    str_SaveGameFolderFormat2
+    jmp     0x00505000
+
+;;@JMP 0x0050528E, _sub505270_Save_Game_Folder_Format_String_Change
+hack 0x0050528E
+_sub505270_Save_Game_Folder_Format_String_Change:
+    push    str_SaveGameFolderFormat2
+    jmp     0x00505293
+
+
+;@LJMP 0x005D693C, _Load_Game_Save_Game_Folder_Format_String_Change1
+hack 0x005D693C
+_Load_Game_Save_Game_Folder_Format_String_Change1:
+    lea     eax, [esp+0x24]
+
+    pushad
+
+    push    esi
+    push    str_SaveGameLoadFolder
+    push    SaveGameLoadPathWide
+    call    [0x006CA464] ; WsSprintf
+    add     esp, 0x0c
+
+    popad
+
+    mov     esi, SaveGameLoadPathWide
+    push    40h
+    jmp     0x005D6942
+
+;@LJMP 0x00505859, _sub_505840_Save_Game_Folder_Format_String_Change
+hack 0x00505859
+_sub_505840_Save_Game_Folder_Format_String_Change:
+    push    str_SaveGameFolderFormat
+    jmp     0x0050585E
+
+;@LJMP 0x00505503, _Get_SaveFile_Info_Save_Game_Folder_Format_String_Change
+hack 0x00505503
+_Get_SaveFile_Info_Save_Game_Folder_Format_String_Change:
+    push    str_SaveGameFolderFormat
+    jmp     0x00505508
+
+
+;@LJMP 0x005D7E96, _Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory
+hack 0x005D7E96
+_Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory:
+    push    esi
+
+    pushad
+
+    push    ecx
+    push    str_SaveGameLoadFolder
+    push    SaveGameLoadPathWide
+    call    [0x006CA464] ; WsSprintf
+    add     esp, 0x0c
+
+    popad
+
+    mov     ecx, SaveGameLoadPathWide
+
+    lea     eax, [esp+8]
+    jmp     0x005D7E9B

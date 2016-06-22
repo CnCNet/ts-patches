@@ -9,7 +9,7 @@
 %define StripClass_Size 980
 
 ; ### Variables ###
-
+cextern hook_wwdebug_printf
 ; Session
 cextern SessionClass_this
 cextern SessionClass__Create_Connections
