@@ -79,6 +79,13 @@
     @ENDPATCH
 %endmacro
 
+%macro @NJNB 2
+    @PATCH (%1)
+    db 0x0F, 0x83
+    dd (%2) - (%1) - 6
+    @ENDPATCH
+%endmacro
+
 %macro @LJMP 2
     @PATCH (%1)
     db 0xE9                     ; far jump

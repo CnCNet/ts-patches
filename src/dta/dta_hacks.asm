@@ -73,6 +73,7 @@ sstring str_IsodesPAL, "ISODES.PAL"
 sstring str_UnittemPAL, "UNITTEM.PAL"
 sstring str_UnitdesPAL, "UNITDES.PAL"
 sstring str_DesertPAL, "DESERT.PAL"
+
 @SET 0x006CA930, {db "DESERT",0,0,0,0}
 @SET 0x006CA940, {db "INI\DES",0,0,0}
 @SET 0x006CA94A, {db "MIX\ISDES",0}
@@ -201,7 +202,7 @@ sstring str_DesertPAL, "DESERT.PAL"
 @SET 0x004070CF, {mov bl, 1}
 ;
 ;; Hack to make tiberium get affected by lighting (at the cost of remappability)
-;; @SET 0x004557FF, jnb 0x004559AE ;jnb loc_4559AE
+@NJNB 0x004557FF, 0x004559AE ;jnb loc_4559AE
 ;
 ;; Don't add random extra cash to the money crate value specified in Rules.ini
 @SET 0x0045839D, {lea edx, [eax]}
