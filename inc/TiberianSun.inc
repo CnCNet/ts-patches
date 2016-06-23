@@ -122,6 +122,8 @@ cextern HouseType_From_Name
 cextern Read_Scenario_Houses
 cextern GetHouseByUserName     ; Defined in ts_util.c
 cextern store_house_spawn_location
+cextern CurrentObjectsArray
+cextern CurrentObjectsArray_Count
 
 ; Arrays
 cextern UnitClassArray_Count
@@ -191,6 +193,10 @@ cextern VisibleRect__FromLeft
 cextern VisibleRect__FromTop
 cextern VisibleRect__Width
 cextern VisibleRect__Height
+cextern WWKeyboard
+cextern WWKeyboardClass__Down
+cextern Left_Shift_Key
+cextern Right_Shift_Key
 
 ; Aircraft
 cextern Loop_Test_Aircraft

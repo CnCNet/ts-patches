@@ -37,6 +37,7 @@ extern void *ScenarioStuff;
 extern uint32_t Frame;
 extern uint32_t GameIDNumber;
 extern int32_t DragDistance;
+extern bool OnlyRightClickDeselect;
 // ### Functions ###
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);

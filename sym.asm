@@ -33,6 +33,8 @@ setcglob 0x007E4850, TeamTypesArray_Count
 setcglob 0x007E4844, TeamTypesArray
 setcglob 0x0070D850, PlayerColorMap
 setcglob 0x007E4058, DynamicVectorClass_AircraftClass
+setcglob 0x007E4858, CurrentObjectsArray
+setcglob 0x007E4868, CurrentObjectsArray_Count
 
 ; INI
 setcglob 0x004E8A30, INIClass__INIClass
@@ -141,6 +143,10 @@ setcglob 0x005D6910, Load_Game
 ; Mouse
 setcglob 0x0074C8F0, WWMouseClas_Mouse
 setcglob 0x00748348, MouseClass_Map
+setcglob 0x007482C0, WWKeyboard
+setcglob 0x007E47B0, Left_Shift_Key
+setcglob 0x007E47B4, Right_Shift_Key
+setcglob 0x004FB390, WWKeyboardClass__Down
 
 ; MapClass
 setcglob 0x0051E130, MapClass__GetCellFloorHeight

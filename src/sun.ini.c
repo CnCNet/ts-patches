@@ -37,5 +37,6 @@ void LoadSunIni()
       LoadKeyboardHook();
     }
     DragDistance = SunIni_GetInt("Options", "DragDistance", 4);
+    OnlyRightClickDeselect = SunIni_GetBool("Options", "OnlyRightClickDeselect", false);
 #endif
 }
