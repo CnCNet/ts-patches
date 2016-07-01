@@ -34,6 +34,7 @@ cextern Frame
 cextern GameIDNumber
 cextern PlayerColor
 cextern TournamentGame
+cextern EasyShroud
 
 ;ini
 cextern INIClass_SUN_INI 
@@ -75,6 +76,7 @@ cextern SetWindowPos
 cextern InvalidateRect
 
 cextern WWDebug_Printf
+cextern WarheadTypeClass__init_versus
 cextern hWndParent
 ; ### definitions of common structures ###
 

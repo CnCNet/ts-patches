@@ -52,6 +52,8 @@ setcglob 0x004DB470, INIClass__Destroy
 setcglob 0x004DC550, INIClass__Find_Section
 setcglob 0x004DC770, INIClass__Find_Entry
 setcglob 0x005C6710, RulesClass__Process
+setcglob 0x005D1800, RulesClass__Objects
+setcglob 0x005C6CF0, RulesClass__AudioVisual
 
 ; File
 setcglob 0x004497B0, FileClass__FileClass
@@ -136,6 +138,7 @@ setcglob 0x005EE7D0, SessionClass__Read_Scenario_Descriptions
 setcglob 0x007E2438, ScenarioStuff
 setcglob 0x007E4724, SelectedDifficulty
 setcglob 0x007E4548, SpecialClass__Special
+setcglob 0x005DE580, Create_Units
 
 ; Save games
 setcglob 0x005D6910, Load_Game
@@ -153,6 +156,8 @@ setcglob 0x0051E130, MapClass__GetCellFloorHeight
 setcglob 0x0050F210, MapClass__Get_Target_Coord
 setcglob 0x0052B870, MapClass__Cell_Is_Shrouded
 setcglob 0x0050F280, MapClass__Coord_Cell
+setcglob 0x0051E0A0, MapClass__Reveal_The_Map
+setcglob 0x0052BBE0, MapClass__Fill_Map_With_Fog
 setcglob 0x007B3304, dword_7B3304
 
 ; Statistics

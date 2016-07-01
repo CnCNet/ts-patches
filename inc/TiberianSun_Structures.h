@@ -12,6 +12,40 @@ typedef struct HouseClass  { // Fixme... define the real HouseClass
   char gap[0x10E4F];
 } HouseClass;
 
+typedef struct TypeList
+{
+  void *base;
+  void *Vector;
+  int VectorMax;
+  char IsValid;
+  char IsAllocated;
+  char VectorClassPad[2];
+  int ActiveCount;
+  int GrowthStep;
+  int field_18;
+} TypeList;
+
+typedef struct DifficultyClass
+{
+  LARGE_INTEGER FirePower;
+  LARGE_INTEGER Groundspeed;
+  LARGE_INTEGER Airspeed;
+  LARGE_INTEGER Armor;
+  LARGE_INTEGER ROF;
+  LARGE_INTEGER Cost;
+  LARGE_INTEGER BuildTime;
+  LARGE_INTEGER RepairDelay;
+  LARGE_INTEGER BuildDelay;
+  char BuildSlowdown;
+  char DestroyWalls;
+  char ContentScan;
+  char field_4B;
+  char field_4C;
+  char field_4D;
+  char field_4E;
+  char field_4F;
+} DifficultyClass;
+
 typedef struct vtCommandClass {
   void *Destroy;
   void *Name;

@@ -1,7 +1,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
+#include <windows.h>
 #include "TiberianSun_Structures.h"
+#include "Classes/RulesClass.h"
 
 // This header works with sym.asm which defines the Vanilla symbols
 // This header will be split up as it becomes larger
@@ -49,7 +51,9 @@ void   __thiscall INIClass__Destroy(INIClass iniClass);
 void * __thiscall INIClass__Find_Section(INIClass iniClass, int i);
 void * __thiscall INIClass__Find_Entry(INIClass iniClass, char *s, char *e);
 
-void   __thiscall RulesClass__Process(void *rules, INIClass iniClass);
+void    __thiscall RulesClass__Process(void *rules, INIClass iniClass);
+void    __thiscall RulesClass__Objects(void *rules, INIClass iniClass);
+int32_t __thiscall RulesClass__AudioVisual(RulesClass *rules, INIClass iniClass);
 
 uint32_t __thiscall TechnoClass_What_Weapon_Should_I_Use(void *ac, void *w);
 int __thiscall AircraftClass__Mission_Attack(AircraftClass *me);
@@ -63,6 +67,9 @@ CellClass * __thiscall MapClass__Get_Target_Coord(MouseClass **Map, xyzCoordStru
 bool __thiscall MapClass__Cell_Is_Shrouded(MouseClass **Map, xyzCoordStruct *);
 bool __thiscall is_coord_shrouded(MouseClass **Map, wCoordStruct *xy_coords);
 CellClass * __thiscall MapClass__Coord_Cell(MouseClass **Map, wCoordStruct *);
+void MapClass__Reveal_The_Map();
+void __thiscall MapClass__Fill_Map_With_Fog(MouseClass *this);
+void __fastcall Create_Units(char i);
 void __cdecl hook_wwdebug_printf(char const *fmt, ...);
 int __thiscall DynamicVectorClass__CommandClass__Add(void *v, CommandClass **c);
 void __thiscall MessageListClass__Manage(MessageListClass *m);

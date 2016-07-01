@@ -105,6 +105,7 @@ section .rdata
     str_HarvesterTruce  db "HarvesterTruce",0
     str_BridgeDestroy   db "BridgeDestroy",0
     str_FogOfWar        db "FogOfWar",0
+    str_EasyShroud      db "EasyShroud",0
     str_Crates          db "Crates",0
     str_ShortGame       db "ShortGame",0
     str_Bases           db "Bases",0
@@ -844,7 +845,11 @@ Initialize_Spawn:
       
     SpawnINI_Get_Bool str_Settings, str_FogOfWar, 0
     mov byte [FogOfWar], al
-    
+
+    SpawnINI_Get_Bool str_Settings, str_EasyShroud, 0
+    mov byte [EasyShroud], al
+    mov byte [FogOfWar], al ; EasyShroud requires Fog
+
     SpawnINI_Get_Bool str_Settings, str_BuildOffAlly, 0
     mov byte [BuildOffAlly], al
  
