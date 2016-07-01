@@ -92,10 +92,14 @@ ifdef WWDEBUG
     CFLAGS += -D WWDEBUG
     OBJS        +=  src/debugging_help.o
 endif
+
 ifdef EXPERIMENTAL
     NFLAGS += -D EXPERIMENTAL
     CLFAGS += -D EXPERIMENTAL
-    OBJS        += src/rulesclass__process_aud.o
+    OBJS        +=  src/rulesclass__process_aud.o \
+                    src/new_armor_types.o \
+                    src/new_armor_types_s.o
+
 endif
 
 PETOOL     ?= petool
