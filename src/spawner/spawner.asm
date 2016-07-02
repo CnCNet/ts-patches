@@ -282,6 +282,9 @@ _Read_Scenario_INI_Dont_Create_Units_Earlier:
     call    _ally_by_spawn_location
 
     call    initMumble
+
+    push    ebp
+    call    _read_tut_from_map
 .Ret:
     jmp 0x005DDAF6
 
@@ -1065,7 +1068,7 @@ Initialize_Spawn:
     mov ecx, ScenarioName
     call Start_Scenario
 
-.Past_Start_Scenario:    
+.Past_Start_Scenario:
     
     ; modify some RulesClass (RULES.INI stuff) settings
     mov esi, [0x0074C488] ; RulesClass pointer

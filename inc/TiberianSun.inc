@@ -10,6 +10,7 @@
 
 ; ### Variables ###
 cextern hook_wwdebug_printf
+
 ; Session
 cextern SessionClass_this
 cextern SessionClass__Create_Connections
@@ -38,6 +39,7 @@ cextern EasyShroud
 
 ;ini
 cextern INIClass_SUN_INI 
+cextern TUTORIAL_INI_Name
 
 ;need to fix those two, should set them in sym.asm
 %define LEFT_STRIP 0x00749874
@@ -167,6 +169,7 @@ cextern LatencyFudge
 cextern RequestedFPS
 cextern ProtocolVersion
 cextern ally_by_spawn_location
+cextern read_tut_from_map
 
 cextern Init_Network
 cextern NameNodes_CurrentSize

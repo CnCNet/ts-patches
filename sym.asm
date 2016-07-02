@@ -192,6 +192,7 @@ setcglob 0x006B6A41, vsprintf
 setcglob 0x006B6730, stristr_
 setcglob 0x006BA490, strlen
 setcglob 0x006BE630, strcpy
+setcglob 0x006BE766, strdup
 setcglob 0x006B51D7, operator_new
 setcglob 0x006B51CC, operator_delete
 setcglob 0x006B67B0, sscanf
@@ -235,6 +236,13 @@ setcglob 0x006CA3BC, SetWindowPos
 setcglob 0x006CA360, _imp__SetFocus
 setcglob 0x006CA360, SetFocus
 setcglob 0x006CA3C8, InvalidateRect
+
+; Tutorial
+setcglob 0x006FE49C, TUTORIAL_INI_Name
+setcglob 0x007E2440, Tutorials
+setcglob 0x007E2444, TutorialActiveCount
+setcglob 0x007E2448, TutorialMax
+
 
 ;Address  Ordinal Name                          Library 
 ;-------  ------- ----                          ------- 

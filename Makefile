@@ -81,11 +81,12 @@ else
                     src/manual_aim_sams.o \
                     src/gamespeed.o \
                     src/mouse_behavior.o \
+                    src/text_triggers.o \
                     src/override_colors.o
 endif
 ifdef DTA
-    OBJS        +=  src/dta/dta_hacks.o \
-                    src/dta/logger.o
+    OBJS        +=  src/dta/dta_hacks.o
+#                    src/dta/logger.o
 endif
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
@@ -97,7 +98,7 @@ ifdef EXPERIMENTAL
     NFLAGS += -D EXPERIMENTAL
     CLFAGS += -D EXPERIMENTAL
     OBJS        +=  src/rulesclass__process_aud.o \
-                    src/new_armor_types.o \
+#                    src/new_armor_types.o \
                     src/new_armor_types_s.o
 
 endif

@@ -77,6 +77,13 @@ typedef struct DynamicVectorClass
 } DynamicVectorClass;
 #pragma pack(pop)
 
+#pragma pack(push, 1)
+typedef struct TutorialStruct {
+  int32_t ID;
+  char *Text;
+} TutorialStruct;
+#pragma pack(pop)
+
 typedef struct MouseClass_struct {
   char v[0x1D30];
 } MouseClass;

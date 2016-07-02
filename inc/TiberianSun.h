@@ -40,6 +40,10 @@ extern uint32_t Frame;
 extern uint32_t GameIDNumber;
 extern int32_t DragDistance;
 extern bool OnlyRightClickDeselect;
+extern TutorialStruct *Tutorials;
+extern size_t TutorialActiveCount;
+extern size_t TutorialMax;
+
 // ### Functions ###
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);
