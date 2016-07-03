@@ -242,7 +242,7 @@ setcglob 0x006FE49C, TUTORIAL_INI_Name
 setcglob 0x007E2440, Tutorials
 setcglob 0x007E2444, TutorialActiveCount
 setcglob 0x007E2448, TutorialMax
-
+setcglob 0x007E244C, TutorialSorted
 
 ;Address  Ordinal Name                          Library 
 ;-------  ------- ----                          ------- 
