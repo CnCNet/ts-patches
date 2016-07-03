@@ -51,9 +51,10 @@ upsert_tut(int32_t ID, char *Text) {
       resize_tut_vector(10);
       tuts = Tutorials;
     }
-    index = TutorialActiveCount + 1;
+    index = TutorialActiveCount++;
     tuts[index].ID = ID;
     tuts[index].Text = Text;
+    TutorialSorted = false;
   }
   return index;
 }
@@ -71,7 +72,7 @@ resize_tut_vector(size_t addElems) {
   }
 
   Tutorials = new_tutorials;
-  TutorialMax = new_size;
+  TutorialMax = TutorialMax + addElems;
   return new_size;
 
 }

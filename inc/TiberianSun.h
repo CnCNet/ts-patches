@@ -43,6 +43,7 @@ extern bool OnlyRightClickDeselect;
 extern TutorialStruct *Tutorials;
 extern size_t TutorialActiveCount;
 extern size_t TutorialMax;
+extern bool TutorialSorted;
 
 // ### Functions ###
 
