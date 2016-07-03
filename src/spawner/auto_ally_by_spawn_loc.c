@@ -44,8 +44,6 @@ store_house_spawn_location(HouseClass *house, int spawn) {
 
 void __stdcall
 ally_by_spawn_location(INIClass scenario) {
-  // We're intercepting a call to Random2Class__operator(a1,a2,a3);
-  // just passing those args right through in the return statement of this function
 
   if (!SpawnerActive)
     return;

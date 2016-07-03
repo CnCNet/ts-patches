@@ -1,5 +1,6 @@
 /* Guarding still doesn't work right
    need to wort out weapontypeclass::compute_crc
+   Crashes at Eip:00460200
  */
 #include "macros/patch.h"
 #include "TiberianSun.h"

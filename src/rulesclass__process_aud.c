@@ -14,10 +14,9 @@ int32_t __thiscall
 RulesClass__Hack_AudioVisual(RulesClass *this, INIClass ini) {
   RulesClass__AudioVisual(this, ini);
 
-  if (EasyShroud) {
-    //FogRate
+  if (EasyShroud)
     this->FogRate = (double) 0.0;
-  }
+
   return 1;
 }
 

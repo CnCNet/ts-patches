@@ -2,9 +2,6 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-;; section .bss
-;;     SaveGameLoadPathWide       RESB 512
-;;     SaveGameLoadPath           RESB 256
 sstring SaveGameLoadPathWide,  "", 512
 sstring SaveGameLoadPath,      "", 256
 
@@ -74,6 +71,7 @@ sstring str_UnittemPAL, "UNITTEM.PAL"
 sstring str_UnitdesPAL, "UNITDES.PAL"
 sstring str_DesertPAL, "DESERT.PAL"
 sstring str_TemperatPAL, "TEMPERAT.PAL"
+sstring str_wtf_align_bitch, "000"
 
 @SET 0x006CA930, {db "DESERT",0,0,0,0}
 @SET 0x006CA940, {db "INI\DES",0,0,0}
@@ -382,17 +380,18 @@ _Save_Game_Save_Game_Folder_Format_String_Change1:
     jmp     0x005D5003
 
 ;@LJMP 0x00504FFB, _LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change
-hack 0x00504FFB
-_LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change:
-    push    str_SaveGameFolderFormat2
-    jmp     0x00505000
+;; hack 0x00504FFB
+;; _LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change:
+;;     push    str_SaveGameFolderFormat2
+;;     jmp     0x00505000
+@SET 0x00504FFB, {push str_SaveGameFolderFormat2}
 
 ;;@JMP 0x0050528E, _sub505270_Save_Game_Folder_Format_String_Change
-hack 0x0050528E
-_sub505270_Save_Game_Folder_Format_String_Change:
-    push    str_SaveGameFolderFormat2
-    jmp     0x00505293
-
+;; hack 0x0050528E
+;; _sub505270_Save_Game_Folder_Format_String_Change:
+;;     push    str_SaveGameFolderFormat2
+;;     jmp     0x00505293
+@SET 0x0050528E, {push str_SaveGameFolderFormat2}
 
 ;@LJMP 0x005D693C, _Load_Game_Save_Game_Folder_Format_String_Change1
 hack 0x005D693C
@@ -404,13 +403,13 @@ _Load_Game_Save_Game_Folder_Format_String_Change1:
     push    esi
     push    str_SaveGameLoadFolder
     push    SaveGameLoadPathWide
-    call    [0x006CA464] ; WsSprintf
+    call    [0x006CA464] ; WsSprintfA
     add     esp, 0x0c
 
     popad
 
     mov     esi, SaveGameLoadPathWide
-    push    40h
+    push    0x40
     jmp     0x005D6942
 
 ;@LJMP 0x00505859, _sub_505840_Save_Game_Folder_Format_String_Change
