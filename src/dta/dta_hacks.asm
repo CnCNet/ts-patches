@@ -268,7 +268,7 @@ sstring str_wtf_align_bitch, "000"
 @SET 0x004E2CFF, nop
 @SET 0x004E2D00, {add esp, 4}
 @SJMP 0x004E2D03, 0x004E2D13 ; jmp short
-@SET 0x004E2D05, align 2
+@SET 0x004E2D05, nop
 
 ; Disable check for Scores.mix 
 ; (music will still be read, but the game won't crash if the MIX file isn't found)
@@ -280,8 +280,8 @@ sstring str_wtf_align_bitch, "000"
 @CLEAR 0x005D6C55, 0x90, 0x005D6C58
 
 ; Load speech MIX files for new sides properly (for saved games)
-; ***** Fails to compile
-@LJMP 0x005D6B80, 0x005D6DCE     ;jmp short
+; This is clearly wrong, 0x005D6B92 jumps to savegame.asm -> _Load_Game_Post_Load_Game_Hook
+;@LJMP 0x005D6B80, 0x005D6DCE     ;jmp short
 
 @SET 0x005D6DCE, {xor ecx, ecx}
 @SET 0x005D6DD0, {mov cl, [eax+1D91h]}
@@ -290,7 +290,7 @@ sstring str_wtf_align_bitch, "000"
 ; Load sidebar MIX files for new sides properly
 @SET 0x005DD798, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 @CLEAR 0x005DD79E, 0x90, 0x005DD7A2
-@SET 0x005DD791, nop
+;@SET 0x005DD791, nop ; Crashes the game when starting a match
 
 ; Load speech MIX files for new sides properly
 @SET 0x005DD822, {xor ecx, ecx}

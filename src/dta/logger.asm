@@ -5,7 +5,7 @@
 
 @LJMP 0x004082D0, WriteToLog
 @LJMP 0x004735C0, WriteToLog
-@LJMP 0x005BE38C, ExtraLogging
+;@LJMP 0x005BE38C, ExtraLogging
 
 section .bss
   log_data resb 4
