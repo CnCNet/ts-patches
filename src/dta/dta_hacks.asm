@@ -280,8 +280,7 @@ sstring str_wtf_align_bitch, "000"
 @CLEAR 0x005D6C55, 0x90, 0x005D6C58
 
 ; Load speech MIX files for new sides properly (for saved games)
-; This is clearly wrong, 0x005D6B92 jumps to savegame.asm -> _Load_Game_Post_Load_Game_Hook
-;@LJMP 0x005D6B80, 0x005D6DCE     ;jmp short
+@SJMP 0x005D6DB8, 0x005D6DCE     ;jmp short
 
 @SET 0x005D6DCE, {xor ecx, ecx}
 @SET 0x005D6DD0, {mov cl, [eax+1D91h]}
