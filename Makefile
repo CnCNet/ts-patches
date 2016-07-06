@@ -82,6 +82,7 @@ else
                     src/gamespeed.o \
                     src/mouse_behavior.o \
                     src/text_triggers.o \
+                    src/attack_nuetral_units.o \
                     src/override_colors.o
 endif
 ifdef DTA

@@ -19,5 +19,5 @@ SECTIONS
     .rsrc        ALIGN(0x1000) : { *(.rsrc); }
 
     .patch       ALIGN(0x1000) : { *(.patch) }
-    /DISCARD/                  : { *(.eh_frame) }
+    .eh_frame    ALIGN(0x1000) : { *(.eh_frame) }
 }

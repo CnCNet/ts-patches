@@ -71,7 +71,6 @@ sstring str_UnittemPAL, "UNITTEM.PAL"
 sstring str_UnitdesPAL, "UNITDES.PAL"
 sstring str_DesertPAL, "DESERT.PAL"
 sstring str_TemperatPAL, "TEMPERAT.PAL"
-sstring str_wtf_align_bitch, "000"
 
 @SET 0x006CA930, {db "DESERT",0,0,0,0}
 @SET 0x006CA940, {db "INI\DES",0,0,0}
@@ -197,6 +196,7 @@ sstring str_wtf_align_bitch, "000"
 @NJNB 0x004557FF, 0x004559AE ;jnb loc_4559AE
 ;
 ;; Don't add random extra cash to the money crate value specified in Rules.ini
+@CLEAR 0x0045839D, 0x90, 0x004583A3
 @SET 0x0045839D, {lea edx, [eax]}
 ;
 ;; Units in Area Guard mode will revert to regular Guard mode when you press S
@@ -287,9 +287,8 @@ sstring str_wtf_align_bitch, "000"
 @CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
 
 ; Load sidebar MIX files for new sides properly
-@SET 0x005DD798, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
+@SET 0x005DD798, {mov cl, byte [0x007E2500]}
 @CLEAR 0x005DD79E, 0x90, 0x005DD7A2
-;@SET 0x005DD791, nop ; Crashes the game when starting a match
 
 ; Load speech MIX files for new sides properly
 @SET 0x005DD822, {xor ecx, ecx}
@@ -325,8 +324,7 @@ sstring str_wtf_align_bitch, "000"
 @SET 0x0065834E, {mov eax, 0}
 
 ; Auto-target units of houses with MultiplayerPassive=yes
-@CLEAR 0x0062D4B2, 0x90, 0x0062D4BA
-
+;; @CLEAR 0x0062D4B2, 0x90, 0x0062D4BA
 
 ;;@LJMP 0x00505A20, _Delete_Save_Game_Game_Folder_Format_String_Change
 hack 0x00505A20
@@ -344,7 +342,7 @@ _Delete_Save_Game_Game_Folder_Format_String_Change:
     popad
     mov     eax, SaveGameLoadPath
     push    eax
-    jmp     0x00505A25
+    jmp     hackend
 
 ;@LJMP 0x005D4FFD, _Save_Game_Save_Game_Folder_Format_String_Change1
 hack 0x005D4FFD
@@ -363,13 +361,13 @@ _Save_Game_Save_Game_Folder_Format_String_Change1:
 
     push    esi
     push    str_SaveGameLoadFolder
-    push    SaveGameLoadPathWide
+    push    SaveGameLoadPath
     call    _sprintf
     add     esp, 0x0c
 
     popad
 
-    mov     esi, SaveGameLoadPathWide
+    mov     esi, SaveGameLoadPath
     xor     edi, edi
     jmp     0x005D5003
 
@@ -378,22 +376,11 @@ _Save_Game_Save_Game_Folder_Format_String_Change1:
     xor     edi, edi
     jmp     0x005D5003
 
-;@LJMP 0x00504FFB, _LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change
-;; hack 0x00504FFB
-;; _LoadOptionsClass__Process_Save_Game_Folder_Format_String_Change:
-;;     push    str_SaveGameFolderFormat2
-;;     jmp     0x00505000
 @SET 0x00504FFB, {push str_SaveGameFolderFormat2}
 
-;;@JMP 0x0050528E, _sub505270_Save_Game_Folder_Format_String_Change
-;; hack 0x0050528E
-;; _sub505270_Save_Game_Folder_Format_String_Change:
-;;     push    str_SaveGameFolderFormat2
-;;     jmp     0x00505293
 @SET 0x0050528E, {push str_SaveGameFolderFormat2}
 
-;@LJMP 0x005D693C, _Load_Game_Save_Game_Folder_Format_String_Change1
-hack 0x005D693C
+hack 0x005D693C, 0x005D6942
 _Load_Game_Save_Game_Folder_Format_String_Change1:
     lea     eax, [esp+0x24]
 
@@ -409,22 +396,12 @@ _Load_Game_Save_Game_Folder_Format_String_Change1:
 
     mov     esi, SaveGameLoadPathWide
     push    0x40
-    jmp     0x005D6942
+    jmp     hackend
 
-;@LJMP 0x00505859, _sub_505840_Save_Game_Folder_Format_String_Change
-hack 0x00505859
-_sub_505840_Save_Game_Folder_Format_String_Change:
-    push    str_SaveGameFolderFormat
-    jmp     0x0050585E
+@SET 0x00505859, {push str_SaveGameFolderFormat}
 
-;@LJMP 0x00505503, _Get_SaveFile_Info_Save_Game_Folder_Format_String_Change
-hack 0x00505503
-_Get_SaveFile_Info_Save_Game_Folder_Format_String_Change:
-    push    str_SaveGameFolderFormat
-    jmp     0x00505508
+@SET 0x00505503, {push str_SaveGameFolderFormat}
 
-
-;@LJMP 0x005D7E96, _Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory
 hack 0x005D7E96
 _Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory:
     push    esi
@@ -433,13 +410,14 @@ _Read_SaveFile_Binary_Hack_Save_Games_Sub_Directory:
 
     push    ecx
     push    str_SaveGameLoadFolder
-    push    SaveGameLoadPathWide
-    call    [0x006CA464] ; WsSprintf
+    push    SaveGameLoadPath
+    call    _sprintf
     add     esp, 0x0c
 
     popad
 
-    mov     ecx, SaveGameLoadPathWide
+    mov     ecx, SaveGameLoadPath
+
 
     lea     eax, [esp+8]
     jmp     0x005D7E9B
