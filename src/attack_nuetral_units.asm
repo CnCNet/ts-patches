@@ -3,7 +3,7 @@
 %include "TiberianSun.inc"
 ;; @CLEAR 0x0062D4B2, 0x90, 0x0062D4BA
 
-gbool AttackNuetralUnits, 0
+gbool AttackNeutralUnits, 0
 
 hack 0x0062D4B2, 0x0062D4BA
         test    al, al
@@ -12,7 +12,7 @@ hack 0x0062D4B2, 0x0062D4BA
         jmp     hackend
 
 .test_weapon:
-        cmp     byte [AttackNuetralUnits], 1
+        cmp     byte [AttackNeutralUnits], 1
         jne     0x0062D8C0
 
         mov     eax, [esi]

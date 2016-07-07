@@ -21,7 +21,7 @@ cextern IsSpectatorArray
 cextern RunAutoSS
 cextern AimableSams
 cextern IntegrateMumbleSpawn
-cextern AttackNuetralUnits
+cextern AttackNeutralUnits
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -141,7 +141,7 @@ section .rdata
     str_TeamName        db "TeamName",0
     str_AimableSams     db "AimableSams",0
     str_IntegrateMumble db "IntegrateMumble",0
-    str_AttackNuetralUnits db "AttackNuetralUnits", 0
+    str_AttackNeutralUnits db "AttackNeutralUnits", 0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -902,8 +902,8 @@ Initialize_Spawn:
     SpawnINI_Get_Bool str_Settings, str_IntegrateMumble, 0
     mov byte [IntegrateMumbleSpawn], al
 
-    SpawnINI_Get_Bool str_Settings, str_AttackNuetralUnits,0
-    mov byte [AttackNuetralUnits], al
+    SpawnINI_Get_Bool str_Settings, str_AttackNeutralUnits,0
+    mov byte [AttackNeutralUnits], al
 
     ; tunnel ip
     lea eax, [TempBuf]
