@@ -87,6 +87,7 @@ else
                     src/override_colors.o
 endif
 ifdef DTA
+    NFLAGS += -D DTA -D NOFISH
     OBJS        +=  src/dta/dta_hacks.o \
                     src/dta/logger.o
 endif

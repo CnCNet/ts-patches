@@ -7,6 +7,7 @@ hack 0x00685E96
         cmp     byte [MouseAlwaysInFocus], 0
         je      .Reg
 
+        add     eax, 4
         jmp     0x00685F30
 
 .Reg:
