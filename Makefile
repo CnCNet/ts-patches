@@ -82,12 +82,11 @@ else
                     src/gamespeed.o \
                     src/mouse_behavior.o \
                     src/text_triggers.o \
-                    src/attack_nuetral_units.o \
-                    src/mouse_always_in_focus.o \
+                    src/attack_neutral_units.o \
                     src/override_colors.o
 endif
 ifdef DTA
-    NFLAGS += -D DTA -D NOFISH
+#    NFLAGS += -D DTA -D NOFISH
     OBJS        +=  src/dta/dta_hacks.o \
                     src/dta/logger.o
 endif
@@ -101,8 +100,9 @@ ifdef EXPERIMENTAL
     NFLAGS += -D EXPERIMENTAL
     CLFAGS += -D EXPERIMENTAL
     OBJS        +=  src/rulesclass__process_aud.o \
+                    src/mouse_always_in_focus.o
 #                    src/new_armor_types.o \
-                    src/new_armor_types_s.o
+                    src/new_armor_types_s.o \
 
 endif
 

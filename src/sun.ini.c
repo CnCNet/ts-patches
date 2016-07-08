@@ -38,6 +38,10 @@ void LoadSunIni()
     }
     DragDistance = SunIni_GetInt("Options", "DragDistance", 4);
     OnlyRightClickDeselect = SunIni_GetBool("Options", "OnlyRightClickDeselect", false);
+
+#ifdef EXPERIMENTAL
     MouseAlwaysInFocus =  SunIni_GetBool("Options", "MouseAlwaysInFocus", false);
+#endif
+
 #endif
 }
