@@ -44,7 +44,7 @@ extern TutorialStruct *Tutorials;
 extern size_t TutorialActiveCount;
 extern size_t TutorialMax;
 extern bool TutorialSorted;
-
+extern bool MouseAlwaysInFocus;
 // ### Functions ###
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);

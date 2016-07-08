@@ -83,6 +83,7 @@ else
                     src/mouse_behavior.o \
                     src/text_triggers.o \
                     src/attack_nuetral_units.o \
+                    src/mouse_always_in_focus.o \
                     src/override_colors.o
 endif
 ifdef DTA
