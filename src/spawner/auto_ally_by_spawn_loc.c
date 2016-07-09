@@ -53,7 +53,8 @@ ally_by_spawn_location(INIClass scenario) {
   char AllyEntry[128] = {0};
   WWDebug_Printf("Starting Auto Allier\n");
 
-  int id = INIClass__GetInt(INIClass_SPAWN, "Settings", "AllyBySpawnLocation",-1);
+  int def = INIClass__GetInt(scenario, "Basic", "AllyBySpawnDefault", -1);
+  int id = INIClass__GetInt(INIClass_SPAWN, "Settings", "AllyBySpawnLocation", def);
   if (id == -1) {
     WWDebug_Printf("AllyBySpawnLocation= not found in spawn.ini [Settings]\n");
     return;
