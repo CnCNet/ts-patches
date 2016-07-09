@@ -83,6 +83,7 @@ else
                     src/mouse_behavior.o \
                     src/text_triggers.o \
                     src/attack_neutral_units.o \
+                    src/mouse_always_in_focus.o \
                     src/override_colors.o
 endif
 ifdef DTA
@@ -99,8 +100,7 @@ endif
 ifdef EXPERIMENTAL
     NFLAGS += -D EXPERIMENTAL
     CLFAGS += -D EXPERIMENTAL
-    OBJS        +=  src/rulesclass__process_aud.o \
-                    src/mouse_always_in_focus.o
+    OBJS        +=  src/rulesclass__process_aud.o
 #                    src/new_armor_types.o \
                     src/new_armor_types_s.o \
 
