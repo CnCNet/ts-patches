@@ -84,6 +84,7 @@ else
                     src/text_triggers.o \
                     src/attack_neutral_units.o \
                     src/mouse_always_in_focus.o \
+                    src/delete_waypoint.o \
                     src/override_colors.o
 endif
 ifdef DTA
