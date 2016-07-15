@@ -90,7 +90,8 @@ endif
 ifdef DTA
 #    NFLAGS += -D DTA -D NOFISH
     OBJS        +=  src/dta/dta_hacks.o \
-                    src/dta/logger.o
+                    src/dta/logger.o \
+                    src/guard_mode_patch.o
 endif
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
