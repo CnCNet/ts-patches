@@ -102,7 +102,7 @@ endif
 ifdef EXPERIMENTAL
     NFLAGS += -D EXPERIMENTAL
     CLFAGS += -D EXPERIMENTAL
-    OBJS        +=  src/rulesclass__process_aud.o
+    OBJS        +=  src/easy_shroud.o
 #                    src/new_armor_types.o \
                     src/new_armor_types_s.o \
 

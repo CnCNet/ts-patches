@@ -67,11 +67,11 @@ int __thiscall ObjectClass__InAir(void *);
 void ApplyUserColorOverrides();
 void __stdcall Save_Scenario();
 
-int  __thiscall MapClass__GetCellFloorHeight(MouseClass **Map, xyzCoordStruct *);
-CellClass * __thiscall MapClass__Get_Target_Coord(MouseClass **Map, xyzCoordStruct *);
-bool __thiscall MapClass__Cell_Is_Shrouded(MouseClass **Map, xyzCoordStruct *);
-bool __thiscall is_coord_shrouded(MouseClass **Map, wCoordStruct *xy_coords);
-CellClass * __thiscall MapClass__Coord_Cell(MouseClass **Map, wCoordStruct *);
+int  __thiscall MapClass__GetCellFloorHeight(MouseClass *Map, xyzCoordStruct *);
+CellClass * __thiscall MapClass__Get_Target_Coord(MouseClass *Map, xyzCoordStruct *);
+bool __thiscall MapClass__Cell_Is_Shrouded(MouseClass *Map, xyzCoordStruct *);
+bool __thiscall is_coord_shrouded(MouseClass *Map, wCoordStruct *xy_coords);
+CellClass * __thiscall MapClass__Coord_Cell(MouseClass *Map, wCoordStruct *);
 void MapClass__Reveal_The_Map();
 void __thiscall MapClass__Fill_Map_With_Fog(MouseClass *this);
 void __fastcall Create_Units(char i);

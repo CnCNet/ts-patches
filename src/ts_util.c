@@ -12,7 +12,7 @@ LJMP(0x004082D0, _hook_wwdebug_printf);
    xyz cell coords.
 */
 bool __thiscall
-is_coord_shrouded(MouseClass **Map, wCoordStruct *xy_coords) {
+is_coord_shrouded(MouseClass *Map, wCoordStruct *xy_coords) {
   xyzCoordStruct xyz;
   xyz.x = (xy_coords->x << 8) + 128;
   xyz.y = (xy_coords->y << 8) + 128;
