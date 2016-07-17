@@ -85,6 +85,7 @@ else
                     src/attack_neutral_units.o \
                     src/mouse_always_in_focus.o \
                     src/delete_waypoint.o \
+                    src/easy_shroud.o \
                     src/override_colors.o
 endif
 ifdef DTA
@@ -102,9 +103,8 @@ endif
 ifdef EXPERIMENTAL
     NFLAGS += -D EXPERIMENTAL
     CLFAGS += -D EXPERIMENTAL
-    OBJS        +=  src/easy_shroud.o
-#                    src/new_armor_types.o \
-                    src/new_armor_types_s.o \
+#    OBJS        +=  src/new_armor_types.o \
+#                    src/new_armor_types_s.o \
 
 endif
 
