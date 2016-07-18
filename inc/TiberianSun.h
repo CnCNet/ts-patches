@@ -45,6 +45,8 @@ extern size_t TutorialActiveCount;
 extern size_t TutorialMax;
 extern bool TutorialSorted;
 extern bool MouseAlwaysInFocus;
+extern char *SearchDirs;
+
 // ### Functions ###
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);
@@ -103,6 +105,7 @@ extern INIClass INIClass_SPAWN;
 
 #define SunIni_GetBool(a,b,c) INIClass__GetBool(INIClass_SUN_INI,a,b,c)
 #define SunIni_GetInt(a,b,c) INIClass__GetInt(INIClass_SUN_INI,a,b,c)
+#define SunIni_GetString(a,b,c,d,e) INIClass__GetString(INIClass_SUN_INI,a,b,c,d,e);
 
 // ### Mumble ###
 extern wchar_t TeamName[128];

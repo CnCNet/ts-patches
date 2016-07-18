@@ -35,6 +35,7 @@ setcglob 0x0070D850, PlayerColorMap
 setcglob 0x007E4058, DynamicVectorClass_AircraftClass
 setcglob 0x007E4858, CurrentObjectsArray
 setcglob 0x007E4868, CurrentObjectsArray_Count
+setcglob 0x0076092C, SearchDirs
 
 ; INI
 setcglob 0x004E8A30, INIClass__INIClass

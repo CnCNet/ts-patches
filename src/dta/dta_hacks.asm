@@ -10,59 +10,59 @@ sstring str_SaveGameFolderFormat, "Saved Games\*.%3s"
 sstring str_SaveGameFolderFormat2, "Saved Games\SAVE%04lX.%3s"
 sstring str_SaveGamesFolder, "Saved Games"
 
-sstring str_EnhanceINI, "INI\ENHANCE.INI"
-sstring str_MainMIX, "MIX\MAIN.MIX"
-sstring str_SoundsMIX, "MIX\SOUNDS.MIX"
+sstring str_EnhanceINI, "ENHANCE.INI"
+sstring str_MainMIX, "MAIN.MIX"
+sstring str_SoundsMIX, "SOUNDS.MIX"
 sstring str_DTALong, "The Dawn of the Tiberium Age"
 sstring str_DTAGameWindow, "DTA (Game Window)"
 sstring str_LanguageDLLNotFound, "Language.dll not found, please reinstall The Dawn of the Tiberium Age."
 sstring str_SettingsINI, "Settings.ini"
-sstring str_SoundsINI, "INI\SOUNDS.INI"
-sstring str_ThemeINI, "INI\THEME.INI"
-sstring str_GMenuMIX, "MIX\GMENU.MIX"
-sstring str_RulesINI, "INI\RULES.INI"
-sstring str_ArtINI, "INI\ART.INI"
-sstring str_ArtEINI, "INI\ARTE.INI"
-sstring str_AIINI, "INI\AI.INI"
-sstring str_AIEINI, "INI\AIE.INI"
-sstring str_PatchMIX, "MIX\PATCH.MIX"
-sstring str_PCacheMIX, "MIX\PCACHE.MIX"
-sstring str_ExpandMIX, "MIX\EXPAND%02d.MIX"
-sstring str_ECacheMIX, "MIX\ECACHE%02d.MIX"
-sstring str_TibsunMIX, "MIX\TIBSUN.MIX"
-sstring str_CacheMIX, "MIX\CACHE.MIX"
-sstring str_LocalMIX, "MIX\LOCAL.MIX"
-sstring str_ConquerMIX, "MIX\CONQUER.MIX"
-sstring str_Sounds01MIX, "MIX\SOUNDS01.MIX"
-sstring str_ScoresMIX, "MIX\SCORES.MIX"
-sstring str_TutorialINI, "INI\TUTORIAL.INI"
-sstring str_Isodes, "MIX\ISODES"
-sstring str_IsodesMIX, "MIX\ISODES.MIX"
-sstring str_SideMIX, "MIX\SIDE%02d.MIX"
-sstring str_SideCDMIX, "MIX\SIDECD%02d.MIX"
+sstring str_SoundsINI, "SOUNDS.INI"
+sstring str_ThemeINI, "THEME.INI"
+sstring str_GMenuMIX, "GMENU.MIX"
+sstring str_RulesINI, "RULES.INI"
+sstring str_ArtINI, "ART.INI"
+sstring str_ArtEINI, "ARTE.INI"
+sstring str_AIINI, "AI.INI"
+sstring str_AIEINI, "AIE.INI"
+sstring str_PatchMIX, "PATCH.MIX"
+sstring str_PCacheMIX, "PCACHE.MIX"
+sstring str_ExpandMIX, "EXPAND%02d.MIX"
+sstring str_ECacheMIX, "ECACHE%02d.MIX"
+sstring str_TibsunMIX, "TIBSUN.MIX"
+sstring str_CacheMIX, "CACHE.MIX"
+sstring str_LocalMIX, "LOCAL.MIX"
+sstring str_ConquerMIX, "CONQUER.MIX"
+sstring str_Sounds01MIX, "SOUNDS01.MIX"
+sstring str_ScoresMIX, "SCORES.MIX"
+sstring str_TutorialINI, "TUTORIAL.INI"
+sstring str_Isodes, "ISODES"
+sstring str_IsodesMIX, "ISODES.MIX"
+sstring str_SideMIX, "SIDE%02d.MIX"
+sstring str_SideCDMIX, "SIDECD%02d.MIX"
 sstring str_Screenshots, "Screenshots\SCRN%04d.pcx"
-sstring str_MapselINI, "INI\MAPSEL.INI"
-sstring str_MapselINI2, "INI\MAPSEL%02d.INI"
-sstring str_MenuINI, "INI\MENU.INI"
+sstring str_MapselINI, "MAPSEL.INI"
+sstring str_MapselINI2, "MAPSEL%02d.INI"
+sstring str_MenuINI, "MENU.INI"
 sstring str_BriefingPCX, "BRIEFING.PCX"
-sstring str_MissionINI, "INI\MISSION.INI"
-sstring str_MissionINI2, "INI\MISSION%01d.INI"
-sstring str_Scores01MIX, "MIX\SCORES01.MIX"
-sstring str_BattleINI, "INI\BATTLE.INI"
-sstring str_BattleEINI, "INI\BATTLEE.INI"
-sstring str_SidencMIX, "MIX\SIDENC%02d.MIX"
+sstring str_MissionINI, "MISSION.INI"
+sstring str_MissionINI2, "MISSION%01d.INI"
+sstring str_Scores01MIX, "SCORES01.MIX"
+sstring str_BattleINI, "BATTLE.INI"
+sstring str_BattleEINI, "BATTLEE.INI"
+sstring str_SidencMIX, "SIDENC%02d.MIX"
 sstring str_SideMIXRoot, "SIDE%02dE.MIX"
-sstring str_SpeechMIX, "MIX\SPEECH%02d.MIX"
-sstring str_MPMapsINI, "INI\MPMAPS.INI"
-sstring str_MoviesMIX, "MIX\MOVIES.MIX"
+sstring str_SpeechMIX, "SPEECH%02d.MIX"
+sstring str_MPMapsINI, "MPMAPS.INI"
+sstring str_MoviesMIX, "MOVIES.MIX"
 sstring str_DTAAlreadyRunning, "DTA is already running!"
 sstring str_D1, "D1"
 sstring str_D2, "D2"
 sstring str_DTA, "DTA"
-sstring str_DesINI, "INI\DES"
-sstring str_IsotemMIX, "MIX\ISOTEM"
-sstring str_DesertMIX, "MIX\DESERT"
-sstring str_TemperatMIX, "MIX\TEMPERAT"
+sstring str_DesINI, "DES"
+sstring str_IsotemMIX, "ISOTEM"
+sstring str_DesertMIX, "DESERT"
+sstring str_TemperatMIX, "TEMPERAT"
 sstring str_Des, "DES"
 
 sstring str_IsotemPAL, "ISOTEM.PAL"
@@ -73,12 +73,12 @@ sstring str_DesertPAL, "DESERT.PAL"
 sstring str_TemperatPAL, "TEMPERAT.PAL"
 
 @SET 0x006CA930, {db "DESERT",0,0,0,0}
-@SET 0x006CA940, {db "INI\DES",0,0,0}
-@SET 0x006CA94A, {db "MIX\ISDES",0}
+@SET 0x006CA940, {db "DES",0,0,0}
+@SET 0x006CA94A, {db "ISODES",0}
 @SET 0x006CA954, {db "DES",0}
 @SET 0x006CA958, {db "TEMPERATE", 0,0,0,0}
-@SET 0x006CA968, {db "INI\TEM", 0,0,0}
-@SET 0x006CA972, {db "MIX\ISTEM", 0}
+@SET 0x006CA968, {db "TEM", 0,0,0}
+@SET 0x006CA972, {db "ISOTEM", 0}
 @SET 0x006CA97C, {db "TEM", 0}
 
 ; String references
@@ -189,9 +189,7 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 ; Set default tech level to 7
 @SET 0x006FB628, dd 7
 ;
-;; Addon_Available() hack
-@SET 0x004070CF, {mov bl, 1}
-;
+
 ;; Hack to make tiberium get affected by lighting (at the cost of remappability)
 @NJNB 0x004557FF, 0x004559AE ;jnb loc_4559AE
 ;

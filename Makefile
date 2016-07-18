@@ -86,6 +86,7 @@ else
                     src/mouse_always_in_focus.o \
                     src/delete_waypoint.o \
                     src/easy_shroud.o \
+                    src/new_search_dir.o \
                     src/override_colors.o
 endif
 ifdef DTA
