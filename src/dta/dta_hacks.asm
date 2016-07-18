@@ -254,7 +254,7 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x0065310D, {and ebx, 1Fh}
 
 ;; IsCoreDefender selection box size
-@SET 0x0065BD7E, {mov eax, 200h}
+@SET 0x0065BD7E, {mov edx, 200h}
 @SET 0x0065BD94, {mov dword [edi+8], 64h} ;dword ptr
 @SET 0x0065BD9B, nop
 @SET 0x0065BD9C, nop
