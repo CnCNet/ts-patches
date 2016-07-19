@@ -200,14 +200,6 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @CLEAR 0x0045839D, 0x90, 0x004583A3
 @SET 0x0045839D, {lea edx, [eax]}
 ;
-;; Units in Area Guard mode will revert to regular Guard mode when you press S
-@SJMP 0x00494AB5, 0x00494AE3 ; jmp short loc_494AE3
-
-; # Units in Guard mode will no longer chase after enemies that move out of firing range
-; 000A1AA8: 75 90
-; 000A1AA9: 2C 90
-; Already included in guard_mode_patch.asm?
-
 ; Disable check for MoviesXX.mix, forces function to return al=1
 @SET 0x004E45D8, {mov al, 1}
 @SET 0x004E45DA, nop
