@@ -8,10 +8,11 @@ cglobal INIClass_SPAWN
 cglobal SpawnLocationsArray
 cglobal SpawnLocationsHouses
 
+gbool IsHost, true
+
 cextern Load_Spectators_Spawner
 cextern PortHack
 cextern BuildOffAlly
-cextern IsHost
 cextern TunnelIp
 cextern TunnelPort
 cextern TunnelId

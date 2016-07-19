@@ -1,7 +1,7 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
-gbool IsHost, true
+cextern IsHost
 
 hack 0x004AA5D2, 0x004AA5DB ; only the host may change gamespeed
         cmp byte[0x7E4580], 1

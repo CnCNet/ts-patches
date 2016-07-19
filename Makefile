@@ -41,7 +41,6 @@ else
                     src/no-cd_iran.o \
                     src/in-game_message_background.o \
                     src/savegame.o \
-                    src/only_the_host_may_change_gamespeed.o \
                     src/trigger_actions_extended.o \
                     src/briefing_screen_mission_start.o \
                     src/briefing_restate_map_file.o \
@@ -91,9 +90,14 @@ else
 endif
 ifdef DTA
 #    NFLAGS += -D DTA -D NOFISH
-    OBJS        +=  src/dta/dta_hacks.o \
+    OBJS        += \
+                    src/dta/dta_hacks.o \
                     src/dta/logger.o \
                     src/guard_mode_patch.o
+else ifndef SINGLEPLAYER
+    OBJS        += \
+                    src/only_the_host_may_change_gamespeed.o
+                    
 endif
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
