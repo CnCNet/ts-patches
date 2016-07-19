@@ -387,8 +387,6 @@ _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
     jmp .Allocate
 
 .Normal_Code:
-    cmp dword [SessionType], 4
-    jnz .Dont_Allocate
     jmp .Allocate
 
 .Allocate:
