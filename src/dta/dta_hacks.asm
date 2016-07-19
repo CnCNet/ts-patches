@@ -190,6 +190,9 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x006FB628, dd 7
 ;
 
+;; Trackbar Border Color change
+@SET 0x0059138B, {db 0xA0, 0xA7, 0xA0}
+
 ;; Hack to make tiberium get affected by lighting (at the cost of remappability)
 @NJNB 0x004557FF, 0x004559AE ;jnb loc_4559AE
 ;
