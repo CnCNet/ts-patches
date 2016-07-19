@@ -63,6 +63,8 @@ setcglob 0x00449A40, FileClass__Open
 setcglob 0x00449A10, FileClass__Close
 setcglob 0x00449850, FileClass__Write
 setcglob 0x00561940, MonoClass__Printf
+setcglob 0x004497B0, CCFileClass__CCFileClass
+setcglob 0x004E8970, CCFileClass__Destroy
 
 ; Session
 setcglob 0x007E2458, SessionClass_this

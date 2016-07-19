@@ -61,6 +61,8 @@ cextern FileClass__Is_Available
 cextern FileClass__Open
 cextern FileClass__Close
 cextern FileClass__Write
+cextern CCFileClass__CCFileClass
+cextern CCFileClass__Destroy
 
 ; ### imports ###
 cextern sendto

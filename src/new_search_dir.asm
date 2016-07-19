@@ -30,3 +30,6 @@ hack 0x005ED005, 0x005ED00B
 
 ;; Addon_Available() hack
 @SET 0x004070CF, {mov bl, 1}
+
+@CALL 0x004E3EAE, CCFileClass__CCFileClass
+@CALL 0x004E3EC1, CCFileClass__Destroy
