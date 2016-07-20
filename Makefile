@@ -93,6 +93,8 @@ ifdef DTA
     OBJS        += \
                     src/dta/dta_hacks.o \
                     src/dta/logger.o \
+                    src/dta/horv_via_undeploysinto.o \
+                    src/dta/basic_theme_fix.o \
                     src/guard_mode_patch.o
 else ifndef SINGLEPLAYER
     OBJS        += \
