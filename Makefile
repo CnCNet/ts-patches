@@ -9,11 +9,13 @@ NFLAGS      = -f elf
 
 OBJS        = \
               src/hp03.o \
-              src/no-cd.o \
               src/loading.o \
+              src/savegame.o \
+              src/no-cd.o \
               src/single-proc-affinity.o \
               src/no_blowfish_dll.o \
-              src/def.o \
+              src/briefing_restate_map_file.o \
+              src/sym.o \
               rsrc.o
 
 PETOOL     ?= petool

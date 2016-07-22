@@ -1,6 +1,10 @@
-@JMP 0x005C0930 _Restate_Briefing_Jump_To_Map_Briefing_First
-@JMP 0x005C0AA4 _Restate_Briefing_Jump_To_Mission_INI_Briefing_Next
-@JMP 0x005C0975 _Restate_Briefing_Else_Jump_Over_Reading_Briefing_Text
+%include "src/patch.inc"
+
+extern FileClass__Is_Available
+
+@LJMP 0x005C0930, _Restate_Briefing_Jump_To_Map_Briefing_First
+@LJMP 0x005C0AA4, _Restate_Briefing_Jump_To_Mission_INI_Briefing_Next
+@LJMP 0x005C0975, _Restate_Briefing_Else_Jump_Over_Reading_Briefing_Text
 
 _Restate_Briefing_Else_Jump_Over_Reading_Briefing_Text:
     call    FileClass__Is_Available

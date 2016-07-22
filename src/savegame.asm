@@ -1,5 +1,14 @@
-@JMP 0x005D6B92 _Load_Game_Post_Load_Game_Hook
-@JMP 0x005D4FF5 _Save_Game_Pre_Save_Game_Hook
+%include "src/patch.inc"
+%include "src/def.asm"
+
+extern var.Anticheat1
+extern ScenarioStuff
+extern var.AntiCheatArray
+extern memcpy
+extern MouseClass_Map
+
+@LJMP 0x005D6B92, _Load_Game_Post_Load_Game_Hook
+@LJMP 0x005D4FF5, _Save_Game_Pre_Save_Game_Hook
 
 _Save_Game_Pre_Save_Game_Hook:
     mov byte bl, [0x007E2500]
