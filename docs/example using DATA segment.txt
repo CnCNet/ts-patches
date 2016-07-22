@@ -1,0 +1,13 @@
+; written by hifi
+
+[absolute 0xA69000]
+ 
+hp_data:
+    .var1 RESD 1
+    .var2 RESD 1
+    .var3 RESD 1
+    .global_buffer RESB 1024
+    .foobar RESW 1
+    .byte RESB 1
+ 
+[section .text]

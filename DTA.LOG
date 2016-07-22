@@ -1,0 +1,13 @@
+MillisecondTimerClass low = 0, high = 7266536
+WinsockInterface constructed
+WinsockInterface init.
+About to call WSAStartup
+Winsock initialised OK
+Winsock version is 1.1
+GetCDClass constructor
+CD drive found - C:
+CD drive found - D:
+Create AppMutex okay.
+Create AutoPlayMutex.
+Got AutoPlayMutex okay.
+MessageListClass::Init(Width: 632)
