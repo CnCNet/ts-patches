@@ -62,9 +62,15 @@ setcglob 0x004499C0, FileClass__Is_Available
 setcglob 0x00449A40, FileClass__Open
 setcglob 0x00449A10, FileClass__Close
 setcglob 0x00449850, FileClass__Write
+setcglob 0x004E8970, FileClass__dtor
+setcglob 0x00449970, FileClass__Size
+setcglob 0x00449880, FileClass__Read
 setcglob 0x00561940, MonoClass__Printf
 setcglob 0x004497B0, CCFileClass__CCFileClass
 setcglob 0x004E8970, CCFileClass__Destroy
+setcglob 0x00449880, CCFileClass__Read
+setcglob 0x004499C0, CCFileClass__Is_Available
+setcglob 0x00449970, CCFileClass__Size
 
 ; Session
 setcglob 0x007E2458, SessionClass_this
@@ -200,6 +206,8 @@ setcglob 0x006B51D7, operator_new
 setcglob 0x006B51CC, operator_delete
 setcglob 0x006B67B0, sscanf
 setcglob 0x006B5F65, atoi
+setcglob 0x006BCA26, calloc
+setcglob 0x006B67E4, free
 
 ; winapi
 setcglob 0x006B4D6C, sendto

@@ -9,6 +9,8 @@
 // This header will be split up as it becomes larger
 
 typedef char INIClass[128];
+typedef char FileClass[128];
+typedef char CCFileClass[0x64];
 extern bool DisableEdgeScrolling;
 extern bool OverrideColors;
 extern int TextBackgroundColor;
@@ -48,6 +50,18 @@ extern bool MouseAlwaysInFocus;
 extern char *SearchDirs;
 
 // ### Functions ###
+
+void __thiscall FileClass__FileClass(FileClass fileClass, char *fileName);
+bool __thiscall FileClass__Is_Available(FileClass fileClass, bool forced);
+int __thiscall FileClass__Size(FileClass fileClass);
+int __thiscall FileClass__Read(FileClass fileClass, void *buf, size_t len);
+void __thiscall FileClass__dtor(FileClass fileClass);
+
+void   __thiscall CCFileClass__CCFileClass(CCFileClass ccfile, char *name);
+bool   __thiscall CCFileClass__Is_Available(CCFileClass ccfile, bool force);
+size_t __thiscall CCFileClass__Size(CCFileClass ccfile);
+size_t __thiscall CCFileClass__Read(CCFileClass ccfile, void *buf, size_t len);
+void   __thiscall CCFileClass__Destroy(CCFileClass ccfile);
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);
 int  __thiscall INIClass__GetInt(INIClass iniClass, char *section, char *key, int defaultValue);

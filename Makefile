@@ -99,13 +99,14 @@ ifdef DTA
 else ifndef SINGLEPLAYER
     OBJS        += \
                     src/only_the_host_may_change_gamespeed.o
-                    
+
 endif
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
     CFLAGS += -D WWDEBUG
     OBJS        +=  src/debugging_help.o
 endif
+
 
 ifdef EXPERIMENTAL
     NFLAGS += -D EXPERIMENTAL
@@ -114,6 +115,12 @@ ifdef EXPERIMENTAL
 #                    src/new_armor_types_s.o \
 
 endif
+
+ifdef CUSTOM
+    -include custom.mk
+     OBJS = $(CUSTOM_OBJS)
+endif
+
 
 PETOOL     ?= petool
 STRIP      ?= strip
@@ -124,7 +131,7 @@ all: $(OUTPUT)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
-  
+
 %.o: %.rc
 	$(WINDRES) $(WINDRES_FLAGS) $< $@
 
@@ -138,4 +145,4 @@ endif
 	$(PETOOL) dump $@
 
 clean:
-	$(RM) $(OUTPUT) $(OBJS)
+	$(RM) $(OUTPUT) $(OBJS) $(CUSTOM_OBJS)
