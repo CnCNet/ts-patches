@@ -48,6 +48,8 @@ extern size_t TutorialMax;
 extern bool TutorialSorted;
 extern bool MouseAlwaysInFocus;
 extern char *SearchDirs;
+extern uint32_t WOLGameID;
+extern int32_t SessionType;
 
 // ### Functions ###
 
