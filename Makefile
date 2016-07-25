@@ -8,9 +8,9 @@ LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=win
 NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/
 CPPFLAGS    = -Iinc/
-REV         = $(shell git describe --tag)
-VERSION     = "CnC-Patch $(REV) (based off WW SOFT_VERSION)"
-WINDRES_FLAGS = --preprocessor-arg -DVERSION=$(VERSION)
+REV         = $(shell git rev-parse --short @{0})
+VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
+WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"
 
 OBJS        = \
               src/tiberium_on_slope_crash.o \
@@ -117,7 +117,7 @@ ifdef EXPERIMENTAL
 endif
 
 ifdef CUSTOM
-    -include custom.mk
+     include custom.mk
      OBJS = $(CUSTOM_OBJS)
 endif
 
