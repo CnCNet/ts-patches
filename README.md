@@ -22,6 +22,6 @@ Building on *nix
 
 Building on Windows
 -------------------
- - install winbuilds, the latest winbuilds has a bug so use hifi.iki.fi/win-builds-for-patching.zip
+ - install winbuilds, the latest winbuilds includes a bug in ld so use http://hifi.iki.fi/win-builds-for-patching.zip
  - install git command line for Windows (optional)
  - run build.cmd
