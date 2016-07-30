@@ -10,14 +10,14 @@ SECTIONS
     /DISCARD/                  : { Game.exe(.rsrc); }
 
     .idata       ALIGN(0x1000) : { *(.idata); }
+    .eh_frame    ALIGN(0x1000) : { *(.eh_frame); }
 
-    /DISCARD/                  : { *(.drectve); }
+    /DISCARD/                  : { *(.drectve); *(.rdata$zzz); }
     .p_text      ALIGN(0x1000) : { *(.text); }
     .p_rdata     ALIGN(0x1000) : { *(.rdata); }
     .p_data      ALIGN(0x1000) : { *(.data); }
     .p_bss       ALIGN(0x1000) : { *(.bss) *(COMMON); }
     .rsrc        ALIGN(0x1000) : { *(.rsrc); }
 
-    .patch       ALIGN(0x1000) : { *(.patch) }
-    .eh_frame    ALIGN(0x1000) : { *(.eh_frame) }
+    .patch       ALIGN(0x1000) : { *(.patch); }
 }
