@@ -1,5 +1,4 @@
 -include config.mk
--include custom.mk
 
 INPUT       = Game.exe
 LDS         = tibsun.lds
@@ -106,6 +105,8 @@ PETOOL     ?= petool
 STRIP      ?= strip
 NASM       ?= nasm
 WINDRES    ?= windres
+
+-include custom.mk
 
 all: tibsun.exe dta.exe singleplayer.exe
 
