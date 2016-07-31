@@ -1,7 +1,7 @@
 -include config.mk
+-include custom.mk
 
 INPUT       = Game.exe
-OUTPUT      = tibsun.exe
 LDS         = tibsun.lds
 IMPORTS     = 0x2EC050 280
 LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=windows --enable-stdcall-fixup
@@ -12,7 +12,7 @@ REV         = $(shell git rev-parse --short @{0})
 VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
 WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"
 
-OBJS        = \
+COMMON_OBJS = \
               src/tiberium_on_slope_crash.o \
               src/no_movie_and_score_mix_dependency.o \
               src/IonBlastClass_crash.o \
@@ -22,7 +22,6 @@ OBJS        = \
               src/high_res_crash.o \
               src/disable_max_windowed_mode.o \
               src/disable_dpi_scaling.o \
-              src/sun.ini.o \
               src/remove_16bit_windowed_check.o \
               src/hp03.o \
               src/fix_mouse_not_found_error.o \
@@ -32,12 +31,10 @@ OBJS        = \
               res/res.o \
               sym.o
 
-ifdef SINGLEPLAYER
-    CFLAGS      += -D SINGLEPLAYER
-    OBJS        += \
-                    src/no-cd_tfd.o
-else
-    OBJS        += \
+SP_OBJS = src/no-cd_tfd.o src/sun.ini.sp.o
+
+MP_OBJS          = \
+                    src/sun.ini.o \
                     src/no-cd_iran.o \
                     src/in-game_message_background.o \
                     src/savegame.o \
@@ -86,25 +83,13 @@ else
                     src/delete_waypoint.o \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
+                    src/only_the_host_may_change_gamespeed.o \
                     src/override_colors.o
-endif
-ifdef DTA
-#    NFLAGS += -D DTA -D NOFISH
-    OBJS        += \
-                    src/dta/dta_hacks.o \
-                    src/dta/logger.o \
-                    src/dta/horv_via_undeploysinto.o \
-                    src/dta/basic_theme_fix.o \
-                    src/guard_mode_patch.o
-else ifndef SINGLEPLAYER
-    OBJS        += \
-                    src/only_the_host_may_change_gamespeed.o
 
-endif
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
     CFLAGS += -D WWDEBUG
-    OBJS        +=  src/debugging_help.o
+    MP_OBJS        +=  src/debugging_help.o
 endif
 
 
@@ -116,18 +101,17 @@ ifdef EXPERIMENTAL
 
 endif
 
-ifdef CUSTOM
-     include custom.mk
-     OBJS = $(CUSTOM_OBJS)
-endif
-
 
 PETOOL     ?= petool
 STRIP      ?= strip
 NASM       ?= nasm
 WINDRES    ?= windres
 
-all: $(OUTPUT)
+all: tibsun.exe dta.exe singleplayer.exe
+
+clean:
+	$(RM) $(OUTPUT) $(COMMON_OBJS)
+	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
@@ -135,14 +119,29 @@ all: $(OUTPUT)
 %.o: %.rc
 	$(WINDRES) $(WINDRES_FLAGS) $< $@
 
-$(OUTPUT): $(LDS) $(INPUT) $(OBJS)
-	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(OBJS)
-ifneq (,$(IMPORTS))
+src/sun.ini.sp.o: src/sun.ini.c
+	$(CC) $(CFLAGS) -DSINGLEPLAYER=1 -c -o $@ $<
+
+tibsun.exe: $(LDS) $(INPUT) $(COMMON_OBJS) $(MP_OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(COMMON_OBJS) $(MP_OBJS)
 	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
-endif
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
 
-clean:
-	$(RM) $(OUTPUT) $(OBJS) $(CUSTOM_OBJS)
+singleplayer.exe: $(LDS) $(INPUT) $(COMMON_OBJS) $(SP_OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(COMMON_OBJS) $(SP_OBJS)
+	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
+	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
+	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
+	$(PETOOL) dump $@
+
+
+include src/dta/dta.mk
+
+dta.exe: $(LDS) $(INPUT) $(DTA_OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(DTA_OBJS)
+	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
+	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
+	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
+	$(PETOOL) dump $@

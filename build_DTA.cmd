@@ -3,6 +3,5 @@ REM
 REM cnc-patch environment config
 REM
 set PATH=C:\win-builds-patch-32\bin
-gmake clean
-gmake DTA=1
+gmake clean dta.exe
 pause
