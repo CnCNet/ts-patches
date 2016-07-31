@@ -138,6 +138,8 @@ singleplayer.exe: $(LDS) $(INPUT) $(COMMON_OBJS) $(SP_OBJS)
 
 
 include src/dta/dta.mk
+src/dta/res/res.o: src/dta/res/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Isrc/dta/res/ -Ires/  $< $@
 
 dta.exe: $(LDS) $(INPUT) $(DTA_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(DTA_OBJS)
