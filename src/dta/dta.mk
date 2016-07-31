@@ -1,4 +1,4 @@
-WINDRES_FLAGS += -Ires/
+WINDRES_FLAGS += -Isrc/dta/res/ -Ires/
 
 DTA_OBJS = \
                     src/dta/res/res.o \
