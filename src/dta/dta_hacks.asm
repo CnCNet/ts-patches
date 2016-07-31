@@ -11,48 +11,25 @@ sstring str_SaveGameFolderFormat2, "Saved Games\SAVE%04lX.%3s"
 sstring str_SaveGamesFolder, "Saved Games"
 
 sstring str_EnhanceINI, "ENHANCE.INI"
-sstring str_MainMIX, "MAIN.MIX"
 sstring str_SoundsMIX, "SOUNDS.MIX"
 sstring str_DTALong, "Dawn of the Tiberium Age"
 sstring str_DTAGameWindow, "DTA (Game Window)"
 sstring str_LanguageDLLNotFound, "Language.dll not found, please start DTA.exe and click Save in the Options menu."
 sstring str_SettingsINI, "Settings.ini"
 sstring str_SoundsINI, "SOUNDS.INI"
-sstring str_ThemeINI, "THEME.INI"
-sstring str_GMenuMIX, "GMENU.MIX"
-sstring str_RulesINI, "RULES.INI"
-sstring str_ArtINI, "ART.INI"
 sstring str_ArtEINI, "ARTE.INI"
-sstring str_AIINI, "AI.INI"
 sstring str_AIEINI, "AIE.INI"
-sstring str_PatchMIX, "PATCH.MIX"
-sstring str_PCacheMIX, "PCACHE.MIX"
-sstring str_ExpandMIX, "EXPAND%02d.MIX"
-sstring str_ECacheMIX, "ECACHE%02d.MIX"
-sstring str_TibsunMIX, "TIBSUN.MIX"
 sstring str_CacheMIX, "CACHE.MIX"
-sstring str_LocalMIX, "LOCAL.MIX"
-sstring str_ConquerMIX, "CONQUER.MIX"
 sstring str_Sounds01MIX, "SOUNDS01.MIX"
-sstring str_ScoresMIX, "SCORES.MIX"
-sstring str_TutorialINI, "TUTORIAL.INI"
 sstring str_Isodes, "ISODES"
 sstring str_IsodesMIX, "ISODES.MIX"
 sstring str_SideMIX, "SIDE%02d.MIX"
-sstring str_SideCDMIX, "SIDECD%02d.MIX"
 sstring str_Screenshots, "Screenshots\SCRN%04d.pcx"
-sstring str_MapselINI, "MAPSEL.INI"
-sstring str_MapselINI2, "MAPSEL%02d.INI"
 sstring str_MenuINI, "MENU.INI"
 sstring str_BriefingPCX, "BRIEFING.PCX"
-sstring str_MissionINI, "MISSION.INI"
-sstring str_MissionINI2, "MISSION%01d.INI"
-sstring str_Scores01MIX, "SCORES01.MIX"
-sstring str_BattleINI, "BATTLE.INI"
 sstring str_BattleEINI, "BATTLEE.INI"
 sstring str_SidencMIX, "SIDENC%02d.MIX"
 sstring str_SideMIXRoot, "SIDE%02dE.MIX"
-sstring str_SpeechMIX, "SPEECH%02d.MIX"
 sstring str_MPMapsINI, "MPMAPS.INI"
 sstring str_MoviesMIX, "MOVIES.MIX"
 sstring str_DTAAlreadyRunning, "DTA is already running!"
@@ -83,61 +60,27 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 
 ; String references
 @SET 0x00407081, push str_EnhanceINI ; push offset str_EnhanceINI?
-;@SET 0x0044EAF5, push str_MainMIX
-;@SET 0x0044EBF3, push str_SoundsMIX
+@SET 0x0044EBF3, push str_SoundsMIX
 @SET 0x00472567, push str_DTALong
 @SET 0x0047256C, push str_LanguageDLLNotFound
 @SET 0x004E0605, push str_SettingsINI
 @SET 0x004E0912, push str_SoundsINI
 @SET 0x004E0919, push str_SoundsINI
-;@SET 0x004E09DC, push str_ThemeINI
-;@SET 0x004E0A97, push str_GMenuMIX
-;@SET 0x004E0F33, push str_RulesINI
-;@SET 0x004E1048, push str_RulesINI
-;@SET 0x004E111B, push str_ArtINI
 @SET 0x004E1196, push str_ArtEINI
 @SET 0x004E11E6, push str_EnhanceINI
-;@SET 0x004E1513, push str_AIINI
 @SET 0x004E1547, push str_AIEINI
-;@SET 0x004E3D3E, push str_PatchMIX
-;@SET 0x004E3D7C, push str_PatchMIX
-;@SET 0x004E3DE7, push str_PatchMIX
-;@SET 0x004E3DF9, push str_PCacheMIX
-;@SET 0x004E3E4E, push str_PCacheMIX
-;@SET 0x004E3E71, push str_PCacheMIX
-;@SET 0x004E3E97, push str_ExpandMIX
-;@SET 0x004E3F81, push str_ECacheMIX
-;@SET 0x004E402B, push str_TibsunMIX
-;@SET 0x004E4078, push str_CacheMIX
-;@SET 0x004E40BA, push str_LocalMIX
-;@SET 0x004E40FB, push str_LocalMIX
-;@SET 0x004E412A, push str_ConquerMIX
-;@SET 0x004E4187, push str_ConquerMIX
+@SET 0x004E4078, push str_CacheMIX
 @SET 0x004E430F, push str_SoundsMIX ; Sounds01.MIX?
 @SET 0x004E4360, push str_SoundsMIX ; Sounds01.MIX?
 @SET 0x004E439C, push str_SoundsMIX
 @SET 0x004E43ED, push str_SoundsMIX
-;@SET 0x004E4429, push str_ScoresMIX
-;@SET 0x004E447A, push str_ScoresMIX
-;@SET 0x004E467E, push str_TutorialINI
 @SET 0x004E80D8, push str_SideMIX
-;@SET 0x004E8377, push str_SideCDMIX
-;@SET 0x004E8391, push str_SideCDMIX
 @SET 0x004EAC41, push str_Screenshots
-;@SET 0x0056E226, push str_MapselINI2
-;@SET 0x0056E23E, push str_MapselINI
-;@SET 0x0057FBEB, push str_GMenuMIX
-;@SET 0x0057FC52, push str_GMenuMIX
 @SET 0x005801BB, push str_MenuINI
 @SET 0x0058A146, push str_SettingsINI
 @SET 0x005C04AF, {mov ecx, str_BriefingPCX}
-;@SET 0x005C094A, push str_MissionINI2
-;@SET 0x005C0962, push str_MissionINI
-;@SET 0x005C6447, push str_ArtINI
 @SET 0x005C649C, push str_ArtEINI
 @SET 0x005D1B26, push str_ArtEINI
-;@SET 0x005DDCEB, push str_MissionINI2
-;@SET 0x005D1C25, push str_ArtINI
 @SET 0x005D6D45, push str_ArtEINI
 @SET 0x005ED7F3, push str_SettingsINI
 @SET 0x005EE47B, push str_SettingsINI
@@ -153,14 +96,7 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x005EEB82, push str_MPMapsINI
 @SET 0x0044ECC5, push str_MoviesMIX
 @SET 0x004E4543, push str_MoviesMIX
-;@SET 0x004E862B, push str_SpeechMIX
-;@SET 0x004E0CD4, push str_BattleINI
-;@SET 0x004E0D53, push str_BattleINI
 @SET 0x004E0DD8, push str_BattleEINI
-;@SET 0x0044EB2B, push str_Scores01MIX
-;@SET 0x0044EC94, push str_Scores01MIX
-;@SET 0x004E44B6, push str_Scores01MIX
-;@SET 0x004E4507, push str_Scores01MIX
 @SET 0x006861ED, {mov dword [esp+48h], str_DTALong} ; dword ptr
 @SET 0x00686215, push str_DTALong
 @SET 0x0068621A, push str_DTALong
