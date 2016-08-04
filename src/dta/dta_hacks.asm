@@ -248,7 +248,7 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x004EC962, nop
 @SET 0x004ECC80, {mov eax, 0}
 @SET 0x004F96D6, {mov eax, 0}
-@SET 0x004F9771, {mov eax, 0}
+@SET 0x004F976E, {mov eax, 0}
 @SET 0x0062FA96, {mov eax, 0} ; Remove IonSensitive effect
 @SET 0x0065834E, {mov eax, 0}
 
