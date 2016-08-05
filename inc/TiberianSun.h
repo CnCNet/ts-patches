@@ -50,6 +50,7 @@ extern bool MouseAlwaysInFocus;
 extern char *SearchDirs;
 extern uint32_t WOLGameID;
 extern int32_t SessionType;
+extern bool OutOfSync;
 
 // ### Functions ###
 
@@ -92,6 +93,8 @@ bool __thiscall is_coord_shrouded(MouseClass *Map, wCoordStruct *xy_coords);
 CellClass * __thiscall MapClass__Coord_Cell(MouseClass *Map, wCoordStruct *);
 void MapClass__Reveal_The_Map();
 void __thiscall MapClass__Fill_Map_With_Fog(MouseClass *this);
+void __thiscall GScreenClass__Input(MouseClass *Map, int, int, int);
+
 void __fastcall Create_Units(char i);
 void __cdecl hook_wwdebug_printf(char const *fmt, ...);
 int __thiscall DynamicVectorClass__CommandClass__Add(void *v, CommandClass **c);

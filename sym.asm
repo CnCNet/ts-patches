@@ -108,10 +108,12 @@ setcglob 0x007E2284, PlayerPtr
 setcglob 0x00572FE0, MessageListClass__Add_Message
 setcglob 0x006B2330, Get_Message_Delay_Or_Duration
 setcglob 0x007E24E4, Message_Input_Player_Dead
+setcglob 0x005098D0, Message_Input
 setcglob 0x005739E0, MessageListClass__Manage
 setcglob 0x007E36A4, MessageToIPaddr
 setcglob 0x007E36A8, MessageToPort
 setcglob 0x007E36AC, MessageToAFI
+
 
 ; Network
 setcglob 0x0070FCF0, ListenPort
@@ -133,7 +135,7 @@ setcglob 0x007E2510, FrameSendRate
 setcglob 0x007E3FA8, LatencyFudge
 setcglob 0x007E2514, RequestedFPS
 setcglob 0x007E2464, ProtocolVersion
-
+setcglob 0x007E289A, OutOfSync
 setcglob 0x00574F90, Init_Network
 setcglob 0x007E3EA0, NameNodes_CurrentSize
 setcglob 0x007E2508, HumanPlayers
@@ -168,6 +170,7 @@ setcglob 0x0050F280, MapClass__Coord_Cell
 setcglob 0x0051E0A0, MapClass__Reveal_The_Map
 setcglob 0x0052BBE0, MapClass__Fill_Map_With_Fog
 setcglob 0x007B3304, dword_7B3304
+setcglob 0x004B9470, GScreenClass__Input
 
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent
@@ -241,6 +244,7 @@ setcglob 0x006CA1E0, _imp__AllocConsole
 setcglob 0x006CA19C, _imp__CloseHandle
 setcglob 0x006CA1A0, _imp__MultiByteToWideChar
 setcglob 0x006CA170, _imp__GetModuleHandleA
+setcglob 0x006CA200, _imp__GetModuleFileNameA
 setcglob 0x006CA39C, _imp__GetAsyncKeyState
 setcglob 0x006CA3BC, _imp__SetWindowPos
 setcglob 0x006CA3BC, SetWindowPos
