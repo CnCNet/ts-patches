@@ -6,6 +6,7 @@
 
 #ifdef WWDEBUG
 LJMP(0x004082D0, _hook_wwdebug_printf);
+LJMP(0x004735C0, _hook_wwdebug_printf);
 #endif
 
 /* To call Cell_Is_Shrouded, we need to convert the xy mouse coords to
