@@ -76,6 +76,7 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x004E439C, push str_SoundsMIX
 @SET 0x004E43ED, push str_SoundsMIX
 @SET 0x004E80D8, push str_SideMIX
+@SET 0x004E838C, push esi
 @SET 0x004E8391, push str_SideCDMIX	; Search for SideCD##.mix instead of E01SC##.mix
 @SET 0x004EAC41, push str_Screenshots
 @SET 0x005801BB, push str_MenuINI
