@@ -6,7 +6,6 @@ IMPORTS     = 0x2EC050 280
 LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=windows --enable-stdcall-fixup
 NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/
-CPPFLAGS    = -Iinc/
 REV         = $(shell git rev-parse --short @{0})
 VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
 WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"

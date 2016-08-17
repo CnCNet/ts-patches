@@ -108,7 +108,15 @@ void __stdcall HookInitCommands();
 void ParseIntLL(char *entry_string, int_ll **head);
 void *__cdecl operator_new(size_t size);
 void __cdecl operator_delete(void *memory);
-size_t WWDebug_Printf(const char *, ...);
+
+
+#ifndef WWDEBUG
+#define WWDebug_Printf(format, ...)
+#else
+void WWDebug_Printf(char *fmt, ...);
+#endif
+
+
 int32_t __thiscall Random2Class__operator(void *self, int32_t a2, int32_t a3);
 int32_t _sprintf(char *dest, char *format, ...);
 size_t __strcmpi(const char *, const char *);
