@@ -44,8 +44,8 @@ MP_OBJS          = \
                     src/reinforcements_player_specific.o \
                     src/internet_cncnet.o \
                     src/tiberium_stuff.o \
-                    src/short_connection_timeout.o \
                     src/no_options_menu_animation.o \
+                    src/short_connection_timeout.o \
                     src/spawner/spawner.o \
                     src/spawner/nethack.o \
                     src/spawner/selectable_spawns.o \
