@@ -72,5 +72,6 @@ DTA_OBJS = \
                     src/dta/horv_via_undeploysinto.o \
                     src/dta/basic_theme_fix.o \
                     src/dta/no_sidecd_mix.o \
+                    src/dta/ingame_ui_text_color.o \
                     src/load_more_movies.o \
                     src/guard_mode_patch.o
