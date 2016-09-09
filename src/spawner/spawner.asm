@@ -23,6 +23,7 @@ cextern RunAutoSS
 cextern AimableSams
 cextern IntegrateMumbleSpawn
 cextern AttackNeutralUnits
+cextern ScrapMetal
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -143,7 +144,8 @@ section .rdata
     str_AimableSams     db "AimableSams",0
     str_IntegrateMumble db "IntegrateMumble",0
     str_AttackNeutralUnits db "AttackNeutralUnits", 0
-
+    str_ScrapMetal      db "ScrapMetal",0
+    
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
 
@@ -903,7 +905,10 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_AttackNeutralUnits,0
     mov byte [AttackNeutralUnits], al
-
+    
+    SpawnINI_Get_Bool str_Settings, str_ScrapMetal,0
+    mov byte [ScrapMetal], al
+    
     ; tunnel ip
     lea eax, [TempBuf]
     SpawnINI_Get_String str_Tunnel, str_Ip, str_Empty, eax, 32
