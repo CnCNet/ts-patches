@@ -60,6 +60,7 @@ int __thiscall FileClass__Size(FileClass fileClass);
 int __thiscall FileClass__Read(FileClass fileClass, void *buf, size_t len);
 void __thiscall FileClass__dtor(FileClass fileClass);
 int __thiscall FileClass__Write(FileClass fileClass, void *buf, size_t len);
+bool __thiscall FileClass__Open(FileClass fileClass, int mode);
 
 void   __thiscall CCFileClass__CCFileClass(CCFileClass ccfile, char *name);
 bool   __thiscall CCFileClass__Is_Available(CCFileClass ccfile, bool force);

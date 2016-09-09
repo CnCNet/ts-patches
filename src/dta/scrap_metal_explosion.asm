@@ -6,9 +6,7 @@ gbool ScrapMetal, false
 
 sstring str_ScrapExplosion, "ScrapExplosion"
 
-@LJMP 0x0063C4E1, UseScrapMetalExplosion
-
-UseScrapMetalExplosion:
+hack 0x0063C4E1 ; UseScrapMetalExplosion
     cmp byte[ScrapMetal], 1
     jnz .out
     push str_ScrapExplosion
