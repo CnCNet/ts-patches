@@ -74,4 +74,6 @@ DTA_OBJS = \
                     src/dta/no_sidecd_mix.o \
                     src/dta/ingame_ui_text_color.o \
                     src/load_more_movies.o \
-                    src/guard_mode_patch.o
+                    src/guard_mode_patch.o \
+					src/dta/scrap_metal_explosion.o \
+					src/minimap_crash.o

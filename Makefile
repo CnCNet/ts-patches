@@ -82,7 +82,9 @@ MP_OBJS          = \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
                     src/only_the_host_may_change_gamespeed.o \
-                    src/override_colors.o
+                    src/override_colors.o \
+					src/dta/scrap_metal_explosion.o \
+					src/minimap_crash.o
 
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
