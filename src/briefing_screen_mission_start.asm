@@ -2,6 +2,13 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+cglobal PlayerSide
+
+section .bss
+    PlayerSide RESD 1
+    
+section .text
+
 @LJMP 0x005DB49C, _Start_Scenario_Force_Briefing_Screen
 
 _Start_Scenario_Force_Briefing_Screen:
@@ -16,7 +23,7 @@ _Start_Scenario_Force_Briefing_Screen:
     MOV DWORD [0x809218],1
     MOV DWORD [0x809250],0x28
     MOV DWORD [0x808B6C],0x7F
-    MOV DWORD [0x808B7C],0x23D05E         ;  UNICODE "ON EFFICIENCY"
+    ;MOV DWORD [0x808B7C],0x23D05E         ;  UNICODE "ON EFFICIENCY"
     MOV DWORD [0x808B68],0x109010
     MOV DWORD [0x809248],0x00909090
     MOV DWORD [0x809244],0x00A0A7A0
@@ -24,8 +31,37 @@ _Start_Scenario_Force_Briefing_Screen:
     MOV DWORD [0x8093A4],0x221B0B
     MOV DWORD [0x808E30],0x00443716
 
+    cmp dword [PlayerSide], 0
+    jz .Default_Color
+    
+    cmp dword [PlayerSide], 1
+    jz .Default_Color
+    
+    cmp dword [PlayerSide], 2
+    jz .Allied_Color
+    
+    cmp dword [PlayerSide], 3
+    jz .Soviet_Color
+    
+.Default_Color:
+ 
+    ; For GDI and Nod (sides 0 and 1) we'll use the vanilla TS color
+    mov dword [0x00808B7C], 0FF70h
+    jmp .out
+    
+.Allied_Color:
+   
+    ; For Allies, we use 76,163,255, also known as 0FFA349h
+    mov dword [0x00808B7C], 0FFA349h
+    jmp .out
+   
+.Soviet_Color:
 
+    ; For Soviet, we use 255,0,0
+    mov dword [0x00808B7C], 0FFh
 
+.out:
+    
 MOV ESI,0x0FF
 MOV word [0x8093B4],SI
 CALL 0x0048C0F0

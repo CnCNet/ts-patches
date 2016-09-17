@@ -5,17 +5,16 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-section .bss
-    PlayerSide RESD 1
+cextern PlayerSide
 
 section .text
 
 hack 0x004E7EC2 ; Store_Side:
-   ; Read the side when the game calls prepares mixfiles for the side
+   ; Read and store the side index when the game prepares mixfiles for the side
    mov dword [PlayerSide], ecx
    call 0x004082D0 ; logging function, log the "Preparing Mixfiles for Side %02d" line
-                 ; that we're skipping by replacing the call instruction at
-                 ; 0x004E7EC2 with jmp
+                   ; that we're skipping by replacing the call instruction at
+                   ; 0x004E7EC2 with jmp
    jmp 0x004E7EC7 ; original code after logging function call
 
 hack 0x00591367 ; Set_Color:
