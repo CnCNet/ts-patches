@@ -5,22 +5,20 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-@LJMP 0x00591367, Set_Color
-@LJMP 0x005DD7A2, Store_Side
-
 section .bss
     PlayerSide RESD 1
 
 section .text
 
-Store_Side:
-   ; Read the side when the game calls Prep_For_Side 
-   ; and store the side index in a variable
+hack 0x004E7EC2 ; Store_Side:
+   ; Read the side when the game calls prepares mixfiles for the side
    mov dword [PlayerSide], ecx
-   call 0x004E7EB0 ; Prep_For_Side()
-   jmp 0x005DD7A7 ; original code after Prep_For_Side call
+   call 0x004082D0 ; logging function, log the "Preparing Mixfiles for Side %02d" line
+                 ; that we're skipping by replacing the call instruction at
+                 ; 0x004E7EC2 with jmp
+   jmp 0x004E7EC7 ; original code after logging function call
 
-Set_Color:
+hack 0x00591367 ; Set_Color:
    pushad
    
    cmp dword [PlayerSide], 0
