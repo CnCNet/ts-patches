@@ -22,13 +22,12 @@ DTA_OBJS = \
                     src/in-game_message_background.o \
                     src/savegame.o \
                     src/trigger_actions_extended.o \
-                    src/briefing_screen_mission_start.o \
                     src/briefing_restate_map_file.o \
                     src/multiplayer_units_placing.o \
+                    src/briefing_screen_mission_start.o \
                     src/display_messages_typed_by_yourself.o \
                     src/reinforcements_player_specific.o \
                     src/internet_cncnet.o \
-                    src/tiberium_stuff.o \
                     src/short_connection_timeout.o \
                     src/no_options_menu_animation.o \
                     src/spawner/spawner.o \
@@ -73,7 +72,8 @@ DTA_OBJS = \
                     src/dta/basic_theme_fix.o \
                     src/dta/no_sidecd_mix.o \
                     src/dta/ingame_ui_text_color.o \
+                    src/dta/scrap_metal_explosion.o \
+                    src/dta/tiberium_damage.o \
                     src/load_more_movies.o \
                     src/guard_mode_patch.o \
-					src/dta/scrap_metal_explosion.o \
 					src/minimap_crash.o
