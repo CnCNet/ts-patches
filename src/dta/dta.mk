@@ -76,4 +76,6 @@ DTA_OBJS = \
                     src/dta/tiberium_damage.o \
                     src/load_more_movies.o \
                     src/guard_mode_patch.o \
-					src/minimap_crash.o
+					src/minimap_crash.o \
+                    src/fix_100_unit_bug.o
+                    
