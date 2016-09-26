@@ -66,6 +66,7 @@ DTA_OBJS = \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
                     src/override_colors.o \
+                    src/dta/auto_deploy_mcv.o \
                     src/dta/dta_hacks.o \
                     src/dta/logger.o \
                     src/dta/horv_via_undeploysinto.o \

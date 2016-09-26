@@ -84,6 +84,7 @@ MP_OBJS          = \
                     src/only_the_host_may_change_gamespeed.o \
                     src/override_colors.o \
 					src/dta/scrap_metal_explosion.o \
+                    src/dta/auto_deploy_mcv.o \
 					src/minimap_crash.o \
                     src/fix_100_unit_bug.o
 
