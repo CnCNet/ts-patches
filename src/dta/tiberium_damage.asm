@@ -2,6 +2,9 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+; Remove hardcoded Power=17 from "Vinifera" by changing the last character of the string
+@SET 0x00711143, {db "."}
+
 ; The damage inflicted by the tiberium is Power= divided by the number at 000D3F75 (originally 0A)
 ; Also makes tiberium do 0 damage with Power=0 and at least 1 for anything higher
 ; original author of hack: AlexB
@@ -22,3 +25,5 @@
 hack 0x004D3F6E ; replacement for lack of @JLE macro
     jle 0x004D409C
     jmp 0x004D3F74
+
+    
