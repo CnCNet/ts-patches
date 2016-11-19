@@ -17,13 +17,14 @@ Is_Mutual_Ally:
     mov edx, [esp+4]
     mov eax, [esp+8]
 
-    mov ecx, [HouseClassArray_Vector] ; HouseClassArray
-    mov ecx, [ecx+4*edx]
+    mov esi, [HouseClassArray_Vector] ; HouseClassArray
+    mov edi, [ecx+4*edx]
 
     push edx
     push eax
 
     push eax
+    mov ecx, edi
     call HouseClass__Is_Ally
     cmp al, 0
 
@@ -32,10 +33,11 @@ Is_Mutual_Ally:
 
     jz .Return_False
 
-    mov ecx, [HouseClassArray_Vector] ; HouseClassArray
-    mov ecx, [ecx+4*edx]
+    mov esi, [HouseClassArray_Vector] ; HouseClassArray
+    mov edi, [ecx+4*edx]
 
     push eax
+    mov ecx, edi
     call HouseClass__Is_Ally
     cmp al, 0
     jz .Return_False
