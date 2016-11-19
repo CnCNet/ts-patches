@@ -75,18 +75,18 @@ strnlen(const char *s, size_t maxlen)
         return (len);
 }
 
-void * __stdcall //HouseClass *
+HouseClass * __stdcall //HouseClass *
 GetHouseByUserName(char *name) {
 
   if (name == 0)
     return 0;
 
-  void **house = HouseClassArray;
-  for (int i = 0; i < HouseClassArray_Count; i++, house++) {
-    char *this_name = *house + 0x10DE4;
+  HouseClass **house = HouseClassArray.Vector;
+  for (int i = 0; i < HouseClassArray.ActiveCount; i++) {
+    char *this_name = house[i]->Name;
 
     if (__strcmpi(this_name, name) == 0)
-      return *house;
+      return house[i];
 
   }
   return 0;

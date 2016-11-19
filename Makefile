@@ -86,6 +86,9 @@ MP_OBJS          = \
 					src/dta/scrap_metal_explosion.o \
                     src/dta/auto_deploy_mcv.o \
 					src/minimap_crash.o \
+                    src/new_events.o \
+                    src/new_events_s.o \
+                    src/shared_control.o \
                     src/fix_100_unit_bug.o
 
 ifdef WWDEBUG

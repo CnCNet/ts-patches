@@ -12,7 +12,7 @@ MainLoop_AfterRender(MessageListClass *msg) {
   MessageListClass__Manage(msg);
 
   if (SpawnerActive) {
-    if (PlayerPtr->gap[0xCB] == true && HaventSetSpecTeam) {
+    if (PlayerPtr->Defeated == true && HaventSetSpecTeam) {
       set_team_spec();
       HaventSetSpecTeam = false;
     }

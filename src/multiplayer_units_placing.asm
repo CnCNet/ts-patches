@@ -69,13 +69,13 @@ _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition:
     mov edi, [UnitClassArray_Count]
     sub edi, [OldUnitClassArrayCount]
     jmp 0x006589CE
-    
+
 _UnitClass__Read_INI_SpawnX_Get_UnitClassArray_Count_In_Prologue:
     push eax
 
     mov dword eax, [UnitClassArray_Count]
     mov dword [OldUnitClassArrayCount], eax
-    
+
     pop eax
     sub esp, 192
     jmp 0x006585C6
@@ -84,12 +84,12 @@ _InfantryClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     call Check_For_Spawn_Fake_HouseType_Name
     cmp eax, -1
     jz .Normal_Code
-    
+
     mov eax, [UsedSpawnsArray+eax*4]
     cmp eax, -1
     jz .Normal_Code
-    
-    mov esi, [HouseClassArray]
+
+    mov esi, [HouseClassArray_Vector]
     mov eax, [esi+eax*4]
 
     mov edi, eax
@@ -103,16 +103,16 @@ _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     call Check_For_Spawn_Fake_HouseType_Name
     push eax
     cmp eax, -1
-    
+
     jz .Normal_Code
-    
+
     mov eax, [UsedSpawnsArray+eax*4]
     cmp eax, -1
     jz .Normal_Code
-    
-    mov esi, [HouseClassArray]
+
+    mov esi, [HouseClassArray_Vector]
     mov eax, [esi+eax*4]
-    
+
     mov esi, eax
     pop esi
     mov ecx, esi
@@ -122,20 +122,20 @@ _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX:
 .Normal_Code:
     pop eax
     call HouseType_From_Name
-    jmp 0x00434848 
+    jmp 0x00434848
 
 _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     call Check_For_Spawn_Fake_HouseType_Name
     cmp eax, -1
     jz .Normal_Code
-    
+
     mov eax, [UsedSpawnsArray+eax*4]
     cmp eax, -1
     jz .Normal_Code
-    
-    mov esi, [HouseClassArray]
+
+    mov esi, [HouseClassArray_Vector]
     mov eax, [esi+eax*4]
-    
+
     mov esi, eax
     push str_Delim ; ","
     push ebx             ; Str
@@ -147,68 +147,68 @@ _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     cmp edi, 0FFFFFFFFh
     mov eax, esi
     jmp 0x00658686
-    
-    
+
+
 .Normal_Code:
     call HouseType_From_Name
     jmp 0x0065865D
-    
+
 Check_For_Spawn_Fake_HouseType_Name:
     push ebx
     push edi
     mov ebx, 0
-    
+
     mov edi, ecx
-    
-    
+
+
     strcmp_i ecx, str_Spawn1
     cmp eax, 0
     jz .Ret
-    
+
     mov ecx, edi
     inc ebx
     strcmp_i ecx, str_Spawn2
     cmp eax, 0
     jz .Ret
-    
+
     mov ecx, edi
     inc ebx
     strcmp_i ecx, str_Spawn3
     cmp eax, 0
     jz .Ret
-    
+
     mov ecx, edi
     inc ebx
     strcmp_i ecx, str_Spawn4
     cmp eax, 0
     jz .Ret
-    
+
     mov ecx, edi
     inc ebx
     strcmp_i ecx, str_Spawn5
     cmp eax, 0
     jz .Ret
-    
+
     mov ecx, edi
     inc ebx
     strcmp_i ecx, str_Spawn6
     cmp eax, 0
     jz .Ret
-    
+
     mov ecx, edi
     inc ebx
     strcmp_i ecx, str_Spawn7
     cmp eax, 0
     jz .Ret
-    
+
     mov ecx, edi
     inc ebx
     strcmp_i ecx, str_Spawn8
     cmp eax, 0
     jz .Ret
-    
+
     mov ebx, -1
-    
+
 .Ret:
     mov ecx, edi
     mov eax, ebx

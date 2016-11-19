@@ -82,7 +82,14 @@
 %macro @SJGE 2
     @PATCH (%1)
     db 0x7D
-    dd (%2) - (%1) - 2
+    db (%2) - (%1) - 2
+    @ENDPATCH
+%endmacro
+
+%macro @LJA 2
+    @PATCH (%1)
+    db 0x0F, 0x87
+    dd (%2) - (%1) - 6
     @ENDPATCH
 %endmacro
 

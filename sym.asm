@@ -6,13 +6,15 @@ setcglob 0x006B63F0, memcpy
 setcglob 0x006C0080, memset
 
 ; House
-setcglob 0x007E155C, HouseClassArray
+setcglob 0x007E1558, HouseClassArray
+setcglob 0x007E155C, HouseClassArray_Vector
 setcglob 0x007E1568, HouseClassArray_Count
 setcglob 0x007E21D4, HouseTypesArray
 setcglob 0x004BB460, HouseClass__Assign_Handicap
 setcglob 0x004BDB30, HouseClass__Make_Ally
 setcglob 0x004BDB50, HouseClass__Make_Ally_House
 setcglob 0x004BD9E0, HouseClass__Is_Ally
+setcglob 0x004BDA60, HouseClass__Is_Ally_Techno
 setcglob 0x005DE210, Assign_Houses
 setcglob 0x005EEF70, Get_MP_Color
 setcglob 0x004CDEF0, HouseType_From_Name
@@ -55,6 +57,7 @@ setcglob 0x004DC770, INIClass__Find_Entry
 setcglob 0x005C6710, RulesClass__Process
 setcglob 0x005D1800, RulesClass__Objects
 setcglob 0x005C6CF0, RulesClass__AudioVisual
+setcglob 0x0074C488, Rules
 
 ; File
 setcglob 0x004497B0, FileClass__FileClass
@@ -97,6 +100,12 @@ setcglob 0x00867014, GameIDNumber
 setcglob 0x007E24DC, PlayerColor
 setcglob 0x00867008, TournamentGame
 setcglob 0x008670BC, WOL_SERVER_PORT ; Hijacking this for Mumble
+
+; EventClass
+setcglob 0x00493E40, EventClass__EventClass_PlayerID
+setcglob 0x007E15F8, Outlist
+setcglob 0x006CB1B8, FramesPerMinute
+
 ; Random
 setcglob 0x007E4934, Seed
 setcglob 0x004E38A0, Init_Random
@@ -161,6 +170,8 @@ setcglob 0x007482C0, WWKeyboard
 setcglob 0x007E47B0, Left_Shift_Key
 setcglob 0x007E47B4, Right_Shift_Key
 setcglob 0x004FB390, WWKeyboardClass__Down
+setcglob 0x007E47A8, ForceFire1
+setcglob 0x007E47AC, ForceFire2
 
 ; MapClass
 setcglob 0x0051E130, MapClass__GetCellFloorHeight
@@ -200,6 +211,7 @@ setcglob 0x006B8E20, strcmp
 setcglob 0x006B602A, _strtok
 setcglob 0x006B602A, strtok
 setcglob 0x006B52EE, _sprintf
+setcglob 0x006B52EE, sprintf
 setcglob 0x006B6A41, vsprintf
 setcglob 0x006B6730, stristr_
 setcglob 0x006BA490, strlen
@@ -262,8 +274,8 @@ setcglob 0x007E244C, TutorialSorted
 setcglob 0x0074950C, Current_Waypoint
 setcglob 0x004EAF20, Delete_Waypoint
 
-;Address  Ordinal Name                          Library 
-;-------  ------- ----                          ------- 
+;Address  Ordinal Name                          Library
+;-------  ------- ----                          -------
 ;006CA000         RegCloseKey                   ADVAPI32
 ;006CA004         RegQueryValueExA              ADVAPI32
 ;006CA008         RegEnumKeyExA                 ADVAPI32
@@ -279,32 +291,32 @@ setcglob 0x004EAF20, Delete_Waypoint
 ;006CA034         ImageList_BeginDrag           COMCTL32
 ;006CA038         ImageList_Destroy             COMCTL32
 ;006CA03C         ImageList_EndDrag             COMCTL32
-;006CA044         DirectDrawCreate              DDRAW   
-;006CA04C 1       DirectSoundCreate             DSOUND  
-;006CA054         DeleteObject                  GDI32   
-;006CA058         CreateSolidBrush              GDI32   
-;006CA05C         SetTextColor                  GDI32   
-;006CA060         SetBkColor                    GDI32   
-;006CA064         SetBkMode                     GDI32   
-;006CA068         GetTextColor                  GDI32   
-;006CA06C         GetBkColor                    GDI32   
-;006CA070         GetBkMode                     GDI32   
-;006CA074         SelectObject                  GDI32   
-;006CA078         GetStockObject                GDI32   
-;006CA07C         GetTextMetricsA               GDI32   
-;006CA080         TextOutA                      GDI32   
-;006CA084         SetTextAlign                  GDI32   
-;006CA088         CreateFontA                   GDI32   
-;006CA08C         RestoreDC                     GDI32   
-;006CA090         CreateFontIndirectA           GDI32   
-;006CA094         DPtoLP                        GDI32   
-;006CA098         SetWindowOrgEx                GDI32   
-;006CA09C         SetViewportOrgEx              GDI32   
-;006CA0A0         ModifyWorldTransform          GDI32   
-;006CA0A4         SetGraphicsMode               GDI32   
-;006CA0A8         SaveDC                        GDI32   
-;006CA0AC         GetTextExtentPoint32A         GDI32   
-;006CA0B0         CreateDIBSection              GDI32   
+;006CA044         DirectDrawCreate              DDRAW
+;006CA04C 1       DirectSoundCreate             DSOUND
+;006CA054         DeleteObject                  GDI32
+;006CA058         CreateSolidBrush              GDI32
+;006CA05C         SetTextColor                  GDI32
+;006CA060         SetBkColor                    GDI32
+;006CA064         SetBkMode                     GDI32
+;006CA068         GetTextColor                  GDI32
+;006CA06C         GetBkColor                    GDI32
+;006CA070         GetBkMode                     GDI32
+;006CA074         SelectObject                  GDI32
+;006CA078         GetStockObject                GDI32
+;006CA07C         GetTextMetricsA               GDI32
+;006CA080         TextOutA                      GDI32
+;006CA084         SetTextAlign                  GDI32
+;006CA088         CreateFontA                   GDI32
+;006CA08C         RestoreDC                     GDI32
+;006CA090         CreateFontIndirectA           GDI32
+;006CA094         DPtoLP                        GDI32
+;006CA098         SetWindowOrgEx                GDI32
+;006CA09C         SetViewportOrgEx              GDI32
+;006CA0A0         ModifyWorldTransform          GDI32
+;006CA0A4         SetGraphicsMode               GDI32
+;006CA0A8         SaveDC                        GDI32
+;006CA0AC         GetTextExtentPoint32A         GDI32
+;006CA0B0         CreateDIBSection              GDI32
 ;006CA0B8         FileTimeToSystemTime          KERNEL32
 ;006CA0BC         FileTimeToLocalFileTime       KERNEL32
 ;006CA0C0         GetDateFormatA                KERNEL32
@@ -464,140 +476,140 @@ setcglob 0x004EAF20, Delete_Waypoint
 ;006CA33C 34      RevokeActiveObject            OLEAUT32
 ;006CA340 33      RegisterActiveObject          OLEAUT32
 ;006CA344 200     GetErrorInfo                  OLEAUT32
-;006CA34C         FindExecutableA               SHELL32 
-;006CA354         DialogBoxIndirectParamA       USER32  
-;006CA358         DialogBoxParamA               USER32  
-;006CA35C         SetDlgItemTextA               USER32  
-;006CA360         SetFocus                      USER32  
-;006CA364         EndDialog                     USER32  
-;006CA368         GetActiveWindow               USER32  
-;006CA36C         ShowCursor                    USER32  
-;006CA370         ChildWindowFromPoint          USER32  
-;006CA374         TranslateMessage              USER32  
-;006CA378         GetDlgItem                    USER32  
-;006CA37C         EnableWindow                  USER32  
-;006CA380         SetWindowTextA                USER32  
-;006CA384         ClientToScreen                USER32  
-;006CA388         GetClientRect                 USER32  
-;006CA38C         DestroyWindow                 USER32  
-;006CA390         GetKeyState                   USER32  
-;006CA394         ToAscii                       USER32  
-;006CA398         MapVirtualKeyA                USER32  
-;006CA39C         GetAsyncKeyState              USER32  
-;006CA3A0         GetSystemMetrics              USER32  
-;006CA3A4         SendDlgItemMessageA           USER32  
-;006CA3A8         GetWindowTextA                USER32  
-;006CA3AC         MoveWindow                    USER32  
-;006CA3B0         AdjustWindowRectEx            USER32  
-;006CA3B4         GetMenu                       USER32  
-;006CA3B8         SetRect                       USER32  
-;006CA3BC         SetWindowPos                  USER32  
-;006CA3C0         PostMessageA                  USER32  
-;006CA3C4         ValidateRect                  USER32  
-;006CA3C8         InvalidateRect                USER32  
-;006CA3CC         CheckDlgButton                USER32  
-;006CA3D0         CharToOemBuffA                USER32  
-;006CA3D4         ScreenToClient                USER32  
-;006CA3D8         GetWindowRect                 USER32  
-;006CA3DC         DispatchMessageA              USER32  
-;006CA3E0         IsDlgButtonChecked            USER32  
-;006CA3E4         GetDlgItemTextA               USER32  
-;006CA3E8         WaitForInputIdle              USER32  
-;006CA3EC         GetTopWindow                  USER32  
-;006CA3F0         GetForegroundWindow           USER32  
-;006CA3F4         LoadIconA                     USER32  
-;006CA3F8         RegisterHotKey                USER32  
-;006CA3FC         RedrawWindow                  USER32  
-;006CA400         GetWindowContextHelpId        USER32  
-;006CA404         WinHelpA                      USER32  
-;006CA408         SendMessageA                  USER32  
-;006CA40C         LoadCursorA                   USER32  
-;006CA410         SetCursor                     USER32  
-;006CA414         CreateDialogParamA            USER32  
-;006CA418         PostQuitMessage               USER32  
-;006CA41C         FindWindowA                   USER32  
-;006CA420         GetDlgCtrlID                  USER32  
-;006CA424         GetCapture                    USER32  
-;006CA428         SetCursorPos                  USER32  
-;006CA42C         SetForegroundWindow           USER32  
-;006CA430         CreateDialogIndirectParamA    USER32  
-;006CA434         DrawTextA                     USER32  
-;006CA438         DefWindowProcA                USER32  
-;006CA43C         CloseWindow                   USER32  
-;006CA440         GetDC                         USER32  
-;006CA444         ReleaseDC                     USER32  
-;006CA448         GetKeyNameTextA               USER32  
-;006CA44C         GetFocus                      USER32  
-;006CA450         GetNextDlgTabItem             USER32  
-;006CA454         GetUpdateRect                 USER32  
-;006CA458         MessageBoxA                   USER32  
-;006CA45C         LoadStringA                   USER32  
-;006CA460         MessageBoxIndirectA           USER32  
-;006CA464         wsprintfA                     USER32  
-;006CA468         GetWindowLongA                USER32  
-;006CA46C         SetWindowLongA                USER32  
-;006CA470         ShowWindow                    USER32  
-;006CA474         UpdateWindow                  USER32  
-;006CA478         CallWindowProcA               USER32  
-;006CA47C         WindowFromPoint               USER32  
-;006CA480         KillTimer                     USER32  
-;006CA484         SetTimer                      USER32  
-;006CA488         IntersectRect                 USER32  
-;006CA48C         GetWindow                     USER32  
-;006CA490         GetClassNameA                 USER32  
-;006CA494         EnumChildWindows              USER32  
-;006CA498         GetParent                     USER32  
-;006CA49C         BringWindowToTop              USER32  
-;006CA4A0         SetCapture                    USER32  
-;006CA4A4         ReleaseCapture                USER32  
-;006CA4A8         CreateWindowExA               USER32  
-;006CA4AC         RegisterClassA                USER32  
-;006CA4B0         IsWindowEnabled               USER32  
-;006CA4B4         PeekMessageA                  USER32  
-;006CA4B8         GetMessageA                   USER32  
-;006CA4BC         IsDialogMessageA              USER32  
-;006CA4C0         TranslateAcceleratorA         USER32  
-;006CA4C4         GetCursorPos                  USER32  
-;006CA4C8         SetActiveWindow               USER32  
-;006CA4D0         GetFileVersionInfoSizeA       VERSION 
-;006CA4D4         GetFileVersionInfoA           VERSION 
-;006CA4D8         VerQueryValueA                VERSION 
-;006CA4E0         timeBeginPeriod               WINMM   
-;006CA4E4         timeSetEvent                  WINMM   
-;006CA4E8         timeKillEvent                 WINMM    
-;006CA4F0         timeGetDevCaps                WINMM   
-;006CA4F4         timeEndPeriod                 WINMM   
-;006CA4FC 17      recvfrom                      WSOCK32 
-;006CA500 21      setsockopt                    WSOCK32 
-;006CA504 20      sendto                        WSOCK32 
-;006CA508 116     WSACleanup                    WSOCK32 
-;006CA50C 101     WSAAsyncSelect                WSOCK32 
-;006CA510 108     WSACancelAsyncRequest         WSOCK32 
-;006CA514 7       getsockopt                    WSOCK32 
-;006CA518 111     WSAGetLastError               WSOCK32 
-;006CA51C 11      inet_ntoa                     WSOCK32 
-;006CA520 15      ntohs                         WSOCK32 
-;006CA524 14      ntohl                         WSOCK32 
-;006CA528 9       htons                         WSOCK32 
-;006CA52C 115     WSAStartup                    WSOCK32 
-;006CA530 57      gethostname                   WSOCK32 
-;006CA534 52      gethostbyname                 WSOCK32 
-;006CA538 3       closesocket                   WSOCK32 
-;006CA53C 23      socket                        WSOCK32 
-;006CA540 2       bind                          WSOCK32 
-;006CA544 8       htonl                         WSOCK32 
-;006CA54C         StgCreateDocfile              ole32   
-;006CA550         CoRevokeClassObject           ole32   
-;006CA554         OleInitialize                 ole32   
-;006CA558         CoRegisterClassObject         ole32   
-;006CA55C         OleUninitialize               ole32   
-;006CA560         CoDisconnectObject            ole32   
-;006CA564         StringFromGUID2               ole32   
-;006CA568         StgOpenStorage                ole32   
-;006CA56C         CoFileTimeNow                 ole32   
-;006CA570         StringFromCLSID               ole32   
-;006CA574         CLSIDFromString               ole32   
-;006CA578         OleSaveToStream               ole32   
-;006CA57C         OleLoadFromStream             ole32   
-;006CA580         CoCreateInstance              ole32   
-;006CA584         OleRun                        ole32   
+;006CA34C         FindExecutableA               SHELL32
+;006CA354         DialogBoxIndirectParamA       USER32
+;006CA358         DialogBoxParamA               USER32
+;006CA35C         SetDlgItemTextA               USER32
+;006CA360         SetFocus                      USER32
+;006CA364         EndDialog                     USER32
+;006CA368         GetActiveWindow               USER32
+;006CA36C         ShowCursor                    USER32
+;006CA370         ChildWindowFromPoint          USER32
+;006CA374         TranslateMessage              USER32
+;006CA378         GetDlgItem                    USER32
+;006CA37C         EnableWindow                  USER32
+;006CA380         SetWindowTextA                USER32
+;006CA384         ClientToScreen                USER32
+;006CA388         GetClientRect                 USER32
+;006CA38C         DestroyWindow                 USER32
+;006CA390         GetKeyState                   USER32
+;006CA394         ToAscii                       USER32
+;006CA398         MapVirtualKeyA                USER32
+;006CA39C         GetAsyncKeyState              USER32
+;006CA3A0         GetSystemMetrics              USER32
+;006CA3A4         SendDlgItemMessageA           USER32
+;006CA3A8         GetWindowTextA                USER32
+;006CA3AC         MoveWindow                    USER32
+;006CA3B0         AdjustWindowRectEx            USER32
+;006CA3B4         GetMenu                       USER32
+;006CA3B8         SetRect                       USER32
+;006CA3BC         SetWindowPos                  USER32
+;006CA3C0         PostMessageA                  USER32
+;006CA3C4         ValidateRect                  USER32
+;006CA3C8         InvalidateRect                USER32
+;006CA3CC         CheckDlgButton                USER32
+;006CA3D0         CharToOemBuffA                USER32
+;006CA3D4         ScreenToClient                USER32
+;006CA3D8         GetWindowRect                 USER32
+;006CA3DC         DispatchMessageA              USER32
+;006CA3E0         IsDlgButtonChecked            USER32
+;006CA3E4         GetDlgItemTextA               USER32
+;006CA3E8         WaitForInputIdle              USER32
+;006CA3EC         GetTopWindow                  USER32
+;006CA3F0         GetForegroundWindow           USER32
+;006CA3F4         LoadIconA                     USER32
+;006CA3F8         RegisterHotKey                USER32
+;006CA3FC         RedrawWindow                  USER32
+;006CA400         GetWindowContextHelpId        USER32
+;006CA404         WinHelpA                      USER32
+;006CA408         SendMessageA                  USER32
+;006CA40C         LoadCursorA                   USER32
+;006CA410         SetCursor                     USER32
+;006CA414         CreateDialogParamA            USER32
+;006CA418         PostQuitMessage               USER32
+;006CA41C         FindWindowA                   USER32
+;006CA420         GetDlgCtrlID                  USER32
+;006CA424         GetCapture                    USER32
+;006CA428         SetCursorPos                  USER32
+;006CA42C         SetForegroundWindow           USER32
+;006CA430         CreateDialogIndirectParamA    USER32
+;006CA434         DrawTextA                     USER32
+;006CA438         DefWindowProcA                USER32
+;006CA43C         CloseWindow                   USER32
+;006CA440         GetDC                         USER32
+;006CA444         ReleaseDC                     USER32
+;006CA448         GetKeyNameTextA               USER32
+;006CA44C         GetFocus                      USER32
+;006CA450         GetNextDlgTabItem             USER32
+;006CA454         GetUpdateRect                 USER32
+;006CA458         MessageBoxA                   USER32
+;006CA45C         LoadStringA                   USER32
+;006CA460         MessageBoxIndirectA           USER32
+;006CA464         wsprintfA                     USER32
+;006CA468         GetWindowLongA                USER32
+;006CA46C         SetWindowLongA                USER32
+;006CA470         ShowWindow                    USER32
+;006CA474         UpdateWindow                  USER32
+;006CA478         CallWindowProcA               USER32
+;006CA47C         WindowFromPoint               USER32
+;006CA480         KillTimer                     USER32
+;006CA484         SetTimer                      USER32
+;006CA488         IntersectRect                 USER32
+;006CA48C         GetWindow                     USER32
+;006CA490         GetClassNameA                 USER32
+;006CA494         EnumChildWindows              USER32
+;006CA498         GetParent                     USER32
+;006CA49C         BringWindowToTop              USER32
+;006CA4A0         SetCapture                    USER32
+;006CA4A4         ReleaseCapture                USER32
+;006CA4A8         CreateWindowExA               USER32
+;006CA4AC         RegisterClassA                USER32
+;006CA4B0         IsWindowEnabled               USER32
+;006CA4B4         PeekMessageA                  USER32
+;006CA4B8         GetMessageA                   USER32
+;006CA4BC         IsDialogMessageA              USER32
+;006CA4C0         TranslateAcceleratorA         USER32
+;006CA4C4         GetCursorPos                  USER32
+;006CA4C8         SetActiveWindow               USER32
+;006CA4D0         GetFileVersionInfoSizeA       VERSION
+;006CA4D4         GetFileVersionInfoA           VERSION
+;006CA4D8         VerQueryValueA                VERSION
+;006CA4E0         timeBeginPeriod               WINMM
+;006CA4E4         timeSetEvent                  WINMM
+;006CA4E8         timeKillEvent                 WINMM
+;006CA4F0         timeGetDevCaps                WINMM
+;006CA4F4         timeEndPeriod                 WINMM
+;006CA4FC 17      recvfrom                      WSOCK32
+;006CA500 21      setsockopt                    WSOCK32
+;006CA504 20      sendto                        WSOCK32
+;006CA508 116     WSACleanup                    WSOCK32
+;006CA50C 101     WSAAsyncSelect                WSOCK32
+;006CA510 108     WSACancelAsyncRequest         WSOCK32
+;006CA514 7       getsockopt                    WSOCK32
+;006CA518 111     WSAGetLastError               WSOCK32
+;006CA51C 11      inet_ntoa                     WSOCK32
+;006CA520 15      ntohs                         WSOCK32
+;006CA524 14      ntohl                         WSOCK32
+;006CA528 9       htons                         WSOCK32
+;006CA52C 115     WSAStartup                    WSOCK32
+;006CA530 57      gethostname                   WSOCK32
+;006CA534 52      gethostbyname                 WSOCK32
+;006CA538 3       closesocket                   WSOCK32
+;006CA53C 23      socket                        WSOCK32
+;006CA540 2       bind                          WSOCK32
+;006CA544 8       htonl                         WSOCK32
+;006CA54C         StgCreateDocfile              ole32
+;006CA550         CoRevokeClassObject           ole32
+;006CA554         OleInitialize                 ole32
+;006CA558         CoRegisterClassObject         ole32
+;006CA55C         OleUninitialize               ole32
+;006CA560         CoDisconnectObject            ole32
+;006CA564         StringFromGUID2               ole32
+;006CA568         StgOpenStorage                ole32
+;006CA56C         CoFileTimeNow                 ole32
+;006CA570         StringFromCLSID               ole32
+;006CA574         CLSIDFromString               ole32
+;006CA578         OleSaveToStream               ole32
+;006CA57C         OleLoadFromStream             ole32
+;006CA580         CoCreateInstance              ole32
+;006CA584         OleRun                        ole32

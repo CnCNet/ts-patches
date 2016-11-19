@@ -1089,7 +1089,7 @@ typedef struct RulesClass
   char field_C65;
   char field_C66;
   char field_C67;
-  char gap_C68[8];
+  double MessageDuration;
   double SavourDelay;
   int Players;
   char field_C7C;

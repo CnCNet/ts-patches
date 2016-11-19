@@ -14,6 +14,7 @@ HookInitCommands() {
                                  &ChatToAllCommand,
                                  &ChatToPlayerCommand,
                                  &TextBackgroundColorCommand,
+                                 &GrantControlCommand,
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
                                  &MapSnapshotCommand
@@ -63,8 +64,6 @@ HookInitCommands() {
   }
 }
 
-void  __thiscall CommandDestroy(void *a, char b) { }
-
 /* Start MapSnapshot */
 void    __thiscall MapSnapshot_nothing(void *a) { }
 char *  __thiscall MapSnapshot_Description(void *a) { return "Makes a .map file from the current game state."; }
@@ -78,6 +77,8 @@ int     __thiscall MapSnapshot_Execute(void *a)     {
   MapSnapshot(buf, 1);
   return 1;
 }
+
+void  __thiscall CommandDestroy(void *a, char b) { }
 
 vtCommandClass vtMapSnapshotCommand = {
   CommandDestroy,
@@ -100,7 +101,7 @@ char *  __thiscall ChatToAllies_INIname(void *a)     { return "ChatToAllies"; }
 char *  __thiscall ChatToAllies_Category(void *a)    { return "Chat"; }
 char *  __thiscall ChatToAllies_Name(void *a)        { return "ChatToAllies"; }
 int     __thiscall ChatToAllies_Execute(void *a)     {
-  if (!PlayerPtr->gap[0xCB]) {
+  if (!PlayerPtr->Defeated) {
     ChatToAlliesFlag = 1; // Defined in chatallies.asm
     WWDebug_Printf("ChatToAllies enabled[%x]\n",&ChatToAllies_Execute);
   }

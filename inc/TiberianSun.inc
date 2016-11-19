@@ -38,7 +38,7 @@ cextern TournamentGame
 cextern EasyShroud
 
 ;ini
-cextern INIClass_SUN_INI 
+cextern INIClass_SUN_INI
 cextern TUTORIAL_INI_Name
 
 ;need to fix those two, should set them in sym.asm
@@ -63,6 +63,8 @@ cextern FileClass__Close
 cextern FileClass__Write
 cextern CCFileClass__CCFileClass
 cextern CCFileClass__Destroy
+
+cextern Switch_NewEvents
 
 ; ### imports ###
 cextern sendto
@@ -116,7 +118,7 @@ cextern memcpy
 cextern memset
 
 ; House
-cextern HouseClassArray
+cextern HouseClassArray_Vector
 cextern HouseClassArray_Count
 cextern HouseTypesArray
 cextern HouseClass__Assign_Handicap
@@ -134,7 +136,7 @@ cextern CurrentObjectsArray_Count
 ; Arrays
 cextern UnitClassArray_Count
 cextern TeamTypesArray_Count
-cextern TeamTypesArray     
+cextern TeamTypesArray
 
 ; Random
 cextern Seed

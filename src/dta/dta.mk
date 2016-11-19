@@ -78,5 +78,7 @@ DTA_OBJS = \
                     src/load_more_movies.o \
                     src/guard_mode_patch.o \
 					src/minimap_crash.o \
+                    src/new_events.o \
+                    src/new_events_s.o \
+                    src/shared_control.o \
                     src/fix_100_unit_bug.o
-                    

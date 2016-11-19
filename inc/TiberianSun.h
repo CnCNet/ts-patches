@@ -2,20 +2,24 @@
 #include <stdint.h>
 #include <string.h>
 #include <windows.h>
+#include "Enums/EventTypes.h"
+#include "Classes/AbstractClass.h"
+#include "Classes/ObjectClass.h"
 #include "TiberianSun_Structures.h"
 #include "Classes/RulesClass.h"
+#include "Classes/HouseClass.h"
+#include "Classes/SessionClass.h"
 
 // This header works with sym.asm which defines the Vanilla symbols
 // This header will be split up as it becomes larger
 
 typedef char INIClass[128];
-typedef char FileClass[128];
-typedef char CCFileClass[0x64];
 extern bool DisableEdgeScrolling;
 extern bool OverrideColors;
 extern int TextBackgroundColor;
 extern uint8_t PlayerColorMap[];
 extern MouseClass *MouseClass_Map;
+extern RulesClass *Rules;
 extern int dword_7B3304;
 extern DynamicVectorClass DynamicVectorClass_AircraftClass;
 extern bool MultiplayerDebug;
@@ -30,12 +34,13 @@ extern CommandClass ChatToAllCommand;
 extern CommandClass ChatToPlayerCommand;
 extern CommandClass MultiplayerDebugCommand;
 extern CommandClass TextBackgroundColorCommand;
+extern CommandClass GrantControlCommand;
 extern bool SpawnerActive;
 extern bool Player_Active;
 extern HouseClass *PlayerPtr;
 extern bool ChatToAlliesFlag;
 extern bool ChatToAllFlag;
-extern void **HouseClassArray;
+extern uint32_t IsSpectatorArray[8];
 extern size_t HouseClassArray_Count;
 extern void *ScenarioStuff;
 extern uint32_t Frame;
@@ -49,8 +54,16 @@ extern bool TutorialSorted;
 extern bool MouseAlwaysInFocus;
 extern char *SearchDirs;
 extern uint32_t WOLGameID;
-extern int32_t SessionType;
 extern bool OutOfSync;
+extern DynamicVectorClass_Objects CurrentObjectsArray;
+extern DynamicVectorClass_Houses HouseClassArray;
+extern SessionClass SessionType;
+extern EventQueueType Outlist;
+extern WWKeyboardClass *WWKeyboard;
+extern uint32_t ForceFire1;
+extern uint32_t ForceFire2;
+extern MessageListClass MessageListClass_this;
+extern double FramesPerMinute;
 
 // ### Functions ###
 
@@ -100,17 +113,29 @@ void __thiscall GScreenClass__Input(MouseClass *Map, int, int, int);
 void __fastcall Create_Units(char i);
 void __cdecl hook_wwdebug_printf(char const *fmt, ...);
 int __thiscall DynamicVectorClass__CommandClass__Add(void *v, CommandClass **c);
+void  __thiscall CommandDestroy(void *a, char b);
 void __thiscall MessageListClass__Manage(MessageListClass *m);
+void __thiscall MessageListClass__Add_Message(MessageListClass *this, char *buf,
+                                              char *name, char *message, int color,
+                                              int32_t PrintType, int32_t duration);
+
 int  __fastcall MapSnapshot(char *name, int n);
 void __stdcall Load_Keyboard_Hotkeys();
 void __thiscall CCINIClass_Vector_Resize(Hotkey **h, int32_t size);
 void __thiscall Multiplayer_Debug_Print();
 void __thiscall HouseClass__Make_Ally_House(HouseClass *self, HouseClass *house);
+bool __thiscall HouseClass__Is_Ally(HouseClass *this, int his_id);
+bool __thiscall HouseClass__Is_Ally_Techno(HouseClass *this, void *him);
 void __stdcall HookInitCommands();
 void ParseIntLL(char *entry_string, int_ll **head);
 void *__cdecl operator_new(size_t size);
 void __cdecl operator_delete(void *memory);
 
+void EnqueueEvent(EventClass *this);
+EventClass * __thiscall EventClass__EventClass_PlayerID(EventClass *e, int my_id, EventType t, int his_id);
+void Toggle_Control(EventClass *e);
+
+bool __thiscall WWKeyboardClass__Down(WWKeyboardClass *this, uint32_t key);
 
 #ifndef WWDEBUG
 #define WWDebug_Printf(format, ...)
