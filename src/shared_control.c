@@ -52,7 +52,10 @@ bool __thiscall
 has_control(HouseClass *h)
 {
     if (h == PlayerPtr) return true;
-    if (PlayerPtr->Defeated) return false;
+    if (PlayerPtr->Defeated)
+    {
+        return HouseClass__Is_Player(h);
+    }
     uint32_t me_mask = 1 << PlayerPtr->ID;
     if (Controlling_Houses[h->ID] & me_mask)
         return true;
@@ -63,7 +66,7 @@ has_control(HouseClass *h)
 bool __thiscall
 has_control_or_spectator(HouseClass *h)
 {
-    if (IsSpectatorArray[h->ID])
+    if (IsSpectatorArray[PlayerPtr->ID])
         return true;
     else
         return has_control(h);
