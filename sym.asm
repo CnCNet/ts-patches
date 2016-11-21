@@ -15,6 +15,7 @@ setcglob 0x004BDB30, HouseClass__Make_Ally
 setcglob 0x004BDB50, HouseClass__Make_Ally_House
 setcglob 0x004BD9E0, HouseClass__Is_Ally
 setcglob 0x004BDA60, HouseClass__Is_Ally_Techno
+setcglob 0x004CB950, HouseClass__Is_Player
 setcglob 0x005DE210, Assign_Houses
 setcglob 0x005EEF70, Get_MP_Color
 setcglob 0x004CDEF0, HouseType_From_Name
@@ -72,6 +73,8 @@ setcglob 0x00561940, MonoClass__Printf
 setcglob 0x004497B0, CCFileClass__CCFileClass
 setcglob 0x004E8970, CCFileClass__Destroy
 setcglob 0x00449880, CCFileClass__Read
+setcglob 0x00449850, CCFileClass__Write
+setcglob 0x00449A40, CCFileClass__Open
 setcglob 0x004499C0, CCFileClass__Is_Available
 setcglob 0x00449970, CCFileClass__Size
 

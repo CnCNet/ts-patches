@@ -67,19 +67,21 @@ extern double FramesPerMinute;
 
 // ### Functions ###
 
-void __thiscall FileClass__FileClass(FileClass fileClass, char *fileName);
-bool __thiscall FileClass__Is_Available(FileClass fileClass, bool forced);
-int __thiscall FileClass__Size(FileClass fileClass);
-int __thiscall FileClass__Read(FileClass fileClass, void *buf, size_t len);
-void __thiscall FileClass__dtor(FileClass fileClass);
-int __thiscall FileClass__Write(FileClass fileClass, void *buf, size_t len);
-bool __thiscall FileClass__Open(FileClass fileClass, int mode);
+void   __thiscall FileClass__FileClass(FileClass *fileClass, char *fileName);
+bool   __thiscall FileClass__Is_Available(FileClass *fileClass, bool forced);
+int    __thiscall FileClass__Size(FileClass *fileClass);
+int    __thiscall FileClass__Read(FileClass *fileClass, void *buf, size_t len);
+void   __thiscall FileClass__dtor(FileClass *fileClass);
+int    __thiscall FileClass__Write(FileClass *fileClass, void *buf, size_t len);
+bool   __thiscall FileClass__Open(FileClass *fileClass, int mode);
 
-void   __thiscall CCFileClass__CCFileClass(CCFileClass ccfile, char *name);
-bool   __thiscall CCFileClass__Is_Available(CCFileClass ccfile, bool force);
-size_t __thiscall CCFileClass__Size(CCFileClass ccfile);
-size_t __thiscall CCFileClass__Read(CCFileClass ccfile, void *buf, size_t len);
-void   __thiscall CCFileClass__Destroy(CCFileClass ccfile);
+void   __thiscall CCFileClass__CCFileClass(CCFileClass *ccfile, char *name);
+bool   __thiscall CCFileClass__Is_Available(CCFileClass *ccfile, bool force);
+size_t __thiscall CCFileClass__Size(CCFileClass *ccfile);
+size_t __thiscall CCFileClass__Read(CCFileClass *ccfile, void *buf, size_t len);
+int    __thiscall CCFileClass__Write(CCFileClass *fileClass, void *buf, size_t len);
+void   __thiscall CCFileClass__Destroy(CCFileClass *ccfile);
+bool   __thiscall CCFileClass__Open(CCFileClass *fileClass, int mode);
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);
 int  __thiscall INIClass__GetInt(INIClass iniClass, char *section, char *key, int defaultValue);
@@ -126,6 +128,8 @@ void __thiscall Multiplayer_Debug_Print();
 void __thiscall HouseClass__Make_Ally_House(HouseClass *self, HouseClass *house);
 bool __thiscall HouseClass__Is_Ally(HouseClass *this, int his_id);
 bool __thiscall HouseClass__Is_Ally_Techno(HouseClass *this, void *him);
+bool __thiscall HouseClass__Is_Player(HouseClass *this);
+
 void __stdcall HookInitCommands();
 void ParseIntLL(char *entry_string, int_ll **head);
 void *__cdecl operator_new(size_t size);
