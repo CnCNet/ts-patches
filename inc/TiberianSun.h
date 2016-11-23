@@ -120,6 +120,11 @@ void __thiscall MessageListClass__Manage(MessageListClass *m);
 void __thiscall MessageListClass__Add_Message(MessageListClass *this, char *buf,
                                               char *name, char *message, int color,
                                               int32_t PrintType, int32_t duration);
+void __fastcall Simple_Text_Print(int32_t *out_width, char *str, void *surface,
+                                  Rect *surf_rect,
+                                  Rect *dest, int32_t *color,
+                                  int32_t bg_color,
+                                  int32_t TextPrintType, int32_t a9);
 
 int  __fastcall MapSnapshot(char *name, int n);
 void __stdcall Load_Keyboard_Hotkeys();

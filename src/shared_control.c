@@ -46,6 +46,15 @@ CALL(0x00585288, _has_control_or_spectator);
 //Tactical::Render
 CALL(0x00611B9E, _has_control_or_spectator);
 
+//CreateTeamCommandClass::Execute
+CALL(0x004E8C69, _has_control);
+//SelectTeamCommandClass
+CALL(0x004E8E4C, _has_control);
+//AddTeamCommandClass::
+CALL(0x004E8FC9, _has_control);
+//CenterTeamCommandClass::
+CALL(0x004E916C, _has_control);
+
 uint32_t Controlling_Houses[8];
 
 bool __thiscall

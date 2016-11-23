@@ -203,6 +203,8 @@ setcglob 0x0074C26C, VisibleRect__Height
 setcglob 0x00509D50, Multiplayer_Debug_Print
 setcglob 0x004082D0, WWDebug_Printf
 setcglob 0x00865040, hWndParent
+setcglob 0x00474E70, Fancy_Text_Print
+setcglob 0x00474A50, Simple_Text_Print
 
 ; Sidebar
 ;setcglob 0x00749874, LEFT_STRIP

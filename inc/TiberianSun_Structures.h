@@ -21,6 +21,13 @@ typedef struct TypeList
   int field_18;
 } TypeList;
 
+typedef struct Rect {
+    int32_t left;
+    int32_t top;
+    int32_t right;
+    int32_t bottom;
+} Rect;
+
 typedef struct DifficultyClass
 {
   LARGE_INTEGER FirePower;
