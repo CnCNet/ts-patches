@@ -10,6 +10,7 @@
 
 ; ### Variables ###
 cextern hook_wwdebug_printf
+cextern AddressList
 
 ; Session
 cextern SessionClass_this
@@ -174,10 +175,14 @@ cextern RequestedFPS
 cextern ProtocolVersion
 cextern ally_by_spawn_location
 cextern read_tut_from_map
+cextern OutOfSync
+cextern OutOfSyncArray
 
 cextern Init_Network
 cextern NameNodes_CurrentSize
 cextern HumanPlayers
+cextern EventClass__EventClass_PlayerID
+cextern EnqueueEvent
 
 ; Scenario
 cextern ScenarioName

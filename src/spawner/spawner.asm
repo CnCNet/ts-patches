@@ -16,7 +16,6 @@ cextern BuildOffAlly
 cextern TunnelIp
 cextern TunnelPort
 cextern TunnelId
-cextern AddressList
 cextern UsedSpawnsArray
 cextern IsSpectatorArray
 cextern RunAutoSS

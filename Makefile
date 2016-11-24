@@ -89,6 +89,7 @@ MP_OBJS          = \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
+                    src/recon_kick.o \
                     src/fix_100_unit_bug.o
 
 ifdef WWDEBUG
