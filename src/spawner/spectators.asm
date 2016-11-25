@@ -251,3 +251,17 @@ _TechnoClass_Draw_Health_Boxes_bldg_draw_pips:
     call 0x004BDA20             ; HouseClass::Is_Ally()
 
     jmp  hackend
+
+hack 0x00428A23
+_BuildingClass_Draw_Overlays_draw_power:
+    pop  ecx
+    mov  edx, [ecx+0x20]
+    mov  eax, [IsSpectatorArray+edx*4]
+    test eax, eax
+    jnz  hackend
+
+    push ecx
+    mov  ecx, [esi+0xEC]
+    call 0x004BDA20
+
+    jmp  hackend
