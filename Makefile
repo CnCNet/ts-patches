@@ -90,6 +90,7 @@ MP_OBJS          = \
                     src/new_events_s.o \
                     src/shared_control.o \
                     src/recon_kick.o \
+                    src/hover_show_health.o \
                     src/fix_100_unit_bug.o
 
 ifdef WWDEBUG
@@ -165,4 +166,3 @@ ti.exe: $(LDS) $(INPUT) $(TI_OBJS)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
-

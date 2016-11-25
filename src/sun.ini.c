@@ -6,6 +6,7 @@ CLEAR(0x006010B8, 0x90, 0x006010D3);
 CALL(0x006010B8, _LoadSunIni);
 
 bool OverrideColors;
+bool HoverShowHealth;
 
 void LoadSunIni()
 {
@@ -39,6 +40,6 @@ void LoadSunIni()
     DragDistance = SunIni_GetInt("Options", "DragDistance", 4);
 
     MouseAlwaysInFocus =     SunIni_GetBool("Options", "MouseAlwaysInFocus", false);
-
+    HoverShowHealth = SunIni_GetBool("Options", "HoverShowHealth", true);
 #endif
 }

@@ -234,3 +234,5 @@ cextern initMumble
 cextern updateMumble
 cextern set_team_name
 cextern set_tean_name_spec
+
+cextern HoverShowHealth
