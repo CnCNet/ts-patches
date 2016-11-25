@@ -83,8 +83,8 @@ MP_OBJS          = \
                     src/new_search_dir.o \
                     src/only_the_host_may_change_gamespeed.o \
                     src/override_colors.o \
-					src/dta/scrap_metal_explosion.o \
-                    src/dta/auto_deploy_mcv.o \
+					src/mods/dta/scrap_metal_explosion.o \
+                    src/mods/dta/auto_deploy_mcv.o \
 					src/minimap_crash.o \
                     src/new_events.o \
                     src/new_events_s.o \
@@ -115,11 +115,11 @@ WINDRES    ?= windres
 
 -include custom.mk
 
-all: tibsun.exe dta.exe singleplayer.exe
+all: tibsun.exe dta.exe ti.exe singleplayer.exe
 
 clean:
 	$(RM) $(OUTPUT) $(COMMON_OBJS)
-	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS)
+	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS) $(TI_OBJS)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
@@ -144,10 +144,9 @@ singleplayer.exe: $(LDS) $(INPUT) $(COMMON_OBJS) $(SP_OBJS)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
 
-
-include src/dta/dta.mk
-src/dta/res/res.o: src/dta/res/res.rc
-	$(WINDRES) $(WINDRES_FLAGS) -Isrc/dta/res/ -Ires/  $< $@
+include src/mods/dta/dta.mk
+src/mods/dta/res/res.o: src/mods/dta/res/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/dta/res/ -Ires/  $< $@
 
 dta.exe: $(LDS) $(INPUT) $(DTA_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(DTA_OBJS)
@@ -155,3 +154,15 @@ dta.exe: $(LDS) $(INPUT) $(DTA_OBJS)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
+
+include src/mods/ti/ti.mk
+src/mods/ti/res/res.o: src/mods/ti/res/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/ti/res/ -Ires/  $< $@
+
+ti.exe: $(LDS) $(INPUT) $(TI_OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(TI_OBJS)
+	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
+	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
+	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
+	$(PETOOL) dump $@
+

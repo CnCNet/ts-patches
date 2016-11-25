@@ -1,6 +1,6 @@
 
 DTA_OBJS = \
-                    src/dta/res/res.o \
+                    src/mods/dta/res/res.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -66,19 +66,18 @@ DTA_OBJS = \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
                     src/override_colors.o \
-                    src/dta/auto_deploy_mcv.o \
-                    src/dta/dta_hacks.o \
-                    src/dta/logger.o \
-                    src/dta/horv_via_undeploysinto.o \
-                    src/dta/basic_theme_fix.o \
-                    src/dta/no_sidecd_mix.o \
-                    src/dta/ingame_ui_text_color.o \
-                    src/dta/scrap_metal_explosion.o \
-                    src/dta/tiberium_damage.o \
+                    src/basic_theme_fix.o \
                     src/load_more_movies.o \
                     src/guard_mode_patch.o \
 					src/minimap_crash.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
-                    src/fix_100_unit_bug.o
+                    src/fix_100_unit_bug.o \
+                    src/mods/saved_games_in_subdir.o \
+                    src/mods/tiberium_damage.o \
+                    src/mods/no_sidecd_mix.o \
+                    src/mods/dta/dta_hacks.o \
+                    src/mods/dta/logger.o \
+                    src/mods/dta/auto_deploy_mcv.o \
+                    src/mods/dta/scrap_metal_explosion.o
