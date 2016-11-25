@@ -66,7 +66,9 @@ has_control(HouseClass *h)
         return HouseClass__Is_Player(h);
     }
     uint32_t me_mask = 1 << PlayerPtr->ID;
-    if (Controlling_Houses[h->ID] & me_mask)
+    if ((Controlling_Houses[h->ID] & me_mask)
+        &&
+        HouseClass__Is_Ally(h, PlayerPtr->ID))
         return true;
     else
         return false;
