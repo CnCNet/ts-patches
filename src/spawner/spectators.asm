@@ -223,3 +223,31 @@ Load_Spectators_Spawner:
     mov dword [IsSpectatorArray+28], eax
 
     retn
+
+hack 0x0062C6CE
+_TechnoClass_Draw_Health_Boxes_unit_draw_pips:
+    pop  ecx
+    mov  edx, [ecx+0x20]
+    mov  eax, [IsSpectatorArray+edx*4]
+    test eax, eax
+    jnz  hackend
+
+    push ecx
+    mov  ecx, [ebx+0xEC]
+    call 0x004BDA20             ; HouseClass::Is_Ally()
+
+    jmp  hackend
+
+hack 0x0062CA26
+_TechnoClass_Draw_Health_Boxes_bldg_draw_pips:
+    pop  ecx
+    mov  edx, [ecx+0x20]
+    mov  eax, [IsSpectatorArray+edx*4]
+    test eax, eax
+    jnz  hackend
+
+    push ecx
+    mov  ecx, [ebx+0xEC]
+    call 0x004BDA20             ; HouseClass::Is_Ally()
+
+    jmp  hackend
