@@ -71,7 +71,7 @@ has_control(HouseClass *h)
         HouseClass__Is_Ally(h, PlayerPtr->ID))
         return true;
     else
-        return false;
+        return HouseClass__Is_Player(h);
 }
 
 bool __thiscall
