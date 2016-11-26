@@ -74,9 +74,11 @@ TI_OBJS = \
                     src/new_events_s.o \
                     src/shared_control.o \
                     src/fix_100_unit_bug.o \
+                    src/hover_show_health.o \
                     src/mods/saved_games_in_subdir.o \
                     src/mods/tiberium_damage.o \
                     src/mods/no_sidecd_mix.o \
+                    src/mods/horv_via_undeploysinto.o \
                     src/mods/ti/ti_hacks.o \
                     src/mods/ti/logger.o \
                     src/mods/dta/auto_deploy_mcv.o \
