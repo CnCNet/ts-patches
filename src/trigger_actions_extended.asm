@@ -61,3 +61,37 @@ Spawn_Index50_To_House_Pointer:
     pop edx
     pop edi
     retn
+
+; New actions
+    
+hack 0x0061913B ; Extend trigger action jump table
+    cmp edx, 105
+    jz .Give_Credits_Action
+    
+    cmp edx, 68h
+    ja 0x0061A9C5 ; default
+    jmp 0x00619141 ; use original switch jump table
+    
+; New actions below
+    
+.Give_Credits_Action:
+    mov eax, [esi+40h] ; first parameter
+    call Spawn_Index50_To_House_Pointer
+    
+    cmp eax, -1 ; no house associated with spawn location
+    jz .Out
+
+    cmp eax, 0
+    jnz .Give_Credits
+    
+    call 0x004C4730 ; House_Pointer_From_HouseType_Index
+    
+.Give_Credits:
+    ; At this point we should have the house pointer in EAX
+    mov ebx, [esi+24h] ; second parameter, number of credits to give
+    mov ecx, [eax+1A4h] ; move current number of credits to ecx
+    add ecx, ebx
+    mov [eax+1A4h], ecx
+    
+.Out:
+    jmp 0x0061A9C5 ; default
