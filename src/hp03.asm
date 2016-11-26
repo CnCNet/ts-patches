@@ -15,9 +15,7 @@ hack 0x006703C1 ;_sonic_beam_fix
     jmp     0x6703C6
 
 ; - Cameo drawn over a factory BuildingType when infiltrated in the incorrect palette has now been fixed.
-hack 0x00428B00 ;_spy_cameo_palette
-    mov     edx, 0x7481F0
-    jmp     0x428B06
+@SET 0x00428B00, {mov edx, [0x007481F0]}
 
 ; - A human controlled AircraftType that is able to carry passengers would get it's target cell
 ;   corrupted, resulting in the Aircraft never landing. This is now fixed.

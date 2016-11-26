@@ -265,3 +265,16 @@ _BuildingClass_Draw_Overlays_draw_power:
     call 0x004BDA20
 
     jmp  hackend
+
+@LJZ 0x00428A88, _Draw_Overlays_spectator_spy
+section .text
+_Draw_Overlays_spectator_spy:
+    jnz  0x00428A8E
+
+    mov  eax, [PlayerPtr]
+    mov  ecx, [eax+0x20]
+    mov  eax, [IsSpectatorArray+ecx*4]
+    test eax, eax
+    jz   0x00428B13
+
+    jmp  0x00428A8E
