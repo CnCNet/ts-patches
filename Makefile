@@ -91,6 +91,7 @@ MP_OBJS          = \
                     src/shared_control.o \
                     src/recon_kick.o \
                     src/hover_show_health.o \
+                    src/autosave.o \
                     src/fix_100_unit_bug.o
 
 ifdef WWDEBUG

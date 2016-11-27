@@ -64,6 +64,8 @@ extern uint32_t ForceFire1;
 extern uint32_t ForceFire2;
 extern MessageListClass MessageListClass_this;
 extern double FramesPerMinute;
+extern int32_t PlayerEventCounts[8];
+extern bool IsHost;
 
 // ### Functions ###
 
@@ -111,6 +113,7 @@ CellClass * __thiscall MapClass__Coord_Cell(MouseClass *Map, wCoordStruct *);
 void MapClass__Reveal_The_Map();
 void __thiscall MapClass__Fill_Map_With_Fog(MouseClass *this);
 void __thiscall GScreenClass__Input(MouseClass *Map, int, int, int);
+void __thiscall GScreenClass__Render(MouseClass *Map);
 
 void __fastcall Create_Units(char i);
 void __cdecl hook_wwdebug_printf(char const *fmt, ...);
@@ -142,6 +145,8 @@ void __cdecl operator_delete(void *memory);
 
 void EnqueueEvent(EventClass *this);
 EventClass * __thiscall EventClass__EventClass_PlayerID(EventClass *e, int my_id, EventType t, int his_id);
+EventClass * __thiscall EventClass__EventClass_noarg(EventClass *e, int my_id, EventType t);
+
 void Toggle_Control(EventClass *e);
 
 bool __thiscall WWKeyboardClass__Down(WWKeyboardClass *this, uint32_t key);

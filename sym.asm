@@ -106,6 +106,7 @@ setcglob 0x008670BC, WOL_SERVER_PORT ; Hijacking this for Mumble
 
 ; EventClass
 setcglob 0x00493E40, EventClass__EventClass_PlayerID
+setcglob 0x00493DE0, EventClass__EventClass_noarg
 setcglob 0x007E15F8, Outlist
 setcglob 0x006CB1B8, FramesPerMinute
 
@@ -185,6 +186,7 @@ setcglob 0x0051E0A0, MapClass__Reveal_The_Map
 setcglob 0x0052BBE0, MapClass__Fill_Map_With_Fog
 setcglob 0x007B3304, dword_7B3304
 setcglob 0x004B9470, GScreenClass__Input
+setcglob 0x004B95A0, GScreenClass__Render
 
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent

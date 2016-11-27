@@ -19,6 +19,7 @@ cextern TunnelId
 cextern UsedSpawnsArray
 cextern IsSpectatorArray
 cextern RunAutoSS
+cextern AutoSaveGame
 cextern AimableSams
 cextern IntegrateMumbleSpawn
 cextern AttackNeutralUnits
@@ -140,6 +141,7 @@ section .rdata
     str_FrameSendRate    db "FrameSendRate",0
     str_MaxAhead        db "MaxAhead",0
     str_RunAutoSS       db "RunAutoSS",0
+    str_AutoSaveGame    db "AutoSaveGame", 0
     str_TeamName        db "TeamName",0
     str_AimableSams     db "AimableSams",0
     str_IntegrateMumble db "IntegrateMumble",0
@@ -897,6 +899,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_RunAutoSS, 0
     mov byte [RunAutoSS], al
+
+    SpawnINI_Get_Int str_Settings, str_AutoSaveGame, -1
+    mov dword [AutoSaveGame], eax
 
     SpawnINI_Get_Bool str_Settings, str_AimableSams, 0
     mov byte [AimableSams], al

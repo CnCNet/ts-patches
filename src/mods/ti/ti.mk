@@ -73,6 +73,7 @@ TI_OBJS = \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
+                    src/autosave.o \
                     src/fix_100_unit_bug.o \
                     src/hover_show_health.o \
                     src/mods/saved_games_in_subdir.o \
