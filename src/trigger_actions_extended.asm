@@ -76,6 +76,10 @@ hack 0x0061913B ; Extend trigger action jump table
     
 .Give_Credits_Action:
     mov eax, [esi+40h] ; first parameter
+    
+    cmp eax, 50
+    jl .Get_House_Pointer ; give credits to a regular house instead of a SpawnX house
+    
     call Spawn_Index50_To_House_Pointer
     
     cmp eax, -1 ; no house associated with spawn location
@@ -84,6 +88,7 @@ hack 0x0061913B ; Extend trigger action jump table
     cmp eax, 0
     jnz .Give_Credits
     
+.Get_House_Pointer:    
     call 0x004C4730 ; House_Pointer_From_HouseType_Index
     
 .Give_Credits:
