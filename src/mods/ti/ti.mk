@@ -73,6 +73,7 @@ TI_OBJS = \
                     src/buildingtype_initialization.o \
                     src/ionstorm_jumpjet_crash.o \
                     src/harvesters_autoharvest.o \
+                    src/harvesters_guardcommand.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
