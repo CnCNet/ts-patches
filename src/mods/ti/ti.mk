@@ -77,6 +77,7 @@ TI_OBJS = \
                     src/flickering_shadow_fix.o \
                     src/destroytrigger_crash.o \
                     src/voxelanim_damage_bug.o \
+                    src/whiteboy_cameo_bugfix.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
