@@ -72,6 +72,7 @@ DTA_OBJS = \
                     src/minimap_crash.o \
                     src/buildingtype_initialization.o \
                     src/ionstorm_jumpjet_crash.o \
+                    src/harvesters_autoharvest.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
