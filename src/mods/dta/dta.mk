@@ -74,6 +74,7 @@ DTA_OBJS = \
                     src/ionstorm_jumpjet_crash.o \
                     src/harvesters_autoharvest.o \
                     src/harvesters_guardcommand.o \
+                    src/flickering_shadow_fix.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
