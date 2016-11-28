@@ -75,6 +75,7 @@ DTA_OBJS = \
                     src/harvesters_autoharvest.o \
                     src/harvesters_guardcommand.o \
                     src/flickering_shadow_fix.o \
+                    src/destroytrigger_crash.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
