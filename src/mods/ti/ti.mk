@@ -71,6 +71,7 @@ TI_OBJS = \
                     src/guard_mode_patch.o \
                     src/minimap_crash.o \
                     src/buildingtype_initialization.o \
+                    src/ionstorm_jumpjet_crash.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
