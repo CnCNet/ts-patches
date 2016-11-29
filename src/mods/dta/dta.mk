@@ -79,6 +79,7 @@ DTA_OBJS = \
                     src/voxelanim_damage_bug.o \
                     src/whiteboy_cameo_bugfix.o \
                     src/mods/tiberium4_blocks_infantry.o \
+                    src/mods/factory_rallypoints.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
