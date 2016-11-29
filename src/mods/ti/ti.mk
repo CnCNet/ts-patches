@@ -78,6 +78,7 @@ TI_OBJS = \
                     src/destroytrigger_crash.o \
                     src/voxelanim_damage_bug.o \
                     src/whiteboy_cameo_bugfix.o \
+                    src/mods/tiberium4_blocks_infantry.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
