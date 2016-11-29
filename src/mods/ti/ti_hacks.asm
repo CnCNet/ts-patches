@@ -62,6 +62,14 @@ sstring str_DarkRed, "DarkRed"
 
 @SET 0x006CA940, {db "TEM",0,0,0}
 
+@SET 0x006F99C4, {db "PWMEL",0}
+@SET 0x006F99D8, {db "TICREDIT.txt"}
+@SET 0x00706A68, {db "GHV"}
+
+; Erase NAWALL and GAWALL
+@SET 0x00710DA4, {db 0,0,0,0,0,0}
+@SET 0x00710DAC, {db 0,0,0,0,0,0}
+
 ; Remove need for MAPS%02d.MIX
 @SET 0x0044EB1E, push str_CacheMIX
 @SET 0x004E41D0, push str_CacheMIX
