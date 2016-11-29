@@ -2,14 +2,16 @@
 
 ; Objects have to be selected to show their health and additional symbols. This
 ; hack adds support to show (only) the health bar when the mouse hovers over it.
+; This feature can be disabled with the HoverShowHealth tag in sun.ini.
 ;
 ; Additionally, veterancy insignia and the medic icon are now always displayed,
 ; even if the unit is neither selected nor hovered. This works as if the unit
 ; were selected, that is, enemies won't see it.
 
-; Author: AlexB
-; Date: 2016-11-23, 2016-11-27
+; Authors: AlexB, Daniel Keeton Jr
+; Date: 2016-11-23, 2016-11-27, 2016-11-29
 
+%include "TiberianSun.inc"
 %include "macros/patch.inc"
 
 @LJMP 0x005E8910, _DisplayClass_SetAction_HoverHealth
@@ -30,6 +32,9 @@ section .text
 _ObjectClass_IsHovered:
     cmp BYTE [HealthBarForced], 0
     jne .Hovered
+
+    cmp BYTE [HoverShowHealth], 0
+    jz .NotHovered
 
     cmp [MouseHovered], ecx
     jne .NotHovered
