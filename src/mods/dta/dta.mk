@@ -87,6 +87,7 @@ DTA_OBJS = \
                     src/hover_show_health.o \
                     src/autosave.o \
                     src/fix_100_unit_bug.o \
+                    src/spy_fix.o \
                     src/mods/saved_games_in_subdir.o \
                     src/mods/tiberium_damage.o \
                     src/mods/no_sidecd_mix.o \
