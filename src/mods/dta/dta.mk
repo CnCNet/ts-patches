@@ -78,6 +78,7 @@ DTA_OBJS = \
                     src/destroytrigger_crash.o \
                     src/voxelanim_damage_bug.o \
                     src/whiteboy_cameo_bugfix.o \
+                    src/veterancy_from_allies.o \
                     src/mods/tiberium4_blocks_infantry.o \
                     src/mods/factory_rallypoints.o \
                     src/new_events.o \
