@@ -88,6 +88,7 @@ DTA_OBJS = \
                     src/autosave.o \
                     src/fix_100_unit_bug.o \
                     src/spy_fix.o \
+                    src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/aircraft_repair.o \
                     src/mods/saved_games_in_subdir.o \
