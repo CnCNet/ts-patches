@@ -88,6 +88,7 @@ DTA_OBJS = \
                     src/autosave.o \
                     src/fix_100_unit_bug.o \
                     src/spy_fix.o \
+                    src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/aircraft_repair.o \

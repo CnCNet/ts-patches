@@ -88,6 +88,7 @@ TI_OBJS = \
                     src/fix_100_unit_bug.o \
                     src/hover_show_health.o \
                     src/spy_fix.o \
+                    src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/cloakstop_to_empimmunity.o \
                     src/mods/reveal_crate_reshroud.o \
                     src/mods/no_insignificant_death_announcement.o \
