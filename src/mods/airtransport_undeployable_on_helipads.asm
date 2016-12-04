@@ -40,5 +40,5 @@ _AircraftClass__What_Action_Check_For_Building_On_Cell:
     jmp     0x0040B8CD
  
 .Ret_No_Deploy_Cursor:
-    mov     ebx, 0x0 ; NONE cursor
+    mov     ebx, 0x1d ; CANT_DEPLOY cursor
     jmp     0x0040B8CD
