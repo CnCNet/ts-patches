@@ -2,8 +2,7 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
  
-; Removes the broken CloakStop logic and instead units with CloakStop=yes
-; become EMP immune
+; Removes the broken CloakStop logic and instead replaces it with EMPImmune=
 ; Author: Iran
 
 @LJMP 0x00492E84, _Check_For_EMP_Immunity_Add_Check_For_CloakStop
