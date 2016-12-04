@@ -15,7 +15,9 @@ section .rdata
 section .text
  
 _Check_For_EMP_Immunity_Add_Check_For_CloakStop:
-    mov     eax, [esi+360h]
+    mov eax, [esi]
+    mov ecx, esi
+    call dword [eax+84h]
     mov     cl, [eax+443h] ; Check for CloakStop
     test    cl, cl
     jnz     0x00492F78
