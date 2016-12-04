@@ -97,7 +97,8 @@ MP_OBJS          = \
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
     CFLAGS += -D WWDEBUG
-    MP_OBJS        +=  src/debugging_help.o
+    MP_OBJS        +=  src/debugging_help.o \
+	                   src/tactical_zoom.o
 endif
 
 

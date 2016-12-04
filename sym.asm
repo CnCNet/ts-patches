@@ -187,6 +187,8 @@ setcglob 0x0052BBE0, MapClass__Fill_Map_With_Fog
 setcglob 0x007B3304, dword_7B3304
 setcglob 0x004B9470, GScreenClass__Input
 setcglob 0x004B95A0, GScreenClass__Render
+setcglob 0x0061CBA0, TActionClass__Zoom_Out
+setcglob 0x0061CB30, TActionClass__Zoom_In
 
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent

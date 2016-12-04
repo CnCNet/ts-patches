@@ -17,7 +17,8 @@ HookInitCommands() {
                                  &GrantControlCommand,
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
-                                 &MapSnapshotCommand
+                                 &MapSnapshotCommand,
+                                 &ToggleTacticalZoomCommand
 #endif
                                };
   size_t len = sizeof(NewHotkeys)/sizeof((NewHotkeys)[0]);

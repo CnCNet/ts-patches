@@ -35,6 +35,7 @@ extern CommandClass ChatToPlayerCommand;
 extern CommandClass MultiplayerDebugCommand;
 extern CommandClass TextBackgroundColorCommand;
 extern CommandClass GrantControlCommand;
+extern CommandClass ToggleTacticalZoomCommand;
 extern bool SpawnerActive;
 extern bool Player_Active;
 extern HouseClass *PlayerPtr;
@@ -104,6 +105,9 @@ int __thiscall TechnoClass__Can_Player_Fire(void *);
 int __thiscall ObjectClass__InAir(void *);
 void ApplyUserColorOverrides();
 void __stdcall Save_Scenario();
+
+void __thiscall TActionClass__Zoom_Out();
+void __thiscall TActionClass__Zoom_In();
 
 int  __thiscall MapClass__GetCellFloorHeight(MouseClass *Map, xyzCoordStruct *);
 CellClass * __thiscall MapClass__Get_Target_Coord(MouseClass *Map, xyzCoordStruct *);
