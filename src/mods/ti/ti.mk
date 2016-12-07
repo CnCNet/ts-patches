@@ -88,6 +88,7 @@ TI_OBJS = \
                     src/fix_100_unit_bug.o \
                     src/hover_show_health.o \
                     src/spy_fix.o \
+                    src/veterancy_crate_check_trainable.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/cloakstop_to_empimmunity.o \

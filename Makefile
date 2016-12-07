@@ -92,7 +92,8 @@ MP_OBJS          = \
                     src/recon_kick.o \
                     src/hover_show_health.o \
                     src/autosave.o \
-                    src/fix_100_unit_bug.o
+                    src/fix_100_unit_bug.o \
+                    src/veterancy_crate_check_trainable.o \
 
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
