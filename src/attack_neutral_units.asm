@@ -27,4 +27,8 @@ hack 0x0062D4B2, 0x0062D4BA
         test    eax, eax
         jz      0x0062D8C0      ; Don't attack
 
+        mov     ecx, [eax+0x7C] ; Check for Range
+        test    ecx, ecx        ; Ranges is zero?
+        jz      0x0062D8C0      ; Don't attack
+
         jmp     hackend
