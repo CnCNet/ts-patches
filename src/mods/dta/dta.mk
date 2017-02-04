@@ -103,4 +103,5 @@ DTA_OBJS = \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/ingame_ui_text_color.o \
                     src/mods/dta/remove_ion_storm_effects.o \
-                    src/mods/dta/scrap_metal_explosion.o
+                    src/mods/dta/scrap_metal_explosion.o \
+					src/paradrop.o
