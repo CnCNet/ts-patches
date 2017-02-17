@@ -13,5 +13,5 @@ hack 0x005DEE42
     push 15
     jmp 0x005DEE47
 .out:
-    push 0
+    push 5
     jmp 0x005DEE47

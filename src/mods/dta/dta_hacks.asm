@@ -17,7 +17,6 @@ sstring str_Isodes, "ISODES"
 sstring str_IsodesMIX, "ISODES.MIX"
 sstring str_SideMIX, "SIDE%02d.MIX"
 sstring str_SideCDMIX, "SIDECD%02d.MIX"
-sstring str_Screenshots, "Screenshots\SCRN%04d.pcx"
 sstring str_MenuINI, "MENU.INI"
 sstring str_BriefingPCX, "BRIEFING.PCX"
 sstring str_BattleEINI, "BATTLEE.INI"
@@ -70,7 +69,6 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x004E80D8, push str_SideMIX
 @SET 0x004E838C, push esi
 @SET 0x004E8391, push str_SideCDMIX	; Search for SideCD##.mix instead of E01SC##.mix
-@SET 0x004EAC41, push str_Screenshots
 @SET 0x005801BB, push str_MenuINI
 @SET 0x0058A146, push str_SettingsINI
 @SET 0x005C04AF, {mov ecx, str_BriefingPCX}
@@ -98,12 +96,6 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x006862BD, push str_DTALong
 @SET 0x006862C2, push str_DTALong
 @SET 0x00687E07, push str_SettingsINI
-
-; Remove need for MAPS%02d.MIX
-@SET 0x0044EB1E, push str_CacheMIX
-@SET 0x004E41D0, push str_CacheMIX
-
-
 
 ; Palette renames
 ; UNITSNO.PAL -> UNITTEM.PAL
@@ -133,9 +125,6 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x004E45D8, {mov al, 1}
 @SET 0x004E45DA, nop
 ; Included in no_movie_and_score_mix_dependency.asm
-
-; Disable check for MULTI.MIX, force function to return al=1
-@SJMP 0x004E42EE, 0x004E42FD ; jmp short loc_4E42FD
 
 ; Remove framework mode mmt/mms loading
 @LJMP 0x004F5182, 0x004F528C    ; jmp loc_4F528C
@@ -191,11 +180,6 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x004E2D00, {add esp, 4}
 @SJMP 0x004E2D03, 0x004E2D13 ; jmp short
 @SET 0x004E2D05, nop
-
-; Disable check for Scores.mix 
-; (music will still be read, but the game won't crash if the MIX file isn't found)
-@SJMP 0x004E44A5, 0x004E44B6 ; jmp short
-; Included in no_movie_and_score_mix_dependency.asm
 
 ; Load sidebar MIX files for new sides properly (for saved games)
 @SET 0x005D6C4F, {mov cl, [eax+1D91h]}

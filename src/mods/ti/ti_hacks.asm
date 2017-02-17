@@ -11,7 +11,6 @@ sstring str_CacheMIX, "CACHE.MIX"
 sstring str_Sounds01MIX, "SOUNDS01.MIX"
 sstring str_SideMIX, "SIDE%02d.MIX"
 sstring str_SideCDMIX, "SIDECD%02d.MIX"
-sstring str_Screenshots, "Screenshots\SCRN%04d.pcx"
 sstring str_MenuINI, "MENU.INI"
 sstring str_BriefingPCX, "BRIEFING.PCX"
 sstring str_BattleEINI, "BATTLEE.INI"
@@ -40,7 +39,6 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x004E43ED, push str_SoundsMIX
 @SET 0x004E80D8, push str_SideMIX
 @SET 0x004E838C, push esi
-@SET 0x004EAC41, push str_Screenshots
 @SET 0x005801BB, push str_MenuINI
 ;@SET 0x005C04AF, {mov ecx, str_BriefingPCX}
 @SET 0x005FF2C0, {cmp edx, str_TILong}
@@ -69,10 +67,6 @@ sstring str_DarkRed, "DarkRed"
 ; Erase NAWALL and GAWALL
 @SET 0x00710DA4, {db 0,0,0,0,0,0}
 @SET 0x00710DAC, {db 0,0,0,0,0,0}
-
-; Remove need for MAPS%02d.MIX
-@SET 0x0044EB1E, push str_CacheMIX
-@SET 0x004E41D0, push str_CacheMIX
 
 ;
 
@@ -132,11 +126,6 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x004E2D00, {add esp, 4}
 @SJMP 0x004E2D03, 0x004E2D13 ; jmp short
 @SET 0x004E2D05, nop
-
-; Disable check for Scores.mix 
-; (music will still be read, but the game won't crash if the MIX file isn't found)
-@SJMP 0x004E44A5, 0x004E44B6 ; jmp short
-; Included in no_movie_and_score_mix_dependency.asm
 
 ; Load sidebar MIX files for new sides properly (for saved games)
 @SET 0x005D6C4F, {mov cl, [eax+1D91h]}

@@ -98,6 +98,8 @@ DTA_OBJS = \
                     src/mods/tiberium_damage.o \
                     src/mods/no_sidecd_mix.o \
                     src/mods/horv_via_undeploysinto.o \
+                    src/mods/screenshots_in_subdir.o \
+                    src/mods/disable_file_checks.o \
                     src/mods/dta/dta_hacks.o \
                     src/mods/dta/logger.o \
                     src/mods/dta/auto_deploy_mcv.o \
