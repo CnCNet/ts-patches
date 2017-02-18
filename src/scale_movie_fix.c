@@ -4,6 +4,9 @@
 
 //Movies are getting scaled too big and parts are out of the screen on certain resolutions (e.g. 1280x600)
 
+extern int VisibleRect__Width;
+extern int VisibleRect__Height;
+
 void ScaleMovieFix(int *finalWidth, int *finalHeight, int *posX, int *posY)
 {
     if (*finalHeight > VisibleRect__Height)

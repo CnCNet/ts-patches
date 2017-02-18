@@ -119,11 +119,11 @@ WINDRES    ?= windres
 
 -include custom.mk
 
-all: tibsun.exe dta.exe ti.exe singleplayer.exe
+all: tibsun.exe dta.exe ti.exe singleplayer.exe tsclientgame.exe
 
 clean:
 	$(RM) $(OUTPUT) $(COMMON_OBJS)
-	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS) $(TI_OBJS)
+	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS) $(TI_OBJS) $(TSCLIENT_OBJS)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
@@ -165,6 +165,17 @@ src/mods/ti/res/res.o: src/mods/ti/res/res.rc
 
 ti.exe: $(LDS) $(INPUT) $(TI_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(TI_OBJS)
+	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
+	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
+	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
+	$(PETOOL) dump $@
+
+include src/mods/tsclient/tsclient.mk
+src/mods/tsclient/res/res.o: src/mods/tsclient/res/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/tsclient/res/ -Ires/  $< $@
+
+tsclientgame.exe: $(LDS) $(INPUT) $(TSCLIENT_OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(TSCLIENT_OBJS)
 	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)

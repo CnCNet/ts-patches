@@ -3,6 +3,7 @@ tibsun.exe
 dta.exe
 ti.exe
 singleplayer.exe
+tsclientgame.exe
 # *local* configuration file, seriously
 config.mk
 custom.mk
