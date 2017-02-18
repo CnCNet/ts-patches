@@ -20,6 +20,7 @@ cextern UsedSpawnsArray
 cextern IsSpectatorArray
 cextern RunAutoSS
 cextern AutoSaveGame
+cextern NextAutoSave
 cextern AimableSams
 cextern IntegrateMumbleSpawn
 cextern AttackNeutralUnits
@@ -902,6 +903,7 @@ Initialize_Spawn:
 
     SpawnINI_Get_Int str_Settings, str_AutoSaveGame, -1
     mov dword [AutoSaveGame], eax
+    mov dword [NextAutoSave], eax
 
     SpawnINI_Get_Bool str_Settings, str_AimableSams, 0
     mov byte [AimableSams], al
