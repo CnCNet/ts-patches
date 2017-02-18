@@ -19,6 +19,8 @@ extern bool OverrideColors;
 extern int TextBackgroundColor;
 extern uint8_t PlayerColorMap[];
 extern MouseClass *MouseClass_Map;
+extern int32_t VisibleRect__Width;
+extern int32_t VisibleRect__Height;
 extern RulesClass *Rules;
 extern int dword_7B3304;
 extern DynamicVectorClass DynamicVectorClass_AircraftClass;
