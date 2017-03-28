@@ -1,0 +1,39 @@
+#pragma pack(push, 1)
+typedef struct ObjectTypeClass
+{
+  AbstractTypeClass a;
+  int field_60;
+  int Armor;
+  int Strength;
+  float Image;
+  int ImageOutdated;
+  int BodyImage;
+  int BodyHVA;
+  int TurretImage;
+  int TurretMotion;
+  int BarrelImage;
+  int BarrelMotion;
+  int ImageDimentions;
+  int CrushSound;
+  char ImageFile[25];
+  char AlphaImageFile[25];
+  char Theater;
+  char Crushable;
+  char RadarInvisible;
+  char Selectable;
+  char LegalTarget;
+  char Insignificant;
+  char Immune;
+  char IsLogic;
+  char field_CE;
+  char Voxel;
+  char NewTheater;
+  char HasRadialIndicator;
+  char IgnoresFirestorm;
+  char field_D3;
+  VoxelCacheClass VoxelCache1;
+  VoxelCacheClass VoxelCache2;
+  VoxelCacheClass VoxelCache3;
+  VoxelCacheClass VoxelCache4;
+} ObjectTypeClass;
+#pragma pack(pop)

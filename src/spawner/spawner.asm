@@ -858,8 +858,8 @@ Initialize_Spawn:
     SpawnINI_Get_Bool str_Settings, str_FogOfWar, 0
     mov byte [FogOfWar], al
 
-    SpawnINI_Get_Bool str_Settings, str_EasyShroud, 0
-    mov byte [EasyShroud], al
+    ;SpawnINI_Get_Bool str_Settings, str_EasyShroud, 0
+    ;mov byte [EasyShroud], al
     mov byte [FogOfWar], al ; EasyShroud requires Fog
 
     SpawnINI_Get_Bool str_Settings, str_BuildOffAlly, 0

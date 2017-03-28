@@ -26,6 +26,10 @@ setcglob 0x006FB630, Player_Active
 setcglob 0x0040F2A0, TechnoClass_What_Weapon_Should_I_Use
 setcglob 0x00632310, TechnoClass__Can_Player_Fire
 setcglob 0x005872A0, ObjectClass__InAir
+setcglob 0x00403570, Is_Techno
+
+; FootClass
+setcglob 0x00584BF0, Is_Foot
 
 ; AircraftClass
 setcglob 0x0040BA40, AircraftClass__Mission_Attack
@@ -39,6 +43,7 @@ setcglob 0x007E4058, DynamicVectorClass_AircraftClass
 setcglob 0x007E4858, CurrentObjectsArray
 setcglob 0x007E4868, CurrentObjectsArray_Count
 setcglob 0x0076092C, SearchDirs
+setcglob 0x006CD148, ArmorNames
 
 ; INI
 setcglob 0x004E8A30, INIClass__INIClass
@@ -123,6 +128,7 @@ setcglob 0x006B2330, Get_Message_Delay_Or_Duration
 setcglob 0x007E24E4, Message_Input_Player_Dead
 setcglob 0x005098D0, Message_Input
 setcglob 0x005739E0, MessageListClass__Manage
+setcglob 0x00573DC0, MessageListClass__Draw
 setcglob 0x007E36A4, MessageToIPaddr
 setcglob 0x007E36A8, MessageToPort
 setcglob 0x007E36AC, MessageToAFI
@@ -147,6 +153,10 @@ setcglob 0x007E2524, MaxMaxAhead
 setcglob 0x007E2510, FrameSendRate
 setcglob 0x007E3FA8, LatencyFudge
 setcglob 0x007E2514, RequestedFPS
+setcglob 0x00804D2C, FramesPerSecond
+setcglob 0x00804D34, AverageFPS
+setcglob 0x00804D30, AverageFPS2
+setcglob 0x0080CA80, GameStartTime
 setcglob 0x007E2464, ProtocolVersion
 setcglob 0x007E289A, OutOfSync
 setcglob 0x00574F90, Init_Network
@@ -189,6 +199,7 @@ setcglob 0x004B9470, GScreenClass__Input
 setcglob 0x004B95A0, GScreenClass__Render
 setcglob 0x0061CBA0, TActionClass__Zoom_Out
 setcglob 0x0061CB30, TActionClass__Zoom_In
+setcglob 0x004B9440, GScreenClass__Flag_To_Redraw
 
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent
@@ -211,8 +222,13 @@ setcglob 0x00474E70, Fancy_Text_Print
 setcglob 0x00474A50, Simple_Text_Print
 
 ; Sidebar
-;setcglob 0x00749874, LEFT_STRIP
-;setcglob 0x00749C48, RIGHT_STRIP
+setcglob 0x0080C3BC, SidebarClass_Redraw_Buttons
+setcglob 0x0074C240, SidebarLoc
+setcglob 0x00749874, LEFT_STRIP
+setcglob 0x00749C48, RIGHT_STRIP
+setcglob 0x005F48F0, SidebarClass__StripClass__Flag_To_Redraw
+setcglob 0x005F38C0, SidebarClass__Blit
+setcglob 0x005F3560, SidebarClass__Draw_It
 
 ; clib
 setcglob 0x006B73A0, __strcmpi
@@ -225,6 +241,7 @@ setcglob 0x006B6A41, vsprintf
 setcglob 0x006B6730, stristr_
 setcglob 0x006BA490, strlen
 setcglob 0x006BE630, strcpy
+setcglob 0x006B6BA0, strncat
 setcglob 0x006BE766, strdup
 setcglob 0x006B51D7, operator_new
 setcglob 0x006B51CC, operator_delete
@@ -249,6 +266,7 @@ setcglob 0x007481C0, Hotkeys_Vector
 setcglob 0x007481C4, Hotkeys_ActiveCount
 setcglob 0x007481C8, Hotkeys_VectorMax
 setcglob 0x004EBCD0, CCINIClass_Vector_Resize
+setcglob 0x006D273C, AllianceCommandClass
 
 ;WSOCK32
 setcglob 0x006CA504, _imp__sendto
@@ -268,6 +286,8 @@ setcglob 0x006CA170, _imp__GetModuleHandleA
 setcglob 0x006CA200, _imp__GetModuleFileNameA
 setcglob 0x006CA39C, _imp__GetAsyncKeyState
 setcglob 0x006CA3BC, _imp__SetWindowPos
+setcglob 0x006CA448, _imp__GetKeyNameTextA
+setcglob 0x006CA398, _imp__MapVirtualKeyA
 setcglob 0x006CA3BC, SetWindowPos
 setcglob 0x006CA360, _imp__SetFocus
 setcglob 0x006CA360, SetFocus
@@ -282,6 +302,13 @@ setcglob 0x007E244C, TutorialSorted
 
 setcglob 0x0074950C, Current_Waypoint
 setcglob 0x004EAF20, Delete_Waypoint
+
+setcglob 0x0047C780, CC_Draw_Shape
+setcglob 0x00559DE0, MixFileClass__CCFileClass__Retrieve
+setcglob 0x0074C5D0, SidebarSurface
+setcglob 0x0074C5E4, TempSurface
+setcglob 0x0074C5EC, CompositeSurface
+setcglob 0x0074C5E0, AlternateSurface
 
 ;Address  Ordinal Name                          Library
 ;-------  ------- ----                          -------

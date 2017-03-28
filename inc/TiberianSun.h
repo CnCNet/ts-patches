@@ -2,13 +2,24 @@
 #include <stdint.h>
 #include <string.h>
 #include <windows.h>
+#include "Enums/RTTIType.h"
 #include "Enums/EventTypes.h"
+#include "TopLevelTypes.h"
 #include "Classes/AbstractClass.h"
+#include "Classes/AbstractTypeClass.h"
+#include "Classes/WeaponTypeClass.h"
+#include "Classes/ObjectTypeClass.h"
+#include "Classes/TechnoTypeClass.h"
+#include "Classes/IPX.h"
 #include "Classes/ObjectClass.h"
 #include "TiberianSun_Structures.h"
 #include "Classes/RulesClass.h"
 #include "Classes/HouseClass.h"
 #include "Classes/SessionClass.h"
+#include "Classes/RadioClass_MissionClass.h"
+#include "Classes/TechnoClass.h"
+#include "Classes/FootClass.h"
+#include "Classes/AircraftClass.h"
 
 // This header works with sym.asm which defines the Vanilla symbols
 // This header will be split up as it becomes larger
@@ -18,7 +29,7 @@ extern bool DisableEdgeScrolling;
 extern bool OverrideColors;
 extern int TextBackgroundColor;
 extern uint8_t PlayerColorMap[];
-extern MouseClass *MouseClass_Map;
+extern MouseClass MouseClass_Map;
 extern int32_t VisibleRect__Width;
 extern int32_t VisibleRect__Height;
 extern RulesClass *Rules;
@@ -32,17 +43,21 @@ extern int32_t Hotkeys_VectorMax;
 extern void *DynamicVectorClass__CommandClass;
 extern CommandClass MapSnapshotCommand;
 extern CommandClass ChatToAlliesCommand;
+extern vtCommandClass vtChatToAlliesCommand;
 extern CommandClass ChatToAllCommand;
+extern vtCommandClass vtChatToAllCommand;
 extern CommandClass ChatToPlayerCommand;
 extern CommandClass MultiplayerDebugCommand;
 extern CommandClass TextBackgroundColorCommand;
 extern CommandClass GrantControlCommand;
 extern CommandClass ToggleTacticalZoomCommand;
+extern CommandClass ToggleInfoPanelCommand;
 extern bool SpawnerActive;
 extern bool Player_Active;
 extern HouseClass *PlayerPtr;
 extern bool ChatToAlliesFlag;
 extern bool ChatToAllFlag;
+extern bool ChatToSpectatorsFlag;
 extern uint32_t IsSpectatorArray[8];
 extern size_t HouseClassArray_Count;
 extern void *ScenarioStuff;
@@ -67,8 +82,25 @@ extern uint32_t ForceFire1;
 extern uint32_t ForceFire2;
 extern MessageListClass MessageListClass_this;
 extern double FramesPerMinute;
+extern int32_t FramesPerSecond;
+extern int32_t AverageFPS;
+extern int32_t AverageFPS2;
 extern int32_t PlayerEventCounts[8];
 extern bool IsHost;
+extern bool EnableInfoPanel;
+extern DSurface *SidebarSurface;
+extern DSurface *TempSurface;
+extern DSurface *CompositeSurface;
+extern DSurface *AlternateSurface;
+extern char RIGHT_STRIP;
+extern char LEFT_STRIP;
+extern Rect SidebarLoc;
+extern bool SidebarClass_Redraw_Buttons;
+extern int32_t GameStartTime;
+extern IPXManagerClass IPXManagerClass_this;
+extern char *ArmorNames[];
+
+extern vtCommandClass AllianceCommandClass;
 
 // ### Functions ###
 
@@ -105,6 +137,9 @@ uint32_t __thiscall TechnoClass_What_Weapon_Should_I_Use(void *ac, void *w);
 int __thiscall AircraftClass__Mission_Attack(AircraftClass *me);
 int __thiscall TechnoClass__Can_Player_Fire(void *);
 int __thiscall ObjectClass__InAir(void *);
+int32_t __thiscall Is_Techno(AbstractClass *this);
+int32_t __thiscall Is_Foot(AbstractClass *this);
+
 void ApplyUserColorOverrides();
 void __stdcall Save_Scenario();
 
@@ -120,16 +155,33 @@ void MapClass__Reveal_The_Map();
 void __thiscall MapClass__Fill_Map_With_Fog(MouseClass *this);
 void __thiscall GScreenClass__Input(MouseClass *Map, int, int, int);
 void __thiscall GScreenClass__Render(MouseClass *Map);
+void __thiscall GScreenClass__Flag_To_Redraw(MouseClass *Map);
+void __thiscall SidebarClass__StripClass__Flag_To_Redraw(void *this);
+void __thiscall SidebarClass__Blit(void *this, char a2);
+void __thiscall SidebarClass__Draw_It(MouseClass *Map, char a2);
+
+extern __fastcall void
+CC_Draw_Shape(DSurface *surface, void *palette, Image *image, int32_t frame,
+              XYCoord *s_pos, Rect *position, int32_t a6, int32_t a7,
+              int32_t a8, int32_t a9, int32_t tint, Image *z_shape,
+              int32_t z_frame, int32_t a13, int32_t where);
+
+extern __thiscall Image *MixFileClass__CCFileClass__Retrieve(char *name);
 
 void __fastcall Create_Units(char i);
 void __cdecl hook_wwdebug_printf(char const *fmt, ...);
 int __thiscall DynamicVectorClass__CommandClass__Add(void *v, CommandClass **c);
 void  __thiscall CommandDestroy(void *a, char b);
+
+void ShowInfo(DSurface *s, Rect *l);
+int32_t ResponseTimeFunc(int32_t a);
+
 void __thiscall MessageListClass__Manage(MessageListClass *m);
+void __thiscall MessageListClass__Draw(MessageListClass *m);
 void __thiscall MessageListClass__Add_Message(MessageListClass *this, char *buf,
                                               char *name, char *message, int color,
                                               int32_t PrintType, int32_t duration);
-void __fastcall Simple_Text_Print(int32_t *out_width, char *str, void *surface,
+void __fastcall Simple_Text_Print(XYCoord *out_width, char *str, DSurface *surface,
                                   Rect *surf_rect,
                                   Rect *dest, int32_t *color,
                                   int32_t bg_color,
@@ -137,6 +189,7 @@ void __fastcall Simple_Text_Print(int32_t *out_width, char *str, void *surface,
 
 int  __fastcall MapSnapshot(char *name, int n);
 void __stdcall Load_Keyboard_Hotkeys();
+void InfoPanelHotkeysInit();
 void __thiscall CCINIClass_Vector_Resize(Hotkey **h, int32_t size);
 void __thiscall Multiplayer_Debug_Print();
 void __thiscall HouseClass__Make_Ally_House(HouseClass *self, HouseClass *house);

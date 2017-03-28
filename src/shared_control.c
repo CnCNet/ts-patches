@@ -92,7 +92,7 @@ GrantControl_Execute()
         if (CurrentObjectsArray.ActiveCount > 0)
         {
             ObjectClass *first = *CurrentObjectsArray.Vector;
-            int32_t his_id = first->vftable->Owning_HouseID(first);
+            int32_t his_id = ((AbstractClass *)first)->vftable->Owning_HouseID((AbstractClass *)first);
             if (PlayerPtr->ID != his_id
                 &&
                 HouseClass__Is_Ally(PlayerPtr, his_id))
