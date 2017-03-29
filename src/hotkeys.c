@@ -15,6 +15,7 @@ HookInitCommands() {
                                  &ChatToPlayerCommand,
                                  &TextBackgroundColorCommand,
                                  &GrantControlCommand,
+                                 //&ToggleInfoPanelCommand,
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
                                  &MapSnapshotCommand,
@@ -47,6 +48,7 @@ HookInitCommands() {
 
     if (key.KeyCode == 0xD)
       seen_return = 1;
+
   }
   if (!seen_allies && !seen_backspace) {
     WWDebug_Printf("****************************didn't see ChatToAllies adding as hotkey[%d]\n",Hotkeys_ActiveCount);
@@ -63,6 +65,7 @@ HookInitCommands() {
     Hotkeys_Vector[Hotkeys_ActiveCount].KeyCode = 0x0D;
     ++Hotkeys_ActiveCount;
   }
+  //InfoPanelHotkeysInit();
 }
 
 /* Start MapSnapshot */
@@ -102,6 +105,9 @@ char *  __thiscall ChatToAllies_INIname(void *a)     { return "ChatToAllies"; }
 char *  __thiscall ChatToAllies_Category(void *a)    { return "Chat"; }
 char *  __thiscall ChatToAllies_Name(void *a)        { return "ChatToAllies"; }
 int     __thiscall ChatToAllies_Execute(void *a)     {
+  if (IsSpectatorArray[PlayerPtr->ID])
+    ChatToSpectatorsFlag = 1;
+
   if (!PlayerPtr->Defeated) {
     ChatToAlliesFlag = 1; // Defined in chatallies.asm
     WWDebug_Printf("ChatToAllies enabled[%x]\n",&ChatToAllies_Execute);
