@@ -19,8 +19,6 @@ cextern TunnelId
 cextern UsedSpawnsArray
 cextern IsSpectatorArray
 cextern RunAutoSS
-cextern AutoSaveGame
-cextern NextAutoSave
 cextern AimableSams
 cextern IntegrateMumbleSpawn
 cextern AttackNeutralUnits

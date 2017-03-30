@@ -33,6 +33,7 @@ _Execute_DoList_dont_recon:
 
 ; Hack the REMOVEPLAYER event
 hack 0x00494EE4
+    mov  dword [AutoSaveGame], -1
     mov  eax, [esi+0x6]
     cmp  byte [OutOfSyncArray+eax], 1
     jz   0x00494F1D
