@@ -14,8 +14,13 @@ section .text
 
 _Execute_DoList_dont_recon:
     mov  edx, [eax+0xc+0x6]     ;ID
+
+    cmp  byte [OutOfSyncArray+edx], 1
+    je   0x005B4F65
+
     mov  byte [OutOfSyncArray+edx], 1
 
+    pusha
     sub  esp, 46                ; sizeof(EventClass)
     mov  ecx, esp
     push edx
@@ -27,8 +32,11 @@ _Execute_DoList_dont_recon:
 
     push esp
     call EnqueueEvent
-
     add  esp, 50
+
+    call MapSnapshot_Execute
+    popa
+
     jmp  0x005B4F65
 
 ; Hack the REMOVEPLAYER event
