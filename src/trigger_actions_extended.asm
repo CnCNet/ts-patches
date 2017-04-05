@@ -67,13 +67,20 @@ Spawn_Index50_To_House_Pointer:
 hack 0x0061913B ; Extend trigger action jump table
     cmp edx, 105
     jz .Give_Credits_Action
+    cmp edx, 106
+    jz .Enable_ShortGame_Action
+    cmp edx, 107
+    jz .Disable_ShortGame_Action
     
     cmp edx, 68h
     ja 0x0061A9C5 ; default
     jmp 0x00619141 ; use original switch jump table
     
 ; New actions below
-    
+
+; ********************
+; *** Give credits ***
+; ********************
 .Give_Credits_Action:
     mov eax, [esi+40h] ; first parameter
     
@@ -100,3 +107,14 @@ hack 0x0061913B ; Extend trigger action jump table
     
 .Out:
     jmp 0x0061A9C5 ; default
+    
+; **********************************
+; *** Enable / disable ShortGame ***
+; **********************************
+.Enable_ShortGame_Action:
+    mov byte [ShortGame], 1
+    jmp 0x0061A9C5 ; default
+
+.Disable_ShortGame_Action:
+    mov byte [ShortGame], 0
+    jmp 0x0061A9C5
