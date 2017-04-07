@@ -10,8 +10,8 @@
 %include "macros/patch.inc"
 
 ; undeploy + set rally point without alt
-@SET 0x00631F29, nop
-@SET 0x00631F2A, nop
+;@SET 0x00631F29, nop
+;@SET 0x00631F2A, nop
 
 ; undeploy with alt, rally point without
-;@SJNZ 0x00631F29, 0x00631F3A
+@SJNZ 0x00631F29, 0x00631F3A
