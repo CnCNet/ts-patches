@@ -1,0 +1,21 @@
+#include "TopLevelTypes.h"
+
+extern vtCommandClass AllianceCommandClass;
+extern vtCommandClass CenterREventCommandClass;
+extern vtCommandClass TogglePowerCommandClass;
+extern vtCommandClass GuardCommandClass;
+extern vtCommandClass ToggleSellCommandClass;
+extern vtCommandClass DeployCommandClass;
+extern vtCommandClass StopCommandClass;
+extern vtCommandClass ScatterCommandClass;
+extern vtCommandClass CenterBaseCommandClass;
+extern vtCommandClass SelectViewCommandClass;
+extern vtCommandClass ToggleRepairCommandClass;
+extern vtCommandClass OptionsCommandClass;
+extern vtCommandClass SetView1CommandClass;
+extern vtCommandClass View1CommandClass;
+extern vtCommandClass FollowCommandClass;
+extern vtCommandClass WaypointCommandClass;
+extern vtCommandClass DeleteWayPointCommandClass;
+extern vtCommandClass SelectSameTypeCommandClass;
+extern vtCommandClass SelectTeamCommandClass;

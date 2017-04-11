@@ -184,6 +184,7 @@ setcglob 0x007482C0, WWKeyboard
 setcglob 0x007E47B0, Left_Shift_Key
 setcglob 0x007E47B4, Right_Shift_Key
 setcglob 0x004FB390, WWKeyboardClass__Down
+setcglob 0x0059C9D0, PrettyPrintKey
 setcglob 0x007E47A8, ForceFire1
 setcglob 0x007E47AC, ForceFire2
 
@@ -200,6 +201,7 @@ setcglob 0x004B95A0, GScreenClass__Render
 setcglob 0x0061CBA0, TActionClass__Zoom_Out
 setcglob 0x0061CB30, TActionClass__Zoom_In
 setcglob 0x004B9440, GScreenClass__Flag_To_Redraw
+setcglob 0x00475D90, DisplayClass__Init_IO
 
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent
@@ -229,6 +231,8 @@ setcglob 0x00749C48, RIGHT_STRIP
 setcglob 0x005F48F0, SidebarClass__StripClass__Flag_To_Redraw
 setcglob 0x005F38C0, SidebarClass__Blit
 setcglob 0x005F3560, SidebarClass__Draw_It
+setcglob 0x005F2720, SidebarClass__Init_IO
+setcglob 0x005F2900, SidebarClass__Init_For_House
 
 ; clib
 setcglob 0x006B73A0, __strcmpi
@@ -267,6 +271,24 @@ setcglob 0x007481C4, Hotkeys_ActiveCount
 setcglob 0x007481C8, Hotkeys_VectorMax
 setcglob 0x004EBCD0, CCINIClass_Vector_Resize
 setcglob 0x006D273C, AllianceCommandClass
+setcglob 0x006D27E4, CenterREventCommandClass
+setcglob 0x006d27AC, TogglePowerCommandClass
+setcglob 0x006D26CC, GuardCommandClass
+setcglob 0x006D2790, ToggleSellCommandClass
+setcglob 0x006D2694, DeployCommandClass
+setcglob 0x006D26B0, StopCommandClass
+setcglob 0x006D26E8, ScatterCommandClass
+setcglob 0x006D2720, CenterBaseCommandClass
+setcglob 0x006D2758, SelectViewCommandClass
+setcglob 0x006D2774, ToggleRepairCommandClass
+setcglob 0x006D29C0, OptionsCommandClass
+setcglob 0x006D2A30, SetView1CommandClass
+setcglob 0x006D2AA0, View1CommandClass
+setcglob 0x006D2ABC, FollowCommandClass
+setcglob 0x006D2B80, WaypointCommandClass
+setcglob 0x006D2BF0, DeleteWayPointCommandClass
+setcglob 0x006D2BD4, SelectSameTypeCommandClass
+setcglob 0x006D2B0C, SelectTeamCommandClass
 
 ;WSOCK32
 setcglob 0x006CA504, _imp__sendto
@@ -288,6 +310,7 @@ setcglob 0x006CA39C, _imp__GetAsyncKeyState
 setcglob 0x006CA3BC, _imp__SetWindowPos
 setcglob 0x006CA448, _imp__GetKeyNameTextA
 setcglob 0x006CA398, _imp__MapVirtualKeyA
+setcglob 0x006CA394, _imp__ToAscii
 setcglob 0x006CA3BC, SetWindowPos
 setcglob 0x006CA360, _imp__SetFocus
 setcglob 0x006CA360, SetFocus

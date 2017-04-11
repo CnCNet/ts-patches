@@ -108,4 +108,8 @@ DTA_OBJS = \
                     src/mods/dta/ingame_ui_text_color.o \
                     src/mods/dta/remove_ion_storm_effects.o \
                     src/mods/dta/scrap_metal_explosion.o \
-					src/paradrop.o
+                    src/paradrop.o \
+                    src/tactical_zoom.o \
+                    src/response_time_func.o \
+                    src/show_stats.o \
+                    src/sidebar.o \

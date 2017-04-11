@@ -1,3 +1,6 @@
+#ifndef TOPLEVELTYPES_H
+#define TOPLEVELTYPES_H
+
 #pragma pack(push, 1)
 typedef struct int_ll {
   int32_t v;
@@ -64,7 +67,7 @@ typedef struct DifficultyClass
 
 typedef struct vtCommandClass {
   void *Destroy;
-  void *ININame;
+  char *(__thiscall *ININame)(void *);
   char *(__thiscall *Name)(void *);
   void *Category;
   void *Description;
@@ -228,3 +231,5 @@ typedef struct RGB
   char b;
 } RGB;
 #pragma pack(pop)
+
+#endif //TOPLEVELTYPES_H

@@ -5,6 +5,7 @@
 #include "Enums/RTTIType.h"
 #include "Enums/EventTypes.h"
 #include "TopLevelTypes.h"
+#include "CommandClasses.h"
 #include "Classes/AbstractClass.h"
 #include "Classes/AbstractTypeClass.h"
 #include "Classes/WeaponTypeClass.h"
@@ -87,7 +88,7 @@ extern int32_t AverageFPS;
 extern int32_t AverageFPS2;
 extern int32_t PlayerEventCounts[8];
 extern bool IsHost;
-extern bool EnableInfoPanel;
+extern int32_t InfoPanel;
 extern DSurface *SidebarSurface;
 extern DSurface *TempSurface;
 extern DSurface *CompositeSurface;
@@ -100,7 +101,6 @@ extern int32_t GameStartTime;
 extern IPXManagerClass IPXManagerClass_this;
 extern char *ArmorNames[];
 
-extern vtCommandClass AllianceCommandClass;
 
 // ### Functions ###
 
@@ -159,6 +159,9 @@ void __thiscall GScreenClass__Flag_To_Redraw(MouseClass *Map);
 void __thiscall SidebarClass__StripClass__Flag_To_Redraw(void *this);
 void __thiscall SidebarClass__Blit(void *this, char a2);
 void __thiscall SidebarClass__Draw_It(MouseClass *Map, char a2);
+void __thiscall SidebarClass__Init_IO(MouseClass *this);
+void __thiscall SidebarClass__Init_For_House(MouseClass *this);
+void __thiscall DisplayClass__Init_IO(void *this);
 
 extern __fastcall void
 CC_Draw_Shape(DSurface *surface, void *palette, Image *image, int32_t frame,
@@ -209,6 +212,7 @@ EventClass * __thiscall EventClass__EventClass_noarg(EventClass *e, int my_id, E
 void Toggle_Control(EventClass *e);
 
 bool __thiscall WWKeyboardClass__Down(WWKeyboardClass *this, uint32_t key);
+void __fastcall PrettyPrintKey(int16_t code, char *buf);
 
 #ifndef WWDEBUG
 #define WWDebug_Printf(format, ...)

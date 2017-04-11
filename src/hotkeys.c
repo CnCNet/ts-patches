@@ -15,7 +15,7 @@ HookInitCommands() {
                                  &ChatToPlayerCommand,
                                  &TextBackgroundColorCommand,
                                  &GrantControlCommand,
-                                 //&ToggleInfoPanelCommand,
+                                 &ToggleInfoPanelCommand,
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
                                  &MapSnapshotCommand,
@@ -65,7 +65,7 @@ HookInitCommands() {
     Hotkeys_Vector[Hotkeys_ActiveCount].KeyCode = 0x0D;
     ++Hotkeys_ActiveCount;
   }
-  //InfoPanelHotkeysInit();
+  InfoPanelHotkeysInit();
 }
 
 /* Start MapSnapshot */

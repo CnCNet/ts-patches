@@ -92,6 +92,9 @@ MP_OBJS          = \
                     src/recon_kick.o \
                     src/hover_show_health.o \
                     src/autosave.o \
+                    src/show_stats.o \
+                    src/sidebar.o \
+                    src/response_time_func.o \
                     src/fix_100_unit_bug.o \
                     src/veterancy_crate_check_trainable.o \
 

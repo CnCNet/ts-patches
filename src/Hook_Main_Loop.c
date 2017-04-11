@@ -7,6 +7,10 @@ CALL(0x005091A5, _MainLoop_AfterRender);
 
 bool HaventSetSpecTeam = true;
 
+int32_t PlayerEventCounts[8];
+int32_t PlayerEventExecs[8];
+int32_t PlayerEventLastFrame[8];
+
 int32_t AutoSaveGame;
 int32_t NextAutoSave;
 
