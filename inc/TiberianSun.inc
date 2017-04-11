@@ -213,6 +213,9 @@ cextern WWKeyboard
 cextern WWKeyboardClass__Down
 cextern Left_Shift_Key
 cextern Right_Shift_Key
+cextern Left_Alt_Key
+cextern Right_Alt_Key
+cextern MoveToUndeploy
 
 ; Aircraft
 cextern Loop_Test_Aircraft

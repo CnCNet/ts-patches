@@ -7,6 +7,7 @@ CALL(0x006010B8, _LoadSunIni);
 
 bool OverrideColors;
 bool HoverShowHealth;
+bool MoveToUndeploy = true;
 int32_t InfoPanel = -1;
 
 void LoadSunIni()
@@ -43,5 +44,6 @@ void LoadSunIni()
     MouseAlwaysInFocus =     SunIni_GetBool("Options", "MouseAlwaysInFocus", false);
     HoverShowHealth = SunIni_GetBool("Options", "HoverShowHealth", true);
     InfoPanel = SunIni_GetInt("Options", "InfoPanel", -1);
+    MoveToUndeploy = SunIni_GetBool("Options", "MoveToUndeploy", true);
 #endif
 }

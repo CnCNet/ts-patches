@@ -97,6 +97,8 @@ MP_OBJS          = \
                     src/response_time_func.o \
                     src/fix_100_unit_bug.o \
                     src/veterancy_crate_check_trainable.o \
+                    src/alt_to_undeploy.o \
+
 
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG

@@ -187,6 +187,8 @@ setcglob 0x004FB390, WWKeyboardClass__Down
 setcglob 0x0059C9D0, PrettyPrintKey
 setcglob 0x007E47A8, ForceFire1
 setcglob 0x007E47AC, ForceFire2
+setcglob 0x007E47A0, Left_Alt_Key
+setcglob 0x007E47A4, Right_Alt_Key
 
 ; MapClass
 setcglob 0x0051E130, MapClass__GetCellFloorHeight
