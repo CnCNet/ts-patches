@@ -102,3 +102,4 @@ TSCLIENT_OBJS = \
                     src/response_time_func.o \
                     src/show_stats.o \
                     src/sidebar.o \
+                    src/alt_to_undeploy.o \

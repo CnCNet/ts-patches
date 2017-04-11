@@ -98,6 +98,9 @@ MP_OBJS          = \
                     src/fix_100_unit_bug.o \
                     src/veterancy_crate_check_trainable.o \
                     src/alt_to_undeploy.o \
+                    src/factory_rallypoints.o \
+                    src/harvesters_autoharvest.o \
+                    src/harvesters_guardcommand.o \
 
 
 ifdef WWDEBUG

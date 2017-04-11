@@ -80,7 +80,7 @@ TI_OBJS = \
                     src/whiteboy_cameo_bugfix.o \
                     src/veterancy_from_allies.o \
                     src/mods/tiberium4_blocks_infantry.o \
-                    src/mods/factory_rallypoints.o \
+                    src/factory_rallypoints.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
@@ -112,3 +112,4 @@ TI_OBJS = \
                     src/response_time_func.o \
                     src/show_stats.o \
                     src/sidebar.o \
+                    src/alt_to_undeploy.o \
