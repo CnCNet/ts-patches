@@ -38,6 +38,7 @@ cextern PlayerColor
 cextern TournamentGame
 cextern EasyShroud
 cextern AutoSaveGame
+cextern NextAutoSave
 
 ;ini
 cextern INIClass_SUN_INI
