@@ -246,3 +246,4 @@ cextern HoverShowHealth
 
 ; CommandClass
 cextern CreateTeamCommandClass_Execute
+cextern CenterTeamCommandClass_Execute
