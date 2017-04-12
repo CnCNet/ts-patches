@@ -3,6 +3,7 @@
 %include "macros/datatypes.inc"
 
 cextern UsedSpawnsArray
+sstring HouseNameNeutral, "Neutral"
 
 hack 0x004C4733, 0x004C4739
 _HouseClase__House_From_HouseType:
@@ -17,24 +18,28 @@ _HouseClase__House_From_HouseType:
 
         mov eax, [UsedSpawnsArray+ecx*4]
         cmp eax, -1
-        je  .set_null
+        je  .set_neutral
 
         mov edi, [HouseClassArray_Vector]
         mov eax, [edi+eax*4]
 
         jmp .out
 
- .set_null:
-        mov eax, 0
+ .set_neutral:
+        mov  ecx, HouseNameNeutral
+        call HouseType_From_Name
+        mov  ecx, eax
+        mov  edi, [0x007E1568]
+        jmp  hackend
  .out:
         jmp 0x004C4759
 
 
-hack 0x006428B8
-_TEventClass__operator_paren_check_null1:
-        call 0x004C4730         ; HouseClass__HouseFrom_HousesType
+;hack 0x006428B8
+;_TEventClass__operator_paren_check_null1:
+;        call 0x004C4730         ; HouseClass__HouseFrom_HousesType
 
-        test eax, eax
-        jz   0x0064285C         ; Return False
+;        test eax, eax
+;        jz   0x0064285C         ; Return False
 
-        jmp  hackend
+;        jmp  hackend
