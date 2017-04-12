@@ -291,6 +291,7 @@ setcglob 0x006D2B80, WaypointCommandClass
 setcglob 0x006D2BF0, DeleteWayPointCommandClass
 setcglob 0x006D2BD4, SelectSameTypeCommandClass
 setcglob 0x006D2B0C, SelectTeamCommandClass
+setcglob 0x004E8C40, CreateTeamCommandClass_Execute
 
 ;WSOCK32
 setcglob 0x006CA504, _imp__sendto

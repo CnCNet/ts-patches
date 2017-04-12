@@ -108,6 +108,7 @@ MP_OBJS          = \
                     src/destroytrigger_crash.o \
                     src/basic_theme_fix.o \
                     src/aircraft_repair.o \
+                    src/add_team_better.o \
 
 
 ifdef WWDEBUG
