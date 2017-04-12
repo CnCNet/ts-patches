@@ -83,9 +83,9 @@ MP_OBJS          = \
                     src/new_search_dir.o \
                     src/only_the_host_may_change_gamespeed.o \
                     src/override_colors.o \
-					src/mods/dta/scrap_metal_explosion.o \
+                    src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/auto_deploy_mcv.o \
-					src/minimap_crash.o \
+                    src/minimap_crash.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \
@@ -101,6 +101,13 @@ MP_OBJS          = \
                     src/factory_rallypoints.o \
                     src/harvesters_autoharvest.o \
                     src/harvesters_guardcommand.o \
+                    src/veterancy_from_allies.o \
+                    src/flickering_shadow_fix.o \
+                    src/voxelanim_damage_bug.o \
+                    src/buildingtype_initialization.o \
+                    src/destroytrigger_crash.o \
+                    src/basic_theme_fix.o \
+                    src/aircraft_repair.o \
 
 
 ifdef WWDEBUG

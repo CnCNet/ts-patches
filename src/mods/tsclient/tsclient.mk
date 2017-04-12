@@ -86,7 +86,7 @@ TSCLIENT_OBJS = \
                     src/scale_movie_fix.o \
                     src/scale_movie_fix_hack.o \
                     src/ionstorm_jumpjet_crash.o \
-                    src/mods/aircraft_repair.o \
+                    src/aircraft_repair.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/no_insignificant_death_announcement.o \

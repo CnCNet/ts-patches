@@ -95,7 +95,7 @@ DTA_OBJS = \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
-                    src/mods/aircraft_repair.o \
+                    src/aircraft_repair.o \
                     src/mods/saved_games_in_subdir.o \
                     src/mods/tiberium_damage.o \
                     src/mods/no_sidecd_mix.o \
