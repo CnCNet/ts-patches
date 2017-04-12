@@ -54,6 +54,8 @@ CALL(0x004E8E4C, _has_control);
 CALL(0x004E8FC9, _has_control);
 //CenterTeamCommandClass::
 CALL(0x004E916C, _has_control);
+//SelectSameType
+CALL(0x004E55E6, _has_control);
 
 uint32_t Controlling_Houses[8];
 
