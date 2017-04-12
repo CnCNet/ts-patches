@@ -114,3 +114,4 @@ DTA_OBJS = \
                     src/show_stats.o \
                     src/sidebar.o \
                     src/alt_to_undeploy.o \
+                    src/hack_house_from_house_type.o \
