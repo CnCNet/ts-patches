@@ -110,6 +110,7 @@ MP_OBJS          = \
                     src/aircraft_repair.o \
                     src/add_team_better.o \
                     src/center_team.o \
+                    src/hack_house_from_house_type.o \
 
 
 ifdef WWDEBUG
