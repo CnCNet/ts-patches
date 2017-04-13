@@ -117,10 +117,10 @@ typedef struct HouseClass
   int AircraftFactoryCount;
   int PowerBonus;
   int PowerDrain;
-  int PrimaryAircraftFactory;
-  int PrimaryInfantryFactory;
-  int PrimaryUnitFactory;
-  int PrimaryBuildingFactory;
+  void *PrimaryAircraftFactory;
+  void *PrimaryInfantryFactory;
+  void *PrimaryUnitFactory;
+  void *PrimaryBuildingFactory;
   int FlagHolder;
   wCoordStruct HomeCell;
   int32_t PerHouseKills[8];

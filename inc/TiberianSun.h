@@ -53,6 +53,7 @@ extern CommandClass TextBackgroundColorCommand;
 extern CommandClass GrantControlCommand;
 extern CommandClass ToggleTacticalZoomCommand;
 extern CommandClass ToggleInfoPanelCommand;
+extern CommandClass PlaceBuildingCommand;
 extern bool SpawnerActive;
 extern bool Player_Active;
 extern HouseClass *PlayerPtr;
@@ -199,6 +200,9 @@ void __thiscall HouseClass__Make_Ally_House(HouseClass *self, HouseClass *house)
 bool __thiscall HouseClass__Is_Ally(HouseClass *this, int his_id);
 bool __thiscall HouseClass__Is_Ally_Techno(HouseClass *this, void *him);
 bool __thiscall HouseClass__Is_Player(HouseClass *this);
+void __thiscall HouseClass__Manual_Place(HouseClass *this, void *factory_building, void *place_building);
+void * __thiscall FactoryClass__Get_Product(void *factory);
+bool  __thiscall FactoryClass__Has_Completed(void *factory);
 
 void __stdcall HookInitCommands();
 void ParseIntLL(char *entry_string, int_ll **head);

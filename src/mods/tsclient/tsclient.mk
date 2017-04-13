@@ -103,3 +103,4 @@ TSCLIENT_OBJS = \
                     src/show_stats.o \
                     src/sidebar.o \
                     src/alt_to_undeploy.o \
+                    src/place_building_hotkey.o \

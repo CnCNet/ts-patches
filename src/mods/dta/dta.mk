@@ -115,3 +115,4 @@ DTA_OBJS = \
                     src/sidebar.o \
                     src/alt_to_undeploy.o \
                     src/hack_house_from_house_type.o \
+                    src/place_building_hotkey.o \

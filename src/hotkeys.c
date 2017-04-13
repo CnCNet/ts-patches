@@ -16,6 +16,7 @@ HookInitCommands() {
                                  &TextBackgroundColorCommand,
                                  &GrantControlCommand,
                                  &ToggleInfoPanelCommand,
+                                 &PlaceBuildingCommand,
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
                                  &MapSnapshotCommand,

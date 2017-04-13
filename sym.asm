@@ -16,6 +16,9 @@ setcglob 0x004BDB50, HouseClass__Make_Ally_House
 setcglob 0x004BD9E0, HouseClass__Is_Ally
 setcglob 0x004BDA60, HouseClass__Is_Ally_Techno
 setcglob 0x004CB950, HouseClass__Is_Player
+setcglob 0x004BEEA0, HouseClass__Manual_Place
+setcglob 0x004974A0, FactoryClass__Get_Product
+setcglob 0x00497470, FactoryClass__Has_Completed
 setcglob 0x005DE210, Assign_Houses
 setcglob 0x005EEF70, Get_MP_Color
 setcglob 0x004CDEF0, HouseType_From_Name

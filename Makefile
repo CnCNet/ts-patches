@@ -111,6 +111,7 @@ MP_OBJS          = \
                     src/add_team_better.o \
                     src/center_team.o \
                     src/hack_house_from_house_type.o \
+                    src/place_building_hotkey.o \
 
 
 ifdef WWDEBUG
