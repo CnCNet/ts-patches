@@ -108,6 +108,8 @@ DTA_OBJS = \
                     src/mods/dta/ingame_ui_text_color.o \
                     src/mods/dta/remove_ion_storm_effects.o \
                     src/mods/dta/scrap_metal_explosion.o \
+                    src/mods/dta/buildconst_harvesterunit_baseunit.o \
+                    src/mods/dta/sideindex_improvements_v2.o \
                     src/paradrop.o \
                     src/tactical_zoom.o \
                     src/response_time_func.o \
@@ -116,3 +118,4 @@ DTA_OBJS = \
                     src/alt_to_undeploy.o \
                     src/hack_house_from_house_type.o \
                     src/place_building_hotkey.o \
+                    src/center_team.o

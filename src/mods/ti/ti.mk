@@ -114,3 +114,4 @@ TI_OBJS = \
                     src/sidebar.o \
                     src/alt_to_undeploy.o \
                     src/place_building_hotkey.o \
+                    src/center_team.o
