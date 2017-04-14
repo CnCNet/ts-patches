@@ -11,10 +11,12 @@ int     __thiscall PlaceBuilding_Execute(void *a)     {
     void *fac = PlayerPtr->PrimaryBuildingFactory;
     if (fac && FactoryClass__Has_Completed(fac))
     {
-        void *build = FactoryClass__Get_Product(fac);
-        if (build)
-            // The first building argument to Manual_Place is supposed to be the consturction yard FIXME
-            HouseClass__Manual_Place(PlayerPtr, build, build);
+        void *product = FactoryClass__Get_Product(fac);
+        if (product)
+        {
+            void *facility = ObjectClass__Who_Can_Build_Me(product, 0, 0);
+            HouseClass__Manual_Place(PlayerPtr, facility, product);
+        }
     }
     return 1;
 }

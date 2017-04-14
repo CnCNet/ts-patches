@@ -54,6 +54,8 @@ extern CommandClass GrantControlCommand;
 extern CommandClass ToggleTacticalZoomCommand;
 extern CommandClass ToggleInfoPanelCommand;
 extern CommandClass PlaceBuildingCommand;
+extern CommandClass RepeatBuildingCommand;
+
 extern bool SpawnerActive;
 extern bool Player_Active;
 extern HouseClass *PlayerPtr;
@@ -140,6 +142,7 @@ int __thiscall TechnoClass__Can_Player_Fire(void *);
 int __thiscall ObjectClass__InAir(void *);
 int32_t __thiscall Is_Techno(AbstractClass *this);
 int32_t __thiscall Is_Foot(AbstractClass *this);
+void * __thiscall ObjectClass__Who_Can_Build_Me(void *this, int a1, int a2);
 
 void ApplyUserColorOverrides();
 void __stdcall Save_Scenario();
@@ -201,6 +204,7 @@ bool __thiscall HouseClass__Is_Ally(HouseClass *this, int his_id);
 bool __thiscall HouseClass__Is_Ally_Techno(HouseClass *this, void *him);
 bool __thiscall HouseClass__Is_Player(HouseClass *this);
 void __thiscall HouseClass__Manual_Place(HouseClass *this, void *factory_building, void *place_building);
+void __thiscall HouseClass__Begin_Production(HouseClass *this, int RTTI, int HeapID, int a3);
 void * __thiscall FactoryClass__Get_Product(void *factory);
 bool  __thiscall FactoryClass__Has_Completed(void *factory);
 
@@ -212,7 +216,7 @@ void __cdecl operator_delete(void *memory);
 void EnqueueEvent(EventClass *this);
 EventClass * __thiscall EventClass__EventClass_PlayerID(EventClass *e, int my_id, EventType t, int his_id);
 EventClass * __thiscall EventClass__EventClass_noarg(EventClass *e, int my_id, EventType t);
-
+EventClass * __thiscall EventClass__EventClass_produce(EventClass *e, int my_id, EventType t, int RTTI, int heapid);
 void Toggle_Control(EventClass *e);
 
 bool __thiscall WWKeyboardClass__Down(WWKeyboardClass *this, uint32_t key);

@@ -17,6 +17,7 @@ setcglob 0x004BD9E0, HouseClass__Is_Ally
 setcglob 0x004BDA60, HouseClass__Is_Ally_Techno
 setcglob 0x004CB950, HouseClass__Is_Player
 setcglob 0x004BEEA0, HouseClass__Manual_Place
+setcglob 0x004BE200, HouseClass__Begin_Production
 setcglob 0x004974A0, FactoryClass__Get_Product
 setcglob 0x00497470, FactoryClass__Has_Completed
 setcglob 0x005DE210, Assign_Houses
@@ -30,6 +31,7 @@ setcglob 0x0040F2A0, TechnoClass_What_Weapon_Should_I_Use
 setcglob 0x00632310, TechnoClass__Can_Player_Fire
 setcglob 0x005872A0, ObjectClass__InAir
 setcglob 0x00403570, Is_Techno
+setcglob 0x00586640, ObjectClass__Who_Can_Build_Me
 
 ; FootClass
 setcglob 0x00584BF0, Is_Foot
@@ -115,6 +117,7 @@ setcglob 0x008670BC, WOL_SERVER_PORT ; Hijacking this for Mumble
 ; EventClass
 setcglob 0x00493E40, EventClass__EventClass_PlayerID
 setcglob 0x00493DE0, EventClass__EventClass_noarg
+setcglob 0x004940A0, EventClass__EventClass_produce
 setcglob 0x007E15F8, Outlist
 setcglob 0x006CB1B8, FramesPerMinute
 
