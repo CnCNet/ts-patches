@@ -21,6 +21,7 @@
 #include "Classes/TechnoClass.h"
 #include "Classes/FootClass.h"
 #include "Classes/AircraftClass.h"
+#include "Classes/StripClass.h"
 
 // This header works with sym.asm which defines the Vanilla symbols
 // This header will be split up as it becomes larger
@@ -96,8 +97,8 @@ extern DSurface *SidebarSurface;
 extern DSurface *TempSurface;
 extern DSurface *CompositeSurface;
 extern DSurface *AlternateSurface;
-extern char RIGHT_STRIP;
-extern char LEFT_STRIP;
+extern StripClass RIGHT_STRIP;
+extern StripClass LEFT_STRIP;
 extern Rect SidebarLoc;
 extern bool SidebarClass_Redraw_Buttons;
 extern int32_t GameStartTime;
@@ -261,3 +262,4 @@ extern bool IntegrateMumbleSpawn;
 
 // Disable alt tab
 void LoadKeyboardHook();
+bool sidebar_has_cameo(int RTTI, int HeapID);

@@ -17,6 +17,7 @@ HookInitCommands() {
                                  &GrantControlCommand,
                                  &ToggleInfoPanelCommand,
                                  &PlaceBuildingCommand,
+                                 &RepeatBuildingCommand,
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
                                  &MapSnapshotCommand,

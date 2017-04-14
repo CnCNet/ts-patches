@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "patch.h"
 #include <string.h>
+#include <stdbool.h>
 
 #ifdef WWDEBUG
 LJMP(0x004082D0, _hook_wwdebug_printf);
@@ -90,4 +91,27 @@ GetHouseByUserName(char *name) {
 
   }
   return 0;
+}
+
+
+bool
+sidebar_has_cameo(int RTTI, int HeapID)
+{
+    CameoType c;
+    int i;
+    for (i = 0; i < LEFT_STRIP.CameoCount; ++i)
+    {
+        c = LEFT_STRIP.CameoList[i];
+        WWDebug_Printf("in_RTTI = %d, in_HeapID = %d, ItemType = %d, ItemIndex = %d\n", RTTI, HeapID, c.ItemType, c.ItemIndex);
+        if (c.ItemType == RTTI && c.ItemIndex == HeapID)
+            return true;
+    }
+    for (i = 0; i < RIGHT_STRIP.CameoCount; ++i)
+    {
+        c = RIGHT_STRIP.CameoList[i];
+        WWDebug_Printf("in_RTTI = %d, in_HeapID = %d, ItemType = %d, ItemIndex = %d\n", RTTI, HeapID, c.ItemType, c.ItemIndex);
+        if (c.ItemType == RTTI && c.ItemIndex == HeapID)
+            return true;
+    }
+    return false;
 }
