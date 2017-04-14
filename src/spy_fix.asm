@@ -29,3 +29,16 @@
 @SET 0x0062C6DD, {mov ecx, [edx+0x20]}
 @CLEAR 0x0062CA3D, 0x90, 0x0062CA40
 @SET 0x0062CA35, {mov ecx, [edx+0x20]}
+
+
+;;; Let the computer cheat and see disguised units
+@LJNZ 0x0062D50F, _Evaluate_Object_threat_disguised
+section .text
+_Evaluate_Object_threat_disguised:
+        mov ecx, [edi+0xEC] ; Owner
+        mov al, [ecx+0xC4]  ; IsHuman
+
+        test al, al
+        jnz  0x0062D8C0
+
+        jmp  0x0062D515

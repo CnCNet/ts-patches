@@ -127,6 +127,7 @@ cextern HouseTypesArray
 cextern HouseClass__Assign_Handicap
 cextern HouseClass__Make_Ally
 cextern HouseClass__Is_Ally
+cextern HouseClass__Is_Player
 cextern Assign_Houses
 cextern Get_MP_Color
 cextern HouseType_From_Name

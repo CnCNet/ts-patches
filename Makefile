@@ -113,6 +113,7 @@ MP_OBJS          = \
                     src/hack_house_from_house_type.o \
                     src/place_building_hotkey.o \
                     src/repeat_last_building_hotkey.o \
+                    src/spy_fix.o \
 
 
 ifdef WWDEBUG
