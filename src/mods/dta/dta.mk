@@ -102,6 +102,7 @@ DTA_OBJS = \
                     src/mods/horv_via_undeploysinto.o \
                     src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
+                    src/mods/no_crate_respawn_with_crates_disabled.o \
                     src/mods/dta/dta_hacks.o \
                     src/mods/dta/logger.o \
                     src/mods/dta/auto_deploy_mcv.o \
