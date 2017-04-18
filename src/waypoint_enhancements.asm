@@ -3,6 +3,11 @@
 %include "TiberianSun.inc"
 
 
+;;; Allow the waypoint loops to be created without holding down the shift key
+@SET 0x005E8B7F, { dw 0x9090 }  ; Skip the check for Shift key being held down
+
+;;; After a waypoint node is deleted, move the curretn waypoint pointer to the next waypoint node
+;;; This results in way easier to delete waypoints
 hack 0x004EAF2A, 0x004EAF30
         jnz     hackend
         mov     ecx, [0x007E2284]

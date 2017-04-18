@@ -78,7 +78,7 @@ MP_OBJS          = \
                     src/text_triggers.o \
                     src/attack_neutral_units.o \
                     src/mouse_always_in_focus.o \
-                    src/delete_waypoint.o \
+                    src/waypoint_enhancements.o \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
                     src/only_the_host_may_change_gamespeed.o \
