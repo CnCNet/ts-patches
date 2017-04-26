@@ -63,7 +63,7 @@ TSCLIENT_OBJS = \
                     src/text_triggers.o \
                     src/attack_neutral_units.o \
                     src/mouse_always_in_focus.o \
-                    src/delete_waypoint.o \
+                    src/waypoint_enhancements.o \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
                     src/override_colors.o \
@@ -105,4 +105,5 @@ TSCLIENT_OBJS = \
                     src/alt_to_undeploy.o \
                     src/place_building_hotkey.o \
                     src/repeat_last_building_hotkey.o \
-                    src/center_team.o
+                    src/center_team.o \
+                    src/hotkey_help.o

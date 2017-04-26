@@ -23,6 +23,9 @@
 #include "Classes/AircraftClass.h"
 #include "Classes/StripClass.h"
 
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
+
 // This header works with sym.asm which defines the Vanilla symbols
 // This header will be split up as it becomes larger
 
@@ -32,6 +35,8 @@ extern bool OverrideColors;
 extern int TextBackgroundColor;
 extern uint8_t PlayerColorMap[];
 extern MouseClass MouseClass_Map;
+extern Rect ViewPortRect;
+extern Rect VisibleRect;
 extern int32_t VisibleRect__Width;
 extern int32_t VisibleRect__Height;
 extern RulesClass *Rules;
@@ -104,6 +109,7 @@ extern bool SidebarClass_Redraw_Buttons;
 extern int32_t GameStartTime;
 extern IPXManagerClass IPXManagerClass_this;
 extern char *ArmorNames[];
+extern int ShowHelpKey;
 
 
 // ### Functions ###
@@ -173,6 +179,7 @@ CC_Draw_Shape(DSurface *surface, void *palette, Image *image, int32_t frame,
               XYCoord *s_pos, Rect *position, int32_t a6, int32_t a7,
               int32_t a8, int32_t a9, int32_t tint, Image *z_shape,
               int32_t z_frame, int32_t a13, int32_t where);
+extern void __thiscall DSurface_FillRect(DSurface *surface, Rect *location, int color);
 
 extern __thiscall Image *MixFileClass__CCFileClass__Retrieve(char *name);
 

@@ -8,7 +8,6 @@
 
 
 //CALL(0x0064D187, _show_stats);
-//CALL(0x004B966C, _MessageListClass__Draw_show_stats);
 CALL(0x0060E681, _MessageListClass__Draw_show_stats);
 extern int32_t PlayerEventCounts[8];
 extern int32_t PlayerEventLastFrame[8];
@@ -34,9 +33,9 @@ show_stats(int32_t *width, char *str, void *surface, Rect *s_coord, Rect *coord,
            int32_t *color, int32_t bg_color, int32_t TextPrintType, int32_t a9)
 {
     WWDebug_Printf("%x,%s, surface = %x, s_coord = (%d,%d,%d,%d),",
-                   width,str, surface, s_coord->left, s_coord->top, s_coord->right, s_coord->bottom);
+                   width,str, surface, s_coord->left, s_coord->top, s_coord->width, s_coord->height);
     WWDebug_Printf("coord = (%d,%d,%d,%d),",
-                   coord->left, coord->top, coord->right, coord->bottom);
+                   coord->left, coord->top, coord->width, coord->height);
     WWDebug_Printf(" color = %d, bg_color = %x, TextPrintType = %x, a9 = %x\n",
                    *color, bg_color, TextPrintType, a9);
 
@@ -59,7 +58,7 @@ MessageListClass__Draw_show_stats(MouseClass *this, char a2)
     if (FlagToReInit)
     {
         FlagToReInit = 0;
-        SidebarLoc.bottom += 153;
+        SidebarLoc.height += 153;
         SidebarClass__Init_IO(&MouseClass_Map);
         SidebarClass__Init_For_House(&MouseClass_Map);
     }
@@ -81,16 +80,14 @@ MessageListClass__Draw_show_stats(MouseClass *this, char a2)
 
 enum InfoPanelTypes {
     INFO_NONE = -1,
-    INFO_HOTKEYS = 0,
+    INFO_PERFORMANCE = 0,
     INFO_UNIT = 1,
-    INFO_PERFORMANCE = 2,
-    INFO_NETWORK = 3,
+    INFO_NETWORK = 2,
 };
 
 uint32_t ShowNetwork(char **out, char **col2, int *width);
 uint32_t ShowSelection(char **out, char **col2, int *width);
 uint32_t ShowPerformance(char **out, char **col2, int *width);
-uint32_t ShowHotkeys(char **out, char **col2, int *width);
 vtCommandClass vtToggleInfoPanelCommand;
 
 void
@@ -107,19 +104,20 @@ ShowInfo(DSurface *surface, Rect *location)
     switch(InfoPanel)
     {
     case INFO_NONE: return;
-    case INFO_HOTKEYS: tpt = ShowHotkeys(&info, &col2, &width); break;
     case INFO_UNIT: tpt = ShowSelection(&info, &col2, &width); break;
     case INFO_PERFORMANCE: tpt = ShowPerformance(&info, &col2, &width); break;
     case INFO_NETWORK: tpt = ShowNetwork(&info, &col2, &width); break;
     default: break;
     }
 
-    //WWDebug_Printf(info);
+    Rect info_location = *location;
+    info_location.width = width;
     if (info[0])
-        Simple_Text_Print(&out_dim, info, surface, location,
+        Simple_Text_Print(&out_dim, info, surface, &info_location,
                           &zero_loc, 0, 0, tpt, 1);
     Rect location2 = *location;
-    location2.left = width;
+    location2.left = location2.left + width + 4;
+    location2.width = location->width - (width + 4);
     if (col2[0])
         Simple_Text_Print(&out_dim, col2, surface, &location2,
                           &zero_loc, 0, 0, tpt, 1);
@@ -132,7 +130,7 @@ ShowPerformance(char **out, char **col2, int *width)
     static char buf[256] = {0};
     static int32_t last_actions = 0;
 
-    static char *col1 = "Game:\nFPS:\nAPM:\nEff:\n";
+    static char *col1 = "Time:\nFPS:\nAPM:\nEff:\n\nHotkeys:\n";
     static char *sfmt =
         "%d:%02d:%02d\n"
         "%d\n"
@@ -160,6 +158,12 @@ ShowPerformance(char **out, char **col2, int *width)
     sprintf(buf, sfmt, gameHours, gameMinutes % 60, gameSeconds % 60,
             FramesPerSecond, p_apm, eff);
 
+    static char KeyName[64];
+    PrettyPrintKey(ShowHelpKey, KeyName);
+    if (!KeyName[0])
+        strcpy(KeyName, "<unset>");
+    strncat(buf, "\n", 512);
+    strncat(buf, KeyName, 512);
     return 0x6046;
 }
 
@@ -170,17 +174,16 @@ ShowNetwork(char **out, char **col2, int *width)
     static char stats[512];
     static char pbuf[128];
     static char sbuf[128];
-    strcpy(players, "Net  latency/lost\n");
-    strcpy(stats, "\n");
+    strcpy(players, "Network\n");
+    strcpy(stats, "rtt/loss\n");
     char *fmt = "%4d/%d\n";
     int32_t i = IPXManagerClass_this.NumConnections;
 
     for (; i-->0;)
     {
         IPXGlobalConnClass *p = IPXManagerClass_this.ConnectionArray[i];
-        sprintf(pbuf, "%-6.6s\n", p->Name, 256);
+        sprintf(pbuf, "%s\n", p->Name, 256);
         strncat(players, pbuf, 512);
-        //strncat(bigbuf, p->Name, 256);
         sprintf(sbuf, fmt,
                 ResponseTimeFunc(p->CommBufferClass->AverageResponseTime),
                 p->PercentLost);
@@ -189,7 +192,7 @@ ShowNetwork(char **out, char **col2, int *width)
 
     *out = players;
     *col2 = stats;
-    *width = 78;
+    *width = 70;
     return 0x6046;
 }
 
@@ -199,6 +202,7 @@ ShowSelection(char **out, char **col2, int *width)
     static char buf[256] = {0};
     static char buf2[256] = {0};
 
+    *width = 148;
     ObjectClass *unit;
     if (CurrentObjectsArray.ActiveCount > 0)
     {
@@ -272,90 +276,11 @@ ShowSelection(char **out, char **col2, int *width)
     return 0x6046;
 }
 
-
-char hk_buf[512];
-char hk_descr_buf[512];
-uint32_t
-ShowHotkeys(char **out, char **out2, int *width)
-{
-    *out = hk_descr_buf;
-    *out2 = hk_buf;
-    *width = 86;
-    return 0x6049;
-}
-
-void
-InfoPanelHotkeysInit()
-{
-    static vtCommandClass *search_keys[] = {
-        &vtToggleInfoPanelCommand,
-        &vtChatToAlliesCommand,
-        &vtChatToAllCommand,
-        &AllianceCommandClass,
-        &GuardCommandClass,
-        &ToggleSellCommandClass,
-        &DeployCommandClass,
-        &StopCommandClass,
-        &CenterBaseCommandClass,
-        &SelectViewCommandClass,
-        &ToggleRepairCommandClass,
-        &WaypointCommandClass,
-        &SelectSameTypeCommandClass,
-    };
-    static int search_keys_len = sizeof(search_keys)/sizeof(vtCommandClass *);
-    static Hotkey *found_keys[sizeof(search_keys)/sizeof(vtCommandClass *)];
-
-    for (int i = 0; i < Hotkeys_ActiveCount; i++)
-    {
-        Hotkey *key = &(Hotkeys_Vector[i]);
-        for (int j = 0; j < search_keys_len; j++)
-        {
-            if (key->Command->vftable == search_keys[j])
-                found_keys[j] = key;
-        }
-    }
-
-    strncat(hk_descr_buf,
-            "SpeedScroll\n"
-            "ForceAttack\n"
-            "ForceMove\n"
-            "GuardArea\n"
-            "QueueMoves\n",
-            512);
-    strncat(hk_buf,
-            "R_Click+Drag\n"
-            "Ctrl+L_Click\n"
-            "Alt+L_Click\n"
-            "Ctrl+Alt+Click\n"
-            "Q\n",
-            512);
-
-    char KeyName[64];
-    char fmtKey[128];
-    char fmtDescr[128];
-    for (int i = 0; i < search_keys_len; i++)
-    {
-        if (found_keys[i])
-        {
-            PrettyPrintKey(found_keys[i]->KeyCode, KeyName);
-
-            sprintf(fmtKey, "%s\n", KeyName);
-            strncat(hk_buf, fmtKey, 512);
-        }
-        else {
-            sprintf(fmtKey, "<unset>\n", KeyName);
-            strncat(hk_buf, fmtKey, 512);
-        }
-        sprintf(fmtDescr, "%-14.14s\n", search_keys[i]->ININame('\0'));
-        strncat(hk_descr_buf, fmtDescr, 512);
-    }
-}
-
 void    __thiscall ToggleInfoPanel_nothing(void *a) { }
 char *  __thiscall ToggleInfoPanel_Description(void *a) { return "Toggles the state of the information panel"; }
 char *  __thiscall ToggleInfoPanel_INIname(void *a)     { return "ToggleInfoPanel"; }
 char *  __thiscall ToggleInfoPanel_Category(void *a)    { return "Interface"; }
-char *  __thiscall ToggleInfoPanel_Name(void *a)        { return "ToggleInfoPanel"; }
+char *  __thiscall ToggleInfoPanel_Name(void *a)        { return "Toggle InfoPanel"; }
 
 int     __thiscall ToggleInfoPanel_Execute(void *a)     {
     if (InfoPanel == -1)
@@ -363,7 +288,7 @@ int     __thiscall ToggleInfoPanel_Execute(void *a)     {
         FlagToReInit = 1;
     }
 
-    if (InfoPanel >= 3)
+    if (InfoPanel >= 2)
     {
         InfoPanel = -1;
         FlagToReInit = 1;

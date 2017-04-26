@@ -18,6 +18,7 @@ HookInitCommands() {
                                  &ToggleInfoPanelCommand,
                                  &PlaceBuildingCommand,
                                  &RepeatBuildingCommand,
+                                 &ShowHelpCommand,
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
                                  &MapSnapshotCommand,
@@ -31,7 +32,7 @@ HookInitCommands() {
   }
   Load_Keyboard_Hotkeys();
 
-  bool seen_all = 0, seen_allies = 0, seen_return = 0, seen_backspace = 0;
+  bool seen_all = 0, seen_allies = 0, seen_return = 0, seen_backspace = 0, seen_space = 0, seen_help = 0;
   // Loop through hotkeys and if chattoallis is not enabled then set it to backspace
   for (int i = 0; i < Hotkeys_ActiveCount; i++) {
     Hotkey key = Hotkeys_Vector[i];
@@ -45,12 +46,17 @@ HookInitCommands() {
       WWDebug_Printf("****************************Seen ChatToAll\n");
     }
 
+    if (key.Command == &ShowHelpCommand)
+      seen_help = key.KeyCode;
+
     if (key.KeyCode == 0x8)
       seen_backspace = 1;
 
     if (key.KeyCode == 0xD)
       seen_return = 1;
 
+    if (key.KeyCode == 0x20)
+      seen_space = 1;
   }
   if (!seen_allies && !seen_backspace) {
     WWDebug_Printf("****************************didn't see ChatToAllies adding as hotkey[%d]\n",Hotkeys_ActiveCount);
@@ -67,6 +73,19 @@ HookInitCommands() {
     Hotkeys_Vector[Hotkeys_ActiveCount].KeyCode = 0x0D;
     ++Hotkeys_ActiveCount;
   }
+
+  if (!seen_help && !seen_space) {
+    if (Hotkeys_VectorMax <= Hotkeys_ActiveCount+1)
+        CCINIClass_Vector_Resize(&Hotkeys, 10);
+    Hotkeys_Vector[Hotkeys_ActiveCount].Command = &ShowHelpCommand;
+    Hotkeys_Vector[Hotkeys_ActiveCount].KeyCode = 0x20;
+    ++Hotkeys_ActiveCount;
+    ShowHelpKey = 0x20;
+  }
+  else if (seen_help) {
+    ShowHelpKey = seen_help;
+  }
+
   InfoPanelHotkeysInit();
 }
 

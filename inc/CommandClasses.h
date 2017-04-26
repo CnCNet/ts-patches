@@ -19,3 +19,8 @@ extern vtCommandClass WaypointCommandClass;
 extern vtCommandClass DeleteWayPointCommandClass;
 extern vtCommandClass SelectSameTypeCommandClass;
 extern vtCommandClass SelectTeamCommandClass;
+extern vtCommandClass vtToggleInfoPanelCommand;
+extern vtCommandClass vtPlaceBuildingCommand;
+extern vtCommandClass vtRepeatBuildingCommand;
+
+extern CommandClass ShowHelpCommand;

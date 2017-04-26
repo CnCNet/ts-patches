@@ -115,4 +115,5 @@ TI_OBJS = \
                     src/alt_to_undeploy.o \
                     src/place_building_hotkey.o \
                     src/repeat_last_building_hotkey.o \
-                    src/center_team.o
+                    src/center_team.o \
+                    src/hotkey_help.o

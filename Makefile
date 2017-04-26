@@ -114,6 +114,8 @@ MP_OBJS          = \
                     src/place_building_hotkey.o \
                     src/repeat_last_building_hotkey.o \
                     src/spy_fix.o \
+                    src/hotkey_help.o \
+
 
 
 ifdef WWDEBUG

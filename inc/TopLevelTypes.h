@@ -23,8 +23,8 @@ typedef struct TypeList
 typedef struct Rect {
     int32_t left;
     int32_t top;
-    int32_t right;
-    int32_t bottom;
+    int32_t width;
+    int32_t height;
 } Rect;
 typedef struct XYCoord {
     int32_t x;
@@ -69,8 +69,8 @@ typedef struct vtCommandClass {
   void *Destroy;
   char *(__thiscall *ININame)(void *);
   char *(__thiscall *Name)(void *);
-  void *Category;
-  void *Description;
+  char *(__thiscall *Category)(void *);
+  char *(__thiscall *Description)(void *);
   int  (__thiscall *Execute)(void *a);
   void *unknown;
 } vtCommandClass;

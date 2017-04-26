@@ -221,6 +221,8 @@ setcglob 0x0070EC84, VideoBackBuffer
 setcglob 0x007E4740, ScreenHeight
 setcglob 0x007E473C, ScreenWidth
 setcglob 0x007E288C, MultiplayerDebug
+setcglob 0x007A2274, ViewPortRect
+setcglob 0x0074C260, VisibleRect
 setcglob 0x0074C260, VisibleRect__FromLeft
 setcglob 0x0074C264, VisibleRect__FromTop
 setcglob 0x0074C268, VisibleRect__Width
@@ -342,6 +344,7 @@ setcglob 0x0074C5D0, SidebarSurface
 setcglob 0x0074C5E4, TempSurface
 setcglob 0x0074C5EC, CompositeSurface
 setcglob 0x0074C5E0, AlternateSurface
+setcglob 0x0048BB00, DSurface_FillRect
 
 ;Address  Ordinal Name                          Library
 ;-------  ------- ----                          -------
