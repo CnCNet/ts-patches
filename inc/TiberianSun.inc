@@ -135,6 +135,7 @@ cextern Read_Scenario_Houses
 cextern GetHouseByUserName     ; Defined in ts_util.c
 cextern store_house_spawn_location
 cextern CurrentObjectsArray
+cextern CurrentObjectsArray_Vector
 cextern CurrentObjectsArray_Count
 
 ; Arrays

@@ -12,6 +12,7 @@ hack 0x004E8E80, 0x004E8E86
 _SelectTeamCommandClass_Execute_after:
         mov  eax, [Frame]
         mov  ecx, [ebp+4]
+        dec  ecx
 
         cmp  ecx, [LastTeamNumber]
         jne  .Out
@@ -31,3 +32,24 @@ _SelectTeamCommandClass_Execute_after:
  .Reg:
         pop  ebp
         jmp  0x00639C30
+
+
+
+;;; Make sure that we don't center the team if no team member was already selected
+hack 0x004E8DE6
+        mov  eax, dword[CurrentObjectsArray_Count]
+        test eax, eax
+        jnz  .Compare_Group
+
+        mov dword[LastTeamNumber], -1
+        jmp 0x004E8E18
+
+ .Compare_Group:
+        mov eax, dword[CurrentObjectsArray_Vector]
+        mov ecx, [eax]
+        mov eax, dword[LastTeamNumber]
+        cmp dword[ecx+0xE4], eax     ; TechnoClass.Group
+        je  hackend
+
+        mov dword[LastTeamNumber], -1
+        jmp hackend

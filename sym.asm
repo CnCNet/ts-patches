@@ -46,6 +46,7 @@ setcglob 0x007E4844, TeamTypesArray
 setcglob 0x0070D850, PlayerColorMap
 setcglob 0x007E4058, DynamicVectorClass_AircraftClass
 setcglob 0x007E4858, CurrentObjectsArray
+setcglob 0x007E485C, CurrentObjectsArray_Vector
 setcglob 0x007E4868, CurrentObjectsArray_Count
 setcglob 0x0076092C, SearchDirs
 setcglob 0x006CD148, ArmorNames
