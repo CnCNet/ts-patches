@@ -160,8 +160,10 @@ ShowPerformance(char **out, char **col2, int *width)
 
     static char KeyName[64];
     PrettyPrintKey(ShowHelpKey, KeyName);
-    if (!KeyName[0])
+
+    if (!ShowHelpKey)
         strcpy(KeyName, "<unset>");
+
     strncat(buf, "\n", 512);
     strncat(buf, KeyName, 512);
     return 0x6046;

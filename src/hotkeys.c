@@ -19,6 +19,7 @@ HookInitCommands() {
                                  &PlaceBuildingCommand,
                                  &RepeatBuildingCommand,
                                  &ShowHelpCommand,
+                                 &SelectOneLessCommand,
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
                                  &MapSnapshotCommand,
@@ -47,7 +48,10 @@ HookInitCommands() {
     }
 
     if (key.Command == &ShowHelpCommand)
-      seen_help = key.KeyCode;
+    {
+      seen_help = true;
+      ShowHelpKey = key.KeyCode;
+    }
 
     if (key.KeyCode == 0x8)
       seen_backspace = 1;
@@ -81,9 +85,6 @@ HookInitCommands() {
     Hotkeys_Vector[Hotkeys_ActiveCount].KeyCode = 0x20;
     ++Hotkeys_ActiveCount;
     ShowHelpKey = 0x20;
-  }
-  else if (seen_help) {
-    ShowHelpKey = seen_help;
   }
 
   InfoPanelHotkeysInit();
@@ -236,4 +237,35 @@ vtCommandClass vtTextBackgroundColorCommand = {
   TextBackgroundColor_nothing
 };
 CommandClass TextBackgroundColorCommand = { &vtTextBackgroundColorCommand,0,17,17 };
+/* End */
+
+
+
+/* SelectOneLess */
+void    __thiscall SelectOneLess_nothing(void *a)  { }
+char *  __thiscall SelectOneLess_Description(void *a) { return "Remove one random unit from the selected units."; }
+char *  __thiscall SelectOneLess_INIname(void *a)     { return "SelectOneLess"; }
+char *  __thiscall SelectOneLess_Category(void *a)    { return "Control"; }
+char *  __thiscall SelectOneLess_Name(void *a)        { return "Select One Less Unit"; }
+int     __thiscall
+SelectOneLess_Execute(void *a)     {
+    if (CurrentObjectsArray.IsValid && CurrentObjectsArray.ActiveCount > 0)
+    {
+        int lastIdx = --CurrentObjectsArray.ActiveCount;
+        TechnoClass *last = (TechnoClass *)CurrentObjectsArray.Vector[lastIdx];
+        last->p.r.m.o.Selected = false;
+    }
+  return 1;
+}
+
+vtCommandClass vtSelectOneLessCommand = {
+  CommandDestroy,
+  SelectOneLess_INIname,
+  SelectOneLess_Name,
+  SelectOneLess_Category,
+  SelectOneLess_Description,
+  SelectOneLess_Execute,
+  SelectOneLess_nothing
+};
+CommandClass SelectOneLessCommand = { &vtSelectOneLessCommand,0,17,17 };
 /* End */

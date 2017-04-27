@@ -61,6 +61,7 @@ extern CommandClass ToggleTacticalZoomCommand;
 extern CommandClass ToggleInfoPanelCommand;
 extern CommandClass PlaceBuildingCommand;
 extern CommandClass RepeatBuildingCommand;
+extern CommandClass SelectOneLessCommand;
 
 extern bool SpawnerActive;
 extern bool Player_Active;
