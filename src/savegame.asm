@@ -22,6 +22,11 @@ _Save_Game_Pre_Save_Game_Hook:
     jmp 0x005D4FFA
 
 _Load_Game_Post_Load_Game_Hook:
+    mov eax, [Frame]
+    add eax, [AutoSaveGame]
+    
+    mov [NextAutoSave], eax
+    
     mov eax, [ScenarioStuff]
     mov al, byte [eax+0x1D91]
     mov byte [0x007E2500], al
