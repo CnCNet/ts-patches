@@ -196,6 +196,8 @@ setcglob 0x007E47A8, ForceFire1
 setcglob 0x007E47AC, ForceFire2
 setcglob 0x007E47A0, Left_Alt_Key
 setcglob 0x007E47A4, Right_Alt_Key
+setcglob 0x007E47B8, QMove_Key1
+setcglob 0x007E47BC, QMove_Key2
 
 ; MapClass
 setcglob 0x0051E130, MapClass__GetCellFloorHeight
@@ -264,6 +266,7 @@ setcglob 0x006B67B0, sscanf
 setcglob 0x006B5F65, atoi
 setcglob 0x006BCA26, calloc
 setcglob 0x006B67E4, free
+setcglob 0x006B6CCB, tolower
 
 ; winapi
 setcglob 0x006B4D6C, sendto

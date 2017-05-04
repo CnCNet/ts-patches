@@ -217,6 +217,8 @@ cextern Left_Shift_Key
 cextern Right_Shift_Key
 cextern Left_Alt_Key
 cextern Right_Alt_Key
+cextern QMove_Key1
+cextern QMove_Key2
 cextern MoveToUndeploy
 
 ; Aircraft

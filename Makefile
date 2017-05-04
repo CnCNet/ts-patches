@@ -115,7 +115,7 @@ MP_OBJS          = \
                     src/repeat_last_building_hotkey.o \
                     src/spy_fix.o \
                     src/hotkey_help.o \
-
+                    src/draw_all_action_lines.o \
 
 
 ifdef WWDEBUG

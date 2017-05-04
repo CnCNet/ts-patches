@@ -37,12 +37,6 @@ typedef struct Image {
     // More Stuff here FIXME
 } Image;
 
-typedef struct DSurface {
-    void *vtable;
-    int32_t Width;
-    int32_t Height;
-    // More Stuff here FIXME
-} DSurface;
 
 typedef struct DifficultyClass
 {

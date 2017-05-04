@@ -22,6 +22,7 @@
 #include "Classes/FootClass.h"
 #include "Classes/AircraftClass.h"
 #include "Classes/StripClass.h"
+#include "Classes/DSurface.h"
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))

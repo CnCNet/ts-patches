@@ -114,6 +114,20 @@
     @ENDPATCH
 %endmacro
 
+%macro @LJGE 2
+    @PATCH (%1)
+    db 0x0F, 0x8D
+    dd (%2) - (%1) - 6
+    @ENDPATCH
+%endmacro
+
+%macro @LJLE 2
+    @PATCH (%1)
+    db 0x0F, 0x8E
+    dd (%2) - (%1) - 6
+    @ENDPATCH
+%endmacro
+
 %macro @LJMP 2
     @PATCH (%1)
     db 0xE9                     ; far jump
