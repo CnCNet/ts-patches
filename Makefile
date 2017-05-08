@@ -116,6 +116,7 @@ MP_OBJS          = \
                     src/spy_fix.o \
                     src/hotkey_help.o \
                     src/draw_all_action_lines.o \
+                    src/radar_event_hacks.o \
 
 
 ifdef WWDEBUG
