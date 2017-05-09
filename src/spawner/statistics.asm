@@ -39,13 +39,13 @@ _Send_Statistics_Packet_Write_New_Fields:
 	mov     byte [0x0070FD0C], 0x53
 	mov     byte [0x0070FD0D], 0x50
 	mov     byte [0x0070FD0E], 0x43
-	
+
 	; player number
 	mov     byte [0x0070FD0F], bl
-	
+
 	mov     edi, [esi+0x20] ; value
 	mov		edi, [IsSpectatorArray+edi*4]
-	
+
 	push    10h
 	call    0x006B51D7 ; operator new(uint)
 	add     esp, 4
@@ -56,8 +56,8 @@ _Send_Statistics_Packet_Write_New_Fields:
 	mov     ecx, eax
 	call    0x00498A70  ; FieldClass::FieldClass(char *,ulong)
 	jmp     short .Write_Alliances
-	
-	
+
+
 .new_failed1:
 	xor     eax, eax
 
@@ -67,16 +67,16 @@ _Send_Statistics_Packet_Write_New_Fields:
 	lea     ecx, [esp+0x18]
 	call    0x005A22D0 ; PacketClass::Add_Field(FieldClass *)
 
-	; write 'ALY' 
+	; write 'ALY'
 	mov     byte [0x0070FD0C], 0x41
 	mov     byte [0x0070FD0D], 0x4c
 	mov     byte [0x0070FD0E], 0x59
-	
+
 	; player number
 	mov     byte [0x0070FD0F], bl
-	
+
 	mov     edi, [esi+0x578] ; value
-	
+
 	push    10h
 	call    0x006B51D7 ; operator new(uint)
 	add     esp, 4
@@ -87,27 +87,27 @@ _Send_Statistics_Packet_Write_New_Fields:
 	mov     ecx, eax
 	call    0x00498A70  ; FieldClass::FieldClass(char *,ulong)
 	jmp     short .Write_Spawns
-	
+
 .new_failed2:
-	xor     eax, eax	
-	
+	xor     eax, eax
+
 .Write_Spawns:
 
 	push    eax
 	lea     ecx, [esp+0x18]
 	call    0x005A22D0 ; PacketClass::Add_Field(FieldClass *)
 
-	; write 'SPA' 
+	; write 'SPA'
 	mov     byte [0x0070FD0C], 0x53
 	mov     byte [0x0070FD0D], 0x50
 	mov     byte [0x0070FD0E], 0x41
-	
+
 	; player number
 	mov     byte [0x0070FD0F], bl
-	
+
 	mov     edi, [esi+0x20] ; value
 	mov		edi, [SpawnLocationsArray+edi*4]
-	
+
 	push    10h
 	call    0x006B51D7 ; operator new(uint)
 	add     esp, 4
@@ -118,10 +118,10 @@ _Send_Statistics_Packet_Write_New_Fields:
 	mov     ecx, eax
 	call    0x00498A70  ; FieldClass::FieldClass(char *,ulong)
 	jmp     short .ret
-	
+
 .new_failed3:
-	xor     eax, eax	
-	
+	xor     eax, eax
+
 .ret:
 
 	; Reset field name to 'COL'
@@ -133,29 +133,29 @@ _Send_Statistics_Packet_Write_New_Fields:
 	lea     ecx, [esp+0x18]
 	jmp		0x00609F45
 
-    
+
 AddMyIdField:
     add bl, 0x30
-    
+
     mov eax, dword[PlayerPtr]
     cmp eax, esi
     jnz .out
- 
+
     push 0x10
     call 0x006B51D7 ; OperatorNew
     add esp, 4
     test eax, eax
     jz .fail
-    
+
     xor ecx, ecx
     mov cl, bl
-    sub cl, '0'  
+    sub cl, '0'
     push ecx
     push str_MyIdField
     mov ecx, eax
     call 0x00498A70 ; FieldClass::FieldClass
     jmp .noFail
-    
+
 .fail:
     xor eax, eax
 
@@ -163,11 +163,11 @@ AddMyIdField:
     push eax
     lea ecx, [esp+0x18]
     call 0x005A22D0 ;PacketClass__Add_Field
-    
+
 .out:
     push 0x10
     jmp 0x00609D78
-    
+
 AddACCNField:
     call 0x005A22D0
 
@@ -183,10 +183,10 @@ AddACCNField:
     mov ecx, eax
     call 0x00498AD0 ; FieldClass__FieldClass_String
     jmp .noFail
-    
+
 .fail:
     xor eax, eax
-    
+
 .noFail:
     push eax
     lea ecx, [esp+0x18]
@@ -208,15 +208,15 @@ _Execute_DoList_Send_Statistics_Game_Leave2:
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
-    
+
     jmp .Send
-    
+
 .Send:
  jmp 0x005B4FDE
 
 .Dont_Send:
  jmp 0x005B500C
- 
+
 .Normal_Code:
     mov edx, [SessionType]
     cmp edx, 4
@@ -231,12 +231,12 @@ _Execute_DoList_Send_Statistics_Game_Leave:
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
-    
+
     jmp 0x005B4FB9
 
 .Dont_Send:
     jmp 0x005B500C
-    
+
 .Normal_Code:
     mov edx, [SessionType]
     cmp edx, 4
@@ -249,15 +249,15 @@ _sub_508A40_Send_Statistics_Spawner2:
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
-    
+
     jmp .Send
-    
+
 .Send:
  jmp 0x00509283
 
 .Dont_Send:
  jmp 0x005092A5
- 
+
 .Normal_Code:
     cmp dword [SessionType], 4
     jnz .Dont_Send
@@ -268,15 +268,15 @@ _sub_508A40_Send_Statistics_Spawner1:
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
-    
+
     jmp .Send
-    
+
 .Send:
  jmp 0x00509229
 
 .Dont_Send:
  jmp 0x0050924B
- 
+
 .Normal_Code:
     cmp dword [SessionType], 4
     jnz .Dont_Send
@@ -287,15 +287,15 @@ _Queue_AI_Multiplayer_Send_Statistics_Spawner:
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
-    
+
     jmp .Send
-    
+
 .Send:
  jmp 0x005B1EA0
 
 .Dont_Send:
  jmp 0x005B1F21
- 
+
 .Normal_Code:
     cmp dword [SessionType], 4
     jnz .Dont_Send
@@ -306,15 +306,15 @@ _sub_5B4290_Send_Statistics_Spawner:
     jz .Normal_Code
     cmp dword [SessionType], 0
     jz .Normal_Code
-    
+
     jmp .Send
-    
+
 .Send:
  jmp 0x005B433C
 
 .Dont_Send:
  jmp 0x005B439F
- 
+
 .Normal_Code:
     cmp dword [SessionType], 4
     jnz .Dont_Send
@@ -324,11 +324,11 @@ _sub_5B4290_Send_Statistics_Spawner:
 _Send_Statistics_Packet_Write_Statistics_Dump:
     cmp dword [SpawnerActive], 0
     jz .Normal_Code
-    
+
     call Write_Stats_File
     mov dword [StatisticsPacketSent], 1
     jmp 0x0060A7DF
-    
+
 .Normal_Code:
     mov edx, [0x0080CA48]
     jmp 0x0060A7A2
@@ -374,16 +374,16 @@ Write_Stats_File:
 
     mov esp,ebp
     pop ebp
-    retn 
-    
-    
+    retn
+
+
 _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
     cmp dword [SpawnerActive], 0
     jz .Normal_Code
 
     cmp dword [SessionType], 0
     jz .Normal_Code
-    
+
     jmp .Allocate
 
 .Normal_Code:
@@ -391,7 +391,18 @@ _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
 
 .Allocate:
     jmp 0x004BAC39
-    
+
 .Dont_Allocate:
     jmp 0x004BADB0
 
+
+
+@SET 0x0042F7A1, dw 0x9090
+@SET 0x00457E81, dw 0x9090
+@CLEAR 0x004C2212, 0x90, 0x004C2218
+@CLEAR 0x004C225C, 0x90, 0x004C225C
+@SET 0x004C22A6, dw 0x9090
+@SET 0x004C22EC, dw 0x9090
+@SET 0x00633891, dw 0x9090
+@SET 0x0063392F, dw 0x9090
+@SET 0x00633963, dw 0x9090
