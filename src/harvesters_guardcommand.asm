@@ -9,10 +9,7 @@
 %include "macros/patch.inc"
 %include "macros/hack.inc"
 
-@LJMP 0x004E95DA, _GuardCommandClass_Execute_Harvester
-
-section .text
-
+hack 0x004E95DA
 _GuardCommandClass_Execute_Harvester:
     test al, al
     jnz .GoOn
@@ -28,6 +25,9 @@ _GuardCommandClass_Execute_Harvester:
     mov ax, [eax+48Eh]; UnitClass::Harvester and UnitClass::Weeder
     test ax, ax
     jz .Skip
+
+    cmp dword [esi+4Ch], 15  ; Mission_Unload
+    je  .Skip                ; Don't assign mission  if we're currently uloading
 
   .GoOn:
     mov edi, [esi]
