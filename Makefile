@@ -117,7 +117,8 @@ MP_OBJS          = \
                     src/hotkey_help.o \
                     src/draw_all_action_lines.o \
                     src/radar_event_hacks.o \
-
+                    src/guard_mode_patch.o \
+                    src/random_loop_delay.o \
 
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
