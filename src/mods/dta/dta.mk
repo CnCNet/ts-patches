@@ -122,4 +122,6 @@ DTA_OBJS = \
                     src/repeat_last_building_hotkey.o \
                     src/center_team.o \
                     src/hotkey_help.o \
-                    src/recon_kick.o
+                    src/recon_kick.o \
+                    src/buildlimit_fix.o
+
