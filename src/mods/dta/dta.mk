@@ -123,5 +123,6 @@ DTA_OBJS = \
                     src/center_team.o \
                     src/hotkey_help.o \
                     src/recon_kick.o \
-                    src/buildlimit_fix.o
+                    src/buildlimit_fix.o \
+                    src/random_looop_delay.o
 

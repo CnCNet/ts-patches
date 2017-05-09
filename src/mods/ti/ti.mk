@@ -116,4 +116,8 @@ TI_OBJS = \
                     src/place_building_hotkey.o \
                     src/repeat_last_building_hotkey.o \
                     src/center_team.o \
-                    src/hotkey_help.o
+                    src/hotkey_help.o \
+                    src/recon_kick.o \
+                    src/buildlimit_fix.o \
+                    src/random_loop_delay.o
+                    
