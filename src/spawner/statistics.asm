@@ -396,7 +396,7 @@ _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
     jmp 0x004BADB0
 
 
-
+%ifdef EXPERIMENTAL
 @SET 0x0042F7A1, dw 0x9090
 @SET 0x00457E81, dw 0x9090
 @CLEAR 0x004C2212, 0x90, 0x004C2218
@@ -406,3 +406,4 @@ _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
 @SET 0x00633891, dw 0x9090
 @SET 0x0063392F, dw 0x9090
 @SET 0x00633963, dw 0x9090
+%endif
