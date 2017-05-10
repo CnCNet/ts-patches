@@ -91,11 +91,27 @@ DTA_OBJS = \
                     src/veterancy_crate_check_trainable.o \
                     src/scale_movie_fix.o \
                     src/scale_movie_fix_hack.o \
+                    src/paradrop.o \
+                    src/tactical_zoom.o \
+                    src/response_time_func.o \
+                    src/show_stats.o \
+                    src/sidebar.o \
+                    src/alt_to_undeploy.o \
+                    src/hack_house_from_house_type.o \
+                    src/place_building_hotkey.o \
+                    src/repeat_last_building_hotkey.o \
+                    src/center_team.o \
+                    src/hotkey_help.o \
+                    src/recon_kick.o \
+                    src/buildlimit_fix.o \
+                    src/random_loop_delay.o \
+                    src/draw_all_action_lines.o \
+                    src/radar_event_hacks.o \
+                    src/aircraft_repair.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
-                    src/aircraft_repair.o \
                     src/mods/saved_games_in_subdir.o \
                     src/mods/tiberium_damage.o \
                     src/mods/no_sidecd_mix.o \
@@ -110,19 +126,6 @@ DTA_OBJS = \
                     src/mods/dta/remove_ion_storm_effects.o \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/buildconst_harvesterunit_baseunit.o \
-                    src/mods/dta/sideindex_improvements_v2.o \
-                    src/paradrop.o \
-                    src/tactical_zoom.o \
-                    src/response_time_func.o \
-                    src/show_stats.o \
-                    src/sidebar.o \
-                    src/alt_to_undeploy.o \
-                    src/hack_house_from_house_type.o \
-                    src/place_building_hotkey.o \
-                    src/repeat_last_building_hotkey.o \
-                    src/center_team.o \
-                    src/hotkey_help.o \
-                    src/recon_kick.o \
-                    src/buildlimit_fix.o \
-                    src/random_looop_delay.o
+                    src/mods/dta/sideindex_improvements_v2.o
+
 

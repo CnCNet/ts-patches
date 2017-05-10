@@ -87,6 +87,19 @@ TSCLIENT_OBJS = \
                     src/scale_movie_fix_hack.o \
                     src/ionstorm_jumpjet_crash.o \
                     src/aircraft_repair.o \
+                    src/tactical_zoom.o \
+                    src/response_time_func.o \
+                    src/show_stats.o \
+                    src/sidebar.o \
+                    src/alt_to_undeploy.o \
+                    src/place_building_hotkey.o \
+                    src/repeat_last_building_hotkey.o \
+                    src/center_team.o \
+                    src/hotkey_help.o \
+                    src/buildlimit_fix.o \
+                    src/random_loop_delay.o \
+                    src/draw_all_action_lines.o \
+                    src/radar_event_hacks.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/no_insignificant_death_announcement.o \
@@ -97,13 +110,5 @@ TSCLIENT_OBJS = \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/tsclient/logger.o \
                     src/mods/tsclient/filename_hacks.o \
-                    src/mods/tsclient/disable_intro_movie.o \
-                    src/tactical_zoom.o \
-                    src/response_time_func.o \
-                    src/show_stats.o \
-                    src/sidebar.o \
-                    src/alt_to_undeploy.o \
-                    src/place_building_hotkey.o \
-                    src/repeat_last_building_hotkey.o \
-                    src/center_team.o \
-                    src/hotkey_help.o
+                    src/mods/tsclient/disable_intro_movie.o
+

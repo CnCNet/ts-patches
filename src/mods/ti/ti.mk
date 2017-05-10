@@ -91,23 +91,6 @@ TI_OBJS = \
                     src/veterancy_crate_check_trainable.o \
                     src/scale_movie_fix.o \
                     src/scale_movie_fix_hack.o \
-                    src/mods/remove_iscoredefender_emp_immunity.o \
-                    src/mods/airtransport_undeployable_on_helipads.o \
-                    src/mods/cloakstop_to_empimmunity.o \
-                    src/mods/reveal_crate_reshroud.o \
-                    src/mods/no_insignificant_death_announcement.o \
-                    src/mods/multi_engineer_ignore_neutral.o \
-                    src/aircraft_repair.o \
-                    src/mods/saved_games_in_subdir.o \
-                    src/mods/tiberium_damage.o \
-                    src/mods/no_sidecd_mix.o \
-                    src/mods/horv_via_undeploysinto.o \
-                    src/mods/screenshots_in_subdir.o \
-                    src/mods/disable_file_checks.o \
-                    src/mods/ti/ti_hacks.o \
-                    src/mods/ti/logger.o \
-                    src/mods/dta/auto_deploy_mcv.o \
-                    src/mods/dta/scrap_metal_explosion.o \
                     src/tactical_zoom.o \
                     src/response_time_func.o \
                     src/show_stats.o \
@@ -119,5 +102,24 @@ TI_OBJS = \
                     src/hotkey_help.o \
                     src/recon_kick.o \
                     src/buildlimit_fix.o \
-                    src/random_loop_delay.o
+                    src/random_loop_delay.o \
+                    src/draw_all_action_lines.o \
+                    src/radar_event_hacks.o \
+                    src/aircraft_repair.o \
+                    src/mods/remove_iscoredefender_emp_immunity.o \
+                    src/mods/airtransport_undeployable_on_helipads.o \
+                    src/mods/cloakstop_to_empimmunity.o \
+                    src/mods/reveal_crate_reshroud.o \
+                    src/mods/no_insignificant_death_announcement.o \
+                    src/mods/multi_engineer_ignore_neutral.o \
+                    src/mods/saved_games_in_subdir.o \
+                    src/mods/tiberium_damage.o \
+                    src/mods/no_sidecd_mix.o \
+                    src/mods/horv_via_undeploysinto.o \
+                    src/mods/screenshots_in_subdir.o \
+                    src/mods/disable_file_checks.o \
+                    src/mods/ti/ti_hacks.o \
+                    src/mods/ti/logger.o \
+                    src/mods/dta/auto_deploy_mcv.o \
+                    src/mods/dta/scrap_metal_explosion.o
                     
