@@ -7,7 +7,9 @@
 @CLEAR 0x004A1AA8, 0x90, 0x004A1AAA
 
 ;; Units in Area Guard mode will revert to regular Guard mode when you press S
-@SJMP 0x00494AB5, 0x00494AE3
+@SET 0x00494ABC, { cmp dword eax, 2 } ; ABSTRACT_AIRCRAFT
+@LJZ 0x00494ABF, 0x00495110           ; jump out
+@LJMP 0x00494AC5, 0x00494AE3
 
 ;;; Don't move back to the previous cell when G is pressed.
 @CLEAR 0x004E95E2, 0x90, 0x004E95EB
