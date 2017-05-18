@@ -1024,10 +1024,12 @@ Initialize_Spawn:
     push 3Ch
     call IPXManagerClass__Set_Timing
 
-    ;mov dword [MaxAhead], 20
-    mov dword [MaxAhead], 4*7
 
-    SpawnINI_Get_Int str_Settings, str_FrameSendRate, 7
+%assign FrameSendRate_ 6
+
+    mov dword [MaxAhead], 4*FrameSendRate_
+
+    SpawnINI_Get_Int str_Settings, str_FrameSendRate, FrameSendRate_
     mov dword [FrameSendRate], eax
 
     ; WOL settings
