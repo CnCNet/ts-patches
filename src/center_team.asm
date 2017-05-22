@@ -49,6 +49,7 @@ hack 0x004E8DE6
         mov ecx, [eax]
         mov eax, dword[LastTeamNumber]
         cmp dword[ecx+0xE4], eax     ; TechnoClass.Group
+        mov eax, dword[CurrentObjectsArray_Count]
         je  hackend
 
         mov dword[LastTeamNumber], -1
