@@ -119,8 +119,10 @@ setcglob 0x008670BC, WOL_SERVER_PORT ; Hijacking this for Mumble
 setcglob 0x00493E40, EventClass__EventClass_PlayerID
 setcglob 0x00493DE0, EventClass__EventClass_noarg
 setcglob 0x004940A0, EventClass__EventClass_produce
+setcglob 0x005B1210, Queue_Exit
 setcglob 0x007E15F8, Outlist
 setcglob 0x006CB1B8, FramesPerMinute
+
 
 ; Random
 setcglob 0x007E4934, Seed
