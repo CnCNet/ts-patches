@@ -119,6 +119,8 @@ MP_OBJS          = \
                     src/radar_event_hacks.o \
                     src/guard_mode_patch.o \
                     src/random_loop_delay.o \
+                    src/rage_quit.o \
+
 
 ifdef WWDEBUG
     NFLAGS += -D WWDEBUG
