@@ -122,7 +122,8 @@ setcglob 0x004940A0, EventClass__EventClass_produce
 setcglob 0x005B1210, Queue_Exit
 setcglob 0x007E15F8, Outlist
 setcglob 0x006CB1B8, FramesPerMinute
-
+setcglob 0x007B353C, EventType_Offset
+setcglob 0x005B58F0, Print_CRCs
 
 ; Random
 setcglob 0x007E4934, Seed
@@ -171,6 +172,7 @@ setcglob 0x007E289A, OutOfSync
 setcglob 0x00574F90, Init_Network
 setcglob 0x007E3EA0, NameNodes_CurrentSize
 setcglob 0x007E2508, HumanPlayers
+setcglob 0x007E3EA0, HumanNode_ActiveCount
 
 ; Scenario
 setcglob 0x007E28B8, ScenarioName

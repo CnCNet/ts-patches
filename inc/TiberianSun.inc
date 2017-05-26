@@ -186,7 +186,12 @@ cextern Init_Network
 cextern NameNodes_CurrentSize
 cextern HumanPlayers
 cextern EventClass__EventClass_PlayerID
+cextern EventClass__EventClass_noarg
 cextern EnqueueEvent
+cextern Queue_Exit
+cextern EventType_Offset
+cextern Print_CRCs
+cextern HumanNode_ActiveCount
 
 ; Scenario
 cextern ScenarioName
@@ -197,6 +202,7 @@ cextern SessionClass__Read_Scenario_Descriptions
 cextern ScenarioStuff
 cextern SelectedDifficulty
 cextern SpecialClass__Special
+cextern Rules
 
 ; Save games
 cextern Load_Game
