@@ -395,15 +395,15 @@ _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
 .Dont_Allocate:
     jmp 0x004BADB0
 
-
 %ifdef EXPERIMENTAL
-@SET 0x0042F7A1, dw 0x9090
-@SET 0x00457E81, dw 0x9090
-@CLEAR 0x004C2212, 0x90, 0x004C2218
-@CLEAR 0x004C225C, 0x90, 0x004C225C
-@SET 0x004C22A6, dw 0x9090
-@SET 0x004C22EC, dw 0x9090
-@SET 0x00633891, dw 0x9090
-@SET 0x0063392F, dw 0x9090
-@SET 0x00633963, dw 0x9090
+@SET 0x0042F79E, { cmp eax, 3 }
+@SET 0x00457E7A, { cmp dword[SessionType], 3 }
+@SET 0x004C220B, { cmp dword[SessionType], 3 }
+@SET 0x004C2255, { cmp dword[SessionType], 3 }
+@SET 0x004C229F, { cmp dword[SessionType], 3 }
+@SET 0x004C22E5, { cmp dword[SessionType], 3 }
+@SET 0x0063388A, { cmp dword[SessionType], 3 }
+@SET 0x006338F4, { cmp dword[SessionType], 3 }
+@SET 0x0063395C, { cmp dword[SessionType], 3 }
+@SET 0x00633928, { cmp dword[SessionType], 3 }
 %endif
