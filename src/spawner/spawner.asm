@@ -1027,10 +1027,11 @@ Initialize_Spawn:
 
 %assign FrameSendRate_ 6
 
-    mov dword [MaxAhead], 4*FrameSendRate_
-
     SpawnINI_Get_Int str_Settings, str_FrameSendRate, FrameSendRate_
     mov dword [FrameSendRate], eax
+    lea eax, [eax*4]
+    mov dword [MaxAhead], eax
+
 
     ; WOL settings
  ;   mov dword [MaxAhead], 40
