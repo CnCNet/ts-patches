@@ -10,6 +10,7 @@ DTA_OBJS = \
                     src/high_res_crash.o \
                     src/disable_max_windowed_mode.o \
                     src/disable_dpi_scaling.o \
+                    src/win8_compat-func.o \
                     src/sun.ini.o \
                     src/remove_16bit_windowed_check.o \
                     src/hp03.o \
@@ -128,4 +129,3 @@ DTA_OBJS = \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/buildconst_harvesterunit_baseunit.o \
                     src/mods/dta/sideindex_improvements_v2.o
-

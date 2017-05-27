@@ -20,6 +20,7 @@ COMMON_OBJS = \
               src/high_res_crash.o \
               src/disable_max_windowed_mode.o \
               src/disable_dpi_scaling.o \
+	      src/win8_compat-func.o \
               src/remove_16bit_windowed_check.o \
               src/hp03.o \
               src/fix_mouse_not_found_error.o \
@@ -64,7 +65,6 @@ MP_OBJS          = \
                     src/fix_depot_explosion_glitch.o \
                     src/harvester_truce.o \
                     src/crate_patches.o \
-                    src/mpdebug.o \
                     src/Hook_Main_Loop.o \
                     src/hotkeys.o \
                     src/chatallies.o \

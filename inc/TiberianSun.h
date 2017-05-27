@@ -272,3 +272,18 @@ extern bool IntegrateMumbleSpawn;
 // Disable alt tab
 void LoadKeyboardHook();
 bool sidebar_has_cameo(int RTTI, int HeapID);
+
+extern bool DWMOffForPrimaryLock;
+extern bool DWMOffForPrimaryBlt;
+extern bool ForceFullscreenSprite;
+extern bool ForceBltToPrimary;
+extern bool LockColorkey;
+extern bool DWMOffForFullscreen;
+extern bool DisableLockEmulation;
+extern bool EnableOverlays;
+extern bool DisableSurfaceLock;
+extern bool RedirectPrimarySurfBlts;
+extern bool StripMaxWindowBorder;
+extern bool DisableMaxWindowedMode;
+
+void SetWin8CompatData();

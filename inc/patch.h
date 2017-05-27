@@ -9,7 +9,7 @@
 
 void SetSingleProcAffinity();
 void DisableHighDpiScaling();
-void DisableMaxWindowedMode();
+void fnDisableMaxWindowedMode();
 
 // ### Variables ###
 

@@ -17,6 +17,7 @@ TSCLIENT_OBJS = \
                     src/graphics_patch.o \
                     src/no_window_frame.o \
                     sym.o \
+                    src/win8_compat-func.o \
                     src/sun.ini.o \
                     src/no-cd_iran.o \
                     src/in-game_message_background.o \
@@ -112,4 +113,3 @@ TSCLIENT_OBJS = \
                     src/mods/tsclient/logger.o \
                     src/mods/tsclient/filename_hacks.o \
                     src/mods/tsclient/disable_intro_movie.o
-

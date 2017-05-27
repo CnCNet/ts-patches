@@ -24,7 +24,24 @@ void LoadSunIni()
     if (SunIni_GetBool("Video", "DisableHighDpiScaling", false))
         DisableHighDpiScaling();
     if (SunIni_GetBool("Video", "DisableMaxWindowedMode", false))
-        DisableMaxWindowedMode();
+        fnDisableMaxWindowedMode();
+    if (SunIni_GetBool("Win8Compat", "Enabled", false))
+    {
+        DWMOffForPrimaryLock =     SunIni_GetBool("Win8Compat", "DWMOffForPrimaryLock", DWMOffForPrimaryLock);
+        DWMOffForPrimaryBlt =      SunIni_GetBool("Win8Compat", "DWMOffForPrimaryBlt", DWMOffForPrimaryBlt);
+        ForceFullscreenSprite =    SunIni_GetBool("Win8Compat", "ForceFullscreenSprite", ForceFullscreenSprite);
+        ForceBltToPrimary =        SunIni_GetBool("Win8Compat", "ForceBltToPrimary", ForceBltToPrimary);
+        LockColorkey =             SunIni_GetBool("Win8Compat", "LockColorkey", LockColorkey);
+        DWMOffForFullscreen =      SunIni_GetBool("Win8Compat", "DWMOffForFullscreen", DWMOffForFullscreen);
+        DisableLockEmulation =     SunIni_GetBool("Win8Compat", "DisableLockEmulation", DisableLockEmulation);
+        EnableOverlays =           SunIni_GetBool("Win8Compat", "EnableOverlays", EnableOverlays);
+        DisableSurfaceLock =       SunIni_GetBool("Win8Compat", "DisableSurfaceLock", DisableSurfaceLock);
+        RedirectPrimarySurfBlts =  SunIni_GetBool("Win8Compat", "RedirectPrimarySurfBlts", RedirectPrimarySurfBlts);
+        StripMaxWindowBorder =     SunIni_GetBool("Win8Compat", "StripMaxWindowBorder", StripMaxWindowBorder);
+        DisableMaxWindowedMode =   SunIni_GetBool("Win8Compat", "DisableMaxWindowedMode", DisableMaxWindowedMode);
+
+        SetWin8CompatData();
+    }
 
 #ifndef SINGLEPLAYER
     if (OverrideColors = SunIni_GetBool("Options","OverrideColors",false))
