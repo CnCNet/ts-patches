@@ -18,7 +18,6 @@ bool DisableSurfaceLock = false;
 bool RedirectPrimarySurfBlts = false;
 bool StripMaxWindowBorder = false;
 bool DisableMaxWindowedMode = true;
-bool Win8Compat = false;
 
 void SetWin8CompatData()
 {

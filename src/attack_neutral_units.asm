@@ -34,9 +34,10 @@ hack 0x0062D4B2, 0x0062D4BA
         jmp     hackend
 
 
-@LJZ 0x0062D45C, _Dont_attack_any_buildings_with_no_weapon
-section .text
+hack 0x0062D45C, 0x0062D462
 _Dont_attack_any_buildings_with_no_weapon:
+        jnz     0x0062D8C0      ; Don't attack
+
         mov     eax, [esi]
         push    0               ; Primary weapon
         mov     ecx, esi
@@ -51,6 +52,6 @@ _Dont_attack_any_buildings_with_no_weapon:
 
         mov     ecx, [eax+0x7C] ; Check for Range
         test    ecx, ecx        ; Ranges is zero?
-        jnz     hackend
+        jz      0x0062D8C0      ; Don't attack
 
-        jmp     0x0062D8C0      ; Don't attack
+        jmp     hackend
