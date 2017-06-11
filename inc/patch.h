@@ -16,3 +16,4 @@ void fnDisableMaxWindowedMode();
 extern bool NoWindowFrame;
 extern bool UseGraphicsPatch;
 extern bool IsNoCD;
+extern bool ScrollDelay;

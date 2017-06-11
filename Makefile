@@ -11,6 +11,7 @@ VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
 WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"
 
 COMMON_OBJS = \
+              src/scrollrate_fix.o \
               src/tiberium_on_slope_crash.o \
               src/no_movie_and_score_mix_dependency.o \
               src/IonBlastClass_crash.o \
@@ -20,7 +21,7 @@ COMMON_OBJS = \
               src/high_res_crash.o \
               src/disable_max_windowed_mode.o \
               src/disable_dpi_scaling.o \
-	      src/win8_compat-func.o \
+              src/win8_compat-func.o \
               src/remove_16bit_windowed_check.o \
               src/hp03.o \
               src/fix_mouse_not_found_error.o \
