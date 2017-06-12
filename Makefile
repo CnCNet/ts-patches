@@ -11,6 +11,8 @@ VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
 WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"
 
 COMMON_OBJS = \
+              src/scale_movie_fix.o \
+              src/scale_movie_fix_hack.o \
               src/scrollrate_fix.o \
               src/tiberium_on_slope_crash.o \
               src/no_movie_and_score_mix_dependency.o \

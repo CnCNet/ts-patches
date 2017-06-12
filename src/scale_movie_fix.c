@@ -12,15 +12,9 @@ void ScaleMovieFix(int *finalWidth, int *finalHeight, int *posX, int *posY)
         *finalHeight = VisibleRect__Height;
         
         int diffWidth = VisibleRect__Width - *finalWidth;
-        if (diffWidth > 0)
-            *posX = diffWidth / 2;
-        else
-            *posX = 0;
+        *posX = (diffWidth > 0) ? diffWidth / 2 : 0;
     
         int diffHeight = VisibleRect__Height - *finalHeight;
-        if (diffHeight > 0)
-            *posY = diffHeight / 2;
-        else
-            *posY = 0;
+        *posY = (diffHeight > 0) ? diffHeight / 2 : 0;
     }
 }
