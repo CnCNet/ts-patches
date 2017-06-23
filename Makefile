@@ -123,6 +123,7 @@ MP_OBJS          = \
                     src/guard_mode_patch.o \
                     src/random_loop_delay.o \
                     src/rage_quit.o \
+                    src/move_team_group_number.o \
 
 
 ifdef WWDEBUG
