@@ -395,7 +395,7 @@ _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
 .Dont_Allocate:
     jmp 0x004BADB0
 
-%ifdef EXPERIMENTAL
+%ifdef STATS
 @SET 0x0042F79E, { cmp eax, 3 }
 @SET 0x00457E7A, { cmp dword[SessionType], 3 }
 @SET 0x004C220B, { cmp dword[SessionType], 3 }

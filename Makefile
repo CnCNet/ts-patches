@@ -133,6 +133,11 @@ ifdef WWDEBUG
 	                   src/tactical_zoom.o
 endif
 
+ifdef STATS
+   # stats causes savegames to crash. Use STATS only for cncnet online.
+   NFLAGS += -D STATS
+   CFLAGS += -D STATS
+endif
 
 ifdef EXPERIMENTAL
     NFLAGS += -D EXPERIMENTAL
