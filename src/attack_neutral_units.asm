@@ -34,10 +34,9 @@ hack 0x0062D4B2, 0x0062D4BA
         jmp     hackend
 
 
-%if 0
-;;; This patch makes the computer not attack buildings at all, so it doesn't work correctly.
-hack 0x0062D45C, 0x0062D462
+hack 0x0062D45A, 0x0062D462
 _Dont_attack_any_buildings_with_no_weapon:
+        test    cl, cl
         jnz     0x0062D8C0      ; Don't attack
 
         mov     eax, [esi]
@@ -46,15 +45,14 @@ _Dont_attack_any_buildings_with_no_weapon:
         call    [eax+0x30C]
 
         test    eax, eax
-        jz      0x0062D8C0      ; Don't attack
+        jz      hackend         ; Don't attack
 
         mov     eax, [eax]
         test    eax, eax
-        jz      0x0062D8C0      ; Don't attack
+        jz      hackend         ; Don't attack
 
         mov     ecx, [eax+0x7C] ; Check for Range
         test    ecx, ecx        ; Ranges is zero?
         jz      0x0062D8C0      ; Don't attack
 
         jmp     hackend
-%endif
