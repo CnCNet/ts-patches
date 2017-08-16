@@ -124,4 +124,5 @@ TI_OBJS = \
                     src/mods/ti/ti_hacks.o \
                     src/mods/ti/logger.o \
                     src/mods/dta/auto_deploy_mcv.o \
-                    src/mods/dta/scrap_metal_explosion.o
+                    src/mods/dta/scrap_metal_explosion.o \
+                    src/mods/sideindex_improvements_v2.o

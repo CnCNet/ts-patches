@@ -110,6 +110,7 @@ TSCLIENT_OBJS = \
                     src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
                     src/mods/dta/scrap_metal_explosion.o \
+                    src/mods/sideindex_improvements_v2.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/tsclient/logger.o \
                     src/mods/tsclient/filename_hacks.o \
