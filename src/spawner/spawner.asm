@@ -24,6 +24,7 @@ cextern IntegrateMumbleSpawn
 cextern AttackNeutralUnits
 cextern ScrapMetal
 cextern AutoDeployMCV
+cextern SharedControl
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -133,6 +134,7 @@ section .rdata
     str_SaveGameName    db "SaveGameName",0
     str_MultipleFactory db "MultipleFactory",0
     str_AlliesAllowed   db "AlliesAllowed",0
+    str_SharedControl   db "SharedControl",0
     str_SidebarHack     db "SidebarHack",0
     str_BuildOffAlly    db "BuildOffAlly",0
     str_CustomLoadScreen db "CustomLoadScreen",0
@@ -875,6 +877,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_AlliesAllowed, 1
     mov byte [AlliesAllowed], al
+
+    SpawnINI_Get_Bool str_Settings, str_SharedControl, 0
+    mov byte [SharedControl], al
 
     SpawnINI_Get_Bool str_Settings, str_MCVRedeploy, 1
     mov byte [MCVRedeploy], al

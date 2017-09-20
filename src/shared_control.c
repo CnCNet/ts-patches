@@ -58,6 +58,7 @@ CALL(0x004E916C, _has_control);
 CALL(0x004E55E6, _has_control);
 
 uint32_t Controlling_Houses[8];
+bool SharedControl = false;
 
 bool __thiscall
 has_control(HouseClass *h)
@@ -89,7 +90,7 @@ has_control_or_spectator(HouseClass *h)
 void __thiscall
 GrantControl_Execute()
 {
-    if (SessionType.GameSession && !PlayerPtr->Defeated)
+    if (SessionType.GameSession && !PlayerPtr->Defeated && SharedControl)
     {
         if (CurrentObjectsArray.ActiveCount > 0)
         {
