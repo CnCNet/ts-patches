@@ -26,6 +26,9 @@ section .rdata
     str_MyIdField db "MYID",0
     str_AccountNameField db "ACCN",0
     str_stats_dmp: db "stats.dmp",0
+    str_HASH db "HASH",0
+
+cextern MapHash
 
 section .text
 
@@ -44,7 +47,7 @@ _Send_Statistics_Packet_Write_New_Fields:
 	mov     byte [0x0070FD0F], bl
 
 	mov     edi, [esi+0x20] ; value
-	mov		edi, [IsSpectatorArray+edi*4]
+	mov     edi, [IsSpectatorArray+edi*4]
 
 	push    10h
 	call    0x006B51D7 ; operator new(uint)
@@ -123,7 +126,6 @@ _Send_Statistics_Packet_Write_New_Fields:
 	xor     eax, eax
 
 .ret:
-
 	; Reset field name to 'COL'
 	mov     byte [0x0070FD0C], 0x43
 	mov     byte [0x0070FD0D], 0x4f
@@ -131,7 +133,35 @@ _Send_Statistics_Packet_Write_New_Fields:
 
 	push    eax
 	lea     ecx, [esp+0x18]
-	jmp		0x00609F45
+	jmp     0x00609F45
+
+
+hack 0x00609825, 0x0060982F
+_Send_Statistics_Packet_Write_MapHash:
+        push    eax
+	lea     ecx, [esp+0x18]
+	call    0x005A22D0 ; PacketClass::Add_Field(FieldClass *)
+
+        push    10h
+        call    0x006B51D7 ; operator new(uint)
+        add     esp, 4
+        test    eax, eax
+        jz      .new_failed4
+
+        push    MapHash
+        push    str_HASH
+        mov     ecx, eax
+        call    0x00498AD0      ; FieldClass::FieldClass(char *, char *)
+        jmp     .ret
+
+.new_failed4:
+        xor     eax, eax
+
+.ret:
+        push    eax
+	lea     ecx, [esp+0x18]
+	call    0x005A22D0 ; PacketClass::Add_Field(FieldClass *)
+        jmp     hackend
 
 
 AddMyIdField:

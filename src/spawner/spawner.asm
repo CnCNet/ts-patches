@@ -84,6 +84,8 @@ section .bss
     SaveGameLoadPath           RESB 256
     SpawnerTeamName            RESB 128
 
+gstring MapHash, "", 256
+
 section .rdata
     str_NoWindowFrame db "NoWindowFrame",0
     str_kernel32dll db "Kernel32.dll",0
@@ -134,6 +136,7 @@ section .rdata
     str_SaveGameName    db "SaveGameName",0
     str_MultipleFactory db "MultipleFactory",0
     str_AlliesAllowed   db "AlliesAllowed",0
+    str_MapHash         db "MapHash",0
     str_SharedControl   db "SharedControl",0
     str_SidebarHack     db "SidebarHack",0
     str_BuildOffAlly    db "BuildOffAlly",0
@@ -877,6 +880,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_AlliesAllowed, 1
     mov byte [AlliesAllowed], al
+
+    lea eax, [MapHash]
+    SpawnINI_Get_String str_Settings, str_MapHash, str_Empty, eax, 255
 
     SpawnINI_Get_Bool str_Settings, str_SharedControl, 0
     mov byte [SharedControl], al
