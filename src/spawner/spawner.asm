@@ -25,6 +25,7 @@ cextern AttackNeutralUnits
 cextern ScrapMetal
 cextern AutoDeployMCV
 cextern SharedControl
+cextern SkipScoreScreen
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -153,6 +154,7 @@ section .rdata
     str_AttackNeutralUnits db "AttackNeutralUnits", 0
     str_ScrapMetal      db "ScrapMetal",0
     str_AutoDeployMCV   db "AutoDeployMCV",0
+    str_SkipScoreScreen db "SkipScoreScreen",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -930,6 +932,9 @@ Initialize_Spawn:
     SpawnINI_Get_Bool str_Settings, str_AutoDeployMCV,0
     mov byte [AutoDeployMCV], al
 
+    SpawnINI_Get_Bool str_Settings, str_SkipScoreScreen, dword[SkipScoreScreen]
+    mov byte [SkipScoreScreen], al
+
     ; tunnel ip
     lea eax, [TempBuf]
     SpawnINI_Get_String str_Tunnel, str_Ip, str_Empty, eax, 32
@@ -1036,10 +1041,10 @@ Initialize_Spawn:
     push 3Ch
     call IPXManagerClass__Set_Timing
 
-    SpawnINI_Get_Int str_Settings, str_FrameSendRate, 6
+    SpawnINI_Get_Int str_Settings, str_FrameSendRate, 5
     mov dword [FrameSendRate], eax
 
-    lea eax, [eax*4]
+    lea eax, [eax*6]
     mov dword [MaxAhead], eax
     SpawnINI_Get_Int str_Settings, str_MaxAhead, { dword [MaxAhead] }
     mov dword [MaxAhead], eax

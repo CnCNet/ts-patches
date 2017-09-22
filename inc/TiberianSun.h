@@ -269,6 +269,8 @@ extern bool IntegrateMumbleSun;
 extern bool IntegrateMumbleSpawn;
 
 
+extern void MultiScore__Present();
+
 // Disable alt tab
 void LoadKeyboardHook();
 bool sidebar_has_cameo(int RTTI, int HeapID);

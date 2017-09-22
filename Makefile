@@ -125,6 +125,7 @@ MP_OBJS          = \
                     src/random_loop_delay.o \
                     src/rage_quit.o \
                     src/move_team_group_number.o \
+                    src/skip_score.o \
 
 
 ifdef WWDEBUG

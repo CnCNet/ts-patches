@@ -9,6 +9,7 @@ bool OverrideColors;
 bool HoverShowHealth;
 bool MoveToUndeploy = true;
 int32_t InfoPanel = -1;
+bool SkipScoreScreen = false;
 
 void LoadSunIni()
 {
@@ -21,7 +22,7 @@ void LoadSunIni()
     UseGraphicsPatch = SunIni_GetBool("Video", "UseGraphicsPatch", true);
     VideoWindowed = SunIni_GetBool("Video", "Video.Windowed", false);
     ScrollDelay = SunIni_GetInt("Options", "ScrollDelay", 0);
-    
+
     if (SunIni_GetBool("Video", "DisableHighDpiScaling", false))
         DisableHighDpiScaling();
     if (SunIni_GetBool("Video", "DisableMaxWindowedMode", false))
@@ -63,5 +64,6 @@ void LoadSunIni()
     HoverShowHealth = SunIni_GetBool("Options", "HoverShowHealth", true);
     InfoPanel = SunIni_GetInt("Options", "InfoPanel", -1);
     MoveToUndeploy = SunIni_GetBool("Options", "MoveToUndeploy", true);
+    SkipScoreScreen = SunIni_GetBool("Options", "SkipScoreScreen", false);
 #endif
 }

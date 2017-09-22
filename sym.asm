@@ -221,6 +221,7 @@ setcglob 0x00475D90, DisplayClass__Init_IO
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent
 setcglob 0x00867014, WOLGameID
+setcglob 0x00568060, MultiScore__Present
 
 ; Others
 setcglob 0x007A1790, VideoWindowed
