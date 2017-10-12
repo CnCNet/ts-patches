@@ -722,10 +722,10 @@ _Read_Scenario_INI_Assign_Houses_And_Spawner_House_Settings:
     lea eax, [SpawnerTeamName]
     SpawnINI_Get_String str_Settings, str_TeamName, 0, eax, 128
 
-    cmp DWORD[SpawnerTeamName], 0
+    cmp byte[SpawnerTeamName], 0
     je  .dont_set_name
 
-    push DWORD[SpawnerTeamName]
+    push SpawnerTeamName
     call set_team_name
 
 .dont_set_name:
@@ -1044,7 +1044,8 @@ Initialize_Spawn:
     SpawnINI_Get_Int str_Settings, str_FrameSendRate, 5
     mov dword [FrameSendRate], eax
 
-    lea eax, [eax*6]
+   ;lea eax, [eax*6]
+    imul eax, 6
     mov dword [MaxAhead], eax
     SpawnINI_Get_Int str_Settings, str_MaxAhead, { dword [MaxAhead] }
     mov dword [MaxAhead], eax
