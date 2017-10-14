@@ -282,6 +282,11 @@ _UnitClass__Read_INI_Jump_Out_When_Units_Section_Missing:
 _Read_Scenario_INI_Dont_Create_Units_Earlier:
     call 0x0058C980
 
+    push    eax
+    push    ebp
+    call    _read_tut_from_map
+    pop     eax
+
     cmp dword [SessionType], 0
     jz  .Ret
 
@@ -298,8 +303,6 @@ _Read_Scenario_INI_Dont_Create_Units_Earlier:
 
     call    initMumble
 
-    push    ebp
-    call    _read_tut_from_map
 .Ret:
     jmp 0x005DDAF6
 
@@ -1044,7 +1047,6 @@ Initialize_Spawn:
     SpawnINI_Get_Int str_Settings, str_FrameSendRate, 5
     mov dword [FrameSendRate], eax
 
-   ;lea eax, [eax*6]
     imul eax, 6
     mov dword [MaxAhead], eax
     SpawnINI_Get_Int str_Settings, str_MaxAhead, { dword [MaxAhead] }
