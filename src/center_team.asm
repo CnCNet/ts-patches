@@ -7,6 +7,7 @@
 
 gint DoubleTapFrame, 0x7fffffff
 gint LastTeamNumber, 0
+gint DoubleTapInterval, 30
 
 hack 0x004E8E80, 0x004E8E86
 _SelectTeamCommandClass_Execute_after:
@@ -26,7 +27,7 @@ _SelectTeamCommandClass_Execute_after:
         popa
 
  .Out:
-        add  eax, 30
+        add  eax, [DoubleTapInterval]
         mov  [DoubleTapFrame], eax ; Set DoubleTapFrame to Frame + 30
         mov  [LastTeamNumber], ecx ; Set LastTeamNumber to the current team number
  .Reg:

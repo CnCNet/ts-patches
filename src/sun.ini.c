@@ -10,6 +10,7 @@ bool HoverShowHealth;
 bool MoveToUndeploy = true;
 int32_t InfoPanel = -1;
 bool SkipScoreScreen = false;
+extern int32_t DoubleTapInterval;
 
 void LoadSunIni()
 {
@@ -65,5 +66,6 @@ void LoadSunIni()
     InfoPanel = SunIni_GetInt("Options", "InfoPanel", -1);
     MoveToUndeploy = SunIni_GetBool("Options", "MoveToUndeploy", true);
     SkipScoreScreen = SunIni_GetBool("Options", "SkipScoreScreen", false);
+    DoubleTapInterval = SunIni_GetInt("Options", "DoubleTapInterval", -1);
 #endif
 }
