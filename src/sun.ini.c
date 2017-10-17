@@ -11,6 +11,7 @@ bool MoveToUndeploy = true;
 int32_t InfoPanel = -1;
 bool SkipScoreScreen = false;
 extern int32_t DoubleTapInterval;
+bool AddTeamStyle2 = false;
 bool AltToRally = false;
 
 void LoadSunIni()
@@ -69,5 +70,6 @@ void LoadSunIni()
     SkipScoreScreen = SunIni_GetBool("Options", "SkipScoreScreen", false);
     DoubleTapInterval = SunIni_GetInt("Options", "DoubleTapInterval", -1);
     AltToRally = SunIni_GetBool("Options", "AltToRally", false);
+    AddTeamStyle2 = SunIni_GetBool("Options", "AddTeamStyle2", false);
 #endif
 }
