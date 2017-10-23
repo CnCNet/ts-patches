@@ -28,7 +28,7 @@ void LoadSunIni()
 
     if (SunIni_GetBool("Video", "DisableHighDpiScaling", false))
         DisableHighDpiScaling();
-    if (SunIni_GetBool("Video", "DisableMaxWindowedMode", false))
+    if (SunIni_GetBool("Video", "DisableMaxWindowedMode", true))
         fnDisableMaxWindowedMode();
     if (SunIni_GetBool("Win8Compat", "Enabled", false))
     {
