@@ -353,6 +353,7 @@ setcglob 0x0074C5D0, SidebarSurface
 setcglob 0x0074C5E4, TempSurface
 setcglob 0x0074C5EC, CompositeSurface
 setcglob 0x0074C5E0, AlternateSurface
+setcglob 0x0074C5DC, HiddenSurface
 setcglob 0x0048BB00, DSurface_FillRect
 
 ;Address  Ordinal Name                          Library

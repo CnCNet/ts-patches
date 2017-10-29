@@ -8,6 +8,7 @@ cglobal INIClass_SPAWN
 cglobal SpawnLocationsArray
 cglobal SpawnLocationsHouses
 
+gbool QuickMatch, false
 gbool IsHost, true
 
 cextern Load_Spectators_Spawner
@@ -155,6 +156,7 @@ section .rdata
     str_ScrapMetal      db "ScrapMetal",0
     str_AutoDeployMCV   db "AutoDeployMCV",0
     str_SkipScoreScreen db "SkipScoreScreen",0
+    str_QuickMatch      db "QuickMatch",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -937,6 +939,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_SkipScoreScreen, dword[SkipScoreScreen]
     mov byte [SkipScoreScreen], al
+
+    SpawnINI_Get_Bool str_Settings, str_QuickMatch, 0
+    mov byte [QuickMatch], al
 
     ; tunnel ip
     lea eax, [TempBuf]

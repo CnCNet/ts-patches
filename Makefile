@@ -126,6 +126,7 @@ MP_OBJS          = \
                     src/rage_quit.o \
                     src/move_team_group_number.o \
                     src/skip_score.o \
+                    src/hide_names_qm.o \
 
 
 ifdef WWDEBUG
