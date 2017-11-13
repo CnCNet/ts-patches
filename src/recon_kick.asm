@@ -5,6 +5,8 @@
 ;;; If a wrong CRC comes in from a player, we try to
 ;;; broadcast a REMOVEPLAYER message to everyone.
 
+cextern SavesDisabled
+
 sstring str_PlayerOutOfSync, "Player has gone out of sync"
 @LJNZ 0x005B4F5F, _Execute_DoList_dont_recon
 
@@ -90,6 +92,7 @@ _Execute_DoList_dont_recon:
 ; Hack the REMOVEPLAYER event
 hack 0x00494EE4
     mov  dword [AutoSaveGame], -1
+    mov  byte [SavesDisabled], 1
     mov  eax, [esi+0x6]
     cmp  byte [OutOfSyncArray+eax], 1
     jz   0x00494F1D

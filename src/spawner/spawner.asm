@@ -27,6 +27,7 @@ cextern ScrapMetal
 cextern AutoDeployMCV
 cextern SharedControl
 cextern SkipScoreScreen
+cextern SavesDisabled
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -921,6 +922,7 @@ Initialize_Spawn:
     SpawnINI_Get_Int str_Settings, str_AutoSaveGame, -1
     mov dword [AutoSaveGame], eax
     mov dword [NextAutoSave], eax
+    mov byte [SavesDisabled], 0
 
     SpawnINI_Get_Bool str_Settings, str_AimableSams, 0
     mov byte [AimableSams], al

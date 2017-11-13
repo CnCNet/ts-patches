@@ -36,6 +36,7 @@ COMMON_OBJS = \
 SP_OBJS = src/no-cd_tfd.o src/sun.ini.sp.o
 
 MP_OBJS          = \
+                    src/mods/dont_save_without_all_players.o \
                     src/sun.ini.o \
                     src/no-cd_iran.o \
                     src/in-game_message_background.o \
