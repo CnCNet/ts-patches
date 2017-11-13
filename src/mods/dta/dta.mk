@@ -130,4 +130,5 @@ DTA_OBJS = \
                     src/mods/dta/remove_ion_storm_effects.o \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/buildconst_harvesterunit_baseunit.o \
+                    src/mods/dta/max_passenger_pip_count.o \
                     src/mods/sideindex_improvements_v2.o
