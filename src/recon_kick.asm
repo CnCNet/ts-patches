@@ -50,7 +50,6 @@ _Execute_DoList_dont_recon:
     call EnqueueEvent
     add  esp, 50
 
-    call MapSnapshot_Execute
     mov  edx, dword[esp+8]
 
     ; Calculate message duration
