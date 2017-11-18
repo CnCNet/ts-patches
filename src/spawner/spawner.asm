@@ -35,6 +35,8 @@ cextern SavesDisabled
 @LJMP 0x004BDDB1, _HouseClass__Make_Ally_STFU_when_Allying_In_Loading_Screen_Spawner
 @LJMP 0x004E078C, _Init_Game_Check_Spawn_Arg_No_Intro
 
+@LJMP 0x005FFDBF, _WinMain_Read_Check_Spawn_Arg
+
 ; Inside HouseClass::Mplayer_Defeated skip some checks which makes game continue
 ; even if there are only allied AI players left, in skirmish
 @LJMP 0x004BF7B6, 0x004BF7BF
@@ -158,6 +160,8 @@ section .rdata
     str_AutoDeployMCV   db "AutoDeployMCV",0
     str_SkipScoreScreen db "SkipScoreScreen",0
     str_QuickMatch      db "QuickMatch",0
+    str_GameNameTitle   db "Tiberian Sun",0
+    str_PleaseRunClient db "Please run the game client instead.",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -361,6 +365,35 @@ _sub_5ED470_Dont_Read_Scenario_Descriptions_When_Spawner_Active:
     call [_imp__timeGetTime]
     jmp 0x005ED482
 
+_WinMain_Read_Check_Spawn_Arg:
+    pushad
+
+    call [_imp__GetCommandLineA]
+    push str_SpawnArg
+    push eax
+    call stristr_
+    add esp, 8
+    xor ebx, ebx
+    cmp eax, 0
+    setne bl
+    mov [IsSpawnArgPresent], ebx
+    popad
+    
+    cmp dword [IsSpawnArgPresent], 1
+    je .Normal_Code
+    
+    ; -SPAWN arg not found, display error message asking to run the client instead
+    
+    push 16 ; uType
+    push str_GameNameTitle ; Title
+    push str_PleaseRunClient ; Text
+    push 0 ; hWnd
+    call [0x006CA458] ; ds:MessageBoxA
+    jmp 0x005FFCB0
+    
+.Normal_Code:
+    call 0x00472540 ; Init_Language
+    jmp 0x005FFDC4
 
 Init_Game_Spawner:
     lea eax, [UsedSpawnsArray]
@@ -377,15 +410,6 @@ _Init_Game_Check_Spawn_Arg_No_Intro:
 
     call Init_Game_Spawner
 
-    call [_imp__GetCommandLineA]
-    push str_SpawnArg
-    push eax
-    call stristr_
-    add esp, 8
-    xor ebx, ebx
-    cmp eax, 0
-    setne bl
-    mov [IsSpawnArgPresent], ebx
     popad
 
     cmp dword [IsSpawnArgPresent], 0
