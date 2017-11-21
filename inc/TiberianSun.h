@@ -232,6 +232,8 @@ void Toggle_Control(EventClass *e);
 bool __thiscall WWKeyboardClass__Down(WWKeyboardClass *this, uint32_t key);
 void __fastcall PrettyPrintKey(int16_t code, char *buf);
 
+LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
 #ifndef WWDEBUG
 #define WWDebug_Printf(format, ...)
 #else

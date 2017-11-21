@@ -240,6 +240,7 @@ setcglob 0x004082D0, WWDebug_Printf
 setcglob 0x00865040, hWndParent
 setcglob 0x00474E70, Fancy_Text_Print
 setcglob 0x00474A50, Simple_Text_Print
+setcglob 0x00685BC0, WndProc
 
 ; Sidebar
 setcglob 0x0080C3BC, SidebarClass_Redraw_Buttons
@@ -336,6 +337,9 @@ setcglob 0x006CA3BC, SetWindowPos
 setcglob 0x006CA360, _imp__SetFocus
 setcglob 0x006CA360, SetFocus
 setcglob 0x006CA3C8, InvalidateRect
+setcglob 0x006CA470, _imp__ShowWindow
+setcglob 0x006CA46C, _imp__SetWindowLongA
+setcglob 0x006CA468, _imp__GetWindowLongA
 
 ; Tutorial
 setcglob 0x006FE49C, TUTORIAL_INI_Name
@@ -628,9 +632,6 @@ setcglob 0x0048BB00, DSurface_FillRect
 ;006CA45C         LoadStringA                   USER32
 ;006CA460         MessageBoxIndirectA           USER32
 ;006CA464         wsprintfA                     USER32
-;006CA468         GetWindowLongA                USER32
-;006CA46C         SetWindowLongA                USER32
-;006CA470         ShowWindow                    USER32
 ;006CA474         UpdateWindow                  USER32
 ;006CA478         CallWindowProcA               USER32
 ;006CA47C         WindowFromPoint               USER32
