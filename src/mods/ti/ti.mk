@@ -97,7 +97,6 @@ TI_OBJS = \
                     src/response_time_func.o \
                     src/show_stats.o \
                     src/sidebar.o \
-                    src/alt_to_undeploy.o \
                     src/place_building_hotkey.o \
                     src/repeat_last_building_hotkey.o \
                     src/center_team.o \
@@ -126,4 +125,6 @@ TI_OBJS = \
                     src/mods/ti/logger.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/scrap_metal_explosion.o \
-                    src/mods/sideindex_improvements_v2.o
+                    src/mods/sideindex_improvements_v2.o \
+                    src/mods/dont_save_without_all_players.o \
+                    src/mods/max_pip_counts.o

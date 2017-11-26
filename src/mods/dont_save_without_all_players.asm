@@ -45,7 +45,7 @@ hack 0x00494DCE
 
     jmp 0x00494EB3
     
-.Original_Code
+.Original_Code:
     mov eax, dword [0x007E4940]
     xor edi, edi
     cmp eax, edi
