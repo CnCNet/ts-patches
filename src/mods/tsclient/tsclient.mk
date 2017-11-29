@@ -16,6 +16,7 @@ TSCLIENT_OBJS = \
                     src/single-proc-affinity.o \
                     src/graphics_patch.o \
                     src/no_window_frame.o \
+                    src/exception_catch.o \
                     sym.o \
                     src/win8_compat-func.o \
                     src/sun.ini.o \

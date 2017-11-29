@@ -340,6 +340,8 @@ setcglob 0x006CA3C8, InvalidateRect
 setcglob 0x006CA470, _imp__ShowWindow
 setcglob 0x006CA46C, _imp__SetWindowLongA
 setcglob 0x006CA468, _imp__GetWindowLongA
+setcglob 0x005FF7D0, Top_Level_Exception_Filter
+setcglob 0x00496350, PrintException
 
 ; Tutorial
 setcglob 0x006FE49C, TUTORIAL_INI_Name

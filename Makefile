@@ -31,6 +31,7 @@ COMMON_OBJS = \
               src/single-proc-affinity.o \
               src/graphics_patch.o \
               src/no_window_frame.o \
+              src/exception_catch.o \
               res/res.o \
               sym.o
 

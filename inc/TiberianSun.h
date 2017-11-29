@@ -291,3 +291,7 @@ extern bool StripMaxWindowBorder;
 extern bool DisableMaxWindowedMode;
 
 void SetWin8CompatData();
+
+
+LONG WINAPI Top_Level_Exception_Filter(struct _EXCEPTION_POINTERS *ExceptionInfo);
+LONG __fastcall PrintException(int id, struct _EXCEPTION_POINTERS *ExceptionInfo);
