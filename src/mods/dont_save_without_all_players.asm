@@ -6,24 +6,21 @@
 ; SavesDisabled is set to 1 in recon_kick.asm when the REMOVEPLAYER event is executed.
 ; Author: Rampastring
 
-cglobal SavesDisabled
+cextern SavesDisabled
 
 sstring str_CantSaveWithoutAllPlayers, "All players need to be present for saving multiplayer games."
 
-section .bss
-    SavesDisabled RESB 1
+section .text
 
-section .text    
-    
 hack 0x00494DCE
 
     mov ax, [SavesDisabled]
     cmp ax, 1
-    
+
     jne .Original_Code
-        
+
     pushad
-    
+
     ; Calculate message duration
     mov eax, [Rules]
     fld qword [eax+0C68h]   ; Message duration in minutes
@@ -40,11 +37,11 @@ hack 0x00494DCE
     push 0
     push 0
     call MessageListClass__Add_Message
-    
+
     popad
 
     jmp 0x00494EB3
-    
+
 .Original_Code:
     mov eax, dword [0x007E4940]
     xor edi, edi

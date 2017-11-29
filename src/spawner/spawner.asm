@@ -8,6 +8,7 @@ cglobal INIClass_SPAWN
 cglobal SpawnLocationsArray
 cglobal SpawnLocationsHouses
 
+gbool SavesDisabled, true
 gbool QuickMatch, false
 gbool IsHost, true
 
@@ -27,7 +28,6 @@ cextern ScrapMetal
 cextern AutoDeployMCV
 cextern SharedControl
 cextern SkipScoreScreen
-cextern SavesDisabled
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -378,19 +378,19 @@ _WinMain_Read_Check_Spawn_Arg:
     setne bl
     mov [IsSpawnArgPresent], ebx
     popad
-    
+
     cmp dword [IsSpawnArgPresent], 1
     je .Normal_Code
-    
+
     ; -SPAWN arg not found, display error message asking to run the client instead
-    
+
     push 16 ; uType
     push str_GameNameTitle ; Title
     push str_PleaseRunClient ; Text
     push 0 ; hWnd
     call [0x006CA458] ; ds:MessageBoxA
     jmp 0x005FFCB0
-    
+
 .Normal_Code:
     call 0x00472540 ; Init_Language
     jmp 0x005FFDC4
