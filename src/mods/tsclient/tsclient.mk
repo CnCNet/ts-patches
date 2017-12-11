@@ -73,6 +73,7 @@ TSCLIENT_OBJS = \
 			        src/minimap_crash.o \
                     src/new_events.o \
                     src/new_events_s.o \
+                    src/factory_rallypoints.o \
                     src/shared_control.o \
                     src/recon_kick.o \
                     src/hover_show_health.o \
