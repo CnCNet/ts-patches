@@ -31,7 +31,7 @@ struct ListAddress
 
 // globals referenced in spawner
 struct ListAddress AddressList[8];
-int TunnelId;
+uint16_t TunnelId;
 int TunnelIp;
 int TunnelPort;
 int PortHack;
@@ -87,7 +87,6 @@ WINAPI int Tunnel_RecvFrom(int sockfd, void *buf, size_t len, int flags, struct 
 WINAPI int NetHack_SendTo(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr_in *dest_addr, int addrlen)
 {
     struct sockaddr_in TempDest;
-
     // pull index
     int i = dest_addr->sin_addr.s_addr - 1;
 

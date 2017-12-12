@@ -990,7 +990,7 @@ Initialize_Spawn:
     and eax, 0xffff
     push eax
     call htons
-    mov [TunnelId], eax
+    mov word [TunnelId], ax
 
     cmp dword [TunnelPort],0
     jne .nosetport
