@@ -4,6 +4,11 @@
 
 cextern UsedSpawnsArray
 
+sstring str_Hard, "Difficulty: Hard"
+sstring str_Medium, "Difficulty: Medium"
+sstring str_Easy, "Difficulty: Easy"
+
+
 ; 0x40 = first parameter, 0x24 = second parameter, 0x28, third parameter, 0x2C = fourth parameter, 0x30 = fifth parameter
 ; the trigger action type should be 0 (as set map INI) for the extended triggers added, determines how the rest of the
 ; INI line is read for the rest of the trigger
@@ -71,6 +76,8 @@ hack 0x0061913B ; Extend trigger action jump table
     jz .Enable_ShortGame_Action
     cmp edx, 107
     jz .Disable_ShortGame_Action
+    cmp edx, 108
+    jz .Print_Difficulty_Action
     
     cmp edx, 68h
     ja 0x0061A9C5 ; default
@@ -118,3 +125,50 @@ hack 0x0061913B ; Extend trigger action jump table
 .Disable_ShortGame_Action:
     mov byte [ShortGame], 0
     jmp 0x0061A9C5
+
+; ******************************
+; *** Print Difficulty Level ***
+; ******************************
+    
+    ; arg: pointer to message
+%macro Print_Message 1
+    ; Calculate message duration
+    mov eax, [Rules]
+    fld qword [eax+0C68h]   ; Message duration in minutes
+    fmul qword [0x006CB1B8] ; Frames Per Minute
+    call Get_Message_Delay_Or_Duration ; Float to int
+
+    ; Push arguments
+    push eax                ; Message delay/duration
+    push 4046h              ; Very likely TextPrintType
+    mov ecx, MessageListClass_this
+    push 4
+    lea edx, [%1]
+    push edx
+    push 0
+    push 0
+    call MessageListClass__Add_Message
+%endmacro
+   
+.Print_Difficulty_Action:
+    mov eax, dword [SelectedDifficulty]
+
+    cmp eax, 2
+    je .Print_Hard
+    
+    cmp eax, 1
+    je .Print_Medium
+    
+    Print_Message str_Easy
+    jmp 0x0061A9C5
+    
+.Print_Medium:
+    Print_Message str_Medium
+    jmp 0x0061A9C5
+    
+.Print_Hard:
+    Print_Message str_Hard
+    jmp 0x0061A9C5
+    
+    
+
