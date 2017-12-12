@@ -32,8 +32,8 @@ struct ListAddress
 // globals referenced in spawner
 struct ListAddress AddressList[8];
 uint16_t TunnelId;
-int TunnelIp;
-int TunnelPort;
+uint32_t TunnelIp;
+uint16_t TunnelPort;
 int PortHack;
 
 WINAPI int Tunnel_SendTo(int sockfd, const void *buf, size_t len, int flags, struct sockaddr_in *dest_addr, int addrlen)

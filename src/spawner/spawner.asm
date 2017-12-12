@@ -983,7 +983,7 @@ Initialize_Spawn:
     and eax, 0xffff
     push eax
     call htons
-    mov [TunnelPort], eax
+    mov word [TunnelPort], ax
 
     ; tunnel id
     SpawnINI_Get_Int str_Settings, str_Port, 0
