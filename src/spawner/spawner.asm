@@ -992,7 +992,7 @@ Initialize_Spawn:
     call htons
     mov word [TunnelId], ax
 
-    cmp dword [TunnelPort],0
+    cmp word[TunnelPort],0
     jne .nosetport
     SpawnINI_Get_Int str_Settings, str_Port, 1234
     mov word [ListenPort], ax
