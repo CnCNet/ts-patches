@@ -32,6 +32,7 @@ COMMON_OBJS = \
               src/graphics_patch.o \
               src/no_window_frame.o \
               src/exception_catch.o \
+              src/force_conversion_type.o \
               res/res.o \
               sym.o
 

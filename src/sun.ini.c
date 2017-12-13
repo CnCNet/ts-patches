@@ -13,6 +13,7 @@ bool SkipScoreScreen = false;
 extern int32_t DoubleTapInterval;
 bool AddTeamStyle2 = false;
 bool AltToRally = false;
+bool ForceConversionType4 = true;
 
 void LoadSunIni()
 {
@@ -25,6 +26,7 @@ void LoadSunIni()
     UseGraphicsPatch = SunIni_GetBool("Video", "UseGraphicsPatch", true);
     VideoWindowed = SunIni_GetBool("Video", "Video.Windowed", false);
     ScrollDelay = SunIni_GetInt("Options", "ScrollDelay", 0);
+    ForceConversionType4 = SunIni_GetBool("Video", "ForceConversionType4", true);
 
     if (SunIni_GetBool("Video", "DisableHighDpiScaling", false))
         DisableHighDpiScaling();

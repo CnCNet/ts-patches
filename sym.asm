@@ -361,6 +361,8 @@ setcglob 0x0074C5EC, CompositeSurface
 setcglob 0x0074C5E0, AlternateSurface
 setcglob 0x0074C5DC, HiddenSurface
 setcglob 0x0048BB00, DSurface_FillRect
+setcglob 0x0048C140, DSurface_Conversion_Type
+
 
 ;Address  Ordinal Name                          Library
 ;-------  ------- ----                          -------

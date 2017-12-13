@@ -113,7 +113,6 @@ extern IPXManagerClass IPXManagerClass_this;
 extern char *ArmorNames[];
 extern int ShowHelpKey;
 
-
 // ### Functions ###
 
 void   __thiscall FileClass__FileClass(FileClass *fileClass, char *fileName);
