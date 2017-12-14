@@ -117,4 +117,5 @@ TSCLIENT_OBJS = \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/tsclient/logger.o \
                     src/mods/tsclient/filename_hacks.o \
-                    src/mods/tsclient/disable_intro_movie.o
+                    src/mods/tsclient/disable_intro_movie.o \
+					src/force_conversion_type.o

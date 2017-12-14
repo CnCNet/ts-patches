@@ -133,4 +133,5 @@ DTA_OBJS = \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/buildconst_harvesterunit_baseunit.o \
                     src/mods/max_pip_counts.o \
-                    src/mods/sideindex_improvements_v2.o
+                    src/mods/sideindex_improvements_v2.o \
+					src/force_conversion_type.o
