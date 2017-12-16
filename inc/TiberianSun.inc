@@ -12,6 +12,7 @@
 cextern hook_wwdebug_printf
 cextern AddressList
 
+
 ; Session
 cextern SessionClass_this
 cextern SessionClass__Create_Connections
@@ -39,6 +40,12 @@ cextern TournamentGame
 cextern EasyShroud
 cextern AutoSaveGame
 cextern NextAutoSave
+
+cextern CoachMode
+cextern HouseClass__Is_Ally_Or_Spec_HH
+cextern HouseClass__Is_Ally_HH
+cextern HouseClass__Is_Coach
+cextern HouseClass__Is_Spectator
 
 ;ini
 cextern INIClass_SUN_INI
@@ -187,7 +194,7 @@ cextern NameNodes_CurrentSize
 cextern HumanPlayers
 cextern EventClass__EventClass_PlayerID
 cextern EventClass__EventClass_noarg
-cextern EnqueueEvent
+cextern EventClass__EnqueueEvent
 cextern Queue_Exit
 cextern EventType_Offset
 cextern Print_CRCs

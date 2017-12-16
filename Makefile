@@ -54,6 +54,7 @@ MP_OBJS          = \
                     src/tiberium_stuff.o \
                     src/no_options_menu_animation.o \
                     src/short_connection_timeout.o \
+                    src/spawner/is_ally_or_spec.o \
                     src/spawner/spawner.o \
                     src/spawner/protocol_zero.o \
                     src/spawner/nethack.o \
@@ -63,6 +64,7 @@ MP_OBJS          = \
                     src/spawner/auto-surrender.o \
                     src/spawner/build_off_ally.o \
                     src/spawner/auto_ss.o \
+                    src/coach_mode.o \
                     src/jj_barracks_glitch_fix.o \
                     src/ts_util.o \
                     src/alt_scout_fix.o \
@@ -94,6 +96,7 @@ MP_OBJS          = \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/minimap_crash.o \
+                    src/EventClass.o \
                     src/new_events.o \
                     src/new_events_s.o \
                     src/shared_control.o \

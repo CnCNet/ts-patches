@@ -35,7 +35,7 @@ Queue_RemovePlayer:
         push eax
         call EventClass__EventClass_PlayerID
 
-        push esp
-        call EnqueueEvent
+        mov  ecx, esp
+        call EventClass__EnqueueEvent
         add  esp, 50
         retn

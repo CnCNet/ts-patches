@@ -94,19 +94,6 @@ typedef struct MessageListClass
 #pragma pack(pop)
 
 #pragma pack(push, 1)
-typedef struct EventClass {
-    char Type;
-    uint32_t Frame;
-    char Is_Exec;
-    uint32_t ID;
-    union {
-        uint32_t Target_ID;
-        char data[36];
-    };
-} EventClass;
-#pragma pack(pop)
-
-#pragma pack(push, 1)
 typedef struct CounterClass
 {
   void *base;
@@ -244,16 +231,6 @@ typedef struct CCFileClass
 } CCFileClass;
 #pragma pack(pop)
 
-
-#pragma pack(push, 1)
-typedef struct EventQueueType
-{
-    int32_t Count;
-    int32_t Head;
-    int32_t Tail;
-    EventClass Array[64];
-} EventQueueType;
-#pragma pack(pop)
 
 #pragma pack(push, 1)
 typedef struct WWKeyboardClass

@@ -127,16 +127,19 @@ char *  __thiscall ChatToAllies_INIname(void *a)     { return "ChatToAllies"; }
 char *  __thiscall ChatToAllies_Category(void *a)    { return "Chat"; }
 char *  __thiscall ChatToAllies_Name(void *a)        { return "ChatToAllies"; }
 int     __thiscall ChatToAllies_Execute(void *a)     {
-  if (IsSpectatorArray[PlayerPtr->ID])
-    ChatToSpectatorsFlag = 1;
 
-  if (!PlayerPtr->Defeated) {
+  if (HouseClass__Is_Coach(PlayerPtr) || !PlayerPtr->Defeated) {
     ChatToAlliesFlag = 1; // Defined in chatallies.asm
     WWDebug_Printf("ChatToAllies enabled[%x]\n",&ChatToAllies_Execute);
   }
-  else WWDebug_Printf("Can't chat allies, you read dead[%x]\n",ChatToAllies_Execute);
+  else if (HouseClass__Is_Spectator(PlayerPtr))
+  {
+    ChatToSpectatorsFlag = 1;
+  }
+  else WWDebug_Printf("Can't chat allies, you are dead[%x]\n",ChatToAllies_Execute);
   return 1;
 }
+
 
 vtCommandClass vtChatToAlliesCommand = {
   CommandDestroy,

@@ -160,6 +160,7 @@ section .rdata
     str_AutoDeployMCV   db "AutoDeployMCV",0
     str_SkipScoreScreen db "SkipScoreScreen",0
     str_QuickMatch      db "QuickMatch",0
+    str_CoachMode       db "CoachMode",0
     str_GameNameTitle   db "Tiberian Sun",0
     str_PleaseRunClient db "Please run the game client instead.",0
 
@@ -968,6 +969,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_QuickMatch, 0
     mov byte [QuickMatch], al
+
+    SpawnINI_Get_Bool str_Settings, str_CoachMode, 0
+    mov byte [CoachMode], al
 
     ; tunnel ip
     lea eax, [TempBuf]

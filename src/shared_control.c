@@ -1,5 +1,6 @@
 #include "macros/patch.h"
 #include "TiberianSun.h"
+#include "Classes/EventClass.h"
 #include "patch.h"
 #include <stdio.h>
 #include <stdbool.h>
@@ -106,7 +107,7 @@ GrantControl_Execute()
                                                 EVENTTYPE_GRANTCONTROL, his_id);
                 WWDebug_Printf("Enqueing event %s => %d, %d\n", "GRANTCONTROL",
                                PlayerPtr->ID, his_id);
-                EnqueueEvent(&e);
+                EventClass__EnqueueEvent(&e);
             }
         }
     }

@@ -42,6 +42,9 @@ DTA_OBJS = \
                     src/spawner/auto-surrender.o \
                     src/spawner/build_off_ally.o \
                     src/spawner/auto_ss.o \
+                    src/spawner/is_ally_or_spec.o \
+                    src/coach_mode.o \
+                    src/EventClass.o \
                     src/jj_barracks_glitch_fix.o \
                     src/ts_util.o \
                     src/alt_scout_fix.o \

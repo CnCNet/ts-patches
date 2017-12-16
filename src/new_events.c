@@ -1,5 +1,6 @@
 #include "macros/patch.h"
 #include "TiberianSun.h"
+#include "Classes/EventClass.h"
 #include "patch.h"
 #include <stdbool.h>
 
@@ -104,19 +105,6 @@ uint8_t NewEventLengths[] = {
     4,    //"LATENCYFUNDGE",
     4,    //"GRANTCONTROL"
 };
-
-void
-EnqueueEvent(EventClass *this)
-{
-    if (Outlist.Count < 64)
-    {
-        memcpy(&(Outlist.Array[Outlist.Tail]), this, sizeof(EventClass));
-        Outlist.Count++;
-        Outlist.Tail++;
-        Outlist.Tail &= 0x3F;
-    }
-
-}
 
 
 void __stdcall

@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include "macros/patch.h"
 #include "TiberianSun.h"
+#include "Classes/EventClass.h"
 #include "patch.h"
 
 CALL(0x005091A5, _MainLoop_AfterRender);
@@ -34,7 +35,7 @@ MainLoop_AfterRender(MessageListClass *msg) {
         NextAutoSave = Frame + AutoSaveGame;
         EventClass e;
         EventClass__EventClass_noarg(&e, PlayerPtr->ID, EVENTTYPE_SAVEGAME);
-        EnqueueEvent(&e);
+        EventClass__EnqueueEvent(&e);
     }
   }
 }

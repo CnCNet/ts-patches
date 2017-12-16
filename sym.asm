@@ -14,10 +14,14 @@ setcglob 0x004BB460, HouseClass__Assign_Handicap
 setcglob 0x004BDB30, HouseClass__Make_Ally
 setcglob 0x004BDB50, HouseClass__Make_Ally_House
 setcglob 0x004BD9E0, HouseClass__Is_Ally
+setcglob 0x004BD9E0, HouseClass__Is_Ally_HI
+setcglob 0x004BDA20, HouseClass__Is_Ally_HH
 setcglob 0x004BDA60, HouseClass__Is_Ally_Techno
 setcglob 0x004CB950, HouseClass__Is_Player
 setcglob 0x004BEEA0, HouseClass__Manual_Place
 setcglob 0x004BE200, HouseClass__Begin_Production
+setcglob 0x004C4730, HouseClass__House_From_HouseType
+setcglob 0x004CDEF0, HouseTypeClass__From_Name
 setcglob 0x004974A0, FactoryClass__Get_Product
 setcglob 0x00497470, FactoryClass__Has_Completed
 setcglob 0x005DE210, Assign_Houses
@@ -120,7 +124,8 @@ setcglob 0x00493E40, EventClass__EventClass_PlayerID
 setcglob 0x00493DE0, EventClass__EventClass_noarg
 setcglob 0x004940A0, EventClass__EventClass_produce
 setcglob 0x005B1210, Queue_Exit
-setcglob 0x007E15F8, Outlist
+setcglob 0x007B3530, DoList
+setcglob 0x007E15F8, OutList
 setcglob 0x006CB1B8, FramesPerMinute
 setcglob 0x007B353C, EventType_Offset
 setcglob 0x005B58F0, Print_CRCs

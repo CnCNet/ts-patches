@@ -1,5 +1,6 @@
 #include "TiberianSun.h"
 #include "macros/patch.h"
+#include "Classes/EventClass.h"
 
 CALL(0x005F5DE9, _remember_last_building);
 
@@ -32,7 +33,7 @@ int     __thiscall RepeatBuilding_Execute(void *a)
             EventClass e;
             EventClass__EventClass_produce(&e, PlayerPtr->ID, EVENTTYPE_PRODUCE,
                                            LastBuilding_RTTI, LastBuilding_HeapID);
-            EnqueueEvent(&e);
+            EventClass__EnqueueEvent(&e);
         }
     }
 }

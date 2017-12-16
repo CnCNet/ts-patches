@@ -88,7 +88,6 @@ extern bool OutOfSync;
 extern DynamicVectorClass_Objects CurrentObjectsArray;
 extern DynamicVectorClass_Houses HouseClassArray;
 extern SessionClass SessionType;
-extern EventQueueType Outlist;
 extern WWKeyboardClass *WWKeyboard;
 extern uint32_t ForceFire1;
 extern uint32_t ForceFire2;
@@ -210,10 +209,17 @@ void __thiscall CCINIClass_Vector_Resize(Hotkey **h, int32_t size);
 void __thiscall Multiplayer_Debug_Print();
 void __thiscall HouseClass__Make_Ally_House(HouseClass *self, HouseClass *house);
 bool __thiscall HouseClass__Is_Ally(HouseClass *this, int his_id);
+bool __thiscall HouseClass__Is_Ally_HH(HouseClass *this, HouseClass *him);
+bool __thiscall HouseClass__Is_Ally_HI(HouseClass *this, int his_id);
 bool __thiscall HouseClass__Is_Ally_Techno(HouseClass *this, void *him);
 bool __thiscall HouseClass__Is_Player(HouseClass *this);
 void __thiscall HouseClass__Manual_Place(HouseClass *this, void *factory_building, void *place_building);
 void __thiscall HouseClass__Begin_Production(HouseClass *this, int RTTI, int HeapID, int a3);
+void *__fastcall HouseTypeClass__From_Name(char *name);
+HouseClass *__fastcall HouseClass__House_From_HouseType(void *this);
+bool __thiscall HouseClass__Is_Coach(HouseClass *this);
+bool __thiscall HouseClass__Is_Spectator(HouseClass *this);
+
 void * __thiscall FactoryClass__Get_Product(void *factory);
 bool  __thiscall FactoryClass__Has_Completed(void *factory);
 
@@ -221,12 +227,6 @@ void __stdcall HookInitCommands();
 void ParseIntLL(char *entry_string, int_ll **head);
 void *__cdecl operator_new(size_t size);
 void __cdecl operator_delete(void *memory);
-
-void EnqueueEvent(EventClass *this);
-EventClass * __thiscall EventClass__EventClass_PlayerID(EventClass *e, int my_id, EventType t, int his_id);
-EventClass * __thiscall EventClass__EventClass_noarg(EventClass *e, int my_id, EventType t);
-EventClass * __thiscall EventClass__EventClass_produce(EventClass *e, int my_id, EventType t, int RTTI, int heapid);
-void Toggle_Control(EventClass *e);
 
 bool __thiscall WWKeyboardClass__Down(WWKeyboardClass *this, uint32_t key);
 void __fastcall PrettyPrintKey(int16_t code, char *buf);
