@@ -97,8 +97,10 @@ MP_OBJS          = \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/minimap_crash.o \
                     src/EventClass.o \
-                    src/new_events.o \
+                    src/event_declarations.o \
                     src/new_events_s.o \
+                    src/log_more_oos.o \
+                    src/record_rng_func.o \
                     src/shared_control.o \
                     src/recon_kick.o \
                     src/hover_show_health.o \

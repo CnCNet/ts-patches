@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
@@ -72,7 +74,7 @@ extern bool ChatToAllFlag;
 extern bool ChatToSpectatorsFlag;
 extern uint32_t IsSpectatorArray[8];
 extern size_t HouseClassArray_Count;
-extern void *ScenarioStuff;
+extern ScenarioClass *ScenarioStuff;
 extern uint32_t Frame;
 extern uint32_t GameIDNumber;
 extern int32_t DragDistance;

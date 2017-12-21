@@ -2,7 +2,7 @@
 #include "TiberianSun.h"
 #include "Classes/EventClass.h"
 #include "patch.h"
-#include <stdbool.h>
+#include <stdlib.h>
 
 SETDWORD(0x00493D12, _EventNames);
 SETDWORD(0x00493D82, _EventNames);
@@ -106,9 +106,10 @@ uint8_t EventLengths[] = {
     4,    //"GRANTCONTROL"
 };
 
+int CountEvents = _countof(EventLengths);
 
 void __stdcall
-Switch_Events(EventClass *e)
+Extended_Events(EventClass *e)
 {
     WWDebug_Printf("Executing extended event 0x%x\n", e->Type);
     switch(e->Type) {

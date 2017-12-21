@@ -4,6 +4,9 @@
 #include "patch.h"
 #include <stdbool.h>
 
+volatile uint32_t DoList_Mask = 0xFFF;
+volatile uint32_t OutList_Mask = 0x3F;
+
 void __thiscall
 EventClass__EnqueueEvent(EventClass *this)
 {

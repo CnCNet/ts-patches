@@ -44,6 +44,10 @@ TI_OBJS = \
                     src/spawner/is_ally_or_spec.o \
                     src/coach_mode.o \
                     src/EventClass.o \
+                    src/event_declarations.o \
+                    src/new_events_s.o \
+                    src/log_more_oos.o \
+                    src/record_rng_func.o \
                     src/jj_barracks_glitch_fix.o \
                     src/ts_util.o \
                     src/alt_scout_fix.o \
@@ -87,8 +91,6 @@ TI_OBJS = \
                     src/veterancy_from_allies.o \
                     src/mods/tiberium4_blocks_infantry.o \
                     src/factory_rallypoints.o \
-                    src/new_events.o \
-                    src/new_events_s.o \
                     src/shared_control.o \
                     src/autosave.o \
                     src/fix_100_unit_bug.o \

@@ -74,7 +74,7 @@ cextern FileClass__Write
 cextern CCFileClass__CCFileClass
 cextern CCFileClass__Destroy
 
-cextern Switch_NewEvents
+cextern Extended_Events
 
 ; ### imports ###
 cextern sendto

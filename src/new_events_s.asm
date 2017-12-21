@@ -11,7 +11,7 @@ section .text
 
 _EventClass__Execute_Extended:
     push esi
-    call Switch_NewEvents
+    call Extended_Events
 
     jmp 0x00495110
 

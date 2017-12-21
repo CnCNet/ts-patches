@@ -1,3 +1,4 @@
+#pragma once
 typedef enum EventType
 {
   EVENTTYPE_EMTPY = 0x0,

@@ -17,6 +17,20 @@ typedef struct CellClass_struct {
 
 
 #pragma pack(push, 1)
+
+typedef struct Random2Class
+{
+    uint32_t Seed;
+    uint32_t Index;
+    uint32_t NumberArray[250];
+} Random2Class;
+
+typedef struct ScenarioClass
+{
+    char data[0x218];
+    Random2Class CriticalRandomNumber;
+} ScenarioClass;
+
 typedef struct DoorClass
 {
   char gap_0[8];

@@ -189,6 +189,7 @@ setcglob 0x007E2438, ScenarioStuff
 setcglob 0x007E4724, SelectedDifficulty
 setcglob 0x007E4548, SpecialClass__Special
 setcglob 0x005DE580, Create_Units
+setcglob 0x007E2650, CriticalRandomNumber
 
 ; Save games
 setcglob 0x005D6910, Load_Game
@@ -266,6 +267,9 @@ setcglob 0x006B602A, strtok
 setcglob 0x006B52EE, _sprintf
 setcglob 0x006B52EE, sprintf
 setcglob 0x006B6A41, vsprintf
+setcglob 0x006B69C1, fprintf
+setcglob 0x006BC70C, fwrite
+
 setcglob 0x006B6730, stristr_
 setcglob 0x006BA490, strlen
 setcglob 0x006BE630, strcpy

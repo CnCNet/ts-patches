@@ -45,6 +45,10 @@ TSCLIENT_OBJS = \
                     src/spawner/is_ally_or_spec.o \
                     src/coach_mode.o \
                     src/EventClass.o \
+                    src/event_declarations.o \
+                    src/new_events_s.o \
+                    src/log_more_oos.o \
+                    src/record_rng_func.o \
                     src/jj_barracks_glitch_fix.o \
                     src/ts_util.o \
                     src/alt_scout_fix.o \
@@ -73,9 +77,7 @@ TSCLIENT_OBJS = \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
                     src/override_colors.o \
-			        src/minimap_crash.o \
-                    src/new_events.o \
-                    src/new_events_s.o \
+                    src/minimap_crash.o \
                     src/factory_rallypoints.o \
                     src/shared_control.o \
                     src/recon_kick.o \
