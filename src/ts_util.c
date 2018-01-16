@@ -115,3 +115,24 @@ sidebar_has_cameo(int RTTI, int HeapID)
     }
     return false;
 }
+
+
+bool __thiscall
+Tactical__In_Viewport(TacticalClass *this, CoordStruct *coord)
+{
+    XYCoord a1;
+    XYCoord v47;
+
+    XYCoord *v16 = Tactical_60F0F0(&a1, coord->x, coord->y);
+    int32_t v19 = Tactical_AdjustForZ(coord->z);
+    v47.x = v16->x / 256;
+    v47.y = v16->y / 256 - v19;
+    //Tactical_618050(&v47, &this->TacticalViewLocation); // Not sure if this function call is needed.
+
+    if (v47.x > this->TacticalViewLocation.x && v47.x < this->TacticalViewLocation.x + ViewPort_Dimensions.width
+        &&
+        v47.y > this->TacticalViewLocation.y && v47.y < this->TacticalViewLocation.y + ViewPort_Dimensions.height)
+        return true;
+
+    return false;
+}

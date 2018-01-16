@@ -21,9 +21,28 @@ _SelectTeamCommandClass_Execute_after:
         cmp  eax, [DoubleTapFrame]
         jg   .Out
 
+        mov  eax, dword[CurrentObjectsArray_Count]
+        test eax, eax
+        jz   .Out
+
+        pusha
+
+        mov eax, dword[CurrentObjectsArray_Vector]
+        mov ecx, [eax]
+        lea eax, [ecx+0x40]
+
+        push eax
+        mov  ecx, [TacticalClassMap]
+        call Tactical__In_Viewport
+        test al, al
+        jnz  .Dont_Center
+
+        popa
         pusha
         mov  ecx, ebp
         call CenterTeamCommandClass_Execute
+
+ .Dont_Center:
         popa
 
  .Out:

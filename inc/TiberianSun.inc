@@ -234,6 +234,10 @@ cextern QMove_Key1
 cextern QMove_Key2
 cextern MoveToUndeploy
 
+;Tactical
+cextern TacticalClassMap
+cextern Tactical__In_Viewport
+
 ; Aircraft
 cextern Loop_Test_Aircraft
 

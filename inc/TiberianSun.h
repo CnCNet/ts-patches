@@ -19,6 +19,7 @@
 #include "Classes/RulesClass.h"
 #include "Classes/HouseClass.h"
 #include "Classes/SessionClass.h"
+#include "Classes/Tactical.h"
 #include "Classes/RadioClass_MissionClass.h"
 #include "Classes/TechnoClass.h"
 #include "Classes/FootClass.h"

@@ -29,6 +29,7 @@ setcglob 0x005EEF70, Get_MP_Color
 setcglob 0x004CDEF0, HouseType_From_Name
 setcglob 0x004C2E40, Read_Scenario_Houses
 setcglob 0x006FB630, Player_Active
+setcglob 0x00674600, WaypointPathClass_GetWaypoint
 
 ; TechnoClass
 setcglob 0x0040F2A0, TechnoClass_What_Weapon_Should_I_Use
@@ -223,6 +224,20 @@ setcglob 0x0061CBA0, TActionClass__Zoom_Out
 setcglob 0x0061CB30, TActionClass__Zoom_In
 setcglob 0x004B9440, GScreenClass__Flag_To_Redraw
 setcglob 0x00475D90, DisplayClass__Init_IO
+
+; Tactical
+setcglob 0x0074C5F4, TacticalClassMap
+setcglob 0x0080CE30, CellHeight
+setcglob 0x0080CE34, CellWidth
+setcglob 0x0080CED8, ViewPort_Dimensions
+setcglob 0x0080CED8, ViewPort_Dimensions_Left
+setcglob 0x0080CEDC, ViewPort_Dimensions_Top
+setcglob 0x0080CEE0, ViewPort_Dimensions_Right
+setcglob 0x0080CEE4, ViewPort_Dimensions_Bottom
+setcglob 0x00618050, Tactical_618050
+setcglob 0x0060F3C0, Tactical_AdjustForZ
+setcglob 0x0060F0F0, Tactical_60F0F0
+
 
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent
