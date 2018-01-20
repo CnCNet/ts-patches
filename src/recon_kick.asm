@@ -48,7 +48,7 @@ _Execute_DoList_dont_recon:
 
     mov  ecx, esp
     call EventClass__EnqueueEvent
-    add  esp, 50
+    add  esp, 46
 
     mov  edx, dword[esp+8]
 
