@@ -37,5 +37,5 @@ Queue_RemovePlayer:
 
         mov  ecx, esp
         call EventClass__EnqueueEvent
-        add  esp, 50
+        add  esp, 46
         retn
