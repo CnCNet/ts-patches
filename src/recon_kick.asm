@@ -62,20 +62,8 @@ _Execute_DoList_dont_recon:
     push eax                ; Message delay/duration
     push 4046h              ; Very likely TextPrintType
     mov ecx, MessageListClass_this
-    mov eax, [HouseClassArray_Vector]
-    mov edx, [esp+8]            ; ID
-    mov edx, [eax+edx*4]
-    test edx, edx
-    jnz .Get_Color
 
-    mov edx, 0
-    jmp .Push_Color
-
- .Get_Color:
-    mov edx, [edx+10DFCh]
-
- .Push_Color:
-    push edx ; Color to use?
+    push 0 ; Color to use?
     lea edx, [str_PlayerOutOfSync]
     push edx
     push 0
