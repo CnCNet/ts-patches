@@ -180,6 +180,8 @@ cextern IPXManagerClass__Connection_Name
 
 cextern MaxAhead
 cextern MaxMaxAhead
+cextern PreCalcMaxAhead
+cextern PreCalcFrameRate
 cextern FrameSendRate
 cextern LatencyFudge
 cextern RequestedFPS

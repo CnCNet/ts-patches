@@ -149,6 +149,8 @@ section .rdata
     str_Host             db "Host",0
     str_FrameSendRate    db "FrameSendRate",0
     str_MaxAhead        db "MaxAhead",0
+    str_PreCalcMaxAhead db "PreCalcMaxAhead",0
+    str_PreCalcFrameRate db "PreCalcFrameRate",0
     str_Protocol        db "Protocol", 0
     str_RunAutoSS       db "RunAutoSS",0
     str_AutoSaveGame    db "AutoSaveGame", 0
@@ -1079,24 +1081,45 @@ Initialize_Spawn:
     push 3Ch
     call IPXManagerClass__Set_Timing
 
+    SpawnINI_Get_Int str_Settings, str_Protocol, 2
+    mov dword [ProtocolVersion], eax
+
     SpawnINI_Get_Int str_Settings, str_FrameSendRate, 5
     mov dword [FrameSendRate], eax
 
-    imul eax, 6
+    mov dword [RequestedFPS], 60
+
+    cmp dword [ProtocolVersion], 0
+    jnz .protocol_2
+
+    ; ProtocolVersion 0 stuff
+    SpawnINI_Get_Int str_Settings, str_PreCalcFrameRate, { dword [RequestedFPS] }
+    mov dword [PreCalcFrameRate], eax
+
+    ; This initial MaxAhead, it will get overridden by the PreCalcMaxAhead after the first second of the game
+    SpawnINI_Get_Int str_Settings, str_MaxAhead, 40
+    mov dword [MaxAhead], eax
+
+    SpawnINI_Get_Int str_Settings, str_PreCalcMaxAhead, 12
+    mov dword [PreCalcMaxAhead], eax
+
+    jmp .continue_network
+
+ .protocol_2
+    ; The initial MaxAhead, it will be overriden based on latency after the first second of the game
+    ; In Protocol 2, MaxAhead must be a multiple of the FrameSendRate
+    imul eax, [FrameSendRate]
     mov dword [MaxAhead], eax
     SpawnINI_Get_Int str_Settings, str_MaxAhead, { dword [MaxAhead] }
     mov dword [MaxAhead], eax
-
-    SpawnINI_Get_Int str_Settings, str_Protocol, 2
-    mov dword [ProtocolVersion], eax
 
     ;WOL settings
     ; mov dword [MaxAhead], 40
     ; mov dword [FrameSendRate], 10
 
+ .continue_network:
     mov dword [MaxMaxAhead], 0
     mov dword [LatencyFudge], 0
-    mov dword [RequestedFPS], 60
 
 
     call Init_Network

@@ -46,7 +46,7 @@ SidebarClass__Draw_It_infopan_shp(DSurface *surface, void *palette, Image *image
             z_frame, a13, where
         };
 
-        WWDebug_Printf("Running ShowInfo (%d)\n", Frame);
+        //WWDebug_Printf("Running ShowInfo (%d)\n", Frame);
         InfoPrintLocation = (Rect){20, a5->y + 4, surface->Width,
                                    surface->Height};
         ShowInfo(surface, &InfoPrintLocation);

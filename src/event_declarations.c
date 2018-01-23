@@ -111,12 +111,14 @@ int CountEvents = _countof(EventLengths);
 void __stdcall
 Extended_Events(EventClass *e)
 {
-    WWDebug_Printf("Executing extended event 0x%x\n", e->Type);
+    //WWDebug_Printf("Executing extended event 0x%x\n", e->Type);
     switch(e->Type) {
+    case 0:
+        break; // Empty Event
     case 0x24:
         Toggle_Control(e);
         break;
     default:
-        WWDebug_Printf("Extended event not found\n");
+        WWDebug_Printf("Extended event not found %d\n", e->Type);
     }
 }

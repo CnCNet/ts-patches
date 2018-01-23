@@ -169,6 +169,8 @@ setcglob 0x007E2524, MaxMaxAhead
 setcglob 0x007E2510, FrameSendRate
 setcglob 0x007E3FA8, LatencyFudge
 setcglob 0x007E2514, RequestedFPS
+setcglob 0x007E252C, PreCalcFrameRate
+setcglob 0x007E2528, PreCalcMaxAhead
 setcglob 0x00804D2C, FramesPerSecond
 setcglob 0x00804D34, AverageFPS
 setcglob 0x00804D30, AverageFPS2
