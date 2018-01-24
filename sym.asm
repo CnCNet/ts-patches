@@ -4,6 +4,7 @@
 setcglob 0x006B51D7, new
 setcglob 0x006B63F0, memcpy
 setcglob 0x006C0080, memset
+setcglob 0x006B766C, _controlfp
 
 ; House
 setcglob 0x007E1558, HouseClassArray

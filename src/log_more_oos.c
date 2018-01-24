@@ -6,6 +6,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <float.h>
 
 CALL(0x005B5AD2, _fprintf_log_more_stuff);
 CALL(0x005B5CA0, _fprintf_no_name_localization);
@@ -21,6 +22,7 @@ fprintf_log_more_stuff(FILE * restrict stream, const char * restrict format, int
     int32_t ret = fprintf(stream, format, pct_lost);
 
     //print_OutList(stream, 64);
+    fprintf(stream, "FPU State: %x\n", _controlfp(0, 0));
     print_DoList(stream, 4096);
     print_RNG(stream, 4096);
     return ret;
