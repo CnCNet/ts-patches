@@ -60,7 +60,7 @@ print_OutList(FILE * restrict stream, int32_t count)
     {
         EventClass *e = &OutList.Events[idx];
 
-        if (e->Type > 0 && e->Type != EVENTTYPE_FRAMEINFO && e->Type != EVENTTYPE_PROCESS_TIME)
+        if (e->Type > 0 && e->Type != EVENTTYPE_FRAMEINFO && e->Type != EVENTTYPE_PROCESS_TIME && e->Type != EVENTTYPE_RESPONSE_TIME2)
         {
             fprintf(stream, "idx = %-4d ", idx);
             printEvent_OneLine(stream, e);
@@ -85,7 +85,7 @@ print_DoList(FILE * restrict stream, int32_t count)
     {
         EventClass *e = &DoList.Events[idx];
 
-        if (e->Type > 0 && e->Type != EVENTTYPE_FRAMEINFO && e->Type != EVENTTYPE_PROCESS_TIME)
+        if (e->Type > 0 && e->Type != EVENTTYPE_FRAMEINFO && e->Type != EVENTTYPE_PROCESS_TIME && e->Type != EVENTTYPE_RESPONSE_TIME2)
         {
             //fprintf(stream, "idx = %-4d ", idx);
             printEvent_OneLine(stream, e);
