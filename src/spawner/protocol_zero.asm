@@ -25,3 +25,14 @@ hack 0x005B1BAF
  .proto_2:
     mov [esp+0x34], dx
     jmp hackend
+
+;;; Don't throw "Packet received too late" when a null event or a RESPONSE_TIME2 packet arrives late.
+hack 0x005B4EA5
+   cmp byte[esi+0xC], 0
+   jz  0x005B4EB7
+
+   cmp byte[esi+0xC], 0x25
+   jz  0x005B4EB7
+
+   mov eax, [0x007E2458]
+   jmp hackend
