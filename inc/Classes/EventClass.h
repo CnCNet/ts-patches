@@ -11,6 +11,7 @@ typedef struct EventClass {
     int32_t ID;
     union {
         uint32_t Target_ID;
+        int8_t MaxAhead;
         char data[36];
     };
 } EventClass;
@@ -44,6 +45,7 @@ EventClass * __thiscall EventClass__EventClass_produce(EventClass *e, int my_id,
 void Toggle_Control(EventClass *e);
 
 void __stdcall Extended_Events(EventClass *e);
+void __thiscall Handle_Timing_Change(EventClass *e);
 
 extern volatile uint8_t EventLengths[];
 extern volatile char *EventNames[];

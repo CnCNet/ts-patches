@@ -1084,28 +1084,35 @@ Initialize_Spawn:
     SpawnINI_Get_Int str_Settings, str_Protocol, 2
     mov dword [ProtocolVersion], eax
 
-    SpawnINI_Get_Int str_Settings, str_FrameSendRate, 5
-    mov dword [FrameSendRate], eax
-
     mov dword [RequestedFPS], 60
 
     cmp dword [ProtocolVersion], 0
     jnz .protocol_2
 
+
     ; ProtocolVersion 0 stuff
-    SpawnINI_Get_Int str_Settings, str_PreCalcFrameRate, { dword [RequestedFPS] }
-    mov dword [PreCalcFrameRate], eax
+    SpawnINI_Get_Int str_Settings, str_FrameSendRate, 1
+    mov dword [FrameSendRate], eax
 
     ; This initial MaxAhead, it will get overridden by the PreCalcMaxAhead after the first second of the game
     SpawnINI_Get_Int str_Settings, str_MaxAhead, 40
     mov dword [MaxAhead], eax
 
-    SpawnINI_Get_Int str_Settings, str_PreCalcMaxAhead, 12
+    SpawnINI_Get_Int str_Settings, str_PreCalcMaxAhead, 0
     mov dword [PreCalcMaxAhead], eax
+
+    test eax, eax
+    jz   .continue_network
+
+    SpawnINI_Get_Int str_Settings, str_PreCalcFrameRate, { dword [RequestedFPS] }
+    mov dword [PreCalcFrameRate], eax
 
     jmp .continue_network
 
- .protocol_2
+ .protocol_2:
+    SpawnINI_Get_Int str_Settings, str_FrameSendRate, 5
+    mov dword [FrameSendRate], eax
+
     ; The initial MaxAhead, it will be overriden based on latency after the first second of the game
     ; In Protocol 2, MaxAhead must be a multiple of the FrameSendRate
     imul eax, [FrameSendRate]

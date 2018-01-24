@@ -14,6 +14,8 @@ int32_t PlayerEventLastFrame[8];
 
 int32_t AutoSaveGame;
 int32_t NextAutoSave;
+int32_t ResponseTimeFrame = 0;
+int32_t ResponseTimeInterval = 4;
 
 void __thiscall
 MainLoop_AfterRender(MessageListClass *msg) {
@@ -36,6 +38,12 @@ MainLoop_AfterRender(MessageListClass *msg) {
         EventClass e;
         EventClass__EventClass_noarg(&e, PlayerPtr->ID, EVENTTYPE_SAVEGAME);
         EventClass__EnqueueEvent(&e);
+    }
+
+    if (ProtocolVersion == 0 && Frame >= ResponseTimeFrame)
+    {
+        ResponseTimeFrame = Frame + ResponseTimeInterval;
+        Send_Response_Time();
     }
   }
 }

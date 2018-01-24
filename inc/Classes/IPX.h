@@ -195,3 +195,7 @@ struct ConnectionClass
   int field_2C;
 };
 #pragma pack(pop)
+
+extern IPXManagerClass IPXManagerClass_this;
+int32_t __thiscall  IPXManagerClass__Response_Time(IPXManagerClass *ipx);
+void Send_Response_Time();

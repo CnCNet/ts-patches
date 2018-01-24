@@ -111,9 +111,12 @@ extern StripClass LEFT_STRIP;
 extern Rect SidebarLoc;
 extern bool SidebarClass_Redraw_Buttons;
 extern int32_t GameStartTime;
-extern IPXManagerClass IPXManagerClass_this;
 extern char *ArmorNames[];
 extern int ShowHelpKey;
+extern int32_t MaxAhead;
+extern int32_t PreCalcMaxAhead;
+extern int32_t PreCalcFrameRate;
+extern int32_t ProtocolVersion;
 
 // ### Functions ###
 

@@ -62,7 +62,8 @@ char *EventNames[] = {
     "PAGEUSER",
     "REMOVEPLAYER",
     "LATENCYFUNDGE",
-    "GRANTCONTROL"
+    "GRANTCONTROL",
+    "RESPONSE_TIME2"
 };
 
 volatile
@@ -103,7 +104,8 @@ uint8_t EventLengths[] = {
     0,    //"PAGEUSER",
     4,    //"REMOVEPLAYER",
     4,    //"LATENCYFUNDGE",
-    4,    //"GRANTCONTROL"
+    4,    //"GRANTCONTROL",
+    1,    //"RESPONSE_TIME2"
 };
 
 int CountEvents = _countof(EventLengths);
@@ -117,6 +119,9 @@ Extended_Events(EventClass *e)
         break; // Empty Event
     case 0x24:
         Toggle_Control(e);
+        break;
+    case 0x25:
+        Handle_Timing_Change(e);
         break;
     default:
         WWDebug_Printf("Extended event not found %d\n", e->Type);

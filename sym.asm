@@ -161,6 +161,7 @@ setcglob 0x006A10A0, WinsockInterfaceClass__Discard_In_Buffers
 setcglob 0x006A1110, WinsockInterfaceClass__Discard_Out_Buffers
 setcglob 0x007E45A0, IPXManagerClass_this
 setcglob 0x004F05B0, IPXManagerClass__Set_Timing
+setcglob 0x004F0F00, IPXManagerClass__Response_Time
 setcglob 0x004EF040, IPXAddressClass__IPXAddressClass
 setcglob 0x004F07E0, IPXManagerClass__Connection_Name
 
