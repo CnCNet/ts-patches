@@ -7,6 +7,7 @@ SETDWORD(0x006D2D54, _IPXManagerClass__ResponseTime_hack);
 
 int32_t WorstMaxAhead = 40;
 
+int32_t LastSentResponseTime = -1;
 int32_t __thiscall _IPXManagerClass__ResponseTime(IPXManagerClass *this);
 int32_t __thiscall
 IPXManagerClass__ResponseTime_hack(IPXManagerClass *this)
@@ -24,7 +25,7 @@ Send_Response_Time()
     if (ProtocolVersion == 0)
     {
         int32_t rspTime = IPXManagerClass__Response_Time(&IPXManagerClass_this);
-        if (rspTime > -1)
+        if (rspTime > -1 && (rspTime > LastSentResponseTime + 1 || rspTime < LastSentResponseTime - 1))
         {
             rspTime = rspTime > 120 ? 120 : rspTime;
             EventClass e;
@@ -34,6 +35,8 @@ Send_Response_Time()
             e.ID = PlayerPtr->ID;
             e.MaxAhead = (int8_t)rspTime;
             EventClass__EnqueueEvent(&e);
+
+            LastSentResponseTime = rspTime;
             //WWDebug_Printf("Player %d sending response time of %d\n", PlayerPtr->ID, e.MaxAhead);
         }
     }
@@ -60,7 +63,7 @@ Handle_Timing_Change(EventClass *e)
         return;
     }
 
-    //WWDebug_Printf("Set PlayerMaxAheads[%d] to %d\n", e->ID, e->MaxAhead);
+    WWDebug_Printf("Set PlayerMaxAheads[%d] to %d\n", e->ID, e->MaxAhead);
     PlayerMaxAheads[e->ID] = (int32_t)e->MaxAhead;
 
     int max = 0;
