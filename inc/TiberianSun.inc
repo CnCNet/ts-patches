@@ -186,6 +186,7 @@ cextern FrameSendRate
 cextern LatencyFudge
 cextern RequestedFPS
 cextern ProtocolVersion
+cextern UseProtocolZero
 cextern ally_by_spawn_location
 cextern read_tut_from_map
 cextern OutOfSync

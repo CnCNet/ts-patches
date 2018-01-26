@@ -117,6 +117,8 @@ extern int32_t MaxAhead;
 extern int32_t PreCalcMaxAhead;
 extern int32_t PreCalcFrameRate;
 extern int32_t ProtocolVersion;
+extern bool UseProtocolZero;
+extern int32_t FrameSendRate;
 
 // ### Functions ###
 

@@ -16,8 +16,8 @@ hack 0x005B1C28
     jmp hackend
 
 hack 0x005B1BAF
-    cmp dword[ProtocolVersion], 0
-    jnz .proto_2
+    cmp byte[UseProtocolZero], 0
+    jz  .proto_2
 
     mov edx, [MaxAhead]
     and edx, 0xffff
@@ -34,5 +34,59 @@ hack 0x005B4EA5
    cmp byte[esi+0xC], 0x25
    jz  0x005B4EB7
 
+   cmp byte[esi+0xC], 0x20
+   jz  0x005B4EB7
+
    mov eax, [0x007E2458]
    jmp hackend
+
+
+cextern Hack_Set_Timing
+hack 0x005B1BE8
+   mov ecx, ebp
+   cmp byte[UseProtocolZero], 0
+   jz  .Reg
+
+   call Hack_Set_Timing
+   jmp hackend
+
+ .Reg:
+   call [edx+0x34]              ;Set_Timing
+   jmp hackend
+
+hack 0x005B16D2
+   mov ecx, ebp
+   cmp byte[UseProtocolZero], 0
+   jz  .Reg
+
+   call Hack_Set_Timing
+   jmp hackend
+
+ .Reg:
+   call [edx+0x34]              ;Set_Timing
+   jmp hackend
+
+cextern Hack_Response_Time
+hack 0x005B1681
+   mov ecx, ebp
+   cmp byte[UseProtocolZero], 0
+   jz  .Reg
+
+   call Hack_Response_Time
+   jmp hackend
+
+ .Reg:
+   call [edx+0x30]              ;Response_Time
+   jmp  hackend
+
+hack 0x005B1AC1
+   mov ecx, ebp
+   cmp byte[UseProtocolZero], 0
+   jz .Reg
+
+   call Hack_Response_Time
+   jmp hackend
+
+ .Reg:
+   call [edx+0x30]              ;Response_Time
+   jmp  hackend

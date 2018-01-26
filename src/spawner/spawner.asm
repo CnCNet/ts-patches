@@ -1075,10 +1075,10 @@ Initialize_Spawn:
     call WinsockInterfaceClass__Discard_Out_Buffers
 
     mov ecx, IPXManagerClass_this
-    push 1
-    push 258h
+    push 1                      ; SetGobally?
+    push 258h                   ; RetryTimeOut
     push 0FFFFFFFFh
-    push 3Ch
+    push 3Ch                    ; RetryDelta
     call IPXManagerClass__Set_Timing
 
     SpawnINI_Get_Int str_Settings, str_Protocol, 2
@@ -1091,6 +1091,10 @@ Initialize_Spawn:
 
 
     ; ProtocolVersion 0 stuff
+    ; We just hack protocol 2 to act like protocol zero
+    mov dword[ProtocolVersion], 2
+    mov byte[UseProtocolZero], 1
+
     SpawnINI_Get_Int str_Settings, str_FrameSendRate, 1
     mov dword [FrameSendRate], eax
 

@@ -3,37 +3,75 @@
 #include "Classes/EventClass.h"
 #include "patch.h"
 
-SETDWORD(0x006D2D54, _IPXManagerClass__ResponseTime_hack);
-
 int32_t WorstMaxAhead = 40;
 
-int32_t LastSentResponseTime = -1;
-int32_t __thiscall _IPXManagerClass__ResponseTime(IPXManagerClass *this);
+int32_t LastSentResponseTime = 100;
+
+bool UseProtocolZero = false;
+bool HighLossMode = false;
+
 int32_t __thiscall
-IPXManagerClass__ResponseTime_hack(IPXManagerClass *this)
+Hack_Response_Time(IPXManagerClass *this)
 {
-    if (ProtocolVersion == 0)
-    {
-        return WorstMaxAhead;
-    }
-    return IPXManagerClass__Response_Time(this);
+    return WorstMaxAhead;
 }
+
+
+
+void __thiscall IPXManagerClass__Set_Timing(IPXManagerClass *this, int NewRetryDelta, int a3, int NewRetryTimeout, bool SetGlobalConnClass);
+void __thiscall
+Hack_Set_Timing(IPXManagerClass *this, int NewRetryDelta, int a3, int NewRetryTimeout, bool SetGlobalConnClass)
+{
+    if (HighLossMode)
+    {
+        WWDebug_Printf("HighLossMode is true\n");
+        IPXManagerClass__Set_Timing(this, (int)MaxAhead/2, a3, NewRetryTimeout, SetGlobalConnClass);
+    }
+    else
+    {
+        WWDebug_Printf("NewRetryDelta = %d,  NewRetryTimeout = %d, FrameSendRate = %d, HighLossMode = %d\n",
+                       NewRetryDelta, NewRetryTimeout, FrameSendRate, HighLossMode);
+        IPXManagerClass__Set_Timing(this, NewRetryDelta, a3, NewRetryTimeout, SetGlobalConnClass);
+    }
+}
+
+int SendResponseTimeFrame = 15;
+int SendResponseTimeInterval = 15;
 
 void
 Send_Response_Time()
 {
-    if (ProtocolVersion == 0)
+    if (UseProtocolZero)
     {
         int32_t rspTime = IPXManagerClass__Response_Time(&IPXManagerClass_this);
-        if (rspTime > -1 && (rspTime > LastSentResponseTime + 1 || rspTime < LastSentResponseTime - 1))
+        rspTime = (int32_t) rspTime * 2 / 3;
+
+        if (rspTime > 36)
+            rspTime = 36;
+
+        bool setHighLossMode = false;
+
+        int32_t i = IPXManagerClass_this.NumConnections;
+
+        for (; i-->0;)
         {
-            rspTime = rspTime > 120 ? 120 : rspTime;
+            IPXGlobalConnClass *p = IPXManagerClass_this.ConnectionArray[i];
+            if (p->PercentLost > 3)
+            {
+                setHighLossMode = true;
+            }
+        }
+
+        if (rspTime > -1 && (Frame > SendResponseTimeFrame || setHighLossMode))
+        {
+
+            SendResponseTimeFrame = Frame + SendResponseTimeInterval;
             EventClass e;
-            e.Frame = Frame;
-            //e.Type = 0x1A;
+            e.Frame = Frame + MaxAhead;
             e.Type = 0x25;
             e.ID = PlayerPtr->ID;
-            e.MaxAhead = (int8_t)rspTime;
+            e.MaxAhead = (int8_t)rspTime + 1;
+            e.HighLossMode = setHighLossMode;
             EventClass__EnqueueEvent(&e);
 
             LastSentResponseTime = rspTime;
@@ -43,15 +81,18 @@ Send_Response_Time()
 }
 
 
-int NextIncreaseFrame = 7;
-int FrameIncreaseInterval = 4;
+int NextIncreaseFrame = 15;
+int FrameIncreaseInterval = 1;
 
-int NextDecreaseFrame = 7;
-int FrameDecreaseInterval = 30;
+int NextDecreaseFrame = 90;
+int FrameDecreaseInterval = 1;
+int MaxDecrease = 8;
 
-int MinimumDecrease = 3;
+int MinimumDecrease = 2;
 int32_t PlayerMaxAheads[8] = {0};
-
+bool PlayerHighLossMode[8] = {0};
+int32_t PlayerLastTimingFrame[8] = {0};
+int TimingTimeout = 120;
 
 void __thiscall
 Handle_Timing_Change(EventClass *e)
@@ -63,15 +104,29 @@ Handle_Timing_Change(EventClass *e)
         return;
     }
 
-    WWDebug_Printf("Set PlayerMaxAheads[%d] to %d\n", e->ID, e->MaxAhead);
+    PlayerLastTimingFrame[e->ID] = e->Frame;
     PlayerMaxAheads[e->ID] = (int32_t)e->MaxAhead;
+    PlayerHighLossMode[e->ID] = e->HighLossMode;
 
+    //WWDebug_Printf("doing timing change (%d. %d)\n", e->ID, e->MaxAhead);
+
+    bool setHighLossMode = false;
     int max = 0;
     for (int i = 0; i < 8; ++i)
     {
-        max = PlayerMaxAheads[i] > max ? PlayerMaxAheads[i] : max;
+        if (PlayerLastTimingFrame[i] + TimingTimeout < Frame)
+        {
+            PlayerMaxAheads[i] = 0;
+            PlayerHighLossMode[i] = false;
+        }
+        else
+        {
+            max = PlayerMaxAheads[i] > max ? PlayerMaxAheads[i] : max;
+            if (PlayerHighLossMode[i])
+                setHighLossMode = true;
+        }
     }
-    //WWDebug_Printf("Setting WorstMaxAhead to %d\n",  WorstMaxAhead);
+    HighLossMode = setHighLossMode;
 
     if (max > MaxAhead && Frame > NextIncreaseFrame)
     {
@@ -85,7 +140,7 @@ Handle_Timing_Change(EventClass *e)
     else if (max < MaxAhead - MinimumDecrease && Frame > NextDecreaseFrame)
     {
         WWDebug_Printf("Decreasing\n");
-        PreCalcMaxAhead = max;
+        PreCalcMaxAhead = max > MaxAhead - MaxDecrease ? max : MaxAhead - MaxDecrease;
         PreCalcFrameRate = 60;
         WorstMaxAhead = max;
         NextDecreaseFrame = Frame + e->MaxAhead + FrameDecreaseInterval;

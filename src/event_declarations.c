@@ -105,7 +105,7 @@ uint8_t EventLengths[] = {
     4,    //"REMOVEPLAYER",
     4,    //"LATENCYFUNDGE",
     4,    //"GRANTCONTROL",
-    1,    //"RESPONSE_TIME2"
+    2,    //"RESPONSE_TIME2"
 };
 
 int CountEvents = _countof(EventLengths);

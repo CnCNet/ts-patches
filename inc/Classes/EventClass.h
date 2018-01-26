@@ -11,7 +11,10 @@ typedef struct EventClass {
     int32_t ID;
     union {
         uint32_t Target_ID;
-        int8_t MaxAhead;
+        struct {
+            int8_t MaxAhead;
+            int8_t HighLossMode;
+        };
         char data[36];
     };
 } EventClass;

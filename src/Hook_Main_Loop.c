@@ -40,7 +40,7 @@ MainLoop_AfterRender(MessageListClass *msg) {
         EventClass__EnqueueEvent(&e);
     }
 
-    if (ProtocolVersion == 0 && Frame >= ResponseTimeFrame)
+    if (UseProtocolZero && Frame >= ResponseTimeFrame)
     {
         ResponseTimeFrame = Frame + ResponseTimeInterval;
         Send_Response_Time();
