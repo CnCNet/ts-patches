@@ -137,6 +137,8 @@ MP_OBJS          = \
                     src/move_team_group_number.o \
                     src/skip_score.o \
                     src/hide_names_qm.o \
+                    src/minimum_burst.o \
+
 
 
 ifdef WWDEBUG
