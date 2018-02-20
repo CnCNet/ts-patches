@@ -184,7 +184,10 @@ ShowNetwork(char **out, char **col2, int *width)
     for (; i-->0;)
     {
         IPXGlobalConnClass *p = IPXManagerClass_this.ConnectionArray[i];
-        sprintf(pbuf, "%s\n", p->Name, 256);
+        if (QuickMatch)
+            sprintf(pbuf, "Player", 256);
+        else
+            sprintf(pbuf, "%s\n", p->Name, 256);
         strncat(players, pbuf, 512);
         sprintf(sbuf, fmt,
                 ResponseTimeFunc(p->CommBufferClass->AverageResponseTime),

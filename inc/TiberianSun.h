@@ -119,6 +119,7 @@ extern int32_t PreCalcFrameRate;
 extern int32_t ProtocolVersion;
 extern bool UseProtocolZero;
 extern int32_t FrameSendRate;
+extern bool QuickMatch;
 
 // ### Functions ###
 
