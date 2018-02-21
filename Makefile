@@ -65,6 +65,7 @@ MP_OBJS          = \
                     src/spawner/auto-surrender.o \
                     src/spawner/build_off_ally.o \
                     src/spawner/auto_ss.o \
+                    src/spawner/random_map.o \
                     src/coach_mode.o \
                     src/jj_barracks_glitch_fix.o \
                     src/ts_util.o \
@@ -138,7 +139,6 @@ MP_OBJS          = \
                     src/skip_score.o \
                     src/hide_names_qm.o \
                     src/minimum_burst.o \
-
 
 
 ifdef WWDEBUG

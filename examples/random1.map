@@ -1,0 +1,59 @@
+[Basic]
+Name=Large Desert topography [2]
+RandomMap=Yes
+FreeRadar=Yes
+
+[RandomMap]
+Description=Description doesn't matter, This is a desert
+Width=2                       ; 0,1,2,3
+Height=2
+NumPlayers=2
+Seed=59976                    ; Seed doesn't get used
+Biome=3                       ; Desert, Taiga, Temperate, Tundra (needs mapped... 3 = desert?)
+Time=1                        ; Time of day, Afternoon, Dusk, Morning, Night (needs to be mapped)
+RegionSize=0                  ; Has to do with how big cliff plateaus are
+Ruggedness=0                  ; Hills?
+Accessibility=100
+WaterAmount=0
+Tiberium=72
+TiberiumLayout=21
+Vegetation=0
+UrbanPresence=0
+VeinholeMonsters=0
+TiberiumWildlife=0
+UseIonStorms=false
+UseBlueTiberium=false
+UseTransitions=false          ; Night/Day transitions
+
+; Unit mods can be added. Lighting terrain things seems to get ignored
+[MCV]
+Sight=9
+Speed=5
+ROT=5
+
+[CrateRules]
+CrateMaximum=20         ; crates can never exceed this quantity
+CrateMinimum=20         ; crates are normally one per human player but never below this number
+CrateRadius=5.0         ; radius (cells) for area effect crate powerup bonuses
+CrateRegen=2            ; average minutes between random powerup crate regeneration
+
+[Powerups]
+Armor=20,ARMOR,2.0              ; armor of nearby objects increased (armor multiplier)
+Cloak=20,CLOAK                   ; enable cloaking on nearby objects
+Darkness=0,SHROUDX              ; cloak entire radar map
+Explosion=0,<none>,500          ; high explosive baddie (damage per explosion)
+Firepower=10,FIREPOWR,2.0       ; firepower of nearby objects increased (firepower multiplier)
+HealBase=10,HEALALL              ; all buildings to full strength
+ICBM=20,CHEMISLE                 ; nuke missile one time shot
+Money=20,MONEY,2000             ; a chunk o' cash (maximum cash)
+Napalm=0,<none>,600             ; fire explosion baddie (damage)
+Reveal=1,REVEAL                 ; reveal entire radar map
+Speed=10,ARMOR,1.7              ; speed of nearby objects increased (speed multiplier)
+Squad=0,<none>                 ; squad of random infantry
+Unit=10,<none>                  ; vehicle
+Invulnerability=1,ARMOR,2.0     ; invulnerability (duration in minutes)
+Veteran=10,VETERAN,1             ; veteran upgrade (levels to upgrade)
+IonStorm=0,<none>               ; initiate ion storm
+Gas=0,<none>,100                ; tiberium gas (damage for each gas cloud)
+Tiberium=0,<none>               ; tiberium patch
+Pod=0,<none>                    ; drop pod special
