@@ -118,6 +118,7 @@ TSCLIENT_OBJS = \
                     src/mods/saved_games_in_subdir.o \
                     src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
+					src/mods/fix_score_logging_typo.o \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/dta/auto_deploy_mcv.o \

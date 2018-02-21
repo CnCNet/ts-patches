@@ -140,5 +140,6 @@ DTA_OBJS = \
                     src/mods/dta/buildconst_harvesterunit_baseunit.o \
                     src/mods/max_pip_counts.o \
                     src/mods/sideindex_improvements_v2.o \
+					src/mods/fix_score_logging_typo.o \
 					src/force_conversion_type.o \
 					src/c4_repairable_fix.o

@@ -135,4 +135,5 @@ TI_OBJS = \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/dont_save_without_all_players.o \
                     src/mods/max_pip_counts.o \
+					src/mods/fix_score_logging_typo.o \
 					src/force_conversion_type.o
