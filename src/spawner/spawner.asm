@@ -1081,7 +1081,7 @@ Initialize_Spawn:
     push 3Ch                    ; RetryDelta
     call IPXManagerClass__Set_Timing
 
-    SpawnINI_Get_Int str_Settings, str_Protocol, 2
+    SpawnINI_Get_Int str_Settings, str_Protocol, 0
     mov dword [ProtocolVersion], eax
 
     mov dword [RequestedFPS], 60
