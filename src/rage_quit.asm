@@ -22,10 +22,7 @@ _Handle_X_Close:
         call Queue_RemovePlayer
         call Queue_Exit
         popa
-        pop  esi
-        mov  eax, 1
-        pop  ebp
-        retn 0x10
+        jmp hackend
 
 section .text
 Queue_RemovePlayer:
