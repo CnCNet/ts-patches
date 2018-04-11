@@ -33,6 +33,7 @@ COMMON_OBJS = \
               src/no_window_frame.o \
               src/exception_catch.o \
               src/force_conversion_type.o \
+              src/check_for_tsddraw.o \
               res/res.o \
               sym.o
 

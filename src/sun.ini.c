@@ -1,6 +1,7 @@
 #include "macros/patch.h"
 #include "TiberianSun.h"
 #include "patch.h"
+#include <windows.h>
 
 CLEAR(0x006010B8, 0x90, 0x006010D3);
 CALL(0x006010B8, _LoadSunIni);
@@ -14,6 +15,7 @@ extern int32_t DoubleTapInterval;
 bool AddTeamStyle2 = false;
 bool AltToRally = false;
 bool ForceConversionType4 = true;
+bool UsingTSDDRAW = false;
 
 void LoadSunIni()
 {
@@ -50,7 +52,18 @@ void LoadSunIni()
         SetWin8CompatData();
     }
 
+    HMODULE hDDraw = LoadLibraryA("ddraw.dll");
+    bool *isDDraw = (bool *)GetProcAddress(hDDraw, "TSDDRAW");
+
+    UsingTSDDRAW = isDDraw && *isDDraw;
+
+
 #ifndef SINGLEPLAYER
+
+    bool *handleClose = (bool *)GetProcAddress(hDDraw, "GameHandlesClose");
+    if (handleClose)
+        *handleClose = true;
+
     if (OverrideColors = SunIni_GetBool("Options","OverrideColors",false))
       ApplyUserColorOverrides();
     TextBackgroundColor = SunIni_GetInt("Options","TextBackgroundColor",0);
