@@ -57,6 +57,11 @@ void LoadSunIni()
 
     UsingTSDDRAW = isDDraw && *isDDraw;
 
+    LPDWORD TargetFPS = (LPDWORD)GetProcAddress(hDDraw, "TargetFPS");
+    if (TargetFPS)
+    {
+        *TargetFPS = SunIni_GetInt("Video", "DDrawTargetFPS", *TargetFPS);
+    }
 
 #ifndef SINGLEPLAYER
 

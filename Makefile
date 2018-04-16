@@ -33,13 +33,14 @@ COMMON_OBJS = \
               src/no_window_frame.o \
               src/exception_catch.o \
               src/force_conversion_type.o \
-              src/check_for_tsddraw.o \
+              src/video_mode_hacks.o \
               res/res.o \
               sym.o
 
 SP_OBJS = src/no-cd_tfd.o src/sun.ini.sp.o
 
 MP_OBJS          = \
+                    src/online_optimizations.o \
                     src/mods/dont_save_without_all_players.o \
                     src/sun.ini.o \
                     src/no-cd_iran.o \

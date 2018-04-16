@@ -371,6 +371,7 @@ setcglob 0x006CA46C, _imp__SetWindowLongA
 setcglob 0x006CA468, _imp__GetWindowLongA
 setcglob 0x005FF7D0, Top_Level_Exception_Filter
 setcglob 0x00496350, PrintException
+setcglob 0x006CA198, _imp__Sleep
 
 ; Tutorial
 setcglob 0x006FE49C, TUTORIAL_INI_Name

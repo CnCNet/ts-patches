@@ -87,6 +87,7 @@ cextern _imp__timeGetTime
 cextern _imp__LoadLibraryA
 cextern _imp__GetProcAddress
 cextern _imp__GetCurrentProcess
+cextern _imp__Sleep
 cextern SetFocus
 cextern SetWindowPos
 cextern InvalidateRect

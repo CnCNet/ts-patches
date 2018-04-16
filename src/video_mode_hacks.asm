@@ -5,24 +5,8 @@
 cextern VideoWindowed
 cextern UsingTSDDRAW
 
-hack 0x0048B6C1, 0x0048B6CE
-    cmp byte[UsingTSDDRAW], 0
-    jz .out
-
-    jmp hackend
-
-.out:
-    cmp byte[VideoWindowed], 1
-    jnz hackend
-    xor al, al
-    jmp 0x0048B6D5
-
-
 ;;; Setup th main window to be the requested size (reg TS always tries to do 640x480 in the menus)
 hack 0x006013DE
-    cmp byte[UsingTSDDRAW], 0
-    jz  .Reg
-
     mov edx, [ScreenWidth]
     jmp hackend
 
@@ -32,11 +16,8 @@ hack 0x006013DE
 
 ;;; Setup th main window to be the requested size (reg TS always tries to do 640x480 in the menus)
 hack 0x00601335
-    cmp byte[UsingTSDDRAW], 0
-    jz  .Reg
-
     mov  esi, [ScreenHeight]
-    push dword[ScreenHeight]
+    push esi
     push dword[ScreenWidth]
     jmp  0x006013A5
 
@@ -45,18 +26,54 @@ hack 0x00601335
     jmp  hackend
 
 
+
+;;; Don't set the screen to 640x480 while in fullscreen mode.
+hack 0x006015AD
+    mov edx, [ScreenWidth]
+    jmp hackend
+
+ .Reg:
+    mov edx, 0x280
+    jmp hackend
+
+;;; Don't set the screen to 640x480 while in fullscreen mode.
+hack 0x006015E6
+    mov edx, [ScreenWidth]
+    jmp hackend
+
+ .Reg:
+    mov edx, 0x280
+    jmp hackend
+
+hack 0x0060161C
+    add esp, 4
+    push dword[ScreenHeight]
+    mov  edx, dword[ScreenWidth]
+    call 0x00472DF0
+    jmp  0x0060141C
+
+
 ;;; Don't reset video mode on Win or Lose
 hack 0x005DCCB7, 0x005DCCBD
-    cmp byte[UsingTSDDRAW], 0
-    jnz 0x005DCD06
+    jmp 0x005DCD06
 
+ .Reg:
     cmp byte[0x007E4902], bl
     jz  0x005DCD06
     jmp hackend
 
 hack 0x005DC96B
-    cmp byte[UsingTSDDRAW], 0
-    jnz 0x005DC9BB
+    jmp 0x005DC9BB
 
+ .Reg:
+    mov al, byte[0x007E4902]
+    jmp hackend
+
+;; Do_Abort
+hack 0x005DD070
+    pop edi
+    jmp 0x005DD0C1
+
+ .Reg:
     mov al, byte[0x007E4902]
     jmp hackend
