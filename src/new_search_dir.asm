@@ -3,29 +3,56 @@
 %include "macros/datatypes.inc"
 
 
-STRUC SearchDirList
-  .next: RESD 1
-  .path: RESD 1
-ENDSTRUC
-
 sstring str_SearchDir, "MIX\\"
 sstring str_SearchDir2, "INI\\"
+%define STR_MAX 256
 
-gint ptr_str_SearchDir, str_SearchDir
-[section .data]
-NewSearch: ISTRUC SearchDirList
-        AT SearchDirList.next, dd NewSearch1
-        AT SearchDirList.path, dd str_SearchDir
-IEND
-NewSearch1: ISTRUC SearchDirList
-        AT SearchDirList.next, dd 0
-        AT SearchDirList.path, dd str_SearchDir2
-IEND
-
-;;; 
+;;; The string and the SearchDirList structure must be malloc because TS will free() them later
 hack 0x005ED005, 0x005ED00B
         mov     [ebp+0x12C8], eax
-        mov     dword [0x00760920], NewSearch
+
+        push    edx
+        push    ecx
+
+        push    8               ; Allocate the structure for SearchDir
+        call    new
+
+        mov     dword[eax], 0
+        mov     dword [0x00760920], eax
+
+        push    STR_MAX         ; Allocate the string for SearchDir
+        call    new
+
+        push    str_SearchDir
+        push    eax
+        call    strcpy
+
+        mov     edx, dword[0x00760920]
+        mov     dword[edx+4], eax
+
+
+
+        push    8               ; Allocate the structure for SearchDir2
+        call    new
+
+        mov     dword[eax], 0
+        mov     edx, dword[0x00760920]
+        mov     dword[edx], eax
+
+        push    STR_MAX         ; Allocate the string for SearchDir2
+        call    new
+
+        push    str_SearchDir2
+        push    eax
+        call    strcpy
+
+        mov     edx, dword[0x00760920]
+        mov     edx, dword[edx]
+        mov     dword[edx+4], eax
+
+        add     esp, 32
+        pop     ecx
+        pop     edx
         jmp     hackend
 
 ;; Addon_Available() hack

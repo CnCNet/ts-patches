@@ -259,6 +259,7 @@ cextern __strcmpi
 cextern _strtok
 cextern _sprintf
 cextern stristr_
+cextern strcpy
 
 ; Mumble
 cextern initMumble
