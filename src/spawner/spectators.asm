@@ -40,8 +40,9 @@ _DisplayClass__Encroach_Shadow_Spectator:
     jnz  0x004799F7
 
  .Reg:
+    mov  ecx, esi
     call 0x0051E270
-    jmp 0x00479979
+    jmp  hackend
 
 hack 0x004BF71B
 _HouseClass__MPlayer_Defeated_Ignore_Spectator_In_Skirmish:
