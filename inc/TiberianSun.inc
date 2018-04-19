@@ -88,9 +88,15 @@ cextern _imp__LoadLibraryA
 cextern _imp__GetProcAddress
 cextern _imp__GetCurrentProcess
 cextern _imp__Sleep
+cextern _imp__GetSystemMetrics
+cextern _imp__timeSetEvent
+
 cextern SetFocus
 cextern SetWindowPos
 cextern InvalidateRect
+
+cextern MouseIntervalResolution
+cextern MouseRenderInterval
 
 cextern WWDebug_Printf
 cextern WarheadTypeClass__init_versus

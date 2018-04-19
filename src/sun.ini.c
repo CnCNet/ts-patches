@@ -16,6 +16,8 @@ bool AddTeamStyle2 = false;
 bool AltToRally = false;
 bool ForceConversionType4 = true;
 bool UsingTSDDRAW = false;
+int32_t MouseRenderInterval = 16;
+int32_t MouseIntervalResolution = 1;
 
 void LoadSunIni()
 {
@@ -62,6 +64,9 @@ void LoadSunIni()
     {
         *TargetFPS = SunIni_GetInt("Video", "DDrawTargetFPS", *TargetFPS);
     }
+
+    MouseIntervalResolution = SunIni_GetInt("Video", "MouseResolution", 1);
+    MouseRenderInterval = SunIni_GetInt("Video", "MouseRenderInterval", 16);
 
 #ifndef SINGLEPLAYER
 

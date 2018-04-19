@@ -230,6 +230,7 @@ setcglob 0x0061CB30, TActionClass__Zoom_In
 setcglob 0x004B9440, GScreenClass__Flag_To_Redraw
 setcglob 0x00475D90, DisplayClass__Init_IO
 
+
 ; Tactical
 setcglob 0x0074C5F4, TacticalClassMap
 setcglob 0x0080CE30, CellHeight
@@ -372,6 +373,8 @@ setcglob 0x006CA468, _imp__GetWindowLongA
 setcglob 0x005FF7D0, Top_Level_Exception_Filter
 setcglob 0x00496350, PrintException
 setcglob 0x006CA198, _imp__Sleep
+setcglob 0x006CA3A0, _imp__GetSystemMetrics
+setcglob 0x006CA4E4, _imp__timeSetEvent
 
 ; Tutorial
 setcglob 0x006FE49C, TUTORIAL_INI_Name
