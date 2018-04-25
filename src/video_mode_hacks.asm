@@ -77,3 +77,7 @@ hack 0x005DD070
  .Reg:
     mov al, byte[0x007E4902]
     jmp hackend
+
+;;; This will force the game to always use ddraw's blit function rather than WW blit.
+;;; We're avoiding ww blit functions because they are not thread safe
+@SET 0x0048B70E, { mov bl, 0 }
