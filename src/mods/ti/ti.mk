@@ -128,12 +128,13 @@ TI_OBJS = \
                     src/mods/horv_via_undeploysinto.o \
                     src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
-                    src/mods/ti/ti_hacks.o \
-                    src/mods/ti/logger.o \
-                    src/mods/dta/auto_deploy_mcv.o \
-                    src/mods/dta/scrap_metal_explosion.o \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/dont_save_without_all_players.o \
                     src/mods/max_pip_counts.o \
 					src/mods/fix_score_logging_typo.o \
+					src/mods/ti/ti_hacks.o \
+                    src/mods/ti/logger.o \
+					src/mods/ti/ai_target_droppods_like_multimissile.o \
+                    src/mods/dta/auto_deploy_mcv.o \
+                    src/mods/dta/scrap_metal_explosion.o \
 					src/force_conversion_type.o
