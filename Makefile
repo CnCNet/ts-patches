@@ -141,6 +141,7 @@ MP_OBJS          = \
                     src/skip_score.o \
                     src/hide_names_qm.o \
                     src/minimum_burst.o \
+                    src/cache_alot.o \
 
 
 ifdef WWDEBUG
