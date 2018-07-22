@@ -4,6 +4,7 @@
 #include <assert.h>
 
 typedef BOOL (WINAPI *SetProcAffinityFunction)(HANDLE, DWORD_PTR);
+typedef BOOL (WINAPI *GetProcessAffinityFunction)(HANDLE, PDWORD_PTR, PDWORD_PTR);
 
 void
 SetSingleProcAffinity() {
@@ -28,3 +29,34 @@ SetSingleProcAffinity() {
   return;
 }
 
+void
+SetMultiProcAffinity() {
+  HMODULE library;
+  SetProcAffinityFunction SetProcAffinityMask;
+  GetProcessAffinityFunction GetProcAffinityMask;
+  HANDLE CurrentProcess;
+
+  DWORD procAffinity;
+  DWORD systemAffinity;
+
+  library = LoadLibraryA("kernel32.dll");
+  if (!library)
+    abort;
+
+  SetProcAffinityMask = GetProcAddress(library, "SetProcessAffinityMask");
+  if (!SetProcAffinityMask)
+    return;
+
+  GetProcAffinityMask = GetProcAddress(library, "GetProcessAffinityMask");
+  if (!GetProcAffinityMask)
+      return;
+
+  CurrentProcess = GetCurrentProcess();
+  if (!CurrentProcess)
+    return;
+
+  if (GetProcAffinityMask(CurrentProcess, &procAffinity, &systemAffinity))
+      SetProcAffinityMask(CurrentProcess, systemAffinity);
+
+  return;
+}

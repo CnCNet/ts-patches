@@ -24,6 +24,8 @@ void LoadSunIni()
     IsNoCD = SunIni_GetBool("Options", "NoCD", true);
     if (SunIni_GetBool("Options", "SingleProcAffinity", true))
         SetSingleProcAffinity();
+    else
+        SetMultiProcAffinity();
 
     VideoBackBuffer = SunIni_GetBool("Video", "VideoBackBuffer", true);
     NoWindowFrame = SunIni_GetBool("Video", "NoWindowFrame", false);
