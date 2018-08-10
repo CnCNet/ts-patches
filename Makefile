@@ -11,6 +11,7 @@ VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
 WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"
 
 COMMON_OBJS = \
+              src/main_menu_cursor_bug.o \
               src/wndproc.o \
               src/scale_movie_fix.o \
               src/scale_movie_fix_hack.o \
