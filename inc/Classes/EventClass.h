@@ -4,6 +4,10 @@
 
 #pragma pack(push, 1)
 
+#define LOSS_MODE_BEST 1
+#define LOSS_MODE_MEDIUM 2
+#define LOSS_MODE_WORST 3
+
 typedef struct EventClass {
     char Type;
     uint32_t Frame;
@@ -13,6 +17,7 @@ typedef struct EventClass {
         uint32_t Target_ID;
         struct {
             int8_t MaxAhead;
+            int8_t FrameSendRate;
             int8_t HighLossMode;
         };
         char data[36];

@@ -1096,7 +1096,7 @@ Initialize_Spawn:
     mov byte[UseProtocolZero], 1
 
     ; FrameSendRate should not be configurable in proto 0
-    mov dword [FrameSendRate], 1
+    mov dword [FrameSendRate], 2
 
     ; This initial MaxAhead, it will get overridden by the PreCalcMaxAhead after the first second of the game
     SpawnINI_Get_Int str_Settings, str_MaxAhead, 40

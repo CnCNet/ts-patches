@@ -8,7 +8,7 @@ int32_t WorstMaxAhead = 40;
 int32_t LastSentResponseTime = 100;
 
 bool UseProtocolZero = false;
-bool HighLossMode = false;
+uint8_t HighLossMode = 0;
 
 int32_t __thiscall
 Hack_Response_Time(IPXManagerClass *this)
@@ -17,26 +17,18 @@ Hack_Response_Time(IPXManagerClass *this)
 }
 
 
-
 void __thiscall IPXManagerClass__Set_Timing(IPXManagerClass *this, int NewRetryDelta, int a3, int NewRetryTimeout, bool SetGlobalConnClass);
 void __thiscall
 Hack_Set_Timing(IPXManagerClass *this, int NewRetryDelta, int a3, int NewRetryTimeout, bool SetGlobalConnClass)
 {
-    if (HighLossMode)
-    {
-        WWDebug_Printf("HighLossMode is true\n");
-        IPXManagerClass__Set_Timing(this, (int)MaxAhead/2, a3, NewRetryTimeout, SetGlobalConnClass);
-    }
-    else
-    {
-        WWDebug_Printf("NewRetryDelta = %d,  NewRetryTimeout = %d, FrameSendRate = %d, HighLossMode = %d\n",
-                       NewRetryDelta, NewRetryTimeout, FrameSendRate, HighLossMode);
-        IPXManagerClass__Set_Timing(this, NewRetryDelta, a3, NewRetryTimeout, SetGlobalConnClass);
-    }
+
+    IPXManagerClass__Set_Timing(this, NewRetryDelta, a3, NewRetryTimeout, SetGlobalConnClass);
+    WWDebug_Printf("NewRetryDelta = %d,  NewRetryTimeout = %d, FrameSendRate = %d, HighLossMode = %d\n",
+                   NewRetryDelta, NewRetryTimeout, FrameSendRate, HighLossMode);
 }
 
-int SendResponseTimeFrame = 15;
-int SendResponseTimeInterval = 15;
+int SendResponseTimeFrame = 240;
+int SendResponseTimeInterval = 30;
 
 void
 Send_Response_Time()
@@ -44,27 +36,18 @@ Send_Response_Time()
     if (UseProtocolZero)
     {
         int32_t rspTime = IPXManagerClass__Response_Time(&IPXManagerClass_this);
-        rspTime = (int32_t) rspTime * 2 / 3;
+        rspTime = (int32_t) rspTime;
 
-        if (rspTime > 36)
-            rspTime = 36;
+        uint8_t setHighLossMode = LOSS_MODE_WORST;
 
-        bool setHighLossMode = false;
+        if (rspTime <= 9)
+            setHighLossMode = LOSS_MODE_BEST;
+        else if (rspTime <= 19)
+            setHighLossMode = LOSS_MODE_MEDIUM;
 
-        int32_t i = IPXManagerClass_this.NumConnections;
 
-        for (; i-->0;)
+        if (rspTime > -1 && (Frame > SendResponseTimeFrame))
         {
-            IPXGlobalConnClass *p = IPXManagerClass_this.ConnectionArray[i];
-            if (p->PercentLost > 3)
-            {
-                setHighLossMode = true;
-            }
-        }
-
-        if (rspTime > -1 && (Frame > SendResponseTimeFrame || setHighLossMode))
-        {
-
             SendResponseTimeFrame = Frame + SendResponseTimeInterval;
             EventClass e;
             e.Frame = Frame + MaxAhead;
@@ -75,24 +58,22 @@ Send_Response_Time()
             EventClass__EnqueueEvent(&e);
 
             LastSentResponseTime = rspTime;
-            //WWDebug_Printf("Player %d sending response time of %d\n", PlayerPtr->ID, e.MaxAhead);
+            WWDebug_Printf("Player %d sending response time of %d, HighLossMode = %d\n", PlayerPtr->ID, e.MaxAhead, e.HighLossMode);
         }
     }
 }
 
 
-int NextIncreaseFrame = 15;
-int FrameIncreaseInterval = 1;
-
 int NextDecreaseFrame = 90;
-int FrameDecreaseInterval = 1;
-int MaxDecrease = 8;
+int DecreaseInterval = 450;
+int TrackHighLossMode = 0;
 
-int MinimumDecrease = 2;
 int32_t PlayerMaxAheads[8] = {0};
-bool PlayerHighLossMode[8] = {0};
+uint8_t PlayerHighLossMode[8] = {0};
 int32_t PlayerLastTimingFrame[8] = {0};
 int TimingTimeout = 120;
+
+extern uint8_t NewFrameSendRate;
 
 void __thiscall
 Handle_Timing_Change(EventClass *e)
@@ -110,40 +91,50 @@ Handle_Timing_Change(EventClass *e)
 
     //WWDebug_Printf("doing timing change (%d. %d)\n", e->ID, e->MaxAhead);
 
-    bool setHighLossMode = false;
+    uint8_t setHighLossMode = 0;
     int max = 0;
     for (int i = 0; i < 8; ++i)
     {
         if (PlayerLastTimingFrame[i] + TimingTimeout < Frame)
         {
             PlayerMaxAheads[i] = 0;
-            PlayerHighLossMode[i] = false;
+            PlayerHighLossMode[i] = 0;
         }
         else
         {
             max = PlayerMaxAheads[i] > max ? PlayerMaxAheads[i] : max;
-            if (PlayerHighLossMode[i])
-                setHighLossMode = true;
+            if (PlayerHighLossMode[i] > setHighLossMode)
+                setHighLossMode = PlayerHighLossMode[i];
         }
     }
-    HighLossMode = setHighLossMode;
+    WorstMaxAhead = max;
 
-    if (max > MaxAhead && Frame > NextIncreaseFrame)
+    WWDebug_Printf("Player %d, Loss mode (%d, %d)\n", PlayerPtr->ID, setHighLossMode, HighLossMode);
+    if (setHighLossMode > HighLossMode)
     {
-        WWDebug_Printf("Increasing\n");
+        HighLossMode = setHighLossMode;
+
+        switch(HighLossMode)
+        {
+        case LOSS_MODE_BEST:
+            NewFrameSendRate = 2;
+            MessageListClass__Add_Message(&MessageListClass_this, 0, 0, "Latency mode set to BEST!",
+                                          4,0x4096,(int)(Rules->MessageDuration * FramesPerMinute)/2);
+            max = 6;
+            break;
+        case LOSS_MODE_MEDIUM:
+            NewFrameSendRate = 3;
+            MessageListClass__Add_Message(&MessageListClass_this, 0, 0, "Latency mode set to MEDIUM!",
+                                          4,0x4096,(int)(Rules->MessageDuration * FramesPerMinute)/2);
+            max = 12;
+            break;
+        default:
+            NewFrameSendRate = 4;
+            MessageListClass__Add_Message(&MessageListClass_this, 0, 0, "Latency mode set to WORST!",
+                                          4,0x4096,(int)(Rules->MessageDuration * FramesPerMinute)/2);
+            max = 16;
+        }
         PreCalcMaxAhead = max;
         PreCalcFrameRate = 60;
-        WorstMaxAhead = max;
-        NextIncreaseFrame = Frame + MaxAhead + FrameIncreaseInterval;
-        NextDecreaseFrame = Frame + e->MaxAhead + FrameDecreaseInterval;
-    }
-    else if (max < MaxAhead - MinimumDecrease && Frame > NextDecreaseFrame)
-    {
-        WWDebug_Printf("Decreasing\n");
-        PreCalcMaxAhead = max > MaxAhead - MaxDecrease ? max : MaxAhead - MaxDecrease;
-        PreCalcFrameRate = 60;
-        WorstMaxAhead = max;
-        NextDecreaseFrame = Frame + e->MaxAhead + FrameDecreaseInterval;
-        NextIncreaseFrame = Frame + MaxAhead + FrameIncreaseInterval;
     }
 }

@@ -9,9 +9,11 @@
 @CLEAR 0x005B3751, 0x90, 0x005B3753
 @CLEAR 0x005B3313, 0x90, 0x005B3319
 
+gbyte NewFrameSendRate, 2
+
 ; Don't set framesend rate to 10 in Generate_Process_Time_Event
 hack 0x005B1C28
-    mov al, byte[FrameSendRate]
+    mov al, byte[NewFrameSendRate]
     push ecx
     jmp hackend
 
