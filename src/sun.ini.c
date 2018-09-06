@@ -67,6 +67,13 @@ void LoadSunIni()
         *TargetFPS = SunIni_GetInt("Video", "DDrawTargetFPS", *TargetFPS);
     }
 
+    // If video_mode_hacks is included then set ThreadSafe to disable SingleProcAffinity
+    LPDWORD ThreadSafe = (LPDWORD)GetProcAddress(hDDraw, "ThreadSafe");
+    if (ThreadSafe)
+    {
+        *ThreadSafe = true;
+    }
+
     MouseIntervalResolution = SunIni_GetInt("Video", "MouseResolution", 1);
     MouseRenderInterval = SunIni_GetInt("Video", "MouseRenderInterval", 16);
 
