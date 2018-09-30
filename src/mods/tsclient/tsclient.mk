@@ -1,6 +1,7 @@
 
 TSCLIENT_OBJS = \
                     src/mods/tsclient/res/res.o \
+					src/main_menu_cursor_bug.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
