@@ -37,6 +37,9 @@ section .text
 
 _Start_Scenario_Print_Difficulty_And_Force_Briefing_Screen:
 
+    cmp dword [SessionType], 0
+    jnz     .Ret
+
     ; Print difficulty
 	pushad
     mov eax, dword [SelectedDifficulty]
@@ -61,9 +64,6 @@ _Start_Scenario_Print_Difficulty_And_Force_Briefing_Screen:
 	popad
 
 	; Force briefing screen
-	
-    cmp dword [SessionType], 0
-    jnz     .Ret
 
     push    ecx
     
