@@ -91,6 +91,7 @@ extern bool OutOfSync;
 extern DynamicVectorClass_Objects CurrentObjectsArray;
 extern DynamicVectorClass_Houses HouseClassArray;
 extern SessionClass SessionType;
+extern SessionClass SessionClass_this;
 extern WWKeyboardClass *WWKeyboard;
 extern uint32_t ForceFire1;
 extern uint32_t ForceFire2;
