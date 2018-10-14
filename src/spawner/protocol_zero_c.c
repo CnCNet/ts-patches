@@ -42,7 +42,7 @@ Send_Response_Time()
 
         if (rspTime <= 9)
             setHighLossMode = LOSS_MODE_BEST;
-        else if (rspTime <= 19)
+        else if (rspTime <= 15)
             setHighLossMode = LOSS_MODE_MEDIUM;
 
 
