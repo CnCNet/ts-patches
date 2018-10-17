@@ -1099,7 +1099,7 @@ Initialize_Spawn:
     mov dword [FrameSendRate], 2
 
     ; This initial MaxAhead, it will get overridden by the PreCalcMaxAhead after the first second of the game
-    SpawnINI_Get_Int str_Settings, str_MaxAhead, 40
+    SpawnINI_Get_Int str_Settings, str_MaxAhead, 12
     mov dword [MaxAhead], eax
 
     SpawnINI_Get_Int str_Settings, str_PreCalcMaxAhead, 0

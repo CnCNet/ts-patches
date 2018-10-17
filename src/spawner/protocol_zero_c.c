@@ -3,7 +3,7 @@
 #include "Classes/EventClass.h"
 #include "patch.h"
 
-int32_t WorstMaxAhead = 40;
+int32_t WorstMaxAhead = 24;
 
 int32_t LastSentResponseTime = 100;
 
