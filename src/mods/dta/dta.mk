@@ -121,6 +121,7 @@ DTA_OBJS = \
                     src/aircraft_repair.o \
                     src/rage_quit.o \
 					src/scrollrate_fix.o \
+					src/minimum_burst.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/no_insignificant_death_announcement.o \
@@ -147,3 +148,4 @@ DTA_OBJS = \
 					src/force_conversion_type.o \
 					src/c4_repairable_fix.o \
                     src/no_charge_power_needed.o\
+					src/video_mode_hacks.o

@@ -117,6 +117,7 @@ TI_OBJS = \
                     src/aircraft_repair.o \
                     src/rage_quit.o \
 					src/scrollrate_fix.o \
+					src/minimum_burst.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/cloakstop_to_empimmunity.o \
@@ -136,7 +137,10 @@ TI_OBJS = \
 					src/mods/ti/ti_hacks.o \
                     src/mods/ti/logger.o \
 					src/mods/ti/ai_target_droppods_like_multimissile.o \
+					src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/scrap_metal_explosion.o \
 					src/mods/fix_allied_decloaking.o \
-					src/force_conversion_type.o
+					src/c4_repairable_fix.o \
+					src/force_conversion_type.o \
+					src/video_mode_hacks.o
