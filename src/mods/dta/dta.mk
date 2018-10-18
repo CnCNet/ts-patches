@@ -144,4 +144,5 @@ DTA_OBJS = \
 					src/mods/fix_score_logging_typo.o \
 					src/mods/ai_target_emp_like_multimissile.o \
 					src/force_conversion_type.o \
-					src/c4_repairable_fix.o
+					src/c4_repairable_fix.o \
+                    src/no_charge_power_needed.o\

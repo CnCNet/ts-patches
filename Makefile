@@ -143,6 +143,7 @@ MP_OBJS          = \
                     src/hide_names_qm.o \
                     src/minimum_burst.o \
                     src/cache_alot.o \
+                    src/no_charge_power_needed.o\
 
 
 ifdef WWDEBUG
