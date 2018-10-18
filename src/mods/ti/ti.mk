@@ -138,4 +138,5 @@ TI_OBJS = \
 					src/mods/ti/ai_target_droppods_like_multimissile.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/scrap_metal_explosion.o \
+					src/mods/fix_allied_decloaking.o \
 					src/force_conversion_type.o
