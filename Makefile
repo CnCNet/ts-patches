@@ -144,6 +144,7 @@ MP_OBJS          = \
                     src/minimum_burst.o \
                     src/cache_alot.o \
                     src/no_charge_power_needed.o\
+                    src/fix_allied_decloaking.o \
 
 
 ifdef WWDEBUG

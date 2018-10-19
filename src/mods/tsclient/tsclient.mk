@@ -126,5 +126,5 @@ TSCLIENT_OBJS = \
                     src/mods/tsclient/logger.o \
                     src/mods/tsclient/filename_hacks.o \
                     src/mods/tsclient/disable_intro_movie.o \
-					src/mods/fix_allied_decloaking.o \
+					src/fix_allied_decloaking.o \
 					src/force_conversion_type.o
