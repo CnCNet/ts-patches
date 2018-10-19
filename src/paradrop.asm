@@ -15,3 +15,7 @@ hack 0x00408A1F, 0x00408A25
     pop  ebx
     mov  [esi+0x134], eax       ; Ammo
     jmp  hackend
+
+
+
+@SET 0x00408A0C, { mov byte[esi+0x1FA], 0 }
