@@ -148,4 +148,5 @@ DTA_OBJS = \
 					src/force_conversion_type.o \
 					src/c4_repairable_fix.o \
                     src/no_charge_power_needed.o\
-					src/video_mode_hacks.o
+					src/video_mode_hacks.o \
+					src/fix_mission_restart_difficulty_bug.o
