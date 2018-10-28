@@ -144,4 +144,5 @@ TI_OBJS = \
 					src/c4_repairable_fix.o \
 					src/force_conversion_type.o \
 					src/video_mode_hacks.o \
-					src/fix_mission_restart_difficulty_bug.o
+					src/fix_mission_restart_difficulty_bug.o \
+					src/cache_alot.o
