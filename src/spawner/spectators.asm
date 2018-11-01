@@ -25,9 +25,24 @@ section .rdata
     str_Multi8          db "Multi8",0
     str_IsSpectator     db "IsSpectator",0
 
+hack 0x0047988B
+_DisplayClass__Encroach_Shadow_Spectator:
+    mov  ecx, [PlayerPtr]
+    call HouseClass__Is_Coach
+    test al, al
+    jnz  .Reg
+
+    mov  ecx, [PlayerPtr]
+    call HouseClass__Is_Spectator
+    test al, al
+    jnz  0x0047995C
+
+ .Reg:
+    mov ebp, 0x200
+    jmp hackend
 
 hack 0x00479974
-_DisplayClass__Encroach_Shadow_Spectator:
+_DisplayClass__Encroach_Fog_Spectator:
 
     mov  ecx, [PlayerPtr]
     call HouseClass__Is_Coach
