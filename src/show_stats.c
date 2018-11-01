@@ -127,10 +127,11 @@ ShowInfo(DSurface *surface, Rect *location)
 uint32_t
 ShowPerformance(char **out, char **col2, int *width)
 {
+    static char col1[256] = {0};
     static char buf[256] = {0};
     static int32_t last_actions = 0;
 
-    static char *col1 = "Time:\nFPS:\nAPM:\nEff:\n\nHotkeys:\n";
+    static char *fmt1 = "Time:\nFPS:\nAPM:\nEff:\n\nShow Keys:\n%s\n";
     static char *sfmt =
         "%d:%02d:%02d\n"
         "%d\n"
@@ -155,17 +156,18 @@ ShowPerformance(char **out, char **col2, int *width)
 
     double p_apm = apm - 27 <= 0 ? 0 : apm - 27.0;
 
-    sprintf(buf, sfmt, gameHours, gameMinutes % 60, gameSeconds % 60,
-            FramesPerSecond, p_apm, eff);
-
-    static char KeyName[64];
+    char KeyName[64];
     PrettyPrintKey(ShowHelpKey, KeyName);
 
     if (!ShowHelpKey)
         strcpy(KeyName, "<unset>");
 
-    strncat(buf, "\n", 512);
-    strncat(buf, KeyName, 512);
+    sprintf(col1, fmt1, KeyName);
+    sprintf(buf, sfmt, gameHours, gameMinutes % 60, gameSeconds % 60,
+            FramesPerSecond, p_apm, eff);
+
+    //strncat(buf, "\n", 512);
+    //strncat(buf, KeyName, 512);
     return 0x6046;
 }
 

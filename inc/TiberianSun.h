@@ -123,6 +123,7 @@ extern int32_t FrameSendRate;
 extern bool QuickMatch;
 
 // ### Functions ###
+void Queue_Options();
 
 void   __thiscall FileClass__FileClass(FileClass *fileClass, char *fileName);
 bool   __thiscall FileClass__Is_Available(FileClass *fileClass, bool forced);

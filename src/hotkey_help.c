@@ -7,6 +7,15 @@
 
 CALL(0x004B966C, _MessageListClass__Draw_show_stats2);
 
+// Disable the help overlay when the menu has been openened
+CALL(0x0050947D, _Queue_Options_No_Help);
+CALL(0x00508E94, _Queue_Options_No_Help);
+CALL(0x00509645, _Queue_Options_No_Help);
+CALL(0x00509758, _Queue_Options_No_Help);
+CALL(0x0060E9EC, _Queue_Options_No_Help);
+CALL(0x0060EA76, _Queue_Options_No_Help);
+LJMP(0x004EA230, _Queue_Options_No_Help);
+
 char category[512];
 char name[512];
 char key[512];
@@ -29,6 +38,11 @@ uint32_t ShowHotkeys(char **out, char **col2, int *width);
 vtCommandClass vtShowHelpCommand;
 
 int ShowHelpKey;
+void Queue_Options_No_Help()
+{
+    ShowHelp = false;
+    Queue_Options();
+}
 
 void __thiscall
 MessageListClass__Draw_show_stats2(void *this)
