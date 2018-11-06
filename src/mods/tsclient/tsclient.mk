@@ -129,4 +129,5 @@ TSCLIENT_OBJS = \
 					src/fix_allied_decloaking.o \
 					src/force_conversion_type.o \
 					src/fix_mission_restart_difficulty_bug.o \
-					src/cache_alot.o
+					src/cache_alot.o \
+                    src/multiple_factory_hack.o \
