@@ -146,4 +146,5 @@ TI_OBJS = \
 					src/video_mode_hacks.o \
 					src/fix_mission_restart_difficulty_bug.o \
 					src/cache_alot.o \
+                    src/config.o \
                     src/multiple_factory_hack.o \

@@ -145,6 +145,7 @@ MP_OBJS          = \
                     src/cache_alot.o \
                     src/no_charge_power_needed.o\
                     src/fix_allied_decloaking.o \
+                    src/config.o \
                     src/multiple_factory_hack.o \
 
 
