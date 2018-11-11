@@ -147,6 +147,7 @@ MP_OBJS          = \
                     src/fix_allied_decloaking.o \
                     src/config.o \
                     src/multiple_factory_hack.o \
+                    src/vinifera_unhardcode.o \
 
 
 
