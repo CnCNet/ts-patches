@@ -148,6 +148,7 @@ MP_OBJS          = \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/vinifera_unhardcode.o \
+                    src/freeunit_enhancements.o \
 
 
 

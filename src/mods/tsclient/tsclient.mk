@@ -132,3 +132,4 @@ TSCLIENT_OBJS = \
 					src/cache_alot.o \
                     src/config.o \
                     src/multiple_factory_hack.o \
+                    src/freeunit_enhancements.o \
