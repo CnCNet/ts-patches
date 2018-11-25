@@ -21,6 +21,8 @@ setcglob 0x004BDA60, HouseClass__Is_Ally_Techno
 setcglob 0x004CB950, HouseClass__Is_Player
 setcglob 0x004BEEA0, HouseClass__Manual_Place
 setcglob 0x004BE200, HouseClass__Begin_Production
+setcglob 0x004BF4C0, HouseClass__MPlayer_Defeated
+setcglob 0x004BF910, HouseClass__Blowup_All
 setcglob 0x004C4730, HouseClass__House_From_HouseType
 setcglob 0x004CDEF0, HouseTypeClass__From_Name
 setcglob 0x004974A0, FactoryClass__Get_Product

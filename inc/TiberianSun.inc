@@ -142,6 +142,8 @@ cextern HouseClass__Assign_Handicap
 cextern HouseClass__Make_Ally
 cextern HouseClass__Is_Ally
 cextern HouseClass__Is_Player
+cextern HouseClass__MPlayer_Defeated
+cextern HouseClass__Blowup_All
 cextern Assign_Houses
 cextern Get_MP_Color
 cextern HouseType_From_Name

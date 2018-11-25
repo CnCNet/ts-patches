@@ -78,6 +78,8 @@ hack 0x0061913B ; Extend trigger action jump table
     jz .Disable_ShortGame_Action
     cmp edx, 108
     jz .Print_Difficulty_Action
+	cmp edx, 109
+	jz .Blow_Up_House_Action
     
     cmp edx, 68h
     ja 0x0061A9C5 ; default
@@ -170,5 +172,34 @@ hack 0x0061913B ; Extend trigger action jump table
     Print_Message str_Hard
     jmp 0x0061A9C5
     
-    
+; ******************************
+; ***      Blow Up House     ***
+; ******************************
 
+.Blow_Up_House_Action:
+    mov eax, [esi+40h] ; first parameter
+    
+    cmp eax, 50
+    jl .Get_House_Pointer_Blow_Up_House ; not a spawn house, find the regular house
+    
+    call Spawn_Index50_To_House_Pointer
+    
+    cmp eax, -1 ; no house associated with spawn location
+    jz .Out2
+
+    cmp eax, 0
+    jnz .Blow_Up
+    
+.Get_House_Pointer_Blow_Up_House:    
+    call 0x004C4730 ; House_Pointer_From_HouseType_Index
+    
+.Blow_Up:
+    ; We should have the house pointer in EAX
+	push eax
+	mov ecx, eax
+	call HouseClass__Blowup_All
+	pop ecx
+    call HouseClass__MPlayer_Defeated
+
+.Out2:
+    jmp 0x0061A9C5 ; default
