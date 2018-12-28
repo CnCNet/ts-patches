@@ -44,5 +44,8 @@ HouseClass__Is_Coach(HouseClass *this)
 bool __thiscall
 HouseClass__Is_Spectator(HouseClass *this)
 {
-    return IsSpectatorArray[this->ID] > 0;
+    if (SessionType.GameSession != 0)
+        return IsSpectatorArray[this->ID] > 0;
+    else
+        return false;
 }
