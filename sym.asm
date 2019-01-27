@@ -379,6 +379,9 @@ setcglob 0x006CA198, _imp__Sleep
 setcglob 0x006CA3A0, _imp__GetSystemMetrics
 setcglob 0x006CA4E4, _imp__timeSetEvent
 
+; Theme
+setcglob 0x00644190, Theme__Stop
+
 ; Tutorial
 setcglob 0x006FE49C, TUTORIAL_INI_Name
 setcglob 0x007E2440, Tutorials

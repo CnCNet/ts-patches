@@ -262,6 +262,9 @@ cextern WOLGameID
 ;cextern RIGHT_STRIP
 cextern MultiplayerDebug
 
+; Theme
+cextern Theme__Stop
+
 ; clib
 cextern __strcmpi
 cextern _strtok
