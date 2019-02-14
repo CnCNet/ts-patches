@@ -90,6 +90,7 @@ TSCLIENT_OBJS = \
                     src/buildingtype_initialization.o \
                     src/destroytrigger_crash.o \
                     src/guard_mode_patch.o \
+                    src/guard_mode_patch2.o \
                     src/harvesters_autoharvest.o \
                     src/whiteboy_cameo_bugfix.o \
                     src/voxelanim_damage_bug.o \

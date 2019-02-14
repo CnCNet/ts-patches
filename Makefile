@@ -135,7 +135,7 @@ MP_OBJS          = \
                     src/hotkey_help.o \
                     src/draw_all_action_lines.o \
                     src/radar_event_hacks.o \
-                    src/guard_mode_patch.o \
+                    src/guard_mode_patch2.o \
                     src/random_loop_delay.o \
                     src/rage_quit.o \
                     src/move_team_group_number.o \

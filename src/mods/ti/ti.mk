@@ -81,6 +81,7 @@ TI_OBJS = \
                     src/basic_theme_fix.o \
                     src/load_more_movies.o \
                     src/guard_mode_patch.o \
+                    src/guard_mode_patch2.o \
                     src/minimap_crash.o \
                     src/buildingtype_initialization.o \
                     src/ionstorm_jumpjet_crash.o \
