@@ -25,7 +25,7 @@ hack 0x0040B86A
     mov ebx, 10h
     jmp 0x0040B8EB
 
-; _TechnoTypeClass__Read_Ini_Change_CloakStop_To_EMPImmune
+; _TechnoTypeClass__Read_Ini_Change_CloakStop_To_TooBigForCarryalls
 hack 0x0063C29A
     push    str_TooBigForCarryalls
     jmp     0x0063C29F
