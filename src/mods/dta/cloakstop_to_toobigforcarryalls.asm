@@ -2,9 +2,13 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-;mov eax, [edi] ; UnitClass::vtbl
-;mov ecx, edi
-;call [eax+88h]; ObjectClass::GetType
+; Converts CloakStop= to TooBigForCarryalls=. Vehicles with this key set to true
+; cannot be picked up by carryalls.
+; Author: Rampastring
+
+sstring str_TooBigForCarryalls, "TooBigForCarryalls"
+
+@LJMP 0x004A686E, 0x004A6897 ; Remove CloakStop logic (it's broken)
 
 ; AircraftClass::What_Action_Disllow_Carrying_Units_With_CloakStop
 hack 0x0040B86A
@@ -21,6 +25,8 @@ hack 0x0040B86A
     mov ebx, 10h
     jmp 0x0040B8EB
 
-
-
-;0040B86A
+; _TechnoTypeClass__Read_Ini_Change_CloakStop_To_EMPImmune
+hack 0x0063C29A
+    push    str_TooBigForCarryalls
+    jmp     0x0063C29F
+	
