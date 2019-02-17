@@ -142,6 +142,7 @@ DTA_OBJS = \
                     src/mods/dta/scrap_metal_explosion.o \
 					src/mods/dta/change_score_screen_music.o \
                     src/mods/dta/buildconst_harvesterunit_baseunit.o \
+					src/mods/dta/cloakstop_to_toobigforcarryalls.o \
                     src/mods/max_pip_counts.o \
                     src/mods/sideindex_improvements_v2.o \
 					src/mods/fix_score_logging_typo.o \
