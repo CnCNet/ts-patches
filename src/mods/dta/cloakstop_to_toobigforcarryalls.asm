@@ -9,6 +9,7 @@
 sstring str_TooBigForCarryalls, "TooBigForCarryalls"
 
 @LJMP 0x004A686E, 0x004A6897 ; Remove CloakStop logic (it's broken)
+@CLEAR 0x0040B81E, 0x90, 0x0040B826 ; Prevent alt-moving with carryalls
 
 ; AircraftClass::What_Action_Disllow_Carrying_Units_With_CloakStop
 hack 0x0040B86A
