@@ -59,9 +59,9 @@ Write_PCX_File_hack_png(CCFileClass *ccFile, DSurface *surface, void *palette)
 
     ScreenshotBuffer = malloc(ScreenshotHeight * (ScreenshotWidth * 2));
 
-    surface->vtable->Unlock(surface);
-
     memcpy(ScreenshotBuffer, buf, ScreenshotHeight * (ScreenshotWidth * 2));
+
+    surface->vtable->Unlock(surface);
 
     strcpy(FileName, ccFile->cd.b.r.Filename);
 
