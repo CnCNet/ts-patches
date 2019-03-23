@@ -18,6 +18,7 @@ bool ForceConversionType4 = true;
 bool UsingTSDDRAW = false;
 int32_t MouseRenderInterval = 16;
 int32_t MouseIntervalResolution = 1;
+bool UsePNG = true;
 
 void LoadSunIni()
 {
@@ -33,6 +34,7 @@ void LoadSunIni()
     VideoWindowed = SunIni_GetBool("Video", "Video.Windowed", false);
     ScrollDelay = SunIni_GetInt("Options", "ScrollDelay", 0);
     ForceConversionType4 = SunIni_GetBool("Video", "ForceConversionType4", true);
+    UsePNG = SunIni_GetBool("Video", "UsePNG", true);
 
     if (SunIni_GetBool("Video", "DisableHighDpiScaling", false))
         DisableHighDpiScaling();

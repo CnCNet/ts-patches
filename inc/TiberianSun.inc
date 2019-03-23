@@ -200,6 +200,7 @@ cextern ally_by_spawn_location
 cextern read_tut_from_map
 cextern OutOfSync
 cextern MapSnapshot_Execute
+cextern UsePNG
 
 cextern Init_Network
 cextern NameNodes_CurrentSize

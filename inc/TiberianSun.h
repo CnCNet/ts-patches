@@ -121,6 +121,9 @@ extern int32_t ProtocolVersion;
 extern bool UseProtocolZero;
 extern int32_t FrameSendRate;
 extern bool QuickMatch;
+extern bool UsePNG;
+extern bool RunAutoSS;
+extern int32_t DoingAutoSS;
 
 // ### Functions ###
 void Queue_Options();
@@ -140,6 +143,8 @@ size_t __thiscall CCFileClass__Read(CCFileClass *ccfile, void *buf, size_t len);
 int    __thiscall CCFileClass__Write(CCFileClass *fileClass, void *buf, size_t len);
 void   __thiscall CCFileClass__Destroy(CCFileClass *ccfile);
 bool   __thiscall CCFileClass__Open(CCFileClass *fileClass, int mode);
+void   __thiscall CCFileClass__Close(CCFileClass);
+bool   __thiscall RawFileCalss__Create(RawFileClass *file);
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);
 int  __thiscall INIClass__GetInt(INIClass iniClass, char *section, char *key, int defaultValue);
@@ -198,6 +203,9 @@ void __fastcall Create_Units(char i);
 void __cdecl hook_wwdebug_printf(char const *fmt, ...);
 int __thiscall DynamicVectorClass__CommandClass__Add(void *v, CommandClass **c);
 void  __thiscall CommandDestroy(void *a, char b);
+
+void ScreenCaptureCommandClass_Execute();
+void Write_PCX_File(CCFileClass *ccFile, DSurface *surface, void *palette);
 
 void ShowInfo(DSurface *s, Rect *l);
 int32_t ResponseTimeFunc(int32_t a);
@@ -305,3 +313,5 @@ void SetWin8CompatData();
 
 LONG WINAPI Top_Level_Exception_Filter(struct _EXCEPTION_POINTERS *ExceptionInfo);
 LONG __fastcall PrintException(int id, struct _EXCEPTION_POINTERS *ExceptionInfo);
+
+void *new(int32_t);

@@ -1,4 +1,10 @@
+#include "ddraw.h"
+
+
+typedef struct DSurface DSurface;
+
 typedef struct {
+    void *DSurface__Destroy;
     void *Dsurface_BlitWhole;
     void *BlitPart;
     void *Blit;
@@ -20,16 +26,16 @@ typedef struct {
     void *sub48FB90;
     void *DrawRectEx;
     void *DrawRect;
-    void *Lock;
-    void *Unlock;
+    char *(__thiscall *Lock)(DSurface *this, int32_t X, int32_t Y);
+    void *(__thiscall *Unlock)(DSurface *this);
     void *sub48B450;
     void *Has_Focus;
     void *Is_Locked;
-    void *Get_BitsPerPixel;
+    int32_t (__thiscall *Get_BytesPerPixel)(DSurface *this);
     void *Get_Pitch;
     void *Get_Rect;
-    void *Get_Width;
-    void *Get_Height;
+    int32_t (__thiscall *Get_Width)(DSurface *this);
+    int32_t (__thiscall *Get_Height)(DSurface *this);
     void *sub4901C0;
     void *sub6A7550;
     void *sub6A74D0;
@@ -42,5 +48,14 @@ typedef struct DSurface {
     vtDSurface *vtable;
     int32_t Width;
     int32_t Height;
-    // More Stuff here FIXME
+    int32_t LockLevel;
+    int32_t BitsPerPixel;
+    char *  Buffer;
+    char    Allocated;
+    char    InVideoMemory;
+    char    Unknown;
+    char    Unknown2;
+    DDSURFACEDESC *SurfaceDesc;
 } DSurface;
+
+extern DSurface *PrimarySurface;

@@ -84,6 +84,7 @@ setcglob 0x004497B0, FileClass__FileClass
 setcglob 0x004499C0, FileClass__Is_Available
 setcglob 0x00449A40, FileClass__Open
 setcglob 0x00449A10, FileClass__Close
+setcglob 0x00449A10, CCFileClass__Close
 setcglob 0x00449850, FileClass__Write
 setcglob 0x004E8970, FileClass__dtor
 setcglob 0x00449970, FileClass__Size
@@ -96,6 +97,7 @@ setcglob 0x00449850, CCFileClass__Write
 setcglob 0x00449A40, CCFileClass__Open
 setcglob 0x004499C0, CCFileClass__Is_Available
 setcglob 0x00449970, CCFileClass__Size
+setcglob 0x005BE9C0, RawFileClass__Create
 
 ; Session
 setcglob 0x007E2458, SessionClass_this
@@ -305,6 +307,10 @@ setcglob 0x006B5F65, atoi
 setcglob 0x006BCA26, calloc
 setcglob 0x006B67E4, free
 setcglob 0x006B6CCB, tolower
+setcglob 0x006B72CC, malloc
+setcglob 0x006B7F72, realloc
+setcglob 0x006B6A2E, fopen
+setcglob 0x006B6944, fclose
 
 ; winapi
 setcglob 0x006B4D6C, sendto
@@ -343,6 +349,7 @@ setcglob 0x006D2BD4, SelectSameTypeCommandClass
 setcglob 0x006D2B0C, SelectTeamCommandClass
 setcglob 0x004E8C40, CreateTeamCommandClass_Execute
 setcglob 0x004E90D0, CenterTeamCommandClass_Execute
+setcglob 0x004EAB00, ScreenCaptureCommandClass_Execute
 setcglob 0x005B10F0, Queue_Options
 
 ;WSOCK32
@@ -378,6 +385,14 @@ setcglob 0x00496350, PrintException
 setcglob 0x006CA198, _imp__Sleep
 setcglob 0x006CA3A0, _imp__GetSystemMetrics
 setcglob 0x006CA4E4, _imp__timeSetEvent
+setcglob 0x006CA1F4, _imp__CreateMutexA
+setcglob 0x006CA20C, _imp__CreateEventA
+;setcglob 0x00 _imp__CreateThread
+setcglob 0x006CA1E8, _imp__WaitForSingleObject
+setcglob 0x006CA1F0, _imp__ReleaseMutex
+setcglob 0x006CA144, _imp__ResetEvent
+setcglob 0x006Ca15C, _imp__SetEvent
+
 
 ; Theme
 setcglob 0x00644190, Theme__Stop
@@ -394,6 +409,7 @@ setcglob 0x004EAF20, Delete_Waypoint
 
 setcglob 0x0047C780, CC_Draw_Shape
 setcglob 0x00559DE0, MixFileClass__CCFileClass__Retrieve
+setcglob 0x0074C5D8, PrimarySurface
 setcglob 0x0074C5D0, SidebarSurface
 setcglob 0x0074C5E4, TempSurface
 setcglob 0x0074C5EC, CompositeSurface
@@ -401,6 +417,7 @@ setcglob 0x0074C5E0, AlternateSurface
 setcglob 0x0074C5DC, HiddenSurface
 setcglob 0x0048BB00, DSurface_FillRect
 setcglob 0x0048C140, DSurface_Conversion_Type
+setcglob 0x0069FAE0, Write_PCX_File
 
 
 ;Address  Ordinal Name                          Library

@@ -17,6 +17,11 @@ int32_t NextAutoSave;
 int32_t ResponseTimeFrame = 0;
 int32_t ResponseTimeInterval = 4;
 
+int32_t NextAutoSS = 0;
+int32_t AutoSSInterval = 4;
+int32_t AutoSSGrowth = 4;
+int32_t AutoSSIntervalMax = 30;
+
 void __thiscall
 MainLoop_AfterRender(MessageListClass *msg) {
   MessageListClass__Manage(msg);
@@ -44,6 +49,16 @@ MainLoop_AfterRender(MessageListClass *msg) {
     {
         ResponseTimeFrame = Frame + ResponseTimeInterval;
         Send_Response_Time();
+    }
+
+    if (RunAutoSS && SessionClass_this.GameSession == 3 && Frame > NextAutoSS)
+    {
+        DoingAutoSS = 1;
+        ScreenCaptureCommandClass_Execute();
+        DoingAutoSS = 0;
+        NextAutoSS = Frame + AutoSSInterval * 60; //60fps
+        if (AutoSSInterval < AutoSSIntervalMax)
+            AutoSSInterval += AutoSSGrowth;
     }
   }
 }

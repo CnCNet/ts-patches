@@ -6,39 +6,11 @@ cextern SpawnerActive
 gbool RunAutoSS, 0
 gint DoingAutoSS, 0
 
-sstring str_AutoSSDir, ""
-sstring str_AutoSSFileNameFormat, "AutoSS-%d-%d_%d.PCX"
-
-hack 0x00509383
-_Main_Loop_Auto_SS:
-    cmp dword [SpawnerActive], 1 ; only do Auto-SS when spawner is active
-    jnz .Ret
-
-    cmp dword [RunAutoSS], 1
-    jnz .Ret
-
-    cmp dword [SessionType], 3 ; only do Auto-SS in LAN mode
-    jnz .Ret
-
-    cmp dword [Frame], 0
-    jz .Ret
-
-    mov edx, 0
-    mov ebx, 3600 ; divive by 3600, 60 FPS means every 60 secs
-    mov eax, [Frame]
-
-    idiv ebx
-
-    cmp dx, 254 ; frame to first do SS and the remainder of the division
-    jnz .Ret
-
-    mov dword [DoingAutoSS], 1
-    call 0x004EAB00 ; screen capture
-    mov dword [DoingAutoSS], 0
-
-.Ret:
-    call 0x005094A0; Sync_Delay(void)
-    jmp 0x00509388
+sstring str_AutoSSDir, "AutoSS"
+sstring str_AutoSSFileNameFormat, "AutoSS/AutoSS-%d-%d_%d.PCX"
+sstring str_AutoSSFileNamePng,    "AutoSS/AutoSS-%d-%d_%d.png"
+sstring str_AutoSSFileNameJpg,    "AutoSS/AutoSS-%d-%d_%d.jpg"
+sstring str_SCRN_png,             "SCRN%04d.png"
 
 hack 0x004EAC39
 _ScreenCaptureCommand__Activate_AutoSS_File_Name:
@@ -58,13 +30,40 @@ _ScreenCaptureCommand__Activate_AutoSS_File_Name:
     push esi
     push dword [Frame]
     push dword [GameIDNumber]
+
+    cmp byte[DoingAutoSS], 1      ;Always use png format with autoss
+    je  .jpg
+
+    cmp byte[UsePNG], 1
+    jne .pcx
+
+ .png:
+    push str_AutoSSFileNamePng
+    jmp .past_pcx
+
+ .jpg:
+    push str_AutoSSFileNameJpg
+    jmp .past_pcx
+
+ .pcx:
     push str_AutoSSFileNameFormat ; "AutoSS\\AutoSS-%d-%d_%d.PCX"
+
+ .past_pcx:
     push ecx
     call _sprintf
     add esp, 0x14 ; AFTER PUSHING
     jmp 0x004EAC4F
 
 .Normal_Code:
+
+    cmp byte[UsePNG], 1
+    jne .Reg_pcx
+
+    push esi
+    push str_SCRN_png
+    jmp  0x004EAC46
+
+ .Reg_pcx
     jmp 0x004EAC40
 
 ; DoingAutoSS

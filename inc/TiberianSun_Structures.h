@@ -195,7 +195,7 @@ typedef struct RawFileClass
   int BiasStart;
   int BiasLength;
   int Handle;
-  void *Filename;
+  char *Filename;
   int16_t Date;
   int16_t Time;
   char FilenameSet;

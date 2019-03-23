@@ -5,7 +5,7 @@ LDS         = tibsun.lds
 IMPORTS     = 0x2EC050 280
 LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=windows --enable-stdcall-fixup
 NFLAGS      = -f elf -Iinc/
-CFLAGS      = -std=c99 -Iinc/
+CFLAGS      = -std=c99 -Iinc/ -I3rdparty/ -DLODEPNG_NO_COMPILE_DISK
 REV         = $(shell git rev-parse --short @{0})
 VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
 WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"
@@ -149,6 +149,9 @@ MP_OBJS          = \
                     src/multiple_factory_hack.o \
                     src/vinifera_unhardcode.o \
                     src/freeunit_enhancements.o \
+                    3rdparty/s_floorf.o \
+                    3rdparty/lodepng.o \
+                    src/write_jpg_png.o \
 
 
 
@@ -195,6 +198,9 @@ clean:
 
 src/sun.ini.sp.o: src/sun.ini.c
 	$(CC) $(CFLAGS) -DSINGLEPLAYER=1 -c -o $@ $<
+
+src/write_jpg_png.o: src/write_jpg_png.c 3rdparty/tiny_jpeg.h
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 tibsun.exe: $(LDS) $(INPUT) $(COMMON_OBJS) $(MP_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(COMMON_OBJS) $(MP_OBJS)
