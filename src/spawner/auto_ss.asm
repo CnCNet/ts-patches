@@ -16,7 +16,10 @@ hack 0x004EAC39
 _ScreenCaptureCommand__Activate_AutoSS_File_Name:
     lea ecx, [esp+0x114]
 
-    cmp dword [DoingAutoSS], 1
+    cmp dword [SessionType], 3
+    jne .Normal_Code
+
+    cmp byte[RunAutoSS], 1
     jnz .Normal_Code
 
 .AutoSS_File_Name:
@@ -31,7 +34,7 @@ _ScreenCaptureCommand__Activate_AutoSS_File_Name:
     push dword [Frame]
     push dword [GameIDNumber]
 
-    cmp byte[DoingAutoSS], 1      ;Always use png format with autoss
+    cmp byte[RunAutoSS], 1      ;Always use png format with autoss
     je  .jpg
 
     cmp byte[UsePNG], 1

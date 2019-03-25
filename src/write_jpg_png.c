@@ -66,7 +66,7 @@ Write_PCX_File_hack_png(CCFileClass *ccFile, DSurface *surface, void *palette)
     strcpy(FileName, ccFile->cd.b.r.Filename);
 
     // JPEGs are ugly so we only use it for Auto SS
-    if (DoingAutoSS)
+    if (RunAutoSS)
         UseJPG = true;
     else
         UseJPG = false;
@@ -108,6 +108,8 @@ ScreenshotWriter()
 
         uint32_t error;
 
+        DWORD start = timeGetTime();
+
         if (UseJPG)
         {
             // https://github.com/serge-rgb/TinyJPEG/blob/master/tiny_jpeg.h
@@ -123,7 +125,7 @@ ScreenshotWriter()
             state.info_png.color.bitdepth = 8;
             state.info_raw.colortype = LCT_RGB;
             state.info_raw.bitdepth = 8;
-            state.encoder.zlibsettings.windowsize = 32768;
+            state.encoder.zlibsettings.windowsize = 8192;
             state.encoder.auto_convert = 0;
 
             error = lodepng_encode(&png, &pngsize, (char *)rgb24buf,
@@ -137,9 +139,11 @@ ScreenshotWriter()
 
             free(png);
         }
+        DWORD end = timeGetTime();
 
-        WWDebug_Printf("Writing: %s %dx%d to %p error=%d pngsize=%d\n", FileName,
-                       ScreenshotWidth, ScreenshotHeight, ScreenshotBuffer, error, pngsize);
+        WWDebug_Printf("Wrote: %s %dx%d to %p error=%d pngsize=%d in TIME: %d\n", FileName,
+                       ScreenshotWidth, ScreenshotHeight, ScreenshotBuffer, error, pngsize,
+                       end - start);
 
         free(ScreenshotBuffer);
         ScreenshotBuffer = NULL;
