@@ -5,7 +5,7 @@ LDS         = tibsun.lds
 IMPORTS     = 0x2EC050 280
 LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=windows --enable-stdcall-fixup
 NFLAGS      = -f elf -Iinc/
-CFLAGS      = -std=c99 -Iinc/ -I3rdparty/ -DLODEPNG_NO_COMPILE_DISK
+CFLAGS      = -std=c99 -Iinc/
 REV         = $(shell git rev-parse --short @{0})
 VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
 WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"
@@ -149,9 +149,6 @@ MP_OBJS          = \
                     src/multiple_factory_hack.o \
                     src/vinifera_unhardcode.o \
                     src/freeunit_enhancements.o \
-                    3rdparty/s_floorf.o \
-                    3rdparty/lodepng.o \
-                    src/write_jpg_png.o \
 
 
 
@@ -184,11 +181,11 @@ WINDRES    ?= windres
 
 -include custom.mk
 
-all: tibsun.exe dta.exe ti.exe singleplayer.exe tsclientgame.exe
+all: tibsun.exe dtagame.exe tigame.exe togame.exe singleplayer.exe tsclientgame.exe
 
 clean:
 	$(RM) $(OUTPUT) $(COMMON_OBJS)
-	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS) $(TI_OBJS) $(TSCLIENT_OBJS)
+	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS) $(TI_OBJS) $(TO_OBJS) $(TSCLIENT_OBJS)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
@@ -198,9 +195,6 @@ clean:
 
 src/sun.ini.sp.o: src/sun.ini.c
 	$(CC) $(CFLAGS) -DSINGLEPLAYER=1 -c -o $@ $<
-
-src/write_jpg_png.o: src/write_jpg_png.c 3rdparty/tiny_jpeg.h
-	$(CC) $(CFLAGS) -c -o $@ $<
 
 tibsun.exe: $(LDS) $(INPUT) $(COMMON_OBJS) $(MP_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(COMMON_OBJS) $(MP_OBJS)
@@ -220,7 +214,7 @@ include src/mods/dta/dta.mk
 src/mods/dta/res/res.o: src/mods/dta/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/dta/res/ -Ires/  $< $@
 
-dta.exe: $(LDS) $(INPUT) $(DTA_OBJS)
+dtagame.exe: $(LDS) $(INPUT) $(DTA_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(DTA_OBJS)
 	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
@@ -231,13 +225,24 @@ include src/mods/ti/ti.mk
 src/mods/ti/res/res.o: src/mods/ti/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/ti/res/ -Ires/  $< $@
 
-ti.exe: $(LDS) $(INPUT) $(TI_OBJS)
+tigame.exe: $(LDS) $(INPUT) $(TI_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(TI_OBJS)
 	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
 
+include src/mods/to/to.mk
+src/mods/to/res/res.o: src/mods/to/res/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/to/res/ -Ires/  $< $@
+
+togame.exe: $(LDS) $(INPUT) $(TO_OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(TO_OBJS)
+	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
+	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
+	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
+	$(PETOOL) dump $@
+	
 include src/mods/tsclient/tsclient.mk
 src/mods/tsclient/res/res.o: src/mods/tsclient/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/tsclient/res/ -Ires/  $< $@
