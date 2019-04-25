@@ -184,11 +184,11 @@ WINDRES    ?= windres
 
 -include custom.mk
 
-all: tibsun.exe dta.exe ti.exe singleplayer.exe tsclientgame.exe
+all: tibsun.exe dtagame.exe tigame.exe togame.exe singleplayer.exe tsclientgame.exe
 
 clean:
 	$(RM) $(OUTPUT) $(COMMON_OBJS)
-	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS) $(TI_OBJS) $(TSCLIENT_OBJS)
+	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS) $(TI_OBJS) $(TO_OBJS) $(TSCLIENT_OBJS)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
@@ -220,7 +220,7 @@ include src/mods/dta/dta.mk
 src/mods/dta/res/res.o: src/mods/dta/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/dta/res/ -Ires/  $< $@
 
-dta.exe: $(LDS) $(INPUT) $(DTA_OBJS)
+dtagame.exe: $(LDS) $(INPUT) $(DTA_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(DTA_OBJS)
 	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
@@ -231,8 +231,19 @@ include src/mods/ti/ti.mk
 src/mods/ti/res/res.o: src/mods/ti/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/ti/res/ -Ires/  $< $@
 
-ti.exe: $(LDS) $(INPUT) $(TI_OBJS)
+tigame.exe: $(LDS) $(INPUT) $(TI_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(TI_OBJS)
+	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
+	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
+	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
+	$(PETOOL) dump $@
+
+include src/mods/to/to.mk
+src/mods/to/res/res.o: src/mods/to/res/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/to/res/ -Ires/  $< $@
+
+togame.exe: $(LDS) $(INPUT) $(TO_OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(TO_OBJS)
 	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
