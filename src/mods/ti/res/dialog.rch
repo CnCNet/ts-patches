@@ -12,9 +12,9 @@ STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
 CAPTION "Tiberian Sun"
 FONT 8, "MS Sans Serif"
 {
- CTEXT "Twisted Insurrection has encountered an internal error", -1, 7, 11, 238, 8, NOT WS_GROUP
+ CTEXT "Dawn of the Tiberium Age has encountered an internal error", -1, 7, 11, 238, 8, NOT WS_GROUP
  CTEXT "and is unable to continue normally.", 1151, 7, 19, 238, 8, NOT WS_GROUP
- CTEXT "Please visit our website at https://ti.ppmsite.com", 1152, 7, 36, 238, 8, NOT WS_GROUP
+ CTEXT "Please visit our website at http://www.moddb.com/mods/the-dawn-of-the-tiberium-age/", 1152, 7, 36, 238, 8, NOT WS_GROUP
  PUSHBUTTON "OK", 1153, 83, 61, 79, 14
  CTEXT "for the latest updates and technical support.", -1, 7, 44, 238, 8, NOT WS_GROUP
 }
