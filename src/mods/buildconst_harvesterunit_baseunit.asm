@@ -38,9 +38,14 @@
 ; - Originally, there had to be one unit set as HarvesterUnit which was used for
 ;   every house. Now, every house needs to find at least one owned unit in this
 ;   list. Currently, there is no fallback to the first item.
+; - The functions have been changed to not use the country's array index for
+;   checking against Owner, but the ActsLike on the house itself. If used
+;   together with the sideindex_improvements_v2, ActsLike defaults to the
+;   country's array index and thus will give the same results if not overridden.
 
 ; Author: AlexB
 ; Date: 2016-07-21 to 2016-07-27: initial release
+;       2019-04-27 Changed to use ActsLike
 
 %include "macros/patch.inc"
 %include "macros/hack.inc"
@@ -63,8 +68,7 @@ section .text
 _FindFirstOwnedUnitTypeInVector:
     ; edx becomes the Owner mask
     mov ecx, [esp+4h]; param 1
-    mov ecx, [ecx+24h]; HouseClass::Type
-    mov ecx, [ecx+64h]; HouseTypeClass::ArrayIndex
+    mov ecx, [ecx+0C0h]; HouseClass::ActsLike
     mov edx, 1
     shl edx, cl
 
@@ -106,8 +110,7 @@ _FindFirstOwnedUnitTypeInVector:
 _FindFirstOwnedTechnoTypeInVector:
     ; edx becomes the Owner mask
     mov ecx, [esp+4h]; param 1
-    mov ecx, [ecx+24h]; HouseClass::Type
-    mov ecx, [ecx+64h]; HouseTypeClass::ArrayIndex
+    mov ecx, [ecx+0C0h]; HouseClass::ActsLike
     mov edx, 1
     shl edx, cl
 
