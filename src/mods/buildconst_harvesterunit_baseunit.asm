@@ -1,56 +1,58 @@
-; BuildConst, BaseUnit, and HarvesterUnit restrictions removed
+; BuildConst, BuildRefinery, BuildWeapons, BaseUnit, and HarvesterUnit
+; restrictions removed
 
-; With this hack, the game will not only look at the first items of BuildConst
-; and HarvesterUnit even though both are lists.
+; With this hack, the game will not only look at the first items of BuildConst,
+; BuildRefinery, and HarvesterUnit even though both are lists reading multiple
+; items. This also applies to BuildWeapons, which in some instances only checked
+; the first two items.
 
 ; HarvesterUnit now fulfills two purposes: it defines all Harvesters and all
-; BaseUnits.
+; BaseUnits. This hack has some limitations, though, but they can be worked
+; around.
 
 ; Features:
 ; - When the AI concludes it needs to build a new harvester, it will build the
 ;   first item from HarvesterUnit= that has Harvester=yes and the house matches
-;   Owner=. If no item exists, no harvester will be built.
+;   Owner=.
 
 ; - Every item from BuildConst is now considered a construction yard. This means
 ;   it will allow AIs to start base building, units that deploy into one of
-;   these will auto-deploy and so on
+;   these will auto-deploy and so on.
 
 ; - BaseUnit= still remains a single item. When a BaseUnit= is to be created
 ;   (either as starting unit, as crate goodie, as reinforcement, or built from
 ;   a factory), the game now automatically replaces it with the first item from
-;   HarvesterUnit= that has Harvester=no but an Owner= matching the house.
-
-;   A dummy BaseUnit type is required for this to work. If no Harvester=no unit
-;   can be found, the actual BaseUnit type is used (as it was before).
+;   HarvesterUnit= that has Harvester=no but an Owner= matching the house. If no
+;   Harvester=no unit can be found, the actual BaseUnit= type is used (as it was
+;   before).
+;   A dummy BaseUnit type is required for this to work.
 
 ; Notes and Limitations:
 ; - All units with Harvester=no in the HarvesterUnit= list will keep the player
 ;   alive during Short Game matches.
+; - All units with Harvester=yes in the HarvesterUnit= list are immune if
+;   Harvester Truce is on. Such units won't keep the player alive even if Short
+;   Game is off.
 ; - For each house, the first matching unit is taken from HarvesterUnit=. The
 ;   game will not randomly chose from any matching units.
-
-; TODO TODO
-; - Currently, crate logic will still always only use the first item of
-;   HarvesterUnit=, no matter whether it is Harvester=yes or not
-; - Harvester Truce will now only work for unit types that have Harvester=yes
-;   set.
+; - Originally, there had to be one unit set as HarvesterUnit which was used for
+;   every house. Now, every house needs to find at least one owned unit in this
+;   list. Currently, there is no fallback to the first item.
 
 ; Author: AlexB
-; Date: 2016-07-21
+; Date: 2016-07-21 to 2016-07-27: initial release
 
 %include "macros/patch.inc"
 %include "macros/hack.inc"
 %include "macros/extern.inc"
 
 section .data
+
 cglobal AlexB_HarvesterUnit
 AlexB_HarvesterUnit dd 0
 
 cglobal AlexB_BuildRefinery
 AlexB_BuildRefinery dd 0
-
-cglobal AlexB_BuildWeapons
-AlexB_BuildWeapons dd 0
 
 section .text
 
@@ -112,7 +114,7 @@ _FindFirstOwnedTechnoTypeInVector:
     push esi
     mov eax, [esp+0Ch]; param 2
     mov ecx, [eax+4h]; VectorClass::Items
-    mov eax, [eax+10h]; VectorClass::Count
+    mov eax, [eax+10h]; DynamicVectorClass::Count
     lea esi, [ecx+eax*4]; end
     jmp .LoopEnd
 
@@ -176,14 +178,22 @@ _IsBaseUnitOrDeployed:
     push ebx
     push esi
 
+    mov bl, BYTE [esp+10h]; param 2
+    mov esi, DWORD [esp+0Ch]; param 1
+
+    mov eax, [ecx+760h]; RuleClass::BaseUnit
+    test bl, bl
+    je .BaseUnitTypeNormal
+    mov eax, [eax+274h]; TechnoTypeClass::DeploysInto
+  .BaseUnitTypeNormal:
+    cmp eax, esi
+    je .IsBaseUnit
+
     mov eax, DWORD [ecx+768h]; RulesClass::HarvesterUnit::Items
     mov ecx, DWORD [ecx+774h]; RulesClass::HarvesterUnit::Count
     lea edx, [eax+ecx*4]
     cmp eax, edx
     je .IsNoBaseUnit
-
-    mov bl, BYTE [esp+10h]; param 2
-    mov esi, DWORD [esp+0Ch]; param 1
 
   .LoopStart:
     mov ecx, DWORD [eax]
@@ -224,19 +234,6 @@ _IsBaseUnitOrDeployed:
     ret 08h
 
 
-;; Select the first unit a player is Owner of from the HarvesterUnit list
-;hack 0x004C1710
-;_HouseClassAIUnitProductionHarvesterUnit:
-;    mov eax, DWORD [0x0074C488]; RulesClass::Instance
-;    add eax, 764h; RulesClass::HarvesterUnit
-;    push 1; param 3 harvester
-;    push eax; param 2 DynamicVectorClass<UnitTypeClass*>*
-;    push ebp; param 1 HouseClass*
-;    call _FindFirstOwnedUnitTypeInVector
-;    mov edx, eax
-;    jmp 0x004C1718
-
-
 ; Register building as ConYard
 hack 0x0042AA76
 _BuildingClassPutBuildConst:
@@ -271,6 +268,60 @@ _BuildingClassChangeOwnerBuildConst3:
     jmp 0x0042FCB6
 
 
+; Every harvester unit with Harvester Truce enabled is subtracted
+hack 0x004BCF3A
+_HouseClassUpdateHarvesterUnit1:
+    push ebx
+
+    mov ecx, DWORD [0x0074C488]; RulesClass::Instance
+    mov eax, DWORD [ecx+768h]; RulesClass::HarvesterUnit::Items
+    mov ecx, DWORD [ecx+774h]; RulesClass::HarvesterUnit::Count
+
+    lea ecx, [eax+ecx*4]
+    cmp eax, ecx
+    je .Done
+
+  .LoopStart:
+    mov ebx, DWORD [eax]
+    cmp BYTE [ebx+48Eh], 0; UnitTypeClass::Harvester
+    je .LoopEnd
+
+    mov edx, DWORD [ebx+478h]; UnitTypeClass::ArrayIndex
+    cmp edx, DWORD [esi+340h]; HouseClass::OwnedVehicleTypes::Capacity
+    jge .LoopEnd
+
+    mov ebx, DWORD [esi+33Ch]; HouseClass::OwnedVehicleTypes::Items
+    mov edx, DWORD [ebx+edx*4]
+    sub edi, edx
+
+  .LoopEnd:
+    add eax, 4
+    cmp eax, ecx
+    jne .LoopStart
+
+  .Done:
+    pop ebx
+    jmp 0x004BCF5C
+
+
+; Special handling when the house's harvester is built, with minor optimization
+hack 0x004BD0BC
+_HouseClassUpdateHarvesterUnit2:
+    mov ecx, [esi+448h]; HouseClass::UnitTypeToProduce
+    test ecx, ecx
+    js 0x004BD0E5
+
+    mov edx, DWORD [0x0074C488]; RulesClass::Instance
+    add edx, 764h; RulesClass::HarvesterUnit
+    push 1; param 3
+    push edx; param 2
+    push esi; param 1
+    call _FindFirstOwnedUnitTypeInVector
+    mov edx, eax
+    mov eax, ecx
+    jmp 0x004BD0CF
+
+
 ; Any con yard suffices check to play EVA messages
 hack 0x004BCD5D
 _HouseClassUpdateBuildConst:
@@ -284,14 +335,14 @@ _HouseClassUpdateBuildConst:
     lea edi, [eax+ecx*4]
     cmp eax, edi
     je .NoConYard
-    mov ebx, DWORD [esi+370h]; HouseClass::OwnedBuildingTypesNow::Count
+    mov ebx, DWORD [esi+370h]; HouseClass::OwnedAndPresentBuildingTypes::Capacity
 
   .LoopStart:
     mov ecx, [eax]
     mov edx, [ecx+478h]; BuildingTypeClass::ArrayIndex
     cmp edx, ebx
     jge .LoopEnd
-    mov ecx, [esi+36Ch]; HouseClass::OwnedBuildingTypesNow::Items
+    mov ecx, [esi+36Ch]; HouseClass::OwnedAndPresentBuildingTypes::Items
     cmp DWORD [ecx+edx*4], 0
     jg .ConYard
 
@@ -462,6 +513,16 @@ _HouseClassUpdateBaseUnit:
     push edi; save
 
     mov ecx, DWORD [0x0074C488]; RulesClass::Instance
+    mov eax, DWORD [ecx+760h]; RuleClass::BaseUnit
+    mov eax, DWORD [eax+478h]; UnitTypeClass::ArrayIndex
+    cmp eax, DWORD [esi+340h]; HouseClass::OwnedVehicleTypes::Capacity
+    jge .SkipBaseUnit
+
+    mov edi, DWORD [esi+33Ch]; HouseClass::OwnedVehicleTypes::Items
+    cmp DWORD [edi+eax*4], 0
+    jg .BaseUnit
+
+  .SkipBaseUnit:
     mov eax, DWORD [ecx+768h]; RulesClass::HarvesterUnit::Items
     mov ecx, DWORD [ecx+774h]; RulesClass::HarvesterUnit::Count
     lea edi, [eax+ecx*4]
@@ -476,10 +537,10 @@ _HouseClassUpdateBaseUnit:
     jne .LoopEnd
 
     mov edx, DWORD [ecx+478h]; UnitTypeClass::ArrayIndex
-    cmp edx, DWORD [esi+340h]; HouseClass::OwnedVehicleTypeNow::Capacity
+    cmp edx, DWORD [esi+340h]; HouseClass::OwnedVehicleTypes::Capacity
     jge .LoopEnd
 
-    mov ecx, DWORD [esi+33Ch]; HouseClass::OwnedVehicleTypeNow::Items
+    mov ecx, DWORD [esi+33Ch]; HouseClass::OwnedVehicleTypes::Items
     cmp DWORD [ecx+edx*4], 0
     jg .BaseUnit
 
@@ -519,30 +580,45 @@ _CenterBaseCommandClassExecuteBaseUnit2:
     jmp 0x004E999C
 
 
-; Check house specific HarvesterUnit when deciding whether to give harvester
-hack 0x0045816C
-_CellClassCrateCollectedHarvesterUnit:
-    push esi; save
-    push 1; param 3
-    mov esi, [ebx+0ECh]; TechnoClass::Owner
+; Check the house's BaseUnit when deciding whether to give it to the player
+hack 0x00457D90
+_CellClassCrateCollectedLists1:
     mov ecx, DWORD [0x0074C488]; RulesClass::Instance
+    push ecx
+    push 0; param 3
     add ecx, 764h; RulesClass::HarvesterUnit
     push ecx; param 2
-    push esi; param 1
+    push DWORD [ebx+0ECh]; param 1 TechnoClass::Owner
     call _FindFirstOwnedUnitTypeInVector
+    pop ecx
     test eax, eax
-    je .Done
-    mov edx, [eax+478h]; UnitTypeClass::ArrayIndex
-    cmp edx, DWORD [esi+340h]; HouseClass::OwnedVehicleTypeNow::Capacity
-    jge .SetHarv
-    mov ecx, DWORD [esi+33Ch]; HouseClass::OwnedVehicleTypeNow::Items
-    cmp DWORD [ecx+edx*4], 0
-    jne .Done
-  .SetHarv:
-    mov edi, eax
-  .Done:
-    pop esi
-    jmp 0x004581A5
+    jnz .Ok
+    mov eax, [ecx+760h]; RulesClass::BaseUnit
+  .Ok:
+    jmp 0x00457D9C
+
+
+; Check house specific BuildRefinery and HarvesterUnit when deciding whether to
+; give harvester
+hack 0x00458148
+_CellClassCrateCollectedLists2:
+    push eax
+    add eax, 764h; RulesClass::HarvesterUnit
+    push 1; param 3
+    push eax; param 2
+    push DWORD [ebx+0ECh]; param 1 TechnoClass::Owner
+    call _FindFirstOwnedUnitTypeInVector
+    mov [AlexB_HarvesterUnit], eax
+    pop eax
+    add eax, 5E8h; RulesClass::BuildRefinery
+    push eax
+    push DWORD [ebx+0ECh]; param 1 TechnoClass::Owner
+    call _FindFirstOwnedTechnoTypeInVector
+    jmp 0x00458150
+
+
+@SET 0x00458172, {lea eax, [AlexB_HarvesterUnit]}
+@SET 0x0045819B, {lea ecx, [AlexB_HarvesterUnit]}
 
 
 ; If the type is Harvester=no, do not apply Harvester Truce
@@ -653,9 +729,9 @@ _sub4C0CF0Lists1:
     mov [AlexB_BuildRefinery], eax
     mov ebp, eax
     mov eax, [ebp+478h]; BuildingTypeClass::ArrayIndex
-    cmp eax, DWORD [esi+370h]; RulesClass::OwnedBuildingTypesNow::Capacity
+    cmp eax, DWORD [esi+370h]; RulesClass::OwnedAndPresentBuildingTypes::Capacity
     jge .InvalidBuildRefinery
-    mov ecx, [esi+36Ch]; RulesClass::OwnedBuildingTypesNow::Items
+    mov ecx, [esi+36Ch]; RulesClass::OwnedAndPresentBuildingTypes::Items
     mov ecx, [ecx+eax*4]
     jmp .CheckBuildRefinery
   .InvalidBuildRefinery:
@@ -675,9 +751,9 @@ _sub4C0CF0Lists1:
   .LoopStart:
     mov eax, [ecx]
     mov edx, [eax+478h]; BuildingTypeClass::ArrayIndex
-    cmp edx, DWORD [esi+370h]; RulesClass::OwnedBuildingTypesNow::Capacity
+    cmp edx, DWORD [esi+370h]; RulesClass::OwnedAndPresentBuildingTypes::Capacity
     jge .InvalidBuildWeapons
-    mov eax, [esi+36Ch]; RulesClass::OwnedBuildingTypesNow::Items
+    mov eax, [esi+36Ch]; RulesClass::OwnedAndPresentBuildingTypes::Items
     mov eax, [eax+edx*4]
     jmp .CheckBuildWeapons
   .InvalidBuildWeapons:
@@ -713,44 +789,6 @@ _sub4C0CF0Lists1:
 @SET 0x004C0F64, {lea ecx, [AlexB_HarvesterUnit]}
 @SET 0x004C0FB5, {lea edx, [AlexB_BuildRefinery]}
 @SET 0x004C1056, {lea ecx, [AlexB_BuildRefinery]}
-
-
-;; Build the HarvesterUnit for this house
-;hack 0x004C0F5F
-;_sub4C0CF0Lists2:
-;    mov ecx, DWORD [0x0074C488]; RulesClass::Instance
-;    lea ecx, [ecx+764h]; RulesClass::HarvesterUnit
-;    push 1; param 3
-;    push ecx; param 2
-;    push esi; param 1
-;    call _FindFirstOwnedUnitTypeInVector
-;    mov edx, eax
-;    jmp 0x004C0F6C
-
-
-;; Build the BuildRefinery for this house
-;hack 0x004C0FC3
-;_sub4C0CF0Lists3:
-;    push eax; store
-;    mov ecx, DWORD [0x0074C488]; RulesClass::Instance
-;    lea ecx, [ecx+5E8h]; RulesClass::BuildRefinery
-;    push ecx; param 2
-;    push esi; param 1
-;    call _FindFirstOwnedTechnoTypeInVector
-;    mov edx, [eax+478h]; BuildingTypeClass::ArrayIndex
-;    pop eax; restore
-;    jmp 0x004C0FC9
-
-
-;; Build the BuildRefinery for this house
-;hack 0x004C1051
-;_sub4C0CF0Lists4:
-;    mov ecx, DWORD [0x0074C488]; RulesClass::Instance
-;    lea ecx, [ecx+5E8h]; RulesClass::BuildRefinery
-;    push ecx; param 2
-;    push esi; param 1
-;    call _FindFirstOwnedTechnoTypeInVector
-;    jmp 0x004C105E
 
 
 ; Use the BuildRefinery for this house
