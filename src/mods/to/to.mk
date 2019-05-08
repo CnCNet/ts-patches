@@ -121,7 +121,6 @@ TO_OBJS = \
 					src/minimum_burst.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
-                    src/mods/cloakstop_to_empimmunity.o \
                     src/mods/reveal_crate_reshroud.o \
                     src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
@@ -133,6 +132,8 @@ TO_OBJS = \
                     src/mods/disable_file_checks.o \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/dont_save_without_all_players.o \
+                    src/mods/buildconst_harvesterunit_baseunit.o \
+					src/mods/dta/cloakstop_to_toobigforcarryalls.o \
                     src/mods/max_pip_counts.o \
 					src/mods/fix_score_logging_typo.o \
                     src/mods/to/logger.o \
@@ -149,4 +150,6 @@ TO_OBJS = \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/freeunit_enhancements.o \
-					src/mods/buildconst_harvesterunit_baseunit.o \
+                    3rdparty/s_floorf.o \
+                    3rdparty/lodepng.o \
+                    src/write_jpg_png.o \

@@ -141,7 +141,7 @@ DTA_OBJS = \
                     src/mods/dta/remove_ion_storm_effects.o \
                     src/mods/dta/scrap_metal_explosion.o \
 					src/mods/dta/change_score_screen_music.o \
-                    src/mods/dta/buildconst_harvesterunit_baseunit.o \
+                    src/mods/buildconst_harvesterunit_baseunit.o \
 					src/mods/dta/cloakstop_to_toobigforcarryalls.o \
                     src/mods/max_pip_counts.o \
                     src/mods/sideindex_improvements_v2.o \
@@ -157,3 +157,6 @@ DTA_OBJS = \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/freeunit_enhancements.o \
+                    3rdparty/s_floorf.o \
+                    3rdparty/lodepng.o \
+                    src/write_jpg_png.o \

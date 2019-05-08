@@ -120,6 +120,11 @@ sstring str_DarkRed, "DarkRed"
 ; "Overlay tiberium fix thing, 4th etc"
 @SET 0x00644DF9, {mov dword [esi+0ACh], 0Ch} ;dword ptr
 ;
+;;; "Facings stuff"
+;@SET 0x006530EB, {cmp dword [eax+4CCh], 20h} ;dword ptr
+;@SET 0x00653106, {shr ebx, 0Ah}
+;@SET 0x0065310D, {and ebx, 1Fh}
+
 ;; IsCoreDefender selection box size
 @SET 0x0065BD7E, {mov edx, 200h}
 @SET 0x0065BD94, {mov dword [edi+8], 64h} ;dword ptr

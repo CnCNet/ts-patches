@@ -150,3 +150,6 @@ TI_OBJS = \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/freeunit_enhancements.o \
+                    3rdparty/s_floorf.o \
+                    3rdparty/lodepng.o \
+                    src/write_jpg_png.o \
