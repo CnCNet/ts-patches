@@ -11,6 +11,10 @@
 
 gbyte NewFrameSendRate, 2
 
+; Clear out EventClass::Execute->TIMING
+; Don't subtract 10 from MaxAhead
+@CLEAR 0x00495013, 0x90, 0x0049502B
+
 ; Don't set framesend rate to 10 in Generate_Process_Time_Event
 hack 0x005B1C28
     mov al, byte[NewFrameSendRate]
