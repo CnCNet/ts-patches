@@ -404,6 +404,9 @@ setcglob 0x007E2444, TutorialActiveCount
 setcglob 0x007E2448, TutorialMax
 setcglob 0x007E244C, TutorialSorted
 
+; Strings
+setcglob 0x00742350, Fetch_String
+
 setcglob 0x0074950C, Current_Waypoint
 setcglob 0x004EAF20, Delete_Waypoint
 

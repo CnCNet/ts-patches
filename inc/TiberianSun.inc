@@ -266,6 +266,9 @@ cextern MultiplayerDebug
 ; Theme
 cextern Theme__Stop
 
+; Strings
+cextern Fetch_String
+
 ; clib
 cextern __strcmpi
 cextern _strtok

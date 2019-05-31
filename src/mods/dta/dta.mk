@@ -123,6 +123,15 @@ DTA_OBJS = \
                     src/rage_quit.o \
 					src/scrollrate_fix.o \
 					src/minimum_burst.o \
+					src/mods/dta/dta_hacks.o \
+                    src/mods/dta/logger.o \
+                    src/mods/dta/auto_deploy_mcv.o \
+                    src/mods/dta/ingame_ui_text_color.o \
+                    src/mods/dta/remove_ion_storm_effects.o \
+                    src/mods/dta/scrap_metal_explosion.o \
+					src/mods/dta/change_score_screen_music.o \
+					src/mods/dta/cloakstop_to_toobigforcarryalls.o \
+					src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/no_insignificant_death_announcement.o \
@@ -134,15 +143,7 @@ DTA_OBJS = \
                     src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
                     src/mods/no_crate_respawn_with_crates_disabled.o \
-                    src/mods/dta/dta_hacks.o \
-                    src/mods/dta/logger.o \
-                    src/mods/dta/auto_deploy_mcv.o \
-                    src/mods/dta/ingame_ui_text_color.o \
-                    src/mods/dta/remove_ion_storm_effects.o \
-                    src/mods/dta/scrap_metal_explosion.o \
-					src/mods/dta/change_score_screen_music.o \
                     src/mods/buildconst_harvesterunit_baseunit.o \
-					src/mods/dta/cloakstop_to_toobigforcarryalls.o \
                     src/mods/max_pip_counts.o \
                     src/mods/sideindex_improvements_v2.o \
 					src/mods/fix_score_logging_typo.o \

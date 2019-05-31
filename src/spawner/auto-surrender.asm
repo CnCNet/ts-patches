@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+cglobal AutoSurrender
+
 cextern SpawnerActive
 
 @CLEAR 0x004B6D04, 0x90, 0x004B6D0D
@@ -14,6 +16,7 @@ cextern SpawnerActive
 
 section .bss
     MeSurrendered                RESB 1
+    AutoSurrender                RESB 1
 
 section .text
 
@@ -36,6 +39,8 @@ AutoSurrenderOnConnectionLost:
     cmp dword[SpawnerActive], 1
     jnz .out
     cmp dword[SessionType], 3
+    jnz .out
+    cmp byte[AutoSurrender], 1
     jnz .out
     jmp 0x00494F16
 

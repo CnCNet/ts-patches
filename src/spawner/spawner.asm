@@ -28,6 +28,7 @@ cextern ScrapMetal
 cextern AutoDeployMCV
 cextern SharedControl
 cextern SkipScoreScreen
+cextern AutoSurrender
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -163,6 +164,7 @@ section .rdata
     str_SkipScoreScreen db "SkipScoreScreen",0
     str_QuickMatch      db "QuickMatch",0
     str_CoachMode       db "CoachMode",0
+    str_AutoSurrender   db "AutoSurrender",0
     str_GameNameTitle   db "Tiberian Sun",0
     str_PleaseRunClient db "Please run the game client instead.",0
 
@@ -974,6 +976,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_CoachMode, 0
     mov byte [CoachMode], al
+
+    SpawnINI_Get_Bool str_Settings, str_AutoSurrender, 1
+    mov byte [AutoSurrender], al
 
     ; tunnel ip
     lea eax, [TempBuf]
