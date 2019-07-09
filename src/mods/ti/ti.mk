@@ -74,7 +74,6 @@ TI_OBJS = \
                     src/text_triggers.o \
                     src/attack_neutral_units.o \
                     src/mouse_always_in_focus.o \
-                    src/waypoint_enhancements.o \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
                     src/override_colors.o \
@@ -153,3 +152,11 @@ TI_OBJS = \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
+                    src/alt_to_undeploy.o \
+                    src/hack_house_from_house_type.o \
+                    src/vinifera_unhardcode.o \
+                    src/mods/buildconst_harvesterunit_baseunit.o \
+                    src/mods/dont_replace_player_name_with_computer.o \
+                    src/mods/no_crate_respawn_with_crates_disabled.o \
+                    src/mods/ti/team_number_position.o \
+                    src/mods/ti/waypoint_enhancements.o \
