@@ -5,7 +5,7 @@
 sstring str_SoundsMIX, "SOUNDS.MIX"
 sstring str_TILong, "Twisted Insurrection"
 sstring str_DTAGameWindow, "TI (Game Window)"
-sstring str_LanguageDLLNotFound, "Language.dll not found, please start Launcher.exe and click Save in the Options menu."
+sstring str_LanguageDLLNotFound, "Language.dll not found, please start TwistedInsurrection.exe and click Save in the Options menu."
 sstring str_SoundsINI, "SOUNDS.INI"
 sstring str_CacheMIX, "CACHE.MIX"
 sstring str_Sounds01MIX, "SOUNDS01.MIX"
