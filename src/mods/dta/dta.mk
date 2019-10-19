@@ -137,7 +137,7 @@ DTA_OBJS = \
                     src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/saved_games_in_subdir.o \
-                    src/mods/tiberium_damage.o \
+                    src/mods/dta/tiberium_damage.o \
                     src/mods/no_sidecd_mix.o \
                     src/mods/horv_via_undeploysinto.o \
                     src/mods/screenshots_in_subdir.o \
