@@ -1,15 +1,14 @@
 %include "TiberianSun.inc"
 %include "macros/patch.inc"
 
-hack 0x0042EFB7, 0x0042EFBD
+hack 0x0042EFB4, 0x0042EFBD
 _BuildingClass_WhatAction_Check_MoveToUndeploy:
-        jz    0x0042F009
 
         cmp   byte[MoveToUndeploy], 1
         je    .Reg
 
         cmp   ebx, 1            ; ACTION_MOVE
-        jnz   0x0042F009
+        jnz   .Reg
 
         mov   edx, [Left_Alt_Key]
         mov   ecx, [WWKeyboard]
@@ -30,6 +29,8 @@ _BuildingClass_WhatAction_Check_MoveToUndeploy:
         mov   ebx, 2            ; ACTION_NOMOVE
         jmp   0x0042F009
  .Reg:
+ 	cmp   ebx, 5
+        jnz   0x0042F009
         mov   edx, [esi]
         push  0
         jmp   hackend
