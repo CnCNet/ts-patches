@@ -149,6 +149,7 @@ MP_OBJS          = \
                     src/multiple_factory_hack.o \
                     src/vinifera_unhardcode.o \
                     src/freeunit_enhancements.o \
+                    src/isomappack5_limit_extend.o \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
