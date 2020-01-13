@@ -1,7 +1,7 @@
 
 DTA_OBJS = \
                     src/mods/dta/res/res.o \
-					src/main_menu_cursor_bug.o \
+                    src/main_menu_cursor_bug.o \
                     src/mods/dont_save_without_all_players.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
@@ -121,17 +121,18 @@ DTA_OBJS = \
                     src/radar_event_hacks.o \
                     src/aircraft_repair.o \
                     src/rage_quit.o \
-					src/scrollrate_fix.o \
-					src/minimum_burst.o \
-					src/mods/dta/dta_hacks.o \
+                    src/scrollrate_fix.o \
+                    src/minimum_burst.o \
+                    src/rules_process.o \
+                    src/mods/dta/dta_hacks.o \
                     src/mods/dta/logger.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/ingame_ui_text_color.o \
                     src/mods/dta/remove_ion_storm_effects.o \
                     src/mods/dta/scrap_metal_explosion.o \
-					src/mods/dta/change_score_screen_music.o \
-					src/mods/dta/cloakstop_to_toobigforcarryalls.o \
-					src/mods/dont_replace_player_name_with_computer.o \
+                    src/mods/dta/change_score_screen_music.o \
+                    src/mods/dta/cloakstop_to_toobigforcarryalls.o \
+                    src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/no_insignificant_death_announcement.o \
@@ -146,15 +147,15 @@ DTA_OBJS = \
                     src/mods/buildconst_harvesterunit_baseunit.o \
                     src/mods/max_pip_counts.o \
                     src/mods/sideindex_improvements_v2.o \
-					src/mods/fix_score_logging_typo.o \
-					src/mods/ai_target_emp_like_multimissile.o \
-					src/fix_allied_decloaking.o \
-					src/force_conversion_type.o \
-					src/c4_repairable_fix.o \
+                    src/mods/fix_score_logging_typo.o \
+                    src/mods/ai_target_emp_like_multimissile.o \
+                    src/fix_allied_decloaking.o \
+                    src/force_conversion_type.o \
+                    src/c4_repairable_fix.o \
                     src/no_charge_power_needed.o\
-					src/video_mode_hacks.o \
-					src/fix_mission_restart_difficulty_bug.o \
-					src/cache_alot.o \
+                    src/video_mode_hacks.o \
+                    src/fix_mission_restart_difficulty_bug.o \
+                    src/cache_alot.o \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/freeunit_enhancements.o \

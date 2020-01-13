@@ -1,7 +1,7 @@
 
 TO_OBJS = \
                     src/mods/to/res/res.o \
-					src/main_menu_cursor_bug.o \
+                    src/main_menu_cursor_bug.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -117,8 +117,9 @@ TO_OBJS = \
                     src/radar_event_hacks.o \
                     src/aircraft_repair.o \
                     src/rage_quit.o \
-					src/scrollrate_fix.o \
-					src/minimum_burst.o \
+                    src/scrollrate_fix.o \
+                    src/minimum_burst.o \
+                    src/rules_process.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/reveal_crate_reshroud.o \
@@ -133,20 +134,20 @@ TO_OBJS = \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/dont_save_without_all_players.o \
                     src/mods/buildconst_harvesterunit_baseunit.o \
-					src/mods/dta/cloakstop_to_toobigforcarryalls.o \
+                    src/mods/dta/cloakstop_to_toobigforcarryalls.o \
                     src/mods/max_pip_counts.o \
-					src/mods/fix_score_logging_typo.o \
+                    src/mods/fix_score_logging_typo.o \
                     src/mods/to/logger.o \
-					src/mods/to/to_hacks.o \
-					src/mods/ai_target_emp_like_multimissile.o \
+                    src/mods/to/to_hacks.o \
+                    src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/scrap_metal_explosion.o \
-					src/fix_allied_decloaking.o \
-					src/c4_repairable_fix.o \
-					src/force_conversion_type.o \
-					src/video_mode_hacks.o \
-					src/fix_mission_restart_difficulty_bug.o \
-					src/cache_alot.o \
+                    src/fix_allied_decloaking.o \
+                    src/c4_repairable_fix.o \
+                    src/force_conversion_type.o \
+                    src/video_mode_hacks.o \
+                    src/fix_mission_restart_difficulty_bug.o \
+                    src/cache_alot.o \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/freeunit_enhancements.o \
