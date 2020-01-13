@@ -9,6 +9,7 @@ Authors
  - FunkyFr3sh
  - hifi
  - dkeeton
+ - CCHyper
  - Rampastring
  - Bittah
  - AlexB
