@@ -1,7 +1,7 @@
 
 TSCLIENT_OBJS = \
                     src/mods/tsclient/res/res.o \
-					src/main_menu_cursor_bug.o \
+                    src/main_menu_cursor_bug.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -113,24 +113,25 @@ TSCLIENT_OBJS = \
                     src/draw_all_action_lines.o \
                     src/radar_event_hacks.o \
                     src/rage_quit.o \
-					src/scrollrate_fix.o \
+                    src/scrollrate_fix.o \
+                    src/rules_process.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/no_insignificant_death_announcement.o \
                     src/mods/saved_games_in_subdir.o \
                     src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
-					src/mods/fix_score_logging_typo.o \
+                    src/mods/fix_score_logging_typo.o \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/tsclient/logger.o \
                     src/mods/tsclient/filename_hacks.o \
                     src/mods/tsclient/disable_intro_movie.o \
-					src/fix_allied_decloaking.o \
-					src/force_conversion_type.o \
-					src/fix_mission_restart_difficulty_bug.o \
-					src/cache_alot.o \
+                    src/fix_allied_decloaking.o \
+                    src/force_conversion_type.o \
+                    src/fix_mission_restart_difficulty_bug.o \
+                    src/cache_alot.o \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/freeunit_enhancements.o \
