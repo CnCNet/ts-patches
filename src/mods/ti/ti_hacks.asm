@@ -62,23 +62,39 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x006F99C4, {db "ENDING"}
 @SET 0x006F99D8, {db "CREDITS.TXT",0}
 @SET 0x006FDD40, {db "TI.INI",0}
+@SET 0x00701158, {db "CLIFX3",0,0}
+@SET 0x00701164, {db "CLIFX2",0,0}
+@SET 0x00701170, {db "CLIFX1",0,0}
 @SET 0x00706A68, {db "GHV"}
 @SET 0x0070FEF4, {db "DP2"}
 @SET 0x0070FEF8, {db "DP1"}
+
+; Increase max. bounces of elastic projectiles to 127
+@SET 0x00445516, {db 0x7F}
+
+; Change the distribution of cluster weapons (only inner spread radius is changed, for now)
+;@SET 0x004465D6, {db 0x02} ; outer spread radius in leptons
+@SET 0x004465DB, {db 0x00} ; inner spread radius in leptons
+;@SET 0x004465EA, {db 0x01} ; [bool] should clusters hit the center of the cell?
+
+; Change building selection box color
+@SET 0x0062B2DC, {db 0x7C}
+@SET 0x0062C0BB, {db 0x7C}
+
+; Don't add random extra cash to the money crate value specified in Rules.ini (disabled, but listed for future use)
+;@CLEAR 0x0045839D, 0x90, 0x004583A3
+;@SET 0x0045839D, {lea edx, [eax]}
 
 ; Erase NAWALL and GAWALL
 @SET 0x00710DA4, {db 0,0,0,0,0,0}
 @SET 0x00710DAC, {db 0,0,0,0,0,0}
 
-;
-
 ;; Trackbar Border Color change
 @SET 0x0059138B, {db 0x09, 0x92, 0x0F}
+
 ; Selected list-box item background color
 @SET 0x00591395, {db 0x00, 0x7D, 0x00}
-;
 
-;
 ; Disable check for MoviesXX.mix, forces function to return al=1
 @SET 0x004E45D8, {mov al, 1}
 @SET 0x004E45DA, nop
@@ -96,17 +112,16 @@ sstring str_DarkRed, "DarkRed"
 
 ;; "Some change in code calling to SendDlgItemMessageA" - techlevel slider limit??
 @SET 0x0057C932, push 70001h
-;
-;
+
 ;; IsScoreShuffle on by default
 @SET 0x005899F1, {mov byte [eax+35h], 1} ;byte ptr
 @SET 0x005899F5, nop
 @SET 0x005899F6, nop
 @SET 0x005899F7, nop
-;
+
 ;; Disable dialog "slide-open" sound effect
 @SJMP 0x00593DBF, 0x00593DF9 ; jmp short loc_593DF9
-;
+
 ;; Remove glowing edges from dialogs
 @SET 0x0059D410, retn 0Ch
 
@@ -116,8 +131,7 @@ sstring str_DarkRed, "DarkRed"
 
 ; "Overlay tiberium fix thing, 4th etc"
 @SET 0x00644DF9, {mov dword [esi+0ACh], 0Ch} ;dword ptr
-;
-;
+
 ;; Rules.ini key, WalkFrames= default value
 @SET 0x0065B9E6, {mov byte [esi+4D0h], 1} ;byte ptr
 @SET 0x0065BF3D, {mov [esi+21h], eax}

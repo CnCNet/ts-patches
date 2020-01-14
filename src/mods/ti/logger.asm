@@ -16,7 +16,7 @@ section .bss
 section .text
 
 sstring str_a, "a"
-sstring str_DTALog, "TI.LOG"
+sstring str_DTALog, "TI.log"
 sstring str_OK, "OK?\n"
 sstring str_Error, "ERROR!\n"
 sstring str_LoadFile, "Loading file %s|"
