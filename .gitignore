@@ -10,3 +10,5 @@ togame.exe
 # *local* configuration file, seriously
 config.mk
 custom.mk
+test.cmd
+

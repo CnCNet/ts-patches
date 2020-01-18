@@ -215,6 +215,8 @@ void __thiscall MessageListClass__Draw(MessageListClass *m);
 void __thiscall MessageListClass__Add_Message(MessageListClass *this, char *buf,
                                               char *name, char *message, int color,
                                               int32_t PrintType, int32_t duration);
+BOOL __thiscall MessageListClass__Concat_Message(MessageListClass *this, char *name,
+                                                 int color, char *message, int unknown);
 void __fastcall Simple_Text_Print(XYCoord *out_width, char *str, DSurface *surface,
                                   Rect *surf_rect,
                                   Rect *dest, int32_t *color,

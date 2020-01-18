@@ -145,6 +145,7 @@ setcglob 0x005BE080, Random2Class__operator
 setcglob 0x007E2C34, MessageListClass_this
 setcglob 0x007E2284, PlayerPtr
 setcglob 0x00572FE0, MessageListClass__Add_Message
+setcglob 0x005734B0, MessageListClass__Concat_Message
 setcglob 0x006B2330, Get_Message_Delay_Or_Duration
 setcglob 0x007E24E4, Message_Input_Player_Dead
 setcglob 0x005098D0, Message_Input
@@ -300,6 +301,7 @@ setcglob 0x006BA490, strlen
 setcglob 0x006BE630, strcpy
 setcglob 0x006B6BA0, strncat
 setcglob 0x006BE766, strdup
+setcglob 0x006B6730, strstr
 setcglob 0x006B51D7, operator_new
 setcglob 0x006B51CC, operator_delete
 setcglob 0x006B67B0, sscanf

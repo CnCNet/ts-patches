@@ -41,6 +41,7 @@ COMMON_OBJS = \
 SP_OBJS = src/no-cd_tfd.o src/sun.ini.sp.o
 
 MP_OBJS          = \
+                    src/chat_ignore.o \
                     src/online_optimizations.o \
                     src/mods/dont_save_without_all_players.o \
                     src/sun.ini.o \

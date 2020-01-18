@@ -2,10 +2,10 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-sstring str_ToAllies, "(Allies): "
-sstring str_ToAll, "(All): "
-sstring str_ToOne, "(one): "
-sstring str_ToSpectators, "(Specs): "
+gstring str_ToAllies, "(Allies): "
+gstring str_ToAll, "(All): "
+gstring str_ToOne, "(one): "
+gstring str_ToSpectators, "(Specs): "
 
 gbool ChatToAlliesFlag, 0
 gbool ChatToAllFlag, 0

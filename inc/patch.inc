@@ -6,3 +6,4 @@
 ; ### Functions ###
 
 cextern LoadSunIni
+cextern IgnoredColors
