@@ -69,6 +69,10 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x0070FEF4, {db "DP2"}
 @SET 0x0070FEF8, {db "DP1"}
 
+@SET 0x006F99CC, {db "UIColor2",0}
+@SET 0x0070CAD8, {db "UIColor3",0}
+@SET 0x0070E0CC, {db "UIColor4",0}
+
 ; Increase max. bounces of elastic projectiles to 127
 @SET 0x00445516, {db 0x7F}
 
