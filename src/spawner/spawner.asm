@@ -47,6 +47,8 @@ cextern AutoSurrender
 
 @LJMP 0x004C06EF, _HouseClass__AI_Attack_Stuff_Alliance_Check
 
+@LJMP 0x005DE2AC, _Assign_Houses_Human_Countries
+
 @LJMP 0x005DE3D7, _Assign_Houses_AI_Countries
 
 @LJMP 0x004C3630, _HouseClass__Computer_Paranoid_Disable_With_Spawner
@@ -332,6 +334,20 @@ _HouseClass__Computer_Paranoid_Disable_With_Spawner:
 
 .Ret:
     jmp 0x004C3700 ; jump to RETN instruction
+	
+_Assign_Houses_Human_Countries:
+	mov ebp, [HouseClassArray_Count]
+    cmp dword [HouseCountriesArray+ebp*4], -1
+    jz  .Ret
+
+    mov edx, [HouseCountriesArray+ebp*4]
+    mov edx,[ecx+edx*4]
+
+.Ret:
+    push edx
+    mov ecx, eax
+    call 0x004BA0B0 ; HouseClass::HouseClass(HousesType)
+    jmp 0x005DE2B4
 
 _Assign_Houses_AI_Countries:
     mov ebp, [HouseClassArray_Count]
