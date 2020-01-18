@@ -2,6 +2,7 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 %include "ini.inc"
+%include "patch.inc"
 
 cglobal SpawnerActive
 cglobal INIClass_SPAWN
@@ -141,6 +142,7 @@ section .rdata
     str_OtherSectionFmt db "Other%d",0
     str_Port            db "Port",0
     str_Ip              db "Ip",0
+    str_Ignored         db "Ignored",0
     str_SpawnArg        db "-SPAWN",0
     str_MultiEngineer   db "MultiEngineer",0
     str_Firestorm       db "Firestorm",0
@@ -1491,6 +1493,20 @@ Add_Human_Opponents:
 
     cmp eax,-1
     je .next_opp
+    
+    ; ignored
+    lea ecx, [OtherSection]
+    SpawnINI_Get_Bool ecx, str_Ignored, 0
+    
+    cmp al, 1
+    jnz .notIgnored
+    
+    xor eax, eax
+    mov al, byte[esi+0x39]
+    
+    mov byte[eax+IgnoredColors], 1
+
+.notIgnored:
 
     mov eax, 1
     mov dword [SessionType], 4 ; HACK: SessonType set to WOL, will be set to LAN later
