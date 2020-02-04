@@ -51,6 +51,9 @@ _Message_Input_Display_Messages_Typed_By_Yourself:
     push 0 
     push 0 
     call MessageListClass__Add_Message
+	lea edx, [TempBuf]
+	push edx
+	call Write_Chat_To_Replay
     
 .Ret:
     mov esp,ebp

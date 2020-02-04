@@ -12,3 +12,4 @@ config.mk
 custom.mk
 test.cmd
 
+build_ts_and_copy.cmd
