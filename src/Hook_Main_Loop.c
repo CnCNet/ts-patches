@@ -64,6 +64,8 @@ MainLoop_AfterRender(MessageListClass *msg) {
 
 		if (DoScreenshotOnceThenExit && DoScreenshotOnceThenExitFrame == Frame)
 		{
+			MapClass__Reveal_The_Map();
+			GScreenClass__Render(&MouseClass_Map);
 			ScreenCaptureCommandClass_Execute();
 			Queue_Exit();
 			//Exit_Process();
