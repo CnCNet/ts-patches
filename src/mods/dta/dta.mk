@@ -151,6 +151,7 @@ DTA_OBJS = \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/fix_score_logging_typo.o \
                     src/mods/ai_target_emp_like_multimissile.o \
+                    src/mods/fix_burst_exploit.o \
                     src/fix_allied_decloaking.o \
                     src/force_conversion_type.o \
                     src/c4_repairable_fix.o \
