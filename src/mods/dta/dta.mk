@@ -133,6 +133,7 @@ DTA_OBJS = \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/change_score_screen_music.o \
                     src/mods/dta/cloakstop_to_toobigforcarryalls.o \
+                    src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
