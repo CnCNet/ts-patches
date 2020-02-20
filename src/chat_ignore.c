@@ -51,14 +51,14 @@ BOOL __thiscall fake_MessageListClass__Concat_Message(
     {
         char *mes = message;
 
-        if(strstr(message, &str_ToAllies) == message)
-            mes += strlen(&str_ToAllies);
-        else if(strstr(message, &str_ToAll) == message)
-            mes += strlen(&str_ToAll);
-        else if(strstr(message, &str_ToOne) == message)
-            mes += strlen(&str_ToOne);
-        else if(strstr(message, &str_ToSpectators) == message)
-            mes += strlen(&str_ToSpectators);
+        if(strstr(message, &str_ToAllies[0]) == message)
+            mes += strlen(&str_ToAllies[0]);
+        else if(strstr(message, &str_ToAll[0]) == message)
+            mes += strlen(&str_ToAll[0]);
+        else if(strstr(message, &str_ToOne[0]) == message)
+            mes += strlen(&str_ToOne[0]);
+        else if(strstr(message, &str_ToSpectators[0]) == message)
+            mes += strlen(&str_ToSpectators[0]);
         
         for (int i = 0; Whitelist[i][0]; i++)
         {
