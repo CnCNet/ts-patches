@@ -3,6 +3,7 @@ DTA_OBJS = \
                     src/mods/dta/res/res.o \
                     src/main_menu_cursor_bug.o \
                     src/mods/dont_save_without_all_players.o \
+					src/chat_ignore.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -162,3 +163,5 @@ DTA_OBJS = \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
+                    src/replays/replays.o \
+                    src/replays/replay_game_patches.o
