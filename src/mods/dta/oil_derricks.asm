@@ -24,8 +24,8 @@ hack 0x0044148A
 ; BuildingClass::AI_Update_Oil_Derrick_Logic
 hack 0x00429A60
     mov eax, [ecx+0x220] ; get BuildingTypeClass instance
-    mov dx, [eax+0x828] ; ICBMLauncher / ProduceCashAmount
-    cmp dx, 0
+    mov dl, [eax+0x828] ; ICBMLauncher / ProduceCashAmount
+    cmp dl, 0
     jg .Check_Frame_Give_Credits_To_Owner
     jmp .Reg
     
