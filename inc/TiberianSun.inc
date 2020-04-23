@@ -164,6 +164,9 @@ cextern CurrentObjectsArray
 cextern CurrentObjectsArray_Vector
 cextern CurrentObjectsArray_Count
 
+; BuildingClass
+cextern BuildingClass__Do_Animation
+
 ; Arrays
 cextern UnitClassArray_Count
 cextern TeamTypesArray_Count

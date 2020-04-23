@@ -47,6 +47,9 @@ setcglob 0x00584BF0, Is_Foot
 ; AircraftClass
 setcglob 0x0040BA40, AircraftClass__Mission_Attack
 
+; BuildingClass
+setcglob 0x00436200, BuildingClass__Do_Animation
+
 ; Arrays
 setcglob 0x007B3468, UnitClassArray_Count
 setcglob 0x007E4850, TeamTypesArray_Count
