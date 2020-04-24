@@ -16,7 +16,7 @@ hack 0x0044148A
     mov [ebp+89Bh], al ; Save value of PlaceAnywhere=
     push str_ProduceCashAmount
     push ebx
-    call 0x004DD140 ; INIClass::Get_Int
+    call INIClass__GetInt
     mov [ebp+828h], al ; it can only take 8 bits
     jmp 0x004414A1
 
