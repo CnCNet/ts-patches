@@ -16,6 +16,8 @@ hack 0x0042CF07
     mov  [0x007E4394], eax
     
     ; Our code
+    cmp esi, 0
+    je .Reg
     mov  ecx, [esi+220h] ; get BuildingTypeCLass instance
     mov  al, [ecx+81Dh]  ; WeaponsFactory
     cmp  al, 1           
