@@ -224,7 +224,7 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x0064C8CF, {db 0x6D}
 
 ; Decrease subterranean pitch speed before digging down
-@SET 0x006D8A96, {db 0x5C}
+@SET 0x006D8A96, {db 0x4C}
 
 ; Decrease subterranean pitch speed after digging up
 @SET 0x006D8AA6, {db 0x80}
