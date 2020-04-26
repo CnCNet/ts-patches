@@ -9,16 +9,13 @@
 ; Author: Rampastring
 
 ; BuildingClass::Exit_Object_Use_ProductionAnim
-hack 0x0042CF07
-    ; Decrement some scenario variable as in the original code
-    mov  eax, [0x007E4394]
-    dec  eax
-    mov  [0x007E4394], eax
+hack 0x0042CE6E
+
+    call dword [edx+158h]
     
     ; Our code
-    cmp esi, 0
-    je .Reg
     mov  ecx, [esi+220h] ; get BuildingTypeCLass instance
+    xor  eax, eax
     mov  al, [ecx+81Dh]  ; WeaponsFactory
     cmp  al, 1           
     je  .Reg             ; Buildings with WeaponsFactory=yes get their
@@ -38,10 +35,4 @@ hack 0x0042CF07
     call BuildingClass__Do_Animation
     
 .Reg:
-    pop  edi
-    pop  esi
-    pop  ebp
-    mov  eax, 2
-    pop  ebx
-    add  esp, 0F8h
-    retn 4
+    jmp 0x0042CE74
