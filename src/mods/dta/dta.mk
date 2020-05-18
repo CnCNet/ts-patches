@@ -136,13 +136,14 @@ DTA_OBJS = \
                     src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
                     src/mods/dta/oil_derricks.o \
                     src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
+                    src/mods/dta/tiberium_damage.o \
+                    src/mods/dta/unit_self_heal_repair_step.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/saved_games_in_subdir.o \
-                    src/mods/dta/tiberium_damage.o \
                     src/mods/no_sidecd_mix.o \
                     src/mods/horv_via_undeploysinto.o \
                     src/mods/screenshots_in_subdir.o \
