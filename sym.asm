@@ -413,7 +413,7 @@ setcglob 0x007E2448, TutorialMax
 setcglob 0x007E244C, TutorialSorted
 
 ; Strings
-setcglob 0x00742350, Fetch_String
+setcglob 0x00472350, Fetch_String
 
 ;KERNEL32
 setcglob 0x006CA0E8, _imp__ReadFile
