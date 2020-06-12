@@ -57,7 +57,6 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x0068621A, push str_TILong
 @SET 0x006862BD, push str_TILong
 @SET 0x006862C2, push str_TILong
-
 @SET 0x006CA940, {db "TEM",0,0,0,0,0}
 @SET 0x006F99C4, {db "ENDING"}
 @SET 0x006F99D8, {db "CREDITS.TXT",0}
@@ -69,12 +68,11 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x0070FEF4, {db "DP2"}
 @SET 0x0070FEF8, {db "DP1"}
 
-@SET 0x006F99CC, {db "UIColor2",0}
-@SET 0x0070CAD8, {db "UIColor3",0}
-@SET 0x0070E0CC, {db "UIColor4",0}
+;Ion Storm warning speech frequency
+@SET 0x004ED5AA, {db 0x4E, 0x01}
 
-; Increase max. bounces of elastic projectiles to 127
-@SET 0x00445516, {db 0x7F}
+; Increase max. bounces of elastic projectiles
+;@SET 0x00445516, {db 0x04}	;commented out, causes issues with projectiles on high bridges
 
 ; Change the distribution of cluster weapons (only inner spread radius is changed, for now)
 ;@SET 0x004465D6, {db 0x02} ; outer spread radius in leptons
