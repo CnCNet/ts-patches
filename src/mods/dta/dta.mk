@@ -155,6 +155,7 @@ DTA_OBJS = \
                     src/mods/fix_score_logging_typo.o \
                     src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/fix_burst_exploit.o \
+                    src/mods/smarter_harvesters.o \
                     src/fix_allied_decloaking.o \
                     src/force_conversion_type.o \
                     src/c4_repairable_fix.o \

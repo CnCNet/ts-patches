@@ -206,6 +206,7 @@ setcglob 0x007E4548, SpecialClass__Special
 setcglob 0x005DE580, Create_Units
 setcglob 0x007E2650, CriticalRandomNumber
 setcglob 0x00805E10, MapSeed
+setcglob 0x007E4394, ScenarioInit
 
 ; Save games
 setcglob 0x005D6910, Load_Game
