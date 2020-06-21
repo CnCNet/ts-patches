@@ -2,13 +2,17 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-; Improves the harvester AI.
-; Harvesters now prefer queuing for occupied refineries instead of heading
-; for free refineries if the free refineries are very far away and the
-; occupied refineries are close.
-; Also, harvesters no longer discriminate against Dock= buildings that are
-; specified last on the list.
-; *******************
+; Improves the harvester AI in multiple ways.
+; - Harvesters now prefer queuing for occupied refineries instead of heading
+;   for free refineries if the free refineries are very far away and the
+;   occupied refineries are close.
+; - Harvesters no longer discriminate against Dock= buildings that are
+;   specified last on the list.
+; - Refineries now allow harvesters close to them to dock even if
+;   they have been reserved by distant harvesters (this feature is
+;   also known as queue jumping)
+;
+; ***********************************
 ; Author: Rampastring
 
 ; Dock building object pointers and distances
