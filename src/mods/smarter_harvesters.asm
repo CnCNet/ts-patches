@@ -132,37 +132,41 @@ Find_Closest_Refinery:
     
 .Check_Potential_Refinery:
     mov  ebp, eax ; Save refinery pointer
-    ; Have we already found a refinery before?
-    cmp  dword [ebx], 0
-    je   .Assign_Best_Refinery
-    ; If yes, then we should compare the distance
-    ; between the old and new refineries
+    ; Get refinery distance
     push eax
     mov  ecx, esi
     call 0x00586CC0       ; ObjectClass::Get_XY_Distance_From
-    mov  edx, [esp+0Ch+8] ; Fetch previous distance
+    
+    mov  edx, [esp+0Ch+8] ; Fetch previous distance to best refinery
+                          ; for future comparison and assignment
+    
+    ; Have we already found a refinery before?
+    cmp  dword [ebx], 0
+    je   .Assign_Best_Refinery
+    
+    ; If yes, then we should compare the distance
+    ; between the old and new refineries
     cmp  eax, [edx]
     jl   .Assign_Best_Refinery
     jmp  .Loop_Continue_Check
     
 .Assign_Best_Refinery:
+    ; Update best refinery pointer, the address of which resides in ebx
+    ; and distance variable, the address of which has been loaded to edx
     mov  [ebx], ebp
-    push eax
-    mov  ecx, esi
-    call 0x00586CC0       ; ObjectClass::Get_XY_Distance_From
-    mov  edx, [esp+0Ch+8] ; Fetch distance variable for updating
     mov  [edx], eax
     
 .Loop_Continue_Check:
     xor  ebp, ebp
-    mov  ecx, [esi+360h]    
+    mov  ecx, [esi+360h] ; Get UnitTypeClass instance
     inc  edi
-    cmp  edi, [ecx+268h]
+    cmp  edi, [ecx+268h] ; Count of buildings specified in Dock=
     jl  .Loop_Start ; Jump if not all dock buildings have been checked for yet
     jmp .Loop_End
 
 .Loop_End:
-    mov  eax, [ebx]
+    mov  eax, 0 ; return 0, this function modifies the values behind the 
+                ; pointer variables that it takes as arguments
     pop  ebp
     pop  edx
     pop  ebx
