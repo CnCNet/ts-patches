@@ -141,6 +141,7 @@ TI_OBJS = \
                     src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/scrap_metal_explosion.o \
+                    src/mods/dta/oil_derricks.o \
 					src/mods/smarter_harvesters.o \
                     src/fix_allied_decloaking.o \
                     src/c4_repairable_fix.o \
