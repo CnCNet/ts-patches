@@ -47,6 +47,7 @@ extern volatile uint32_t OutList_Mask;
 #pragma pack(pop)
 
 void __thiscall EventClass__EnqueueEvent(EventClass *this);
+void __thiscall EventClass__EventClass_Execute(EventClass *this);
 EventClass * __thiscall EventClass__EventClass_PlayerID(EventClass *e, int my_id, EventType t, int his_id);
 EventClass * __thiscall EventClass__EventClass_noarg(EventClass *e, int my_id, EventType t);
 EventClass * __thiscall EventClass__EventClass_produce(EventClass *e, int my_id, EventType t, int RTTI, int heapid);

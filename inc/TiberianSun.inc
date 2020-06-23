@@ -13,6 +13,7 @@ cextern hook_wwdebug_printf
 cextern AddressList
 
 
+
 ; Session
 cextern SessionClass_this
 cextern SessionClass__Create_Connections
@@ -40,6 +41,7 @@ cextern TournamentGame
 cextern EasyShroud
 cextern AutoSaveGame
 cextern NextAutoSave
+cextern NormalizedDelayGameSpeed;
 
 cextern CoachMode
 cextern HouseClass__Is_Ally_Or_Spec_HH
@@ -74,6 +76,11 @@ cextern FileClass__Write
 cextern CCFileClass__CCFileClass
 cextern CCFileClass__Destroy
 
+;replays
+cextern Write_Event_To_Replay_File
+cextern Replay_Read_Frame_Func
+cextern Write_Chat_To_Replay
+
 cextern Extended_Events
 
 ; ### imports ###
@@ -90,6 +97,9 @@ cextern _imp__GetCurrentProcess
 cextern _imp__Sleep
 cextern _imp__GetSystemMetrics
 cextern _imp__timeSetEvent
+cextern _imp_CreateFile
+cextern _imp_SetFilePointer
+cextern _imp_ReadFile
 
 cextern SetFocus
 cextern SetWindowPos
@@ -154,6 +164,9 @@ cextern CurrentObjectsArray
 cextern CurrentObjectsArray_Vector
 cextern CurrentObjectsArray_Count
 
+; BuildingClass
+cextern BuildingClass__Do_Animation
+
 ; Arrays
 cextern UnitClassArray_Count
 cextern TeamTypesArray_Count
@@ -201,6 +214,7 @@ cextern read_tut_from_map
 cextern OutOfSync
 cextern MapSnapshot_Execute
 cextern UsePNG
+cextern GameOptionsClass_GameSpeed
 
 cextern Init_Network
 cextern NameNodes_CurrentSize
@@ -208,6 +222,7 @@ cextern HumanPlayers
 cextern EventClass__EventClass_PlayerID
 cextern EventClass__EventClass_noarg
 cextern EventClass__EnqueueEvent
+cextern EventClass__EventClass_Execute
 cextern Queue_Exit
 cextern EventType_Offset
 cextern Print_CRCs
@@ -223,6 +238,7 @@ cextern ScenarioStuff
 cextern SelectedDifficulty
 cextern SpecialClass__Special
 cextern Rules
+cextern ScenarioInit
 
 ; Save games
 cextern Load_Game

@@ -206,3 +206,29 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 
 ; Prevent more than 75 cameos from appearing in a sidebar column and thus crashing the game
 ;; @SJGE 0x005F463B, 0x005F46A1    ;jge short loc_5F46A1
+
+; Reduce minimum scatter radius of clusters to 0.5 cells
+@SET 0x004465DA, {db 0x7F}
+@SET 0x004465DB, {db 0x00}
+
+; Reduce maximum scatter radius of clusters to 1.4 cells
+@SET 0x004465D5, {db 0x7F}
+@SET 0x004465D6, {db 0x00}
+
+; Increase max number of bounces for bouncy projectiles from 3 to 127
+@SET 0x00445514, {cmp eax, 127}
+
+; Change subterranean pitch-up speed to different value from pitch-down speed
+@SET 0x0064C8CD, {db 0xA0}
+@SET 0x0064C8CE, {db 0x8A}
+@SET 0x0064C8CF, {db 0x6D}
+
+; Decrease subterranean pitch speed before digging down
+@SET 0x006D8A96, {db 0x4C}
+
+; Decrease subterranean pitch speed after digging up
+@SET 0x006D8AA6, {db 0x80}
+
+; Increase subterranean movement speed
+@SET 0x006D8A9E, {db 0x40}
+

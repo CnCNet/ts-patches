@@ -3,6 +3,7 @@ DTA_OBJS = \
                     src/mods/dta/res/res.o \
                     src/main_menu_cursor_bug.o \
                     src/mods/dont_save_without_all_players.o \
+					src/chat_ignore.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -132,13 +133,17 @@ DTA_OBJS = \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/change_score_screen_music.o \
                     src/mods/dta/cloakstop_to_toobigforcarryalls.o \
+                    src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
+                    src/mods/dta/oil_derricks.o \
+                    src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
+                    src/mods/dta/tiberium_damage.o \
+                    src/mods/dta/unit_self_heal_repair_step.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
                     src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/saved_games_in_subdir.o \
-                    src/mods/dta/tiberium_damage.o \
                     src/mods/no_sidecd_mix.o \
                     src/mods/horv_via_undeploysinto.o \
                     src/mods/screenshots_in_subdir.o \
@@ -149,6 +154,8 @@ DTA_OBJS = \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/fix_score_logging_typo.o \
                     src/mods/ai_target_emp_like_multimissile.o \
+                    src/mods/fix_burst_exploit.o \
+                    src/mods/smarter_harvesters.o \
                     src/fix_allied_decloaking.o \
                     src/force_conversion_type.o \
                     src/c4_repairable_fix.o \
@@ -162,3 +169,5 @@ DTA_OBJS = \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
+                    src/replays/replays.o \
+                    src/replays/replay_game_patches.o

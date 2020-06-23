@@ -3,6 +3,7 @@ TSCLIENT_OBJS = \
                     src/mods/tsclient/res/res.o \
                     src/main_menu_cursor_bug.o \
                     src/tiberium_on_slope_crash.o \
+					src/chat_ignore.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
                     src/singleplayer_objects_on_multiplayer_map_crash.o \
@@ -138,3 +139,5 @@ TSCLIENT_OBJS = \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
+                    src/replays/replays.o \
+                    src/replays/replay_game_patches.o

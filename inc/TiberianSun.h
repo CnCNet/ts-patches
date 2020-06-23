@@ -25,6 +25,7 @@
 #include "Classes/FootClass.h"
 #include "Classes/AircraftClass.h"
 #include "Classes/StripClass.h"
+#include "Classes/EventClass.h"
 #include "Classes/DSurface.h"
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
@@ -123,7 +124,18 @@ extern int32_t FrameSendRate;
 extern bool QuickMatch;
 extern bool UsePNG;
 extern bool RunAutoSS;
+extern bool DoScreenshotOnceThenExit;
+extern int DoScreenshotOnceThenExitFrame;
+extern bool ReplayRecording;
+extern bool ReplayPlayback;
+extern char ReplayName[1024];
 extern int32_t DoingAutoSS;
+extern int DumpDebugInfoFrame;
+extern int GameSpeed;
+extern int GameOptionsClass_GameSpeed;
+extern int RequestedFPS;
+extern int NormalizedDelayGameSpeed;
+extern int ScenarioInit;
 
 // ### Functions ###
 void Queue_Options();
@@ -207,6 +219,9 @@ void  __thiscall CommandDestroy(void *a, char b);
 void ScreenCaptureCommandClass_Execute();
 void Write_PCX_File(CCFileClass *ccFile, DSurface *surface, void *palette);
 
+bool __stdcall Write_Event_To_Replay_File(EventClass *e);
+void Replay_Read_Frame_Func();
+
 void ShowInfo(DSurface *s, Rect *l);
 int32_t ResponseTimeFunc(int32_t a);
 
@@ -215,6 +230,8 @@ void __thiscall MessageListClass__Draw(MessageListClass *m);
 void __thiscall MessageListClass__Add_Message(MessageListClass *this, char *buf,
                                               char *name, char *message, int color,
                                               int32_t PrintType, int32_t duration);
+BOOL __thiscall MessageListClass__Concat_Message(MessageListClass *this, char *name,
+                                                 int color, char *message, int unknown);
 void __fastcall Simple_Text_Print(XYCoord *out_width, char *str, DSurface *surface,
                                   Rect *surf_rect,
                                   Rect *dest, int32_t *color,
@@ -249,6 +266,8 @@ void __cdecl operator_delete(void *memory);
 
 bool __thiscall WWKeyboardClass__Down(WWKeyboardClass *this, uint32_t key);
 void __fastcall PrettyPrintKey(int16_t code, char *buf);
+
+void __thiscall Print_CRCs(int a1);
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 

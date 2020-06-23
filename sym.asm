@@ -47,6 +47,9 @@ setcglob 0x00584BF0, Is_Foot
 ; AircraftClass
 setcglob 0x0040BA40, AircraftClass__Mission_Attack
 
+; BuildingClass
+setcglob 0x00436200, BuildingClass__Do_Animation
+
 ; Arrays
 setcglob 0x007B3468, UnitClassArray_Count
 setcglob 0x007E4850, TeamTypesArray_Count
@@ -129,6 +132,7 @@ setcglob 0x008670BC, WOL_SERVER_PORT ; Hijacking this for Mumble
 setcglob 0x00493E40, EventClass__EventClass_PlayerID
 setcglob 0x00493DE0, EventClass__EventClass_noarg
 setcglob 0x004940A0, EventClass__EventClass_produce
+setcglob 0x00494280, EventClass__EventClass_Execute
 setcglob 0x005B1210, Queue_Exit
 setcglob 0x007B3530, DoList
 setcglob 0x007E15F8, OutList
@@ -145,6 +149,7 @@ setcglob 0x005BE080, Random2Class__operator
 setcglob 0x007E2C34, MessageListClass_this
 setcglob 0x007E2284, PlayerPtr
 setcglob 0x00572FE0, MessageListClass__Add_Message
+setcglob 0x005734B0, MessageListClass__Concat_Message
 setcglob 0x006B2330, Get_Message_Delay_Or_Duration
 setcglob 0x007E24E4, Message_Input_Player_Dead
 setcglob 0x005098D0, Message_Input
@@ -187,6 +192,7 @@ setcglob 0x00574F90, Init_Network
 setcglob 0x007E3EA0, NameNodes_CurrentSize
 setcglob 0x007E2508, HumanPlayers
 setcglob 0x007E3EA0, HumanNode_ActiveCount
+setcglob 0x007E4720, GameOptionsClass_GameSpeed
 
 ; Scenario
 setcglob 0x007E28B8, ScenarioName
@@ -200,6 +206,7 @@ setcglob 0x007E4548, SpecialClass__Special
 setcglob 0x005DE580, Create_Units
 setcglob 0x007E2650, CriticalRandomNumber
 setcglob 0x00805E10, MapSeed
+setcglob 0x007E4394, ScenarioInit
 
 ; Save games
 setcglob 0x005D6910, Load_Game
@@ -300,6 +307,7 @@ setcglob 0x006BA490, strlen
 setcglob 0x006BE630, strcpy
 setcglob 0x006B6BA0, strncat
 setcglob 0x006BE766, strdup
+setcglob 0x006B6730, strstr
 setcglob 0x006B51D7, operator_new
 setcglob 0x006B51CC, operator_delete
 setcglob 0x006B67B0, sscanf
@@ -311,6 +319,7 @@ setcglob 0x006B72CC, malloc
 setcglob 0x006B7F72, realloc
 setcglob 0x006B6A2E, fopen
 setcglob 0x006B6944, fclose
+setcglob 0x006BC288, fflush 
 
 ; winapi
 setcglob 0x006B4D6C, sendto
@@ -405,7 +414,13 @@ setcglob 0x007E2448, TutorialMax
 setcglob 0x007E244C, TutorialSorted
 
 ; Strings
-setcglob 0x00742350, Fetch_String
+setcglob 0x00472350, Fetch_String
+
+;KERNEL32
+setcglob 0x006CA0E8, _imp__ReadFile
+setcglob 0x006CA0EC, _imp__SetFilePointer
+setcglob 0x006CA18C, _imp__CreateFileA  
+
 
 setcglob 0x0074950C, Current_Waypoint
 setcglob 0x004EAF20, Delete_Waypoint

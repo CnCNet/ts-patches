@@ -2,15 +2,24 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 %include "ini.inc"
+%include "patch.inc"
 
 cglobal SpawnerActive
 cglobal INIClass_SPAWN
 cglobal SpawnLocationsArray
 cglobal SpawnLocationsHouses
 
+gbool DoScreenshotOnceThenExit, 0
+gint DoScreenshotOnceThenExitFrame, 0
+
+gbool ReplayRecording, 0
+gbool ReplayPlayback, 0
+gstring ReplayName, "replay.bin", 1024 
+
 gbool SavesDisabled, true
 gbool QuickMatch, false
 gbool IsHost, true
+gint DumpDebugInfoFrame, -1
 
 cextern Load_Spectators_Spawner
 cextern PortHack
@@ -29,6 +38,7 @@ cextern AutoDeployMCV
 cextern SharedControl
 cextern SkipScoreScreen
 cextern AutoSurrender
+
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -58,6 +68,9 @@ cextern AutoSurrender
 @LJMP 0x0065860D, _UnitClass__Read_INI_Jump_Out_When_Units_Section_Missing
 @LJMP 0x005DBCC3, _Read_Scenario_Custom_Load_Screen_Spawner
 @LJMP 0x005DD523, _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting
+@LJMP 0x004E38D8, _Init_Random_Use_Seed_In_Skirmish_If_SpawnerActive
+
+
 
 ;always write mp stats
 @CLEAR 0x0046353C, 0x90, 0x00463542
@@ -131,6 +144,7 @@ section .rdata
     str_OtherSectionFmt db "Other%d",0
     str_Port            db "Port",0
     str_Ip              db "Ip",0
+    str_Ignored         db "Ignored",0
     str_SpawnArg        db "-SPAWN",0
     str_MultiEngineer   db "MultiEngineer",0
     str_Firestorm       db "Firestorm",0
@@ -168,7 +182,11 @@ section .rdata
     str_CoachMode       db "CoachMode",0
     str_AutoSurrender   db "AutoSurrender",0
     str_GameNameTitle   db "Tiberian Sun",0
+	str_SessionType		db "SessionType",0
     str_PleaseRunClient db "Please run the game client instead.",0
+    str_DoScreenshotOnceThenExit db "DoScreenshotOnceThenExit",0
+    str_DoScreenshotOnceThenExitFrame db "DoScreenshotOnceThenExitFrame",0
+	str_DumpDebugInfoFrame db "DumpDebugInfoFrame",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -236,6 +254,11 @@ section .rdata
     str_bue_mi24_pcx      db"bue_mi24.pcx",0
     str_bue_ri24_pcx      db"bue_ri24.pcx",0
 
+	str_ReplayPlayback	  db"ReplayPlayback",0
+	str_ReplayRecording   db"ReplayRecording",0
+	str_ReplayName		  db"ReplayName",0
+	str_ReplayBin     db"replay.bin",0
+
 section .text
 
 _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
@@ -272,6 +295,17 @@ _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
     ;mov dword [0x7a2f0c], eax
     mov eax, [ScenarioStuff]
     jmp 0x005DD528
+
+_Init_Random_Use_Seed_In_Skirmish_If_SpawnerActive:
+
+	cmp DWORD [SessionType], 5
+	jnz 0x004E3A6C
+
+	cmp DWORD [SpawnerActive], 1
+	jz 0x004E3A6C
+
+.Ret:
+	jmp 0x004E38E1
 
 _Read_Scenario_Custom_Load_Screen_Spawner:
 
@@ -889,7 +923,8 @@ Initialize_Spawn:
     mov byte [GameActive], 1 ; needs to be set here or the game gets into an infinite loop trying to create spawning units
 
     ; set session
-    mov dword [SessionType], 5
+	SpawnINI_Get_Int str_Settings, str_SessionType, 5
+    mov dword [SessionType], eax
 
     SpawnINI_Get_Int str_Settings, str_GameID, 0
     mov dword [WOLGameID], eax
@@ -948,6 +983,7 @@ Initialize_Spawn:
 
     SpawnINI_Get_Int str_Settings, str_GameSpeed, 0
     mov dword [GameSpeed], eax
+	mov dword [NormalizedDelayGameSpeed], eax
 
     SpawnINI_Get_Bool str_Settings, str_MultiEngineer, 0
     mov byte [MultiEngineer], al
@@ -961,8 +997,23 @@ Initialize_Spawn:
     lea eax, [CustomLoadScreen]
     SpawnINI_Get_String str_Settings, str_CustomLoadScreen, str_Empty, eax, 256
 
+	lea eax, [ReplayName]
+    SpawnINI_Get_String str_Settings, str_ReplayName, str_ReplayBin, eax, 1024
+
+	SpawnINI_Get_Bool str_Settings, str_ReplayPlayback, 0
+    mov byte [ReplayPlayback], al
+
+	SpawnINI_Get_Bool str_Settings, str_ReplayRecording, 0
+    mov byte [ReplayRecording], al
+
     SpawnINI_Get_Bool str_Settings, str_RunAutoSS, 0
     mov byte [RunAutoSS], al
+
+    SpawnINI_Get_Int str_Settings, str_DoScreenshotOnceThenExitFrame, 0
+    mov dword [DoScreenshotOnceThenExitFrame], eax
+
+    SpawnINI_Get_Bool str_Settings, str_DoScreenshotOnceThenExit, 0
+    mov byte [DoScreenshotOnceThenExit], al
 
     SpawnINI_Get_Int str_Settings, str_AutoSaveGame, -1
     mov dword [AutoSaveGame], eax
@@ -995,6 +1046,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_AutoSurrender, 1
     mov byte [AutoSurrender], al
+
+	SpawnINI_Get_Int str_Settings, str_DumpDebugInfoFrame, -1
+    mov dword [DumpDebugInfoFrame], eax
 
     ; tunnel ip
     lea eax, [TempBuf]
@@ -1154,7 +1208,7 @@ Initialize_Spawn:
     mov dword [LatencyFudge], 0
 
 
-    call Init_Network
+   call Init_Network
 
     mov dword eax, [NameNodes_CurrentSize]
     mov dword [HumanPlayers], eax
@@ -1226,8 +1280,14 @@ Initialize_Spawn:
 
 .Dont_Set_SessionType_To_Lan:
 
+	cmp BYTE [ReplayPlayback], 1
+	jz .Dont_Create_Connections
+
     mov ecx, SessionClass_this
     call SessionClass__Create_Connections
+
+.Dont_Create_Connections:
+
 
     mov ecx, IPXManagerClass_this
     push 1
@@ -1449,6 +1509,20 @@ Add_Human_Opponents:
 
     cmp eax,-1
     je .next_opp
+    
+    ; ignored
+    lea ecx, [OtherSection]
+    SpawnINI_Get_Bool ecx, str_Ignored, 0
+    
+    cmp al, 1
+    jnz .notIgnored
+    
+    xor eax, eax
+    mov al, byte[esi+0x39]
+    
+    mov byte[eax+IgnoredColors], 1
+
+.notIgnored:
 
     mov eax, 1
     mov dword [SessionType], 4 ; HACK: SessonType set to WOL, will be set to LAN later

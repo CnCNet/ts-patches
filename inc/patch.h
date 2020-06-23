@@ -18,3 +18,8 @@ extern bool NoWindowFrame;
 extern bool UseGraphicsPatch;
 extern bool IsNoCD;
 extern uint32_t ScrollDelay;
+
+extern char str_ToAllies[];
+extern char str_ToAll[];
+extern char str_ToOne[];
+extern char str_ToSpectators[];
