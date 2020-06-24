@@ -238,6 +238,7 @@ cextern ScenarioStuff
 cextern SelectedDifficulty
 cextern SpecialClass__Special
 cextern Rules
+cextern ScenarioInit
 
 ; Save games
 cextern Load_Game

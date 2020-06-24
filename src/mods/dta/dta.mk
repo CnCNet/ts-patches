@@ -138,6 +138,7 @@ DTA_OBJS = \
                     src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
                     src/mods/dta/tiberium_damage.o \
                     src/mods/dta/unit_self_heal_repair_step.o \
+                    src/mods/dta/vehicle_transports.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
@@ -155,6 +156,7 @@ DTA_OBJS = \
                     src/mods/fix_score_logging_typo.o \
                     src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/fix_burst_exploit.o \
+                    src/mods/smarter_harvesters.o \
                     src/fix_allied_decloaking.o \
                     src/force_conversion_type.o \
                     src/c4_repairable_fix.o \

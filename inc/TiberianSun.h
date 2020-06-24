@@ -135,6 +135,7 @@ extern int GameSpeed;
 extern int GameOptionsClass_GameSpeed;
 extern int RequestedFPS;
 extern int NormalizedDelayGameSpeed;
+extern int ScenarioInit;
 
 // ### Functions ###
 void Queue_Options();

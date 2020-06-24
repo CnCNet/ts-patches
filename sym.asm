@@ -206,6 +206,7 @@ setcglob 0x007E4548, SpecialClass__Special
 setcglob 0x005DE580, Create_Units
 setcglob 0x007E2650, CriticalRandomNumber
 setcglob 0x00805E10, MapSeed
+setcglob 0x007E4394, ScenarioInit
 
 ; Save games
 setcglob 0x005D6910, Load_Game
@@ -413,7 +414,7 @@ setcglob 0x007E2448, TutorialMax
 setcglob 0x007E244C, TutorialSorted
 
 ; Strings
-setcglob 0x00742350, Fetch_String
+setcglob 0x00472350, Fetch_String
 
 ;KERNEL32
 setcglob 0x006CA0E8, _imp__ReadFile
