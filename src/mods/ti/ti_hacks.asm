@@ -87,6 +87,9 @@ sstring str_DarkRed, "DarkRed"
 ;@CLEAR 0x0045839D, 0x90, 0x004583A3
 ;@SET 0x0045839D, {lea edx, [eax]}
 
+; Change subterranean horizontal movement speed
+@SET 0x006D8A9E, {db 0x29}
+
 ; Erase NAWALL and GAWALL
 @SET 0x00710DA4, {db 0,0,0,0,0,0}
 @SET 0x00710DAC, {db 0,0,0,0,0,0}
