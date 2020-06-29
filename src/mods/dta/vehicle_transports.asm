@@ -138,6 +138,8 @@ hack 0x004A64B6
 hack 0x0065159C
     ; Only use our special behaviour if our NavCom is pointing to a unit
     mov  ecx, [ebp+278h] ; Unit destination (NavCom), pointer to AbstractClass
+    cmp  ecx, 0
+    je   .Check_If_Talking_To_Transport ; Our NavCom is null, move on
     mov  eax, [ecx] ; vtable
     call [eax+2Ch]  ; What_Am_I()
     cmp  eax, 1     ; RTTI_UNIT
