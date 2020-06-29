@@ -13,6 +13,7 @@ Authors
  - Rampastring
  - Bittah
  - AlexB
+ - E1Elite
 
 Building on *nix
 -----------------
