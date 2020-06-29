@@ -2,6 +2,7 @@
 TI_OBJS = \
                     src/mods/ti/res/res.o \
                     src/main_menu_cursor_bug.o \
+					src/chat_ignore.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -131,6 +132,7 @@ TI_OBJS = \
                     src/mods/horv_via_undeploysinto.o \
                     src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
+                    src/mods/fix_burst_exploit.o \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/dont_save_without_all_players.o \
                     src/mods/max_pip_counts.o \
@@ -163,3 +165,5 @@ TI_OBJS = \
                     src/mods/no_crate_respawn_with_crates_disabled.o \
                     src/mods/ti/team_number_position.o \
                     src/mods/ti/waypoint_enhancements.o \
+                    src/replays/replays.o \
+                    src/replays/replay_game_patches.o
