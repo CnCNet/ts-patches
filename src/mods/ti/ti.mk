@@ -160,10 +160,12 @@ TI_OBJS = \
                     src/mods/ti/alt_to_undeploy.o \
                     src/mods/ti/hack_house_from_house_type.o \
                     src/vinifera_unhardcode.o \
+					src/tileset255_bridgerepairfix.o \
                     src/mods/buildconst_harvesterunit_baseunit.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/no_crate_respawn_with_crates_disabled.o \
                     src/mods/ti/team_number_position.o \
                     src/mods/ti/waypoint_enhancements.o \
+                    src/mods/mechanics.o \
                     src/replays/replays.o \
                     src/replays/replay_game_patches.o
