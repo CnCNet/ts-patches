@@ -81,7 +81,7 @@ has_control(HouseClass *h)
 bool __thiscall
 has_control_or_spectator(HouseClass *h)
 {
-    if (IsSpectatorArray[PlayerPtr->ID])
+    if (SessionType.GameSession > 0 && IsSpectatorArray[PlayerPtr->ID])
         return true;
     else
         return has_control(h);
