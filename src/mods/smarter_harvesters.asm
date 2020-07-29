@@ -179,27 +179,29 @@ Find_Closest_Refinery:
 gint OldHarvDistance, 0
 
 ; Hack BuildingClass::Receive_Message
-; Disable generic check for returning RADIO_NEGATIVE if 
-; (!ScenarioInit && In_Radio_Contact() && Contact_With_Whom() != from), instead add 
-; a specific check for refineries only
+; Skip check for returning RADIO_NEGATIVE if 
+; (!ScenarioInit && In_Radio_Contact() && Contact_With_Whom() != from) for refineries
 hack 0x0042694A
     mov  ecx, esi
     mov  eax, [ecx+0x220] ; get BuildingTypeClass instance
-    mov  al,  [eax+81Dh]  ; BuildingTypeClass.Refinery
+    mov  al,  [eax+81Bh]  ; BuildingTypeClass.Refinery
     cmp  al, 0
-    je   0x0042697B
+    jz   .Original_Behaviour
+    jmp  0x0042697B ; Skip check
+    
+.Original_Behaviour
     mov  eax, [ScenarioInit]
     test eax, eax
-    jne  .Check 
-    mov  eax, [esi+78h]
+    jnz  0x00426962
+    mov  eax, [esi+78h] ; Get object in radio contact
     test eax, eax
-    je   .Check
+    jz   0x00426962
     cmp  eax, edi
-    jne 0x00426BFD
-    
-.Check:
-    jmp 0x00426962
+    jnz  0x00426BFD
+    jmp  0x00426962
 
+
+    
 
 ; Queue jumping, part 2
 ; Hack refinery-specific code in BuildingClass::Receive_Message
