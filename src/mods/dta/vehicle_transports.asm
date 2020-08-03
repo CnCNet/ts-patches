@@ -233,17 +233,13 @@ hack 0x0065159C
     ; Check if we are in radio contact with a transport
     test esi, esi
     jz   0x00651631
-    mov  ecx, [ebp+278h] ; Unit destination (NavCom), pointer to AbstractClass
+    mov  ecx, esi ; esi = object we're in radio contact with
     mov  eax, [ecx] ; vtable
     call [eax+2Ch]  ; What_Am_I()
     cmp  eax, 1     ; RTTI_UNIT
-    jne  .Original_Code
+    jne  0x006515A4
     mov  [ebp+278h], esi
     jmp  .Post_Radio_Check
     
-.Original_Code:
-    test esi, esi
-    jz   0x00651631
-    jmp  0x006515A4
     
     
