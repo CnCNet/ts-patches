@@ -59,8 +59,16 @@ setcglob 0x007E4058, DynamicVectorClass_AircraftClass
 setcglob 0x007E4858, CurrentObjectsArray
 setcglob 0x007E485C, CurrentObjectsArray_Vector
 setcglob 0x007E4868, CurrentObjectsArray_Count
+
+setcglob 0x007B345C, DynamicVectorClass_UnitClass_Array
+setcglob 0x007E2304, DynamicVectorClass_InfantryClass_Array
+setcglob 0x007E2310, DynamicVectorClass_InfantryClass_ActiveCount
+setcglob 0x007E470C, DynamicVectorClass_BuildingClass_Array
+setcglob 0x007E4718, DynamicVectorClass_BuildingClass_ActiveCount
+
 setcglob 0x0076092C, SearchDirs
 setcglob 0x006CD148, ArmorNames
+
 
 ; INI
 setcglob 0x004E8A30, INIClass__INIClass
