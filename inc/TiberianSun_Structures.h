@@ -1,4 +1,3 @@
-
 #pragma pack(push, 1)
 typedef struct TutorialStruct {
   int32_t ID;
@@ -278,4 +277,13 @@ typedef struct Matrix3D
   int field_28;
   int field_2C;
 } Matrix3D;
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+typedef struct BuildType
+{
+    int BuildableID;
+    RTTIType BuildableType;
+    int Factory;
+} BuildType;
 #pragma pack(pop)
