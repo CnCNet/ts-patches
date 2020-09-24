@@ -10,6 +10,16 @@
 
 sstring str_IsVehicleTransport, "IsVehicleTransport"
 
+; Remove functionality of DoubleOwned= in two locations
+; HouseClass::Can_Build
+@SJMP 0x004BBC39, 0x004BBC4F
+@CLEAR 0x004BBC3B, 0x90, 0x004BBC43
+
+; TechnoTypeClass::Get_Ownable
+@SJMP 0x0063B890, 0x0063B8A8
+@CLEAR 0x0063B892, 0x0063B89A
+
+
 ; Hack TechnoTypeClass::Read_INI to read IsVehicleTransport=
 ; Repurposes DoubleOwned
 hack 0x0063BA43
