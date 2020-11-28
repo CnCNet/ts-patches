@@ -10,6 +10,16 @@
 
 sstring str_IsVehicleTransport, "IsVehicleTransport"
 
+; Remove functionality of DoubleOwned= in two locations
+; HouseClass::Can_Build
+@SJMP 0x004BBC39, 0x004BBC4F
+@CLEAR 0x004BBC3B, 0x90, 0x004BBC43
+
+; TechnoTypeClass::Get_Ownable
+@SJMP 0x0063B890, 0x0063B8A8
+@CLEAR 0x0063B892, 0x0063B89A
+
+
 ; Hack TechnoTypeClass::Read_INI to read IsVehicleTransport=
 ; Repurposes DoubleOwned
 hack 0x0063BA43
@@ -39,7 +49,7 @@ hack 0x0065648B
     ; Check if the object under the cursor is a unit
     mov  edx, [ebx]      ; object vtbl
     mov  ecx, ebx        ; object pointer
-    call dword [edx+2Ch] ; What_Am_I()
+    call dword [edx+2Ch] ; AbstractClass::What_Am_I()
     cmp  eax, 1          ; RTTI_UNIT
     jne  .Restore_Original_Value_And_Return
     
@@ -66,16 +76,30 @@ hack 0x0065648B
     call 0x006C61E0 ; _com_issue_error
     
 .Cont:
-    mov  eax, [esi+32Ch]
     push eax
     mov  ecx, [eax]
     call dword [ecx+10h] ; DriveLocomotionClass_Is_Moving
     test al, al
-    jz .PostCheckMovingTransport
-    ; The transport was moving, return ACTION_NO_ENTER
-    jmp .NoEnter
+    jnz .NoEnter         ; The transport was moving, jump out
+
 
 .PostCheckMovingTransport:
+    ; Check that we're not commanding a transport to prevent transport-in-transport
+    ; First check if we're commanding a vehicle (UnitType)
+    mov  edx, [esi]      ; object vtbl
+    mov  ecx, esi        ; object pointer
+    call dword [edx+2Ch] ; AbstractClass::What_Am_I()
+    cmp  eax, 1
+    jne  .Transmit_Message ; we're not commanding a vehicle, proceed
+    
+    ; If we are commanding a vehicle, check if it's a vehicle transport
+    mov  eax, [esi+360h] ; Get UnitTypeClass instance
+    mov  ecx, [eax+449h] ; TechnoTypeClass.DoubleOwned (now actually TechnoTypeClass.IsVehicleTransport)
+    and  ecx, 1          ; Only use 1 bit of the byte
+    cmp  ecx, 1
+    je   .NoEnter        ; We're commanding a vehicle transport, jump out
+    
+.Transmit_Message
     ; Transmit message
     mov  edx, [esi]
     push ebx              ; pointer to object to transfer message to

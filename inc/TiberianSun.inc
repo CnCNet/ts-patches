@@ -171,6 +171,11 @@ cextern BuildingClass__Do_Animation
 cextern UnitClassArray_Count
 cextern TeamTypesArray_Count
 cextern TeamTypesArray
+cextern DynamicVectorClass_UnitClass_Array
+cextern DynamicVectorClass_InfantryClass_Array
+cextern DynamicVectorClass_InfantryClass_ActiveCount
+cextern DynamicVectorClass_BuildingClass_Array
+cextern DynamicVectorClass_BuildingClass_ActiveCount
 
 ; Random
 cextern Seed

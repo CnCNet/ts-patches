@@ -1,4 +1,7 @@
-enum RTTIType
+#ifndef _RTTI
+#define _RTTI
+
+typedef enum RTTIType
 {
   ABSTRACT_NONE = 0x0,
   ABSTRACT_UNIT = 0x1,
@@ -20,4 +23,6 @@ enum RTTIType
   ABSTRACT_TERRAINTYPE = 0x25,
   ABSTRACT_UNITTYPE = 0x28,
   ABSTRACT_EVENT = 0x30,
-};
+} RTTIType;
+
+#endif

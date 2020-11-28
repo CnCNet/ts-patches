@@ -141,6 +141,7 @@ DTA_OBJS = \
                     src/mods/dta/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o \
                     src/mods/dta/mechanics.o \
                     src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
+                    src/mods/smarter_firesale.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
@@ -159,6 +160,8 @@ DTA_OBJS = \
                     src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/fix_burst_exploit.o \
                     src/mods/smarter_harvesters.o \
+                    src/mods/sidebar_cameo_sort_helper.o \
+                    src/mods/sidebar_cameo_sort.o \
                     src/fix_allied_decloaking.o \
                     src/force_conversion_type.o \
                     src/c4_repairable_fix.o \
