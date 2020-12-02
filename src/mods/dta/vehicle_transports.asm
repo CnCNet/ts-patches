@@ -266,4 +266,51 @@ hack 0x0065159C
     jmp  .Post_Radio_Check
     
     
+; Hack UnitClass::Mission_Unload
+; Tiberian Sun assumes that all objects unloaded from a vehicle are infantry,
+; and so assigns the objects to sub-cells like they were infantry.
+; This causes unloaded vehicles to be stuck in wrong sub-cell positions
+; which causes a graphical issue and also issues with object interactions,
+; such as movement collisions and docking into repair bays for repair (the repair bays
+; don't realize that the unit is standing on the bay if the unit is on a wrong sub-cell position).
+; Normally vehicles are always on the center sub-cell spot.
+;
+; Red Alert 1 does not have this bug due to its different unload logic and
+; Yuri's Revenge also has the bug fixed. To fix it here, we hack the return value
+; of DisplayClass::Closest_Free_Spot to force unloaded vehicles
+; to be in the center of the cell instead of a sub-cell reserved for infantry.
+; It's a hacky fix, but the easiest way to solve it with ASM and limited knowledge of the engine.
+hack 0x006542B6
+    ; restore original code
+    mov  [ScenarioInit], ebx
+    mov  [esp+38h], eax
     
+    mov  ecx, ebp   ; move unloaded object to "this" pointer
+    mov  eax, [ebp] ; vtable
+    call [eax+2Ch]  ; What_Am_I()
+    cmp  eax, 0Fh   ; RTTI_INFANTRY
+    jne   .NonInfantry
+    
+.Infantry:
+    mov  ecx, MouseClass_Map
+    jmp  0x006542C5
+
+.NonInfantry:
+    mov  ecx, MouseClass_Map
+    call DisplayClass__Closest_Free_Spot
+    mov  ecx, [eax]     ; gets X coord
+    and  ecx, 0xFF00    ; erase the sub-cell information (last 8 bits of the integer)
+    add  ecx, 0x80      ; add coord for center of the sub-cell 
+                        ; (128 = 0x80, an entire sub-cell being 255 = 0xFF in length)
+    mov  [esp+2Ch], ecx ; save X coord
+    lea  ecx, [esp+10h]
+    mov  edx, [eax+4]   ; get Y coord, perform the same operation as for the X coord above
+    and  edx, 0xFF00
+    add  edx, 0x80
+    mov  [esp+30h], edx
+    mov  eax, [eax+8]   ; Z coord, at least we don't need to mess with it :)
+    mov  [esp+34h], eax
+    push ecx
+    mov  ecx, MouseClass_Map
+    jmp 0x006542E8
+

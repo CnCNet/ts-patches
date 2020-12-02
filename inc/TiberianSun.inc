@@ -309,3 +309,6 @@ cextern HoverShowHealth
 ; CommandClass
 cextern CreateTeamCommandClass_Execute
 cextern CenterTeamCommandClass_Execute
+
+; DisplayClass
+cextern DisplayClass__Closest_Free_Spot

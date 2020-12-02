@@ -14,6 +14,11 @@ typedef struct CellClass_struct {
   int VisibilityFlags;
 } CellClass;
 
+typedef struct CoordStruct {
+  int X;
+  int Y;
+  int Z;
+} CoodStruct;
 
 #pragma pack(push, 1)
 

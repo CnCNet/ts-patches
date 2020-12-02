@@ -248,7 +248,7 @@ setcglob 0x0061CBA0, TActionClass__Zoom_Out
 setcglob 0x0061CB30, TActionClass__Zoom_In
 setcglob 0x004B9440, GScreenClass__Flag_To_Redraw
 setcglob 0x00475D90, DisplayClass__Init_IO
-
+setcglob 0x004797D0, DisplayClass__Closest_Free_Spot
 
 ; Tactical
 setcglob 0x0074C5F4, TacticalClassMap
