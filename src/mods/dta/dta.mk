@@ -162,6 +162,7 @@ DTA_OBJS = \
                     src/mods/smarter_harvesters.o \
                     src/mods/sidebar_cameo_sort_helper.o \
                     src/mods/sidebar_cameo_sort.o \
+                    src/mods/fix_building_damage_state_crash.o \
                     src/fix_allied_decloaking.o \
                     src/force_conversion_type.o \
                     src/c4_repairable_fix.o \
