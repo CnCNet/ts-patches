@@ -51,7 +51,7 @@ hack 0x0065648F
     mov  ecx, [esi+0ECh]       ; get house of the selected object
     call HouseClass__Is_Player
     cmp  eax, 1
-    jne  .End
+    jne  .Restore_Original_Value_And_Return
     
     ; Check that the object under the cursor is owned by us
     mov  ecx, [esi+0ECh] ; 0ECh = Owner
@@ -64,7 +64,7 @@ hack 0x0065648F
     mov  ecx, [esi+0ECh]
     call HouseClass__Is_Ally_Techno
     cmp  eax, 1
-    jne  .End
+    jne  .Restore_Original_Value_And_Return
     
 .Post_Ally_Check
     ; Check if the object under the cursor is a unit
