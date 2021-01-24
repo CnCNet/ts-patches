@@ -46,6 +46,7 @@ cextern NormalizedDelayGameSpeed;
 cextern CoachMode
 cextern HouseClass__Is_Ally_Or_Spec_HH
 cextern HouseClass__Is_Ally_HH
+cextern HouseClass__Is_Ally_Techno
 cextern HouseClass__Is_Coach
 cextern HouseClass__Is_Spectator
 
@@ -309,3 +310,6 @@ cextern HoverShowHealth
 ; CommandClass
 cextern CreateTeamCommandClass_Execute
 cextern CenterTeamCommandClass_Execute
+
+; DisplayClass
+cextern DisplayClass__Closest_Free_Spot

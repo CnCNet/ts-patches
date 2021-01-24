@@ -8,7 +8,6 @@ sstring str_Hard, "Difficulty: Hard"
 sstring str_Medium, "Difficulty: Medium"
 sstring str_Easy, "Difficulty: Easy"
 
-
 ; 0x40 = first parameter, 0x24 = second parameter, 0x28, third parameter, 0x2C = fourth parameter, 0x30 = fifth parameter
 ; the trigger action type should be 0 (as set map INI) for the extended triggers added, determines how the rest of the
 ; INI line is read for the rest of the trigger
@@ -78,9 +77,11 @@ hack 0x0061913B ; Extend trigger action jump table
     jz .Disable_ShortGame_Action
     cmp edx, 108
     jz .Print_Difficulty_Action
-	cmp edx, 109
-	jz .Blow_Up_House_Action
-    
+    cmp edx, 109
+    jz .Blow_Up_House_Action
+    cmp edx, 110
+    jz .Make_Attached_Objects_Elite
+
     cmp edx, 68h
     ja 0x0061A9C5 ; default
     jmp 0x00619141 ; use original switch jump table
@@ -203,3 +204,62 @@ hack 0x0061913B ; Extend trigger action jump table
 
 .Out2:
     jmp 0x0061A9C5 ; default
+
+; ***********************************
+; *** Make Attached Objects Elite ***
+; ***********************************
+
+; Loops through all Technos (buildings/units/infantry/aircraft) and turns
+; ones attached to this trigger elite
+.Make_Attached_Objects_Elite:
+
+.Loop_Start:
+    xor  bl, bl
+    xor  edi, edi
+    mov  eax, [0x007E4830] ; DynamicVectorClass_TechnoClass_ActiveCount
+    test eax, eax
+    jz   .PostLoop
+    mov  ebp, [esp+1CCh]   ; Get TriggerClass* pointer
+
+.Loop_MainBody:
+    mov  eax, [0x007E4824]  ; DynamicVectorClass_TechnoClass_Entries
+    mov  esi, [eax+edi*4]   ; get object pointer to esi
+
+    ; Check some unknown object properties, WW does this in most trigger actions
+    ; for example, look at 0061C40D (in function that performs the "Destroy Attached Objects" trigger action)
+    mov  eax, [esi+28h]
+    test eax, eax
+    jle  .Loop_Increment
+    mov  al, [esi+35h]
+    test al, al
+    jz   .Loop_Increment
+    mov  al, [esi+2Ch]
+    test al, al
+    jz   .Loop_Increment
+    mov  al, [esi+2Fh]
+    test al, al
+    jnz  .Loop_Increment
+    mov  ecx, [esi+24h]
+    test ecx, ecx
+    jz   .Loop_Increment
+
+    push ebp             ; TriggerClass* pointer
+    call 0x0061E860      ; TagClass::IsAttachedToTrigger
+    test al, al
+    jz   .Loop_Increment
+
+    lea  ecx, [esi+0A8h] ; Get VeterancyClass of object
+    push 1               ; enable elite status
+    call 0x00664520      ; VeterancyClass::Set_Elite
+
+.Loop_Increment:
+    mov  eax, [0x007E4830] ; DynamicVectorClass_TechnoClass_ActiveCount
+    inc  edi
+    cmp  edi, eax
+    jl   .Loop_MainBody
+    test bl, bl
+    jnz  .Loop_Start
+
+.PostLoop:
+    jmp  0x0061A9C5 ; default
+
