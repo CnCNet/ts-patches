@@ -141,6 +141,7 @@ DTA_OBJS = \
                     src/mods/dta/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o \
                     src/mods/dta/mechanics.o \
                     src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
+                    src/mods/dta/extra_difficulty.o \
                     src/mods/smarter_firesale.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
