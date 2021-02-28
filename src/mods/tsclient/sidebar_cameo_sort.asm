@@ -11,6 +11,9 @@
 ; Technically this implementation simply calls the C standard library qsort function
 ; each time when the game has added cameos to the sidebar.
 ; The comparison function used for the sorting is in sidebar_cameo_sort_helper.c.
+
+; Modified TSClient only copy of original: Building cameo sort is disabled as vanilla building
+; list isn't readily suitable for this. The sort is now applicable for 2nd/unit strip only.
 ; -------------------
 ; Author: Rampastring
 
@@ -32,8 +35,7 @@ cextern BuildType_Comparison
                              ; Weird class design, but okay.
                              ; Maybe it made more sense in the resource-constrained 90s.
 
-    mov  edx, 1              ; 0 for first strip, 1 for second strip
-                             ; Applied for unit strip only as vanilla building list isn't readily suitable for this.
+    mov  edx, %1             ; 0 for first strip, 1 for second strip
     lea  eax, [edx+edx*2]
     shl  eax, 4
     add  eax, edx
@@ -55,11 +57,11 @@ cextern BuildType_Comparison
 
 
 ; building types
-hack 0x0042DA40
-    inc  esi
-    cmp  esi, eax
-    jl   0x0042DA12 ; replace instructions that our jump destroyed
-    Sort_Sidebar_Strip 0
+; hack 0x0042DA40
+;     inc  esi
+;     cmp  esi, eax
+;     jl   0x0042DA12 ; replace instructions that our jump destroyed
+;     Sort_Sidebar_Strip 0
 
 
 ; infantry types
