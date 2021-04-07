@@ -47,3 +47,11 @@
         ".long 4;"                                  \
         ".long " #value ";"                         \
     )
+	
+#define SETBYTE(dst, value)                         \
+    __asm (                                         \
+        ".section .patch,\"d0\";"                   \
+        ".long " #dst ";"                           \
+        ".long 1;"                                  \
+        ".byte " #value ";"                         \
+    )
