@@ -315,16 +315,8 @@ void WWDebug_Printf(char *fmt, ...);
 int32_t __thiscall Random2Class__operator(void *self, int32_t a2, int32_t a3);
 int32_t _sprintf(char *dest, char *format, ...);
 size_t __strcmpi(const char *, const char *);
-//void *memcpy(char *dest, const char *src, size_t len);
-//char *__cdecl _strupr(char *String);
-//char *__cdecl _strstr(const char *Str, const char *SubStr);
-//char *__cdecl strchr(const char *Str, int Val);
 char *__cdecl strncpy(char *Dest, const char *Source, size_t Count);
 
-//HMODULE __stdcall LoadLibraryA(LPCSTR lpLibFileName);
-//DWORD __stdcall GetFileAttributesA(LPCSTR lpFileName);
-//FARPROC __stdcall GetProcAddress(HMODULE hModule, LPCSTR lpProcName);
-//BOOL __stdcall GetClientRect(HWND hWnd, LPRECT lpRect);
 
 // ### Variables ###
 

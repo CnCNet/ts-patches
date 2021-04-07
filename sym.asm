@@ -445,6 +445,8 @@ setcglob 0x006CA144, _imp__ResetEvent
 setcglob 0x006Ca15C, _imp__SetEvent
 setcglob 0x006CA194, _imp__GetLastError
 setcglob 0x006CA458, _imp__MessageBoxA
+setcglob 0x006CA36C, ShowCursor
+setcglob 0x006CA36C, _imp__ShowCursor
 
 ; Theme
 setcglob 0x00644190, Theme__Stop
