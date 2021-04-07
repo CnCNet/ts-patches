@@ -267,6 +267,30 @@ typedef struct WWKeyboardClass
 
 
 #pragma pack(push, 1)
+typedef struct WWMouseClass
+{
+} WWMouseClass;
+#pragma pack(pop)
+
+
+#pragma pack(push, 4)
+typedef struct MixFileClass
+{
+	char GenericNode[0xC];
+	char *Filename;
+	bool IsDigest;
+	bool IsEncrypted;
+	bool IsAllocated;
+	int Count;
+	int DataSize;
+	int DataStart;
+	void *HeaderBuffer;
+	void *Data;
+} MixFileClass;
+#pragma pack(pop)
+
+
+#pragma pack(push, 1)
 typedef struct Matrix3D
 {
   float field_0;

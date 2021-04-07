@@ -108,7 +108,10 @@ setcglob 0x00449850, CCFileClass__Write
 setcglob 0x00449A40, CCFileClass__Open
 setcglob 0x004499C0, CCFileClass__Is_Available
 setcglob 0x00449970, CCFileClass__Size
+setcglob 0x005BE310, RawFileClass__RawFileClass
+setcglob 0x005BE470, RawFileClass__Is_Available
 setcglob 0x005BE9C0, RawFileClass__Create
+setcglob 0x005BE290, RawFileClass__Destroy
 
 ; Session
 setcglob 0x007E2458, SessionClass_this
@@ -201,6 +204,9 @@ setcglob 0x007E3EA0, NameNodes_CurrentSize
 setcglob 0x007E2508, HumanPlayers
 setcglob 0x007E3EA0, HumanNode_ActiveCount
 setcglob 0x007E4720, GameOptionsClass_GameSpeed
+setcglob 0x007E474C, GameOptionsClass_VoiceVolume
+setcglob 0x007E473C, GameOptionsClass_ScreenWidth
+setcglob 0x007E4740, GameOptionsClass_ScreenHeight
 
 ; Scenario
 setcglob 0x007E28B8, ScenarioName
@@ -223,9 +229,15 @@ setcglob 0x005D6910, Load_Game
 setcglob 0x0074C8F0, WWMouseClas_Mouse
 setcglob 0x00748348, MouseClass_Map
 setcglob 0x007482C0, WWKeyboard
+setcglob 0x0074C8F0, WWMouse
 setcglob 0x007E47B0, Left_Shift_Key
 setcglob 0x007E47B4, Right_Shift_Key
 setcglob 0x004FB390, WWKeyboardClass__Down
+setcglob 0x004FB4F0, WWKeyboardClass__Clear
+setcglob 0x004FAF30, WWKeyboardClass__Check
+setcglob 0x004FAF80, WWKeyboardClass__Get
+setcglob 0x006A5FE0, WWMouseClass__Show_Mouse
+setcglob 0x006A6140, WWMouseClass__Hide_Mouse
 setcglob 0x0059C9D0, PrettyPrintKey
 setcglob 0x007E47A8, ForceFire1
 setcglob 0x007E47AC, ForceFire2
@@ -244,6 +256,7 @@ setcglob 0x0052BBE0, MapClass__Fill_Map_With_Fog
 setcglob 0x007B3304, dword_7B3304
 setcglob 0x004B9470, GScreenClass__Input
 setcglob 0x004B95A0, GScreenClass__Render
+setcglob 0x004B96C0, GScreenClass__Do_Blit
 setcglob 0x0061CBA0, TActionClass__Zoom_Out
 setcglob 0x0061CB30, TActionClass__Zoom_In
 setcglob 0x004B9440, GScreenClass__Flag_To_Redraw
@@ -287,6 +300,8 @@ setcglob 0x00865040, hWndParent
 setcglob 0x00474E70, Fancy_Text_Print
 setcglob 0x00474A50, Simple_Text_Print
 setcglob 0x00685BC0, WndProc
+setcglob 0x00865040, MainWindow
+setcglob 0x007E4920, GameInFocus
 
 ; Sidebar
 setcglob 0x0080C3BC, SidebarClass_Redraw_Buttons
@@ -299,6 +314,13 @@ setcglob 0x005F3560, SidebarClass__Draw_It
 setcglob 0x005F2720, SidebarClass__Init_IO
 setcglob 0x005F2900, SidebarClass__Init_For_House
 
+; Audio
+setcglob 0x007A27CC, DSAudio_SoundObject
+setcglob 0x007A27DC, DSAudio_AudioDone
+
+; Debug
+setcglob 0x007E4903, Debug_Quiet
+
 ; clib
 setcglob 0x006B73A0, __strcmpi
 setcglob 0x006B8E20, strcmp
@@ -310,9 +332,12 @@ setcglob 0x006B6A41, vsprintf
 setcglob 0x006B69C1, fprintf
 setcglob 0x006BC70C, fwrite
 
+setcglob 0x006B6AB0, strchr
+setcglob 0x006C6A96, strupr
 setcglob 0x006B6730, stristr_
 setcglob 0x006BA490, strlen
 setcglob 0x006BE630, strcpy
+setcglob 0x006B51F0, strncpy
 setcglob 0x006B6BA0, strncat
 setcglob 0x006BE766, strdup
 setcglob 0x006B6730, strstr
@@ -369,12 +394,19 @@ setcglob 0x004E90D0, CenterTeamCommandClass_Execute
 setcglob 0x004EAB00, ScreenCaptureCommandClass_Execute
 setcglob 0x005B10F0, Queue_Options
 
+setcglob 0x00413760, Rect_Intersect
+
+setcglob 0x00602480, Emergency_Exit
+setcglob 0x006B6EAA, exit
+
 ;WSOCK32
 setcglob 0x006CA504, _imp__sendto
 setcglob 0x006CA4FC, _imp__recvfrom
 
 setcglob 0x006CA24C, _imp__GetCommandLineA
 setcglob 0x006CA16C, _imp__LoadLibraryA
+setcglob 0x006CA1F8, _imp__FreeLibrary
+setcglob 0x006CA2A4, _imp__GetFileAttributesA
 setcglob 0x006CA174, _imp__GetProcAddress
 setcglob 0x006CA1D0, _imp__GetCurrentProcess
 setcglob 0x006CA4EC, _imp__timeGetTime
@@ -391,6 +423,8 @@ setcglob 0x006CA448, _imp__GetKeyNameTextA
 setcglob 0x006CA398, _imp__MapVirtualKeyA
 setcglob 0x006CA394, _imp__ToAscii
 setcglob 0x006CA3BC, SetWindowPos
+setcglob 0x006CA388, _imp__GetClientRect
+setcglob 0x006CA384, _imp__ClientToScreen
 setcglob 0x006CA360, _imp__SetFocus
 setcglob 0x006CA360, SetFocus
 setcglob 0x006CA3C8, InvalidateRect
@@ -409,7 +443,8 @@ setcglob 0x006CA1E8, _imp__WaitForSingleObject
 setcglob 0x006CA1F0, _imp__ReleaseMutex
 setcglob 0x006CA144, _imp__ResetEvent
 setcglob 0x006Ca15C, _imp__SetEvent
-
+setcglob 0x006CA194, _imp__GetLastError
+setcglob 0x006CA458, _imp__MessageBoxA
 
 ; Theme
 setcglob 0x00644190, Theme__Stop
@@ -435,6 +470,7 @@ setcglob 0x004EAF20, Delete_Waypoint
 
 setcglob 0x0047C780, CC_Draw_Shape
 setcglob 0x00559DE0, MixFileClass__CCFileClass__Retrieve
+setcglob 0x0055A1C0, MixFileClass__Offset
 setcglob 0x0074C5D8, PrimarySurface
 setcglob 0x0074C5D0, SidebarSurface
 setcglob 0x0074C5E4, TempSurface
@@ -444,6 +480,9 @@ setcglob 0x0074C5DC, HiddenSurface
 setcglob 0x0048BB00, DSurface_FillRect
 setcglob 0x0048C140, DSurface_Conversion_Type
 setcglob 0x0069FAE0, Write_PCX_File
+
+setcglob 0x00563670, Play_Movie
+setcglob 0x0066B230, VQA_Windows_Message_Loop
 
 
 ;Address  Ordinal Name                          Library
