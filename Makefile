@@ -37,6 +37,7 @@ COMMON_OBJS = \
               src/video_mode_hacks.o \
               src/binkmovie/bink_load_dll.o \
               src/binkmovie/bink_patches.o \
+              src/binkmovie/bink_asm_patches.o \
               src/binkmovie/binkmovie.o \
               res/res.o \
               sym.o

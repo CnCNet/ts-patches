@@ -71,6 +71,9 @@ extern CommandClass ToggleInfoPanelCommand;
 extern CommandClass PlaceBuildingCommand;
 extern CommandClass RepeatBuildingCommand;
 extern CommandClass SelectOneLessCommand;
+extern DynamicVectorClass DynamicVectorClass_Movies;
+extern char ** DynamicVectorClass_Movies_Vector;
+extern int DynamicVectorClass_Movies_ActiveCount;
 
 extern bool SpawnerActive;
 extern bool Player_Active;
@@ -142,12 +145,20 @@ extern int GameOptionsClass_GameSpeed;
 extern int GameOptionsClass_VoiceVolume;
 extern int GameOptionsClass_ScreenWidth;
 extern int GameOptionsClass_ScreenHeight;
+extern bool GameOptionsClass_StretchMovies;
 extern int RequestedFPS;
 extern int NormalizedDelayGameSpeed;
 extern int ScenarioInit;
 extern int GameInFocus;
 extern HWND MainWindow;
 extern bool Debug_Quiet;
+extern bool Radar_Movie_Playing;
+extern int IngameVQ_Count;
+extern int DSAudio;
+extern void *Current_Movie_Ptr;
+extern int RadarClass_14B4;
+extern int RadarClass_14BC;
+extern bool InScenario;
 
 // ### Functions ###
 void Queue_Options();
@@ -218,8 +229,15 @@ void __thiscall SidebarClass__Draw_It(MouseClass *Map, char a2);
 void __thiscall SidebarClass__Init_IO(MouseClass *this);
 void __thiscall SidebarClass__Init_For_House(MouseClass *this);
 void __thiscall DisplayClass__Init_IO(void *this);
+void __thiscall RadarClass__Play_Movie(MouseClass *this);
+void __thiscall RadarClass__Radar_Activate(MouseClass *this, int a2);
 
 void __fastcall Play_Movie(char *filename, int theme, bool a3, bool a4, bool a5);
+void __fastcall Play_Ingame_Movie(int vqtype);
+
+void __thiscall DSAudio_Set_Volume_All(int this, int vol);
+int __thiscall DSAudio_Set_Volume_Percent(int this, int percent);
+bool __fastcall Is_Speaking(void);
 
 void __fastcall Emergency_Exit();
 void __cdecl exit(int code);
@@ -299,6 +317,9 @@ bool __fastcall MixFileClass__Offset(const char * filename, void ** realptr, Mix
 
 bool __fastcall VQA_Windows_Message_Loop(void);
 
+void __fastcall MovieClass_Update(void);
+void __fastcall Movie_Handle_Focus(bool state);
+
 void __thiscall Print_CRCs(int a1);
 
 RECT __fastcall Rect_Intersect(RECT *rect1, RECT *rect2, int *x, int *y);
@@ -317,6 +338,8 @@ int32_t _sprintf(char *dest, char *format, ...);
 size_t __strcmpi(const char *, const char *);
 char *__cdecl strncpy(char *Dest, const char *Source, size_t Count);
 
+
+extern const int vtBSurface;
 
 // ### Variables ###
 

@@ -19,7 +19,14 @@
 
 BOOL BinkBreakoutAllowed = TRUE;
 BOOL BinkScaleToFit = FALSE;
+BOOL BinkFullscreenMovie = FALSE;
+BOOL BinkIngameMovie = FALSE;
+BOOL BinkRadarDraw = FALSE;
+char BinkFilename[32];
 
+
+// Required to make reference to fake virtual table offset.
+static int vtBSurface_ref = 0x006CAB74;
 
 // Master playback volume.
 static float BinkMasterVolume = 0.7f;
@@ -27,9 +34,10 @@ static float BinkMasterVolume = 0.7f;
 static HBINK BinkHandle;
 static int SurfaceFlags;
 static DSurface * BinkVideoSurface;
+static RECT VideoScaledRect;
 static RECT VideoRect;
-static HANDLE FileHandle;
 static BOOL IsPlaying;
+static HANDLE FileHandle;
 static BOOL NewFrame;
 static int LastFrameNum;
 
@@ -58,12 +66,13 @@ void __fastcall BinkMovie_Close(void)
     }
 	
     BinkVideoSurface = NULL;
+	BinkFilename[0] = '\0';
 }
 
 
 void __fastcall BinkMovie_SetPosition(unsigned x_pos, unsigned y_pos)
 {
-    WWDebug_Printf("BinkMovie_SetPosition()\n");
+    //WWDebug_Printf("BinkMovie_SetPosition()\n");
 
     RECT surface_rect;
 	surface_rect.left = 0;
@@ -94,7 +103,7 @@ void __fastcall BinkMovie_Pause(BOOL pause)
 }
 
 
-BOOL __fastcall BinkMovie_Has_Frames_Left(void)
+BOOL __fastcall BinkMovie_Has_Finished(void)
 {
     return BinkHandle->FrameNum >= BinkHandle->Frames || BinkHandle->FrameNum < LastFrameNum;
 }
@@ -102,8 +111,6 @@ BOOL __fastcall BinkMovie_Has_Frames_Left(void)
 
 BOOL __fastcall BinkMovie_Open(char * filename)
 {
-    BinkMovie_Close();
-
     LastFrameNum = 0;
 
     //
@@ -149,27 +156,27 @@ BOOL __fastcall BinkMovie_Open(char * filename)
             }
         }
     }
-	
-	if (BinkHandle->Width > GameOptionsClass_ScreenWidth || BinkHandle->Height > GameOptionsClass_ScreenHeight) {
-		WWDebug_Printf("Video can not be played due to low user resolution!\n");
-		ShowCursor(TRUE);
-		char buffer[256];
-		sprintf(buffer,
-			"Video \"%s\" can not be played due to low resolution size, please\n"
-			"increase your resolution to at least %dx%d to play this video.\n",
-			filename, BinkHandle->Width, BinkHandle->Height);
-		MessageBoxA(MainWindow, buffer, "Error!", MB_ICONWARNING|MB_OK);
-		BinkMovie_Close();
-#ifdef BINK_REQUIRED
-		Emergency_Exit();
-		exit(1);
-#else
-		ShowCursor(FALSE);
-#endif
-		return FALSE;
-	}
 
     if (BinkHandle) {
+
+		if (BinkHandle->Width > GameOptionsClass_ScreenWidth || BinkHandle->Height > GameOptionsClass_ScreenHeight) {
+			WWDebug_Printf("Video can not be played due to low user resolution!\n");
+			ShowCursor(TRUE);
+			char buffer[256];
+			sprintf(buffer,
+				"Video \"%s\" can not be played due to low resolution size, please\n"
+				"increase your resolution to at least %dx%d to play this video.\n",
+				filename, BinkHandle->Width, BinkHandle->Height);
+			MessageBoxA(MainWindow, buffer, "Error!", MB_ICONWARNING|MB_OK);
+			BinkMovie_Close();
+#ifdef BINK_REQUIRED
+			Emergency_Exit();
+			exit(1);
+#else
+			ShowCursor(FALSE);
+#endif
+			return FALSE;
+		}
 
         //
         // Adjust playback volume based on the set user volume.
@@ -179,22 +186,87 @@ BOOL __fastcall BinkMovie_Open(char * filename)
             BinkSetVolume(BinkHandle, (BinkMasterVolume * 32768.0f));
         }
 
-        RECT rect;
-        int x = 0;
-        int y = 0;
-
         if (!BinkVideoSurface) {
 			BinkVideoSurface = PrimarySurface;
 		}
 		
+		int x = 0;
+		int y = 0;
+		
 		//
 		// Center video in the main window.
 		//
-		GetClientRect(MainWindow, &rect);
-		x = (rect.right - rect.left - BinkHandle->Width) / 2;
-		y = (rect.bottom - rect.top - BinkHandle->Height) / 2;
+		if (!BinkIngameMovie) {
+			RECT rect;
+			GetClientRect(MainWindow, &rect);
+			x = (rect.right - rect.left - BinkHandle->Width) / 2;
+			y = (rect.bottom - rect.top - BinkHandle->Height) / 2;
+		}
+		
+		BinkMovie_SetPosition(x, y);
+		
+		if (!BinkIngameMovie) {
+			
+			//
+			// Create the scaling area.
+			//
+			if (GameOptionsClass_StretchMovies) {
+				
+				int surface_width = BinkVideoSurface->Width;
+				int surface_height = BinkVideoSurface->Height;
+				
+				//
+				// This is a workaround for edge case issues with some versions
+				// of cnc-ddraw. This ensures the available draw area is actually
+				// the resolution the user defines, not what the cnc-ddraw forces
+				// the primary surface to.
+				//
+				surface_width = CLAMP(surface_width, 0, GameOptionsClass_ScreenWidth);
+				surface_height = CLAMP(surface_height, 0, GameOptionsClass_ScreenHeight);
+				
+				double dSurfaceWidth = surface_width;
+				double dSurfaceHeight = surface_height;
+				double dSurfaceAspectRatio = dSurfaceWidth/dSurfaceHeight;
 
-        BinkMovie_SetPosition(x, y);
+				double dVideoWidth = BinkHandle->Width;
+				double dVideoHeight = BinkHandle->Height;
+				double dVideoAspectRatio = dVideoWidth/dVideoHeight;
+
+				//
+				// If the aspect ratios are the same then the screen rectangle
+				// will do, otherwise we need to calculate the new rectangle
+				//
+				
+				if (dVideoAspectRatio > dSurfaceAspectRatio) {
+					int nNewHeight = (int)(surface_width/dVideoWidth*dVideoHeight);
+					int nCenteringFactor = (surface_height - nNewHeight) / 2;
+					VideoScaledRect.left = 0;
+					VideoScaledRect.top = nCenteringFactor;
+					VideoScaledRect.right = surface_width;
+					VideoScaledRect.bottom = nNewHeight;
+					
+				} else if (dVideoAspectRatio < dSurfaceAspectRatio) {
+					int nNewWidth = (int)(surface_height/dVideoHeight*dVideoWidth);
+					int nCenteringFactor = (surface_width - nNewWidth) / 2;
+					VideoScaledRect.left = nCenteringFactor;
+					VideoScaledRect.top = 0;
+					VideoScaledRect.right = nNewWidth;
+					VideoScaledRect.bottom = surface_height;
+					
+				} else {
+					VideoScaledRect.left = 0;
+					VideoScaledRect.top = 0;
+					VideoScaledRect.right = surface_width;
+					VideoScaledRect.bottom = surface_height;
+				}
+
+				WWDebug_Printf("BinkMovie_Open() - AspectRatio: %f,%f, VideoRect: %d,%d,%d,%d -> %d,%d,%d,%d\n",
+						dSurfaceAspectRatio, dVideoAspectRatio,
+						VideoRect.left, VideoRect.top, VideoRect.right, VideoRect.bottom,
+						VideoScaledRect.left, VideoScaledRect.top, VideoScaledRect.right, VideoScaledRect.bottom);
+				
+			}
+		}
 
         //
         // Store a copy of the surface flags.
@@ -275,7 +347,7 @@ void __fastcall BinkMovie_Play(void)
 
     for (;;) {
     
-        if (BinkMovie_Has_Frames_Left()) {
+        if (BinkMovie_Has_Finished()) {
             break;
         }
 
@@ -340,11 +412,13 @@ void __fastcall BinkMovie_Play(void)
 void __fastcall BinkMovie_Draw_Frame(void)
 {
     if (BinkVideoSurface == PrimarySurface) {
+        //WWDebug_Printf("BinkMovie_Draw_Frame() - On PrimarySurface.\n");
         RECT rect;
         GetClientRect(MainWindow, &rect);
         ClientToScreen(MainWindow, (LPPOINT)&rect);
         BinkMovie_Render_Frame(BinkVideoSurface, rect.left + VideoRect.left, rect.top + VideoRect.top);
     } else {
+        //WWDebug_Printf("BinkMovie_Draw_Frame() - On custom surface.\n");
         BinkMovie_Render_Frame(BinkVideoSurface, VideoRect.left, VideoRect.top);
     }
 }
@@ -356,40 +430,60 @@ void __fastcall BinkMovie_Render_Frame(DSurface * surface, unsigned x_pos, unsig
         WWDebug_Printf("BinkMovie_Render_Frame() - Surface is null!\n");
         return;
     }
-
-    //
-    // Lock the surface so that we can copy the decompressed frame into it.
-    //
-    void *buffptr = surface->vtable->Lock(surface, 0, 0);
-    if (buffptr) {
 		
-		if (BinkScaleToFit) {
+	if (GameOptionsClass_StretchMovies && !BinkIngameMovie) {
+		
+		// Clear the surfaces.
+		HiddenSurface->vtable->Fill(HiddenSurface, 0);
+		
+		void *buffptr = HiddenSurface->vtable->Lock(HiddenSurface, 0, 0);
+		if (buffptr) {
 			
+			//WWDebug_Printf("BinkMovie_Render_Frame() - About to call BinkCopyToBuffer.\n");
+
 			//
-			// Copy the decompressed frame into the buffer surface, then scale copy to the primary surface.
+			// Copy the decompressed frame into the buffer surface so we can then scale copy to the primary surface.
 			//
+			BinkCopyToBuffer(BinkHandle, buffptr, HiddenSurface->vtable->Get_Pitch(HiddenSurface), HiddenSurface->Height, x_pos, y_pos, SurfaceFlags|BINKCOPYALL);
+		}
+		
+        //
+        // Finished, now unlock the surface.
+        //
+        HiddenSurface->vtable->Unlock(HiddenSurface);
+		
+		//WWDebug_Printf("BinkMovie_Render_Frame() - About to call surface->BlitPart.\n");
+		
+		//
+		// Now copy to the destination surface.
+		//
+		surface->vtable->BlitPart(surface, &VideoScaledRect, HiddenSurface, &VideoRect, false, true);
 			
-			// TODO!
-			
-			//BSurface buffsurface(BinkHandle->Width, BinkHandle-Height, surface->vtable->Get_Pitch(surface));
-			//BinkCopyToBuffer(BinkHandle, buffptr, buffsurface.vtable->Get_Pitch(surface), buffsurface->Height, x_pos, y_pos, SurfaceFlags|BINKCOPYALL);
-			
-			//PrimarySurface->vtable->BlitPart(buffsurface);
-			
-		} else {
+		//WWDebug_Printf("BinkMovie_Render_Frame() - surface->BlitPart done.\n");
+		
+	} else {
+		
+		//
+		// Lock the surface so that we can copy the decompressed frame into it.
+		//
+		void *buffptr = surface->vtable->Lock(surface, 0, 0);
+		if (buffptr) {
+
+			//WWDebug_Printf("BinkMovie_Render_Frame() - About to call BinkCopyToBuffer.\n");
 			
 			//
 			// Copy the decompressed frame into the surface buffer (this might be currently on-screen).
 			//
 			BinkCopyToBuffer(BinkHandle, buffptr, surface->vtable->Get_Pitch(surface), surface->Height, x_pos, y_pos, SurfaceFlags|BINKCOPYALL);
 			
+			//WWDebug_Printf("BinkMovie_Render_Frame() - BinkCopyToBuffer done.\n");
 		}
-
+		
         //
         // Finished, now unlock the BinkBuffer.
         //
         surface->vtable->Unlock(surface);
-    }
+	}
 }
 
 
@@ -397,11 +491,12 @@ BOOL __fastcall BinkMovie_Create(char * filename)
 {
 	if (!BinkImportsLoaded) {
 		return FALSE;
-	}	
+	}
+	
+    BinkMovie_Close();
 	
     BinkHandle = 0;
     SurfaceFlags = 0;
-    BinkVideoSurface = NULL;
     BinkVideoSurface = PrimarySurface;
     VideoRect.left = 0;
     VideoRect.top = 0;
@@ -411,6 +506,8 @@ BOOL __fastcall BinkMovie_Create(char * filename)
     IsPlaying = TRUE;
     NewFrame = FALSE;
     LastFrameNum = 0;
+	
+	strncpy(BinkFilename, filename, 32);
 
     return BinkMovie_Open(filename);
 }
@@ -422,9 +519,10 @@ BOOL __fastcall BinkMovie_CreateSurface(char * filename, DSurface *surface)
 		return FALSE;
 	}
 	
+    BinkMovie_Close();
+	
     BinkHandle = 0;
     SurfaceFlags = 0;
-    BinkVideoSurface = NULL;
     BinkVideoSurface = surface;
     VideoRect.left = 0;
     VideoRect.top = 0;
@@ -434,6 +532,8 @@ BOOL __fastcall BinkMovie_CreateSurface(char * filename, DSurface *surface)
     IsPlaying = TRUE;
     NewFrame = FALSE;
     LastFrameNum = 0;
+	
+	strncpy(BinkFilename, filename, 32);
 
     return BinkMovie_Open(filename);
 }
@@ -476,4 +576,9 @@ float __fastcall BinkMovie_Set_Master_Volume(float vol)
     float old = BinkMasterVolume;
     BinkMasterVolume = vol;
     return old;
+}
+
+BOOL BinkMovie_File_Loaded()
+{
+	return BinkHandle != 0;
 }

@@ -18,7 +18,7 @@ void __fastcall BinkMovie_Close(void);
 void __fastcall BinkMovie_SetPosition(unsigned x_pos, unsigned y_pos);
 void __fastcall BinkMovie_Go_To_Frame(int frame);
 void __fastcall BinkMovie_Pause(BOOL pause);
-BOOL __fastcall BinkMovie_Has_Frames_Left(void);
+BOOL __fastcall BinkMovie_Has_Finished(void);
 BOOL __fastcall BinkMovie_Open(char * filename);
 BOOL __fastcall BinkMovie_Next_Frame(DSurface * surface, unsigned x_pos, unsigned y_pos);
 BOOL __fastcall BinkMovie_Advance_Frame(void);
@@ -27,6 +27,7 @@ void __fastcall BinkMovie_Render_Frame(DSurface * surface, unsigned x_pos, unsig
 void __fastcall BinkMovie_Destroy(void);
 BOOL __fastcall BinkMovie_ResumePause(void);
 float __fastcall BinkMovie_Set_Master_Volume(float vol);
+BOOL BinkMovie_File_Loaded();
 
 
 //
@@ -34,6 +35,10 @@ float __fastcall BinkMovie_Set_Master_Volume(float vol);
 //
 extern BOOL BinkBreakoutAllowed;
 extern BOOL BinkScaleToFit;
+extern BOOL BinkFullscreenMovie;
+extern BOOL BinkIngameMovie;
+extern BOOL BinkRadarDraw;
+extern char BinkFilename[32];
 
 
 #endif // _BINK_MOVIE_H_
