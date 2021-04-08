@@ -164,6 +164,8 @@ ifdef WWDEBUG
     CFLAGS += -D WWDEBUG
     MP_OBJS        +=  src/debugging_help.o \
 	                   src/tactical_zoom.o
+
+	COMMON_OBJS    +=  src/ts_debug.o
 endif
 
 ifdef STATS
