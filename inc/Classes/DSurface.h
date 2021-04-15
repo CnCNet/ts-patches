@@ -59,4 +59,16 @@ typedef struct DSurface {
 	LPDDSURFACEDESC VideoSurfaceDescription; // Description of the said surface.
 } DSurface;
 
+
+typedef struct BSurface {
+    vtDSurface *vtable;
+    int32_t Width;
+    int32_t Height;
+    int32_t LockLevel;
+    int32_t BitsPerPixel;
+	void *BufferPtr;
+	int32_t BufferSize;
+	char IsAllocated;
+} BSurface;
+
 extern DSurface *PrimarySurface;

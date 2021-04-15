@@ -59,6 +59,9 @@ setcglob 0x007E4058, DynamicVectorClass_AircraftClass
 setcglob 0x007E4858, CurrentObjectsArray
 setcglob 0x007E485C, CurrentObjectsArray_Vector
 setcglob 0x007E4868, CurrentObjectsArray_Count
+setcglob 0x00806DD0, DynamicVectorClass_Movies
+setcglob 0x00806DD4, DynamicVectorClass_Movies_Vector
+setcglob 0x00806DE0, DynamicVectorClass_Movies_ActiveCount
 
 setcglob 0x007B345C, DynamicVectorClass_UnitClass_Array
 setcglob 0x007E2304, DynamicVectorClass_InfantryClass_Array
@@ -186,6 +189,7 @@ setcglob 0x004F0F00, IPXManagerClass__Response_Time
 setcglob 0x004EF040, IPXAddressClass__IPXAddressClass
 setcglob 0x004F07E0, IPXManagerClass__Connection_Name
 
+setcglob 0x007093C0, Radar_Movie_Playing
 setcglob 0x007E250C, MaxAhead
 setcglob 0x007E2524, MaxMaxAhead
 setcglob 0x007E2510, FrameSendRate
@@ -207,6 +211,7 @@ setcglob 0x007E4720, GameOptionsClass_GameSpeed
 setcglob 0x007E474C, GameOptionsClass_VoiceVolume
 setcglob 0x007E473C, GameOptionsClass_ScreenWidth
 setcglob 0x007E4740, GameOptionsClass_ScreenHeight
+setcglob 0x007E4744, GameOptionsClass_StretchMovies
 
 ; Scenario
 setcglob 0x007E28B8, ScenarioName
@@ -276,6 +281,12 @@ setcglob 0x00618050, Tactical_618050
 setcglob 0x0060F3C0, Tactical_AdjustForZ
 setcglob 0x0060F0F0, Tactical_60F0F0
 
+setcglob 0x005BCC40, RadarClass__Play_Movie
+setcglob 0x005BBEE0, RadarClass__Radar_Activate
+setcglob 0x00838038, IngameVQ_Count
+setcglob 0x007497FC, RadarClass_14B4;
+setcglob 0x00749804 ,RadarClass_14BC;
+
 
 ; Statistics
 setcglob 0x007E4FD0, StatisticsPacketSent
@@ -302,6 +313,7 @@ setcglob 0x00474A50, Simple_Text_Print
 setcglob 0x00685BC0, WndProc
 setcglob 0x00865040, MainWindow
 setcglob 0x007E4920, GameInFocus
+setcglob 0x007E48FC, InScenario
 
 ; Sidebar
 setcglob 0x0080C3BC, SidebarClass_Redraw_Buttons
@@ -314,9 +326,19 @@ setcglob 0x005F3560, SidebarClass__Draw_It
 setcglob 0x005F2720, SidebarClass__Init_IO
 setcglob 0x005F2900, SidebarClass__Init_For_House
 
+
 ; Audio
+setcglob 0x00489E30, DSAudio_Set_Volume_All
+setcglob 0x00489F20, DSAudio_Set_Volume_Percent
 setcglob 0x007A27CC, DSAudio_SoundObject
 setcglob 0x007A27DC, DSAudio_AudioDone
+setcglob 0x007A2448, DSAudio
+setcglob 0x00665B20, Is_Speaking
+
+setcglob 0x00806E1C, Current_Movie_Ptr
+setcglob 0x005646E0, MovieClass_Update
+setcglob 0x00563CC0, Movie_Handle_Focus
+
 
 ; Debug
 setcglob 0x007E4903, Debug_Quiet
@@ -484,7 +506,10 @@ setcglob 0x0048C140, DSurface_Conversion_Type
 setcglob 0x0069FAE0, Write_PCX_File
 
 setcglob 0x00563670, Play_Movie
+setcglob 0x00563B00, Play_Ingame_Movie
 setcglob 0x0066B230, VQA_Windows_Message_Loop
+
+setcglob 0x006CAB74, vtBSurface
 
 
 ;Address  Ordinal Name                          Library
