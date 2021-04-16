@@ -64,7 +64,7 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x00701158, {db "CLIFX3",0,0}
 @SET 0x00701164, {db "CLIFX2",0,0}
 @SET 0x00701170, {db "CLIFX1",0,0}
-@SET 0x00706A68, {db "GHV"}
+;@SET 0x00706A68, {db "GHV"}
 @SET 0x0070FEF4, {db "DP2"}
 @SET 0x0070FEF8, {db "DP1"}
 

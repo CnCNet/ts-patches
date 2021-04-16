@@ -145,6 +145,11 @@ TI_OBJS = \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/oil_derricks.o \
 					src/mods/smarter_harvesters.o \
+                    src/mods/sidebar_cameo_sort_helper.o \
+                    src/mods/sidebar_cameo_sort.o \
+                    src/mods/fix_building_damage_state_crash.o \
+                    src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+					src/mods/scriptaction4.o \
                     src/fix_allied_decloaking.o \
                     src/c4_repairable_fix.o \
                     src/force_conversion_type.o \
@@ -167,5 +172,6 @@ TI_OBJS = \
                     src/mods/ti/team_number_position.o \
                     src/mods/ti/waypoint_enhancements.o \
                     src/mods/mechanics.o \
+                    src/mods/smarter_firesale.o \
                     src/replays/replays.o \
                     src/replays/replay_game_patches.o
