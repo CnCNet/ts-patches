@@ -1239,6 +1239,12 @@ Initialize_Spawn:
     cmp dword [SessionType], 0
     jnz .Start_Scenario_NOT_Singleplayer
 
+    ; Show mouse, fix for dropship loadout screen
+    ; The mouse.shp is expected in cache.mix.
+    mov ecx, [0x0074C8F0]
+    mov eax, [ecx]
+    call dword [eax+10h]
+
     ; start scenario for singleplayer
     push 0
     mov edx, 1

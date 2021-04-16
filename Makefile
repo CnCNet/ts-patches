@@ -35,6 +35,10 @@ COMMON_OBJS = \
               src/exception_catch.o \
               src/force_conversion_type.o \
               src/video_mode_hacks.o \
+              src/binkmovie/bink_load_dll.o \
+              src/binkmovie/bink_patches.o \
+              src/binkmovie/bink_asm_patches.o \
+              src/binkmovie/binkmovie.o \
               res/res.o \
               sym.o
 
@@ -164,6 +168,8 @@ ifdef WWDEBUG
     CFLAGS += -D WWDEBUG
     MP_OBJS        +=  src/debugging_help.o \
 	                   src/tactical_zoom.o
+
+	COMMON_OBJS    +=  src/ts_debug.o
 endif
 
 ifdef STATS

@@ -6,11 +6,11 @@ typedef struct DSurface DSurface;
 typedef struct {
     void *DSurface__Destroy;
     void *Dsurface_BlitWhole;
-    void *BlitPart;
+    void (__thiscall *BlitPart)(DSurface *this, RECT *torect, DSurface *fromsurface, RECT *fromrect, bool a4, bool a5);
     void *Blit;
     void *FillRectEx;
     void *FillRect;
-    void *Fill;
+    void (__thiscall *Fill)(DSurface *this, int color);
     void *sub48BCE0;
     void *sub6A7910;
     void *Put_Pixel;
@@ -32,8 +32,8 @@ typedef struct {
     void *Has_Focus;
     void *Is_Locked;
     int32_t (__thiscall *Get_BytesPerPixel)(DSurface *this);
-    void *Get_Pitch;
-    void *Get_Rect;
+    int32_t (__thiscall *Get_Pitch)(DSurface *this);
+    RECT (__thiscall *Get_Rect)(DSurface *this, RECT *__hidden_ret);
     int32_t (__thiscall *Get_Width)(DSurface *this);
     int32_t (__thiscall *Get_Height)(DSurface *this);
     void *sub4901C0;
@@ -55,7 +55,20 @@ typedef struct DSurface {
     char    InVideoMemory;
     char    Unknown;
     char    Unknown2;
-    DDSURFACEDESC *SurfaceDesc;
+	LPDIRECTDRAWSURFACE VideoSurfacePtr; // Pointer to the related direct draw surface.
+	LPDDSURFACEDESC VideoSurfaceDescription; // Description of the said surface.
 } DSurface;
+
+
+typedef struct BSurface {
+    vtDSurface *vtable;
+    int32_t Width;
+    int32_t Height;
+    int32_t LockLevel;
+    int32_t BitsPerPixel;
+	void *BufferPtr;
+	int32_t BufferSize;
+	char IsAllocated;
+} BSurface;
 
 extern DSurface *PrimarySurface;

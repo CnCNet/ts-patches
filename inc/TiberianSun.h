@@ -6,6 +6,7 @@
 #include <windows.h>
 #include "Enums/RTTIType.h"
 #include "Enums/EventTypes.h"
+#include "Enums/KeyboardTypes.h"
 #include "TopLevelTypes.h"
 #include "CommandClasses.h"
 #include "Classes/AbstractClass.h"
@@ -28,8 +29,11 @@
 #include "Classes/EventClass.h"
 #include "Classes/DSurface.h"
 
+#define CLAMP(x, min, max) (x < min ? min : x > max ? max : x)
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
+
+#define GAME_CAMPAIGN 0
 
 // This header works with sym.asm which defines the Vanilla symbols
 // This header will be split up as it becomes larger
@@ -67,6 +71,9 @@ extern CommandClass ToggleInfoPanelCommand;
 extern CommandClass PlaceBuildingCommand;
 extern CommandClass RepeatBuildingCommand;
 extern CommandClass SelectOneLessCommand;
+extern DynamicVectorClass DynamicVectorClass_Movies;
+extern char ** DynamicVectorClass_Movies_Vector;
+extern int DynamicVectorClass_Movies_ActiveCount;
 
 extern bool SpawnerActive;
 extern bool Player_Active;
@@ -94,6 +101,7 @@ extern DynamicVectorClass_Houses HouseClassArray;
 extern SessionClass SessionType;
 extern SessionClass SessionClass_this;
 extern WWKeyboardClass *WWKeyboard;
+extern WWMouseClass *WWMouse;
 extern uint32_t ForceFire1;
 extern uint32_t ForceFire2;
 extern MessageListClass MessageListClass_this;
@@ -108,6 +116,7 @@ extern DSurface *SidebarSurface;
 extern DSurface *TempSurface;
 extern DSurface *CompositeSurface;
 extern DSurface *AlternateSurface;
+extern DSurface *HiddenSurface;
 extern StripClass RIGHT_STRIP;
 extern StripClass LEFT_STRIP;
 extern Rect SidebarLoc;
@@ -133,9 +142,23 @@ extern int32_t DoingAutoSS;
 extern int DumpDebugInfoFrame;
 extern int GameSpeed;
 extern int GameOptionsClass_GameSpeed;
+extern int GameOptionsClass_VoiceVolume;
+extern int GameOptionsClass_ScreenWidth;
+extern int GameOptionsClass_ScreenHeight;
+extern bool GameOptionsClass_StretchMovies;
 extern int RequestedFPS;
 extern int NormalizedDelayGameSpeed;
 extern int ScenarioInit;
+extern int GameInFocus;
+extern HWND MainWindow;
+extern bool Debug_Quiet;
+extern bool Radar_Movie_Playing;
+extern int IngameVQ_Count;
+extern int DSAudio;
+extern void *Current_Movie_Ptr;
+extern int RadarClass_14B4;
+extern int RadarClass_14BC;
+extern bool InScenario;
 
 // ### Functions ###
 void Queue_Options();
@@ -148,6 +171,11 @@ void   __thiscall FileClass__dtor(FileClass *fileClass);
 int    __thiscall FileClass__Write(FileClass *fileClass, void *buf, size_t len);
 bool   __thiscall FileClass__Open(FileClass *fileClass, int mode);
 
+void   __thiscall RawFileClass__RawFileClass(RawFileClass *rawfile, char *name);
+bool   __thiscall RawFileClass__Is_Available(RawFileClass *rawfile, bool force);
+bool   __thiscall RawFileCalss__Create(RawFileClass *rawfile);
+void   __thiscall RawFileClass__Destroy(RawFileClass *rawfile);
+
 void   __thiscall CCFileClass__CCFileClass(CCFileClass *ccfile, char *name);
 bool   __thiscall CCFileClass__Is_Available(CCFileClass *ccfile, bool force);
 size_t __thiscall CCFileClass__Size(CCFileClass *ccfile);
@@ -156,7 +184,6 @@ int    __thiscall CCFileClass__Write(CCFileClass *fileClass, void *buf, size_t l
 void   __thiscall CCFileClass__Destroy(CCFileClass *ccfile);
 bool   __thiscall CCFileClass__Open(CCFileClass *fileClass, int mode);
 void   __thiscall CCFileClass__Close(CCFileClass);
-bool   __thiscall RawFileCalss__Create(RawFileClass *file);
 
 bool __thiscall INIClass__GetBool(INIClass iniClass, char *section, char *key, bool defaultValue);
 int  __thiscall INIClass__GetInt(INIClass iniClass, char *section, char *key, int defaultValue);
@@ -194,13 +221,26 @@ void MapClass__Reveal_The_Map();
 void __thiscall MapClass__Fill_Map_With_Fog(MouseClass *this);
 void __thiscall GScreenClass__Input(MouseClass *Map, int, int, int);
 void __thiscall GScreenClass__Render(MouseClass *Map);
-void __thiscall GScreenClass__Flag_To_Redraw(MouseClass *Map);
+void __thiscall GScreenClass__Flag_To_Redraw(MouseClass *Map, int flag);
+void __fastcall GScreenClass__Do_Blit(bool a1, DSurface *surface, bool a2);
 void __thiscall SidebarClass__StripClass__Flag_To_Redraw(void *this);
 void __thiscall SidebarClass__Blit(void *this, char a2);
 void __thiscall SidebarClass__Draw_It(MouseClass *Map, char a2);
 void __thiscall SidebarClass__Init_IO(MouseClass *this);
 void __thiscall SidebarClass__Init_For_House(MouseClass *this);
 void __thiscall DisplayClass__Init_IO(void *this);
+void __thiscall RadarClass__Play_Movie(MouseClass *this);
+void __thiscall RadarClass__Radar_Activate(MouseClass *this, int a2);
+
+void __fastcall Play_Movie(char *filename, int theme, bool a3, bool a4, bool a5);
+void __fastcall Play_Ingame_Movie(int vqtype);
+
+void __thiscall DSAudio_Set_Volume_All(int this, int vol);
+int __thiscall DSAudio_Set_Volume_Percent(int this, int percent);
+bool __fastcall Is_Speaking(void);
+
+void __fastcall Emergency_Exit();
+void __cdecl exit(int code);
 
 extern __fastcall void
 CC_Draw_Shape(DSurface *surface, void *palette, Image *image, int32_t frame,
@@ -265,9 +305,24 @@ void *__cdecl operator_new(size_t size);
 void __cdecl operator_delete(void *memory);
 
 bool __thiscall WWKeyboardClass__Down(WWKeyboardClass *this, uint32_t key);
+void __thiscall WWKeyboardClass__Clear(WWKeyboardClass *this);
+unsigned short __thiscall WWKeyboardClass__Check(WWKeyboardClass *this);
+unsigned short __thiscall WWKeyboardClass__Get(WWKeyboardClass *this);
 void __fastcall PrettyPrintKey(int16_t code, char *buf);
 
+void __thiscall WWMouseClass__Show_Mouse(WWMouseClass *this);
+void __thiscall WWMouseClass__Hide_Mouse(WWMouseClass *this);
+
+bool __fastcall MixFileClass__Offset(const char * filename, void ** realptr, MixFileClass ** mixfile, long * offset, long * size);
+
+bool __fastcall VQA_Windows_Message_Loop(void);
+
+void __fastcall MovieClass_Update(void);
+void __fastcall Movie_Handle_Focus(bool state);
+
 void __thiscall Print_CRCs(int a1);
+
+RECT __fastcall Rect_Intersect(RECT *rect1, RECT *rect2, int *x, int *y);
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -281,7 +336,11 @@ void WWDebug_Printf(char *fmt, ...);
 int32_t __thiscall Random2Class__operator(void *self, int32_t a2, int32_t a3);
 int32_t _sprintf(char *dest, char *format, ...);
 size_t __strcmpi(const char *, const char *);
-//void *memcpy(char *dest, const char *src, size_t len);
+char *__cdecl strncpy(char *Dest, const char *Source, size_t Count);
+
+
+extern const int vtBSurface;
+
 // ### Variables ###
 
 extern bool VideoWindowed;
@@ -334,3 +393,8 @@ LONG WINAPI Top_Level_Exception_Filter(struct _EXCEPTION_POINTERS *ExceptionInfo
 LONG __fastcall PrintException(int id, struct _EXCEPTION_POINTERS *ExceptionInfo);
 
 void *new(int32_t);
+
+#include <dsound.h>
+		
+extern LPDIRECTSOUND DSAudio_SoundObject;
+extern bool DSAudio_AudioDone;

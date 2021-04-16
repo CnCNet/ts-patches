@@ -76,7 +76,7 @@ TSCLIENT_OBJS = \
                     src/text_triggers.o \
                     src/attack_neutral_units.o \
                     src/mouse_always_in_focus.o \
-                    src/waypoint_enhancements.o \
+                    src/mods/tsclient/waypoint_enhancements.o \
                     src/easy_shroud.o \
                     src/new_search_dir.o \
                     src/override_colors.o \
@@ -125,6 +125,9 @@ TSCLIENT_OBJS = \
                     src/mods/fix_score_logging_typo.o \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/sideindex_improvements_v2.o \
+                    src/mods/buildconst_harvesterunit_baseunit.o \
+                    src/mods/horv_via_undeploysinto.o \
+                    src/mods/tsclient/ts_hacks.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/tsclient/logger.o \
                     src/mods/tsclient/filename_hacks.o \
@@ -136,6 +139,12 @@ TSCLIENT_OBJS = \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/freeunit_enhancements.o \
+                    src/isomappack5_limit_extend.o \
+                    src/tileset255_bridgerepairfix.o \
+                    src/mods/tsclient/move_team_group_number.o \
+                    src/mods/smarter_harvesters.o \
+                    src/mods/sidebar_cameo_sort_helper.o \
+                    src/mods/tsclient/sidebar_cameo_sort.o \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \

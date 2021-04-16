@@ -74,6 +74,9 @@ cextern FileClass__Is_Available
 cextern FileClass__Open
 cextern FileClass__Close
 cextern FileClass__Write
+cextern RawFileClass__FileClass
+cextern RawFileClass__Is_Available
+cextern RawFileClass__Destroy
 cextern CCFileClass__CCFileClass
 cextern CCFileClass__Destroy
 
@@ -261,6 +264,9 @@ cextern VisibleRect__Width
 cextern VisibleRect__Height
 cextern WWKeyboard
 cextern WWKeyboardClass__Down
+cextern WWKeyboardClass__Clear
+cextern WWKeyboardClass__Check
+cextern WWKeyboardClass__Get
 cextern Left_Shift_Key
 cextern Right_Shift_Key
 cextern Left_Alt_Key
