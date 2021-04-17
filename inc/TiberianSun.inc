@@ -42,6 +42,8 @@ cextern EasyShroud
 cextern AutoSaveGame
 cextern NextAutoSave
 cextern NormalizedDelayGameSpeed;
+cextern GameOptionsClass_ScreenWidth;
+cextern GameOptionsClass_ScreenHeight;
 
 cextern CoachMode
 cextern HouseClass__Is_Ally_Or_Spec_HH

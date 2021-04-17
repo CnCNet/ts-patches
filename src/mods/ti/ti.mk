@@ -161,6 +161,7 @@ TI_OBJS = \
                     src/mods/no_crate_respawn_with_crates_disabled.o \
                     src/mods/ti/team_number_position.o \
                     src/mods/ti/waypoint_enhancements.o \
+                    src/enforce_lower_resolution_limit.o \
                     src/binkmovie/bink_load_dll.o \
                     src/binkmovie/bink_patches.o \
                     src/binkmovie/bink_asm_patches.o \
