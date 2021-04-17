@@ -7,7 +7,7 @@ typedef struct {
     void *DSurface__Destroy;
     void *Dsurface_BlitWhole;
     void (__thiscall *BlitPart)(DSurface *this, RECT *torect, DSurface *fromsurface, RECT *fromrect, bool a4, bool a5);
-    void *Blit;
+    void (__thiscall *BlitClip)(DSurface *this, RECT *toclip, RECT *torect, DSurface *fromsurface, RECT *fromclip, RECT *fromrect, bool a4, bool a5);
     void *FillRectEx;
     void *FillRect;
     void (__thiscall *Fill)(DSurface *this, int color);

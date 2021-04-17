@@ -22,24 +22,24 @@ cextern IngameVQ_Count
 ;
 _Windows_Procedure_Should_Blit_Patch_asm_patch:
 	cmp byte [InScenario], 1
-	jnz .move_update
+	jnz .movie_update
 
 	mov edx, dword [BinkFullscreenMovie]
 	test edx, edx
-	jnz .move_update
+	jnz .movie_update
 
 	mov edx, dword [Current_Movie_Ptr]
 	test edx, edx
-	jnz .move_update
+	jnz .movie_update
 
 	mov edx, dword [IngameVQ_Count]
 	cmp edx, 1
-	jge .move_update
+	jge .movie_update
 	
 	; Blit game layer.
 	mov eax, dword [CompositeSurface]
 	jmp 0x00685CC2
 	
 	; Update a movie
-.move_update:
+.movie_update:
 	jmp 0x00685CEE

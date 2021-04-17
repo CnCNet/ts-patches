@@ -28,38 +28,48 @@ MainLoop_AfterRender(MessageListClass *msg) {
 	MessageListClass__Manage(msg);
 
 	if (SpawnerActive) {
-		if (PlayerPtr->Defeated == true && HaventSetSpecTeam) {
-			set_team_spec();
-			HaventSetSpecTeam = false;
-		}
+		
+		if (SessionClass_this.GameSession != 0) { // GAME_CAMPAIGN
+		
+			if (PlayerPtr->Defeated == true && HaventSetSpecTeam) {
+				set_team_spec();
+				HaventSetSpecTeam = false;
+			}
 
-		if (IntegrateMumbleSun && IntegrateMumbleSpawn) {
-			updateMumble();
-		}
+			if (IntegrateMumbleSun && IntegrateMumbleSpawn) {
+				updateMumble();
+			}
 
-		if (IsHost &&
-			AutoSaveGame > 0 && Frame >= NextAutoSave)
-		{
-			NextAutoSave = Frame + AutoSaveGame;
-			EventClass e;
-			EventClass__EventClass_noarg(&e, PlayerPtr->ID, EVENTTYPE_SAVEGAME);
-			EventClass__EnqueueEvent(&e);
-		}
+			if (IsHost &&
+				AutoSaveGame > 0 && Frame >= NextAutoSave)
+			{
+				NextAutoSave = Frame + AutoSaveGame;
+				EventClass e;
+				EventClass__EventClass_noarg(&e, PlayerPtr->ID, EVENTTYPE_SAVEGAME);
+				EventClass__EnqueueEvent(&e);
+			}
 
-		if (UseProtocolZero && Frame >= ResponseTimeFrame)
-		{
-			ResponseTimeFrame = Frame + ResponseTimeInterval;
-			Send_Response_Time();
-		}
+			if (UseProtocolZero && Frame >= ResponseTimeFrame)
+			{
+				ResponseTimeFrame = Frame + ResponseTimeInterval;
+				Send_Response_Time();
+			}
 
-		if (RunAutoSS && SessionClass_this.GameSession == 3 && Frame > NextAutoSS)
-		{
-			DoingAutoSS = 1;
-			ScreenCaptureCommandClass_Execute();
-			DoingAutoSS = 0;
-			NextAutoSS = Frame + AutoSSInterval * 60; //60fps
-			if (AutoSSInterval < AutoSSIntervalMax)
-				AutoSSInterval += AutoSSGrowth;
+			if (RunAutoSS && SessionClass_this.GameSession == 3 && Frame > NextAutoSS)
+			{
+				DoingAutoSS = 1;
+				ScreenCaptureCommandClass_Execute();
+				DoingAutoSS = 0;
+				NextAutoSS = Frame + AutoSSInterval * 60; //60fps
+				if (AutoSSInterval < AutoSSIntervalMax)
+					AutoSSInterval += AutoSSGrowth;
+			}
+			
+			if (DumpDebugInfoFrame == Frame)
+			{
+				Print_CRCs(0);
+			}
+			
 		}
 
 		if (DoScreenshotOnceThenExit && DoScreenshotOnceThenExitFrame == Frame)
@@ -73,11 +83,6 @@ MainLoop_AfterRender(MessageListClass *msg) {
 
 		if (ReplayPlayback) {
 			Replay_Read_Frame_Func();
-		}
-
-		if (DumpDebugInfoFrame == Frame)
-		{
-			Print_CRCs(0);
 		}
 	}
 }
