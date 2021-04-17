@@ -40,5 +40,8 @@ extern BOOL BinkIngameMovie;
 extern BOOL BinkRadarDraw;
 extern char BinkFilename[32];
 
+extern int BinkXPos;
+extern int BinkYPos;
+
 
 #endif // _BINK_MOVIE_H_
