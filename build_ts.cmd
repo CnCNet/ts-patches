@@ -3,5 +3,6 @@ REM
 REM cnc-patch environment config
 REM
 set PATH=C:\win-builds-patch-32\bin
-gmake clean tibsun.exe
+gmake clean
+gmake tibsun.exe
 pause

@@ -157,3 +157,14 @@ TO_OBJS = \
                     src/write_jpg_png.o \
                     src/replays/replays.o \
                     src/replays/replay_game_patches.o \
+                    src/binkmovie/bink_load_dll.o \
+                    src/binkmovie/bink_patches.o \
+                    src/binkmovie/bink_asm_patches.o \
+                    src/binkmovie/binkmovie.o \
+					
+ifdef WWDEBUG
+                    NFLAGS += -D WWDEBUG
+                    CFLAGS += -D WWDEBUG
+
+                    TO_OBJS +=  src/ts_debug.o
+endif

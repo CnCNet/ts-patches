@@ -161,3 +161,14 @@ TI_OBJS = \
                     src/mods/no_crate_respawn_with_crates_disabled.o \
                     src/mods/ti/team_number_position.o \
                     src/mods/ti/waypoint_enhancements.o \
+                    src/binkmovie/bink_load_dll.o \
+                    src/binkmovie/bink_patches.o \
+                    src/binkmovie/bink_asm_patches.o \
+                    src/binkmovie/binkmovie.o \
+					
+ifdef WWDEBUG
+                    NFLAGS += -D WWDEBUG
+                    CFLAGS += -D WWDEBUG
+
+                    TI_OBJS +=  src/ts_debug.o
+endif
