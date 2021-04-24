@@ -66,7 +66,7 @@ hack 0x0065648F
     cmp  eax, 1
     jne  .Restore_Original_Value_And_Return
     
-.Post_Ally_Check
+.Post_Ally_Check:
     ; Check if the object under the cursor is a unit
     mov  edx, [ebx]      ; object vtbl
     mov  ecx, ebx        ; object pointer
@@ -120,7 +120,7 @@ hack 0x0065648F
     cmp  ecx, 1
     je   .NoEnter        ; We're commanding a vehicle transport, jump out
     
-.Transmit_Message
+.Transmit_Message:
     ; Transmit message
     mov  edx, [esi]
     push ebx              ; pointer to object to transfer message to
@@ -274,7 +274,7 @@ hack 0x0065159C
     ; We're too far away from the transport
     jmp 0x00651631
 
-.Check_If_Talking_To_Transport
+.Check_If_Talking_To_Transport:
     ; Check if we are in radio contact with a transport
     test esi, esi
     jz   0x00651631
