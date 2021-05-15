@@ -142,6 +142,7 @@ DTA_OBJS = \
                     src/mods/dta/mechanics.o \
                     src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
                     src/mods/dta/extra_difficulty.o \
+                    src/mods/dta/change_projectile_degeneration_speed.o \
                     src/mods/smarter_firesale.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
