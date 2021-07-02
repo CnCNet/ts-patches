@@ -189,7 +189,7 @@ hack 0x0042694A
     jz   .Original_Behaviour
     jmp  0x0042697B ; Skip check
     
-.Original_Behaviour
+.Original_Behaviour:
     mov  eax, [ScenarioInit]
     test eax, eax
     jnz  0x00426962
@@ -275,7 +275,7 @@ hack 0x004A49A3
     je   .Check_For_Harvester
     jmp  .Original_Code
     
-.Check_For_Harvester
+.Check_For_Harvester:
     mov  edx, esi
     mov  eax, [edx+360h] ; UnitClass->Class
     mov  cl, [eax+48Eh]  ; UnitTypeClass.Harvester

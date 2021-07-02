@@ -165,15 +165,8 @@ BOOL __fastcall Play_Ingame_Movie_As_Bink(char *filename)
 	// Destroy any existing movie playing.
 	BinkMovie_Close();
 
-	// Create an instance of the Bink video player, drawing is
-	// handled elsewhere for ingame movies.
-	//BinkMovie_CreateSurface(filename, SidebarSurface);
-	BinkMovie_CreateSurface(filename, PrimarySurface);
-	
-	if (!BinkMovie_File_Loaded()) {
-		BinkMovie_Close();
-		return FALSE;
-	}
+	// Tell the player that this is a ingame/radar movie.
+	BinkIngameMovie = TRUE;
 	
 	// Fixup position.
 	int radar_movie_width = 140;
@@ -181,15 +174,22 @@ BOOL __fastcall Play_Ingame_Movie_As_Bink(char *filename)
 	int xpos = ((SidebarSurface->Width-radar_movie_width)/2)+1;
 	int ypos = 27;
 	
-	// We draw to primary now, so we need to do an absolute adjustment.
-	xpos = xpos + (PrimarySurface->Width-SidebarSurface->Width);
+	BinkXPos = xpos;
+	BinkYPos = ypos;
+
+	// Create an instance of the Bink video player, drawing is
+	// handled elsewhere for ingame movies.
+	BinkMovie_CreateSurface(filename, SidebarSurface);
+	//BinkMovie_CreateSurface(filename, PrimarySurface);
 	
-	BinkMovie_SetPosition(xpos, ypos);
+	if (!BinkMovie_File_Loaded()) {
+		BinkMovie_Close();
+		BinkIngameMovie = FALSE;
+		return FALSE;
+	}
 	
 	// To make sure the video doesnt stop when the user presses the ESC key.
 	BinkBreakoutAllowed = FALSE;
-	
-	BinkIngameMovie = TRUE;
 	
 	return TRUE;
 }
@@ -289,6 +289,52 @@ void RadarClass_Play_Bink_Movie()
 		
 		BinkMovie_Advance_Frame();
 		
+		//
+		// Fixes an issue with some cnc-ddraw setups not redrawing the
+		// sidebar when a movie is playing.
+		//
+		{
+			RECT dest_rect;
+			dest_rect.left = PrimarySurface->Width-SidebarSurface->Width;
+			dest_rect.top = 0;
+			dest_rect.right = SidebarSurface->Width;
+			dest_rect.bottom = SidebarSurface->Height;
+			
+			RECT dest_clip;
+			dest_clip.left = PrimarySurface->Width-SidebarSurface->Width;
+			dest_clip.top = 0;
+			dest_clip.right = SidebarSurface->Width;
+			dest_clip.bottom = 160;
+			
+			RECT sidebar_rect;
+			sidebar_rect.left = 0;
+			sidebar_rect.top = 0;
+			sidebar_rect.right = SidebarSurface->Width;
+			sidebar_rect.bottom = SidebarSurface->Height;
+			
+			RECT sidebar_clip;
+			sidebar_clip.left = 0;
+			sidebar_clip.top = 0;
+			sidebar_clip.right = SidebarSurface->Width;
+			sidebar_clip.bottom = 160;
+			
+			//WWDebug_Printf("Radar: Before forced blit.\n");
+		
+			PrimarySurface->vtable->BlitPart(
+					PrimarySurface,
+					&dest_rect,
+					SidebarSurface,
+					&sidebar_rect,
+					false,
+					true
+				);
+				
+			//WWDebug_Printf("Radar: After forced blit.\n");
+				
+			WWMouseClass__Show_Mouse(WWMouse);
+			GScreenClass__Flag_To_Redraw(&MouseClass_Map, 2);
+		}
+		
 		//WWDebug_Printf("Radar: After BinkMovie_Advance_Frame.\n");
 		
 		BinkRadarDraw = FALSE;
@@ -342,6 +388,8 @@ bool Windows_Procedure_Is_Movie_Playing_Intercept()
 void MovieClass_Update_Intercept()
 {
 	if (BinkFullscreenMovie) {
+		
+		WWDebug_Printf("MovieClass_Update_Intercept: Clearing HiddenSurface.\n");
 
 		//
 		// Clear the surfaces, this fixes a issue were the game
@@ -355,9 +403,9 @@ void MovieClass_Update_Intercept()
 	} else if (BinkIngameMovie) {
 		
 		if (!BinkMovie_Has_Finished()) {
-			//WWDebug_Printf("MovieClass_Update_Intercept: Before BinkMovie_Draw_Frame.\n");
+			WWDebug_Printf("MovieClass_Update_Intercept: Before BinkMovie_Draw_Frame.\n");
 			BinkMovie_Draw_Frame();
-			//WWDebug_Printf("MovieClass_Update_Intercept: After BinkMovie_Draw_Frame.\n");
+			WWDebug_Printf("MovieClass_Update_Intercept: After BinkMovie_Draw_Frame.\n");
 		} else {
 			// Cleanup bink movie the player.
 			BinkMovie_Close();

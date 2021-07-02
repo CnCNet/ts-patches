@@ -24,6 +24,9 @@ BOOL BinkIngameMovie = FALSE;
 BOOL BinkRadarDraw = FALSE;
 char BinkFilename[32];
 
+int BinkXPos = 0;
+int BinkYPos = 0;
+
 
 // Required to make reference to fake virtual table offset.
 static int vtBSurface_ref = 0x006CAB74;
@@ -64,6 +67,11 @@ void __fastcall BinkMovie_Close(void)
         CloseHandle(FileHandle);
         FileHandle = INVALID_HANDLE_VALUE;
     }
+	
+    VideoRect.left = 0;
+    VideoRect.top = 0;
+    VideoRect.right = 0;
+    VideoRect.bottom = 0;
 	
     BinkVideoSurface = NULL;
 	BinkFilename[0] = '\0';
@@ -190,20 +198,20 @@ BOOL __fastcall BinkMovie_Open(char * filename)
 			BinkVideoSurface = PrimarySurface;
 		}
 		
-		int x = 0;
-		int y = 0;
-		
 		//
-		// Center video in the main window.
+		// Center video in the main window. If this is a ingame movie
+		// we are creating, you must set the position before creating
+		// the movie instance!
 		//
 		if (!BinkIngameMovie) {
 			RECT rect;
 			GetClientRect(MainWindow, &rect);
-			x = (rect.right - rect.left - BinkHandle->Width) / 2;
-			y = (rect.bottom - rect.top - BinkHandle->Height) / 2;
+			int x = (rect.right - rect.left - BinkHandle->Width) / 2;
+			int y = (rect.bottom - rect.top - BinkHandle->Height) / 2;
+			BinkMovie_SetPosition(x, y);
+		} else {
+			BinkMovie_SetPosition(BinkXPos, BinkYPos);
 		}
-		
-		BinkMovie_SetPosition(x, y);
 		
 		if (!BinkIngameMovie) {
 			
@@ -266,6 +274,10 @@ BOOL __fastcall BinkMovie_Open(char * filename)
 						VideoScaledRect.left, VideoScaledRect.top, VideoScaledRect.right, VideoScaledRect.bottom);
 				
 			}
+		} else {
+			
+			WWDebug_Printf("BinkMovie_Open() - VideoRect: %d,%d,%d,%d\n",
+					VideoRect.left, VideoRect.top, VideoRect.right, VideoRect.bottom);
 		}
 
         //
@@ -470,6 +482,7 @@ void __fastcall BinkMovie_Render_Frame(DSurface * surface, unsigned x_pos, unsig
 		if (buffptr) {
 
 			//WWDebug_Printf("BinkMovie_Render_Frame() - About to call BinkCopyToBuffer.\n");
+			//WWDebug_Printf("BinkMovie_Render_Frame() - FrameNum: %d.\n", BinkHandle->FrameNum);
 			
 			//
 			// Copy the decompressed frame into the surface buffer (this might be currently on-screen).
@@ -524,10 +537,6 @@ BOOL __fastcall BinkMovie_CreateSurface(char * filename, DSurface *surface)
     BinkHandle = 0;
     SurfaceFlags = 0;
     BinkVideoSurface = surface;
-    VideoRect.left = 0;
-    VideoRect.top = 0;
-    VideoRect.right = 0;
-    VideoRect.bottom = 0;
     FileHandle = INVALID_HANDLE_VALUE;
     IsPlaying = TRUE;
     NewFrame = FALSE;

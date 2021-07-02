@@ -142,6 +142,7 @@ DTA_OBJS = \
                     src/mods/dta/mechanics.o \
                     src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
                     src/mods/dta/extra_difficulty.o \
+                    src/mods/dta/change_projectile_degeneration_speed.o \
                     src/mods/smarter_firesale.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
@@ -179,4 +180,15 @@ DTA_OBJS = \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
                     src/replays/replays.o \
-                    src/replays/replay_game_patches.o
+                    src/replays/replay_game_patches.o \
+                    src/binkmovie/bink_load_dll.o \
+                    src/binkmovie/bink_patches.o \
+                    src/binkmovie/bink_asm_patches.o \
+                    src/binkmovie/binkmovie.o \
+					
+ifdef WWDEBUG
+                    NFLAGS += -D WWDEBUG
+                    CFLAGS += -D WWDEBUG
+
+                    DTA_OBJS +=  src/ts_debug.o
+endif

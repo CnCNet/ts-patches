@@ -4,5 +4,5 @@ REM cnc-patch environment config
 REM
 set PATH=C:\win-builds-patch-32\bin
 gmake clean
-gmake tibsun.exe
+gmake WWDEBUG=1 tsclientgame.exe
 pause
