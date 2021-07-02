@@ -133,7 +133,7 @@ DTA_OBJS = \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/change_score_screen_music.o \
                     src/mods/dta/cloakstop_to_toobigforcarryalls.o \
-                    src/mods/dta/oil_derricks.o \
+                    src/mods/oil_derricks.o \
                     src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
                     src/mods/dta/tiberium_damage.o \
                     src/mods/dta/unit_self_heal_repair_step.o \
