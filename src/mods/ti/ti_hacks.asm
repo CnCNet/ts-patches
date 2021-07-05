@@ -57,7 +57,6 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x0068621A, push str_TILong
 @SET 0x006862BD, push str_TILong
 @SET 0x006862C2, push str_TILong
-
 @SET 0x006CA940, {db "TEM",0,0,0,0,0}
 @SET 0x006F99C4, {db "ENDING"}
 @SET 0x006F99D8, {db "CREDITS.TXT",0}
@@ -65,16 +64,15 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x00701158, {db "CLIFX3",0,0}
 @SET 0x00701164, {db "CLIFX2",0,0}
 @SET 0x00701170, {db "CLIFX1",0,0}
-@SET 0x00706A68, {db "GHV"}
+;@SET 0x00706A68, {db "GHV"}
 @SET 0x0070FEF4, {db "DP2"}
 @SET 0x0070FEF8, {db "DP1"}
 
-@SET 0x006F99CC, {db "UIColor2",0}
-@SET 0x0070CAD8, {db "UIColor3",0}
-@SET 0x0070E0CC, {db "UIColor4",0}
+;Ion Storm warning speech frequency
+@SET 0x004ED5AA, {db 0x4E, 0x01}
 
-; Increase max. bounces of elastic projectiles to 127
-@SET 0x00445516, {db 0x7F}
+; Increase max. bounces of elastic projectiles
+;@SET 0x00445516, {db 0x04}	;commented out, causes issues with projectiles on high bridges
 
 ; Change the distribution of cluster weapons (only inner spread radius is changed, for now)
 ;@SET 0x004465D6, {db 0x02} ; outer spread radius in leptons
@@ -88,6 +86,9 @@ sstring str_DarkRed, "DarkRed"
 ; Don't add random extra cash to the money crate value specified in Rules.ini (disabled, but listed for future use)
 ;@CLEAR 0x0045839D, 0x90, 0x004583A3
 ;@SET 0x0045839D, {lea edx, [eax]}
+
+; Change subterranean horizontal movement speed
+@SET 0x006D8A9E, {db 0x29}
 
 ; Erase NAWALL and GAWALL
 @SET 0x00710DA4, {db 0,0,0,0,0,0}

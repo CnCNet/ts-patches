@@ -2,6 +2,7 @@
 TI_OBJS = \
                     src/mods/ti/res/res.o \
                     src/main_menu_cursor_bug.o \
+					src/chat_ignore.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -131,6 +132,7 @@ TI_OBJS = \
                     src/mods/horv_via_undeploysinto.o \
                     src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
+                    src/mods/fix_burst_exploit.o \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/dont_save_without_all_players.o \
                     src/mods/max_pip_counts.o \
@@ -141,6 +143,13 @@ TI_OBJS = \
                     src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/scrap_metal_explosion.o \
+                    src/mods/oil_derricks.o \
+					src/mods/smarter_harvesters.o \
+                    src/mods/sidebar_cameo_sort_helper.o \
+                    src/mods/sidebar_cameo_sort.o \
+                    src/mods/fix_building_damage_state_crash.o \
+                    src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+					src/mods/scriptaction4.o \
                     src/fix_allied_decloaking.o \
                     src/c4_repairable_fix.o \
                     src/force_conversion_type.o \
@@ -156,11 +165,16 @@ TI_OBJS = \
                     src/mods/ti/alt_to_undeploy.o \
                     src/mods/ti/hack_house_from_house_type.o \
                     src/vinifera_unhardcode.o \
+					src/tileset255_bridgerepairfix.o \
                     src/mods/buildconst_harvesterunit_baseunit.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/no_crate_respawn_with_crates_disabled.o \
                     src/mods/ti/team_number_position.o \
                     src/mods/ti/waypoint_enhancements.o \
+                    src/mods/mechanics.o \
+                    src/mods/smarter_firesale.o \
+                    src/replays/replays.o \
+                    src/replays/replay_game_patches.o \
                     src/binkmovie/bink_load_dll.o \
                     src/binkmovie/bink_patches.o \
                     src/binkmovie/bink_asm_patches.o \

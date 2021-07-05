@@ -133,13 +133,13 @@ DTA_OBJS = \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/change_score_screen_music.o \
                     src/mods/dta/cloakstop_to_toobigforcarryalls.o \
-                    src/mods/dta/oil_derricks.o \
+                    src/mods/oil_derricks.o \
                     src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
                     src/mods/dta/tiberium_damage.o \
                     src/mods/dta/unit_self_heal_repair_step.o \
                     src/mods/dta/vehicle_transports.o \
                     src/mods/dta/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o \
-                    src/mods/dta/mechanics.o \
+                    src/mods/mechanics.o \
                     src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
                     src/mods/dta/extra_difficulty.o \
                     src/mods/dta/change_projectile_degeneration_speed.o \
