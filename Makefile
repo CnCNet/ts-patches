@@ -158,9 +158,11 @@ MP_OBJS          = \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/replays/replays.o \
-		    src/replays/replay_game_patches.o \
+                    src/replays/replay_game_patches.o \
                     src/write_jpg_png.o \
-
+                    src/mods/oil_derricks.o \
+                    src/mods/dta/cloakstop_to_toobigforcarryalls.o \
+                    src/mods/dta/vehicle_transports.o \
 
 
 ifdef WWDEBUG
