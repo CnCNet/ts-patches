@@ -44,7 +44,8 @@ MainLoop_AfterRender(MessageListClass *msg) {
 				updateMumble();
 			}
 
-			if (IsHost &&
+			if (IsHost && 
+                SessionClass_this.GameSession != 5 && // disable for GAME_SKIRMISH
 				AutoSaveGame > 0 && Frame >= NextAutoSave)
 			{
 				NextAutoSave = Frame + AutoSaveGame;

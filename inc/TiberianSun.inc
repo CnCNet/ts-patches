@@ -41,6 +41,7 @@ cextern TournamentGame
 cextern EasyShroud
 cextern AutoSaveGame
 cextern NextAutoSave
+cextern NextSPAutoSaveId
 cextern NormalizedDelayGameSpeed;
 
 cextern CoachMode
