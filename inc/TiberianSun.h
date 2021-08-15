@@ -322,6 +322,8 @@ void __fastcall Movie_Handle_Focus(bool state);
 
 void __thiscall Print_CRCs(int a1);
 
+bool __fastcall Save_Game(const char *file_name, const char *descr, bool bargraph);
+
 RECT __fastcall Rect_Intersect(RECT *rect1, RECT *rect2, int *x, int *y);
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

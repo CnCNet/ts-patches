@@ -229,6 +229,7 @@ setcglob 0x007E4394, ScenarioInit
 
 ; Save games
 setcglob 0x005D6910, Load_Game
+setcglob 0x005D4FE0, Save_Game
 
 ; Mouse
 setcglob 0x0074C8F0, WWMouseClas_Mouse
