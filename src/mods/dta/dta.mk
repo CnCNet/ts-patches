@@ -18,6 +18,7 @@ DTA_OBJS = \
                     src/remove_16bit_windowed_check.o \
                     src/hp03.o \
                     src/fix_mouse_not_found_error.o \
+                    src/fix_houseclass_checksws_crash.o \
                     src/single-proc-affinity.o \
                     src/graphics_patch.o \
                     src/no_window_frame.o \
