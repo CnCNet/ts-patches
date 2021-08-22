@@ -118,12 +118,6 @@ sstring str_DarkRed, "DarkRed"
 ;; "Some change in code calling to SendDlgItemMessageA" - techlevel slider limit??
 @SET 0x0057C932, push 70001h
 
-;; IsScoreShuffle on by default
-@SET 0x005899F1, {mov byte [eax+35h], 1} ;byte ptr
-@SET 0x005899F5, nop
-@SET 0x005899F6, nop
-@SET 0x005899F7, nop
-
 ;; Disable dialog "slide-open" sound effect
 @SJMP 0x00593DBF, 0x00593DF9 ; jmp short loc_593DF9
 
@@ -165,7 +159,7 @@ sstring str_DarkRed, "DarkRed"
 
 ; Load speech MIX files for new sides properly
 @SET 0x005DD822, {xor ecx, ecx}
-@CLEAR 0x005DD822, 0x90, 0x005DD828
+@CLEAR 0x005DD824, 0x90, 0x005DD828
 @SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 
 ; AI starting units will start in Unload mode instead of Area Guard mode (was 05 for Guard mode)

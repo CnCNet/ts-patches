@@ -140,12 +140,6 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x00589972, {mov [eax+19h], cl}
 @SET 0x00589975, {mov [eax+1Ah], cl}
 ;
-;; IsScoreShuffle on by default
-@SET 0x005899F1, {mov byte [eax+35h], 1} ;byte ptr
-@SET 0x005899F5, nop
-@SET 0x005899F6, nop
-@SET 0x005899F7, nop
-;
 ;; Disable dialog "slide-open" sound effect
 @SJMP 0x00593DBF, 0x00593DF9 ; jmp short loc_593DF9
 ;
