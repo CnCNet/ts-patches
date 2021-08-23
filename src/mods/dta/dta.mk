@@ -161,7 +161,6 @@ DTA_OBJS = \
                     src/mods/buildconst_harvesterunit_baseunit.o \
                     src/mods/max_pip_counts.o \
                     src/mods/sideindex_improvements_v2.o \
-                    src/mods/fix_score_logging_typo.o \
                     src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/fix_burst_exploit.o \
                     src/mods/smarter_harvesters.o \
@@ -176,7 +175,6 @@ DTA_OBJS = \
                     src/c4_repairable_fix.o \
                     src/no_charge_power_needed.o\
                     src/video_mode_hacks.o \
-                    src/fix_mission_restart_difficulty_bug.o \
                     src/cache_alot.o \
                     src/config.o \
                     src/multiple_factory_hack.o \
