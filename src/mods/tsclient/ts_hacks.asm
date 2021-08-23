@@ -2,7 +2,7 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-sstring str_TSCLong, "TS Client"
+sstring str_TSCLong, "Tiberian Sun"
 sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianSun.exe and click Save in the Options menu."
 
 ; String references
