@@ -154,7 +154,7 @@ Toggle_Control(EventClass *e)
 
 
 void    __thiscall GrantControl_nothing(void *a) { }
-char *  __thiscall GrantControl_Description(void *a) { return "Grant's shared unit control to an ally. Select a unit of your ally and press this key to grant unit control"; }
+char *  __thiscall GrantControl_Description(void *a) { return "Grants shared unit control to an ally. Select a unit of your ally and press this key to grant unit control"; }
 char *  __thiscall GrantControl_INIname(void *a)     { return "GrantControl"; }
 char *  __thiscall GrantControl_Category(void *a)    { return "Control"; }
 char *  __thiscall GrantControl_Name(void *a)        { return "GrantControl"; }
