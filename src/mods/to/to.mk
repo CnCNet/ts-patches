@@ -161,6 +161,24 @@ TO_OBJS = \
                     src/binkmovie/bink_patches.o \
                     src/binkmovie/bink_asm_patches.o \
                     src/binkmovie/binkmovie.o \
+					src/fix_houseclass_checksws_crash.o \
+					src/paradrop.o \
+					src/alt_to_undeploy.o \
+					src/hack_house_from_house_type.o \
+					src/mods/oil_derricks.o \
+					src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
+					src/mods/dta/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o \
+					src/mods/mechanics.o \
+					src/mods/smarter_firesale.o \
+					src/mods/dont_replace_player_name_with_computer.o \
+					src/mods/no_crate_respawn_with_crates_disabled.o \
+					src/mods/fix_burst_exploit.o \
+					src/mods/smarter_harvesters.o \
+                    src/mods/sidebar_cameo_sort_helper.o \
+                    src/mods/sidebar_cameo_sort.o \
+                    src/mods/fix_building_damage_state_crash.o \
+                    src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+					src/no_charge_power_needed.o\
 					
 ifdef WWDEBUG
                     NFLAGS += -D WWDEBUG
