@@ -26,7 +26,6 @@
 #include "Classes/FootClass.h"
 #include "Classes/AircraftClass.h"
 #include "Classes/StripClass.h"
-#include "Classes/EventClass.h"
 #include "Classes/DSurface.h"
 
 #define CLAMP(x, min, max) (x < min ? min : x > max ? max : x)
@@ -133,11 +132,6 @@ extern int32_t FrameSendRate;
 extern bool QuickMatch;
 extern bool UsePNG;
 extern bool RunAutoSS;
-extern bool DoScreenshotOnceThenExit;
-extern int DoScreenshotOnceThenExitFrame;
-extern bool ReplayRecording;
-extern bool ReplayPlayback;
-extern char ReplayName[1024];
 extern int32_t DoingAutoSS;
 extern int DumpDebugInfoFrame;
 extern int GameSpeed;
@@ -258,9 +252,6 @@ void  __thiscall CommandDestroy(void *a, char b);
 
 void ScreenCaptureCommandClass_Execute();
 void Write_PCX_File(CCFileClass *ccFile, DSurface *surface, void *palette);
-
-bool __stdcall Write_Event_To_Replay_File(EventClass *e);
-void Replay_Read_Frame_Func();
 
 void ShowInfo(DSurface *s, Rect *l);
 int32_t ResponseTimeFunc(int32_t a);

@@ -26,10 +26,9 @@ int32_t AutoSSInterval = 4;
 int32_t AutoSSGrowth = 4;
 int32_t AutoSSIntervalMax = 30;
 
-
 void __thiscall
 MainLoop_AfterRender(MessageListClass *msg) {
-	MessageListClass__Manage(msg);
+  MessageListClass__Manage(msg);
 
 	if (SpawnerActive) {
 		
@@ -69,12 +68,7 @@ MainLoop_AfterRender(MessageListClass *msg) {
 				if (AutoSSInterval < AutoSSIntervalMax)
 					AutoSSInterval += AutoSSGrowth;
 			}
-			
-			if (DumpDebugInfoFrame == Frame)
-			{
-				Print_CRCs(0);
-			}
-			
+
 		}
         else {
             // Auto-save for singleplayer missions
@@ -105,18 +99,6 @@ MainLoop_AfterRender(MessageListClass *msg) {
                 }
             }
         }
-        
-		if (DoScreenshotOnceThenExit && DoScreenshotOnceThenExitFrame == Frame)
-		{
-			MapClass__Reveal_The_Map();
-			GScreenClass__Render(&MouseClass_Map);
-			ScreenCaptureCommandClass_Execute();
-			Queue_Exit();
-			//Exit_Process();
-		}
 
-		if (ReplayPlayback) {
-			Replay_Read_Frame_Func();
-		}
 	}
 }

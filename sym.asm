@@ -146,7 +146,6 @@ setcglob 0x008670BC, WOL_SERVER_PORT ; Hijacking this for Mumble
 setcglob 0x00493E40, EventClass__EventClass_PlayerID
 setcglob 0x00493DE0, EventClass__EventClass_noarg
 setcglob 0x004940A0, EventClass__EventClass_produce
-setcglob 0x00494280, EventClass__EventClass_Execute
 setcglob 0x005B1210, Queue_Exit
 setcglob 0x007B3530, DoList
 setcglob 0x007E15F8, OutList
@@ -375,7 +374,6 @@ setcglob 0x006B72CC, malloc
 setcglob 0x006B7F72, realloc
 setcglob 0x006B6A2E, fopen
 setcglob 0x006B6944, fclose
-setcglob 0x006BC288, fflush 
 
 ; winapi
 setcglob 0x006B4D6C, sendto
