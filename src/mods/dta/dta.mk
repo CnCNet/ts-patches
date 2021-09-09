@@ -163,7 +163,6 @@ DTA_OBJS = \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/ai_target_emp_like_multimissile.o \
                     src/mods/fix_burst_exploit.o \
-                    src/mods/smarter_harvesters.o \
                     src/mods/sidebar_cameo_sort_helper.o \
                     src/mods/sidebar_cameo_sort.o \
                     src/mods/fix_building_damage_state_crash.o \
