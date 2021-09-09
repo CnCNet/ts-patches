@@ -187,7 +187,7 @@ DTA_OBJS = \
                     src/binkmovie/binkmovie.o \
                     src/isomappack5_limit_extend.o \
                     src/tileset255_bridgerepairfix.o \
-					
+
 ifdef WWDEBUG
                     NFLAGS += -D WWDEBUG
                     CFLAGS += -D WWDEBUG
