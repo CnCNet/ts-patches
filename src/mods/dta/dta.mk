@@ -9,7 +9,6 @@ DTA_OBJS = \
                     src/IonBlastClass_crash.o \
                     src/singleplayer_objects_on_multiplayer_map_crash.o \
                     src/laser_draw_it_crash.o \
-                    src/no_blowfish_dll.o \
                     src/high_res_crash.o \
                     src/disable_max_windowed_mode.o \
                     src/disable_dpi_scaling.o \
@@ -88,8 +87,6 @@ DTA_OBJS = \
                     src/minimap_crash.o \
                     src/buildingtype_initialization.o \
                     src/ionstorm_jumpjet_crash.o \
-                    src/harvesters_autoharvest.o \
-                    src/harvesters_guardcommand.o \
                     src/flickering_shadow_fix.o \
                     src/destroytrigger_crash.o \
                     src/voxelanim_damage_bug.o \
@@ -118,23 +115,18 @@ DTA_OBJS = \
                     src/hotkey_help.o \
                     src/recon_kick.o \
                     src/buildlimit_fix.o \
-                    src/random_loop_delay.o \
                     src/draw_all_action_lines.o \
                     src/radar_event_hacks.o \
                     src/aircraft_repair.o \
                     src/rage_quit.o \
                     src/scrollrate_fix.o \
                     src/minimum_burst.o \
-                    src/rules_process.o \
                     src/mods/dta/dta_hacks.o \
-                    src/mods/dta/logger.o \
                     src/mods/dta/auto_deploy_mcv.o \
                     src/mods/dta/ingame_ui_text_color.o \
                     src/mods/dta/remove_ion_storm_effects.o \
                     src/mods/dta/scrap_metal_explosion.o \
                     src/mods/dta/change_score_screen_music.o \
-                    src/mods/dta/cloakstop_to_toobigforcarryalls.o \
-                    src/mods/oil_derricks.o \
                     src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
                     src/mods/dta/tiberium_damage.o \
                     src/mods/dta/unit_self_heal_repair_step.o \
@@ -150,12 +142,9 @@ DTA_OBJS = \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
                     src/mods/airtransport_undeployable_on_helipads.o \
-                    src/mods/no_insignificant_death_announcement.o \
                     src/mods/multi_engineer_ignore_neutral.o \
                     src/mods/saved_games_in_subdir.o \
                     src/mods/no_sidecd_mix.o \
-                    src/mods/horv_via_undeploysinto.o \
-                    src/mods/screenshots_in_subdir.o \
                     src/mods/disable_file_checks.o \
                     src/mods/no_crate_respawn_with_crates_disabled.o \
                     src/mods/buildconst_harvesterunit_baseunit.o \
@@ -178,9 +167,8 @@ DTA_OBJS = \
                     src/config.o \
                     src/multiple_factory_hack.o \
                     src/freeunit_enhancements.o \
-                    3rdparty/s_floorf.o \
-                    3rdparty/lodepng.o \
-                    src/write_jpg_png.o \
+                    src/replays/replays.o \
+                    src/replays/replay_game_patches.o \
                     src/binkmovie/bink_load_dll.o \
                     src/binkmovie/bink_patches.o \
                     src/binkmovie/bink_asm_patches.o \
