@@ -159,7 +159,6 @@ MP_OBJS          = \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
                     src/mods/oil_derricks.o \
-                    src/mods/dta/cloakstop_to_toobigforcarryalls.o \
 
 
 ifdef WWDEBUG
