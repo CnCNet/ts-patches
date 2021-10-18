@@ -3,7 +3,7 @@ TSCLIENT_OBJS = \
                     src/mods/tsclient/res/res.o \
                     src/main_menu_cursor_bug.o \
                     src/tiberium_on_slope_crash.o \
-					src/chat_ignore.o \
+                    src/chat_ignore.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
                     src/singleplayer_objects_on_multiplayer_map_crash.o \
@@ -150,6 +150,35 @@ TSCLIENT_OBJS = \
                     src/write_jpg_png.o \
                     src/replays/replays.o \
                     src/replays/replay_game_patches.o \
+                    src/mods/dont_save_without_all_players.o \
+                    src/basic_theme_fix.o \
+                    src/harvesters_guardcommand.o \
+                    src/flickering_shadow_fix.o \
+                    src/veterancy_from_allies.o \
+                    src/mods/tiberium4_blocks_infantry.o \
+                    src/spy_fix.o \
+                    src/paradrop.o \
+                    src/hack_house_from_house_type.o \
+                    src/minimum_burst.o \
+                    src/mods/dta/cloakstop_to_toobigforcarryalls.o \
+                    src/mods/dta/oil_derricks.o \
+                    src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
+                    src/mods/dta/unit_self_heal_repair_step.o \
+                    src/mods/dta/vehicle_transports.o \
+                    src/mods/dta/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o \
+                    src/mods/dta/mechanics.o \
+                    src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
+                    src/mods/smarter_firesale.o \
+                    src/mods/dont_replace_player_name_with_computer.o \
+                    src/mods/no_crate_respawn_with_crates_disabled.o \
+                    src/mods/max_pip_counts.o \
+                    src/mods/ai_target_emp_like_multimissile.o \
+                    src/mods/fix_burst_exploit.o \
+                    src/mods/fix_building_damage_state_crash.o \
+                    src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+                    src/c4_repairable_fix.o \
+                    src/no_charge_power_needed.o\
+                    src/video_mode_hacks.o \
                     src/binkmovie/bink_load_dll.o \
                     src/binkmovie/bink_patches.o \
                     src/binkmovie/bink_asm_patches.o \

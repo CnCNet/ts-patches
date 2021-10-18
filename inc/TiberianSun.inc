@@ -13,7 +13,6 @@ cextern hook_wwdebug_printf
 cextern AddressList
 
 
-
 ; Session
 cextern SessionClass_this
 cextern SessionClass__Create_Connections
@@ -41,7 +40,7 @@ cextern TournamentGame
 cextern EasyShroud
 cextern AutoSaveGame
 cextern NextAutoSave
-cextern NormalizedDelayGameSpeed;
+cextern NextSPAutoSaveId
 
 cextern CoachMode
 cextern HouseClass__Is_Ally_Or_Spec_HH
@@ -79,11 +78,6 @@ cextern RawFileClass__Is_Available
 cextern RawFileClass__Destroy
 cextern CCFileClass__CCFileClass
 cextern CCFileClass__Destroy
-
-;replays
-cextern Write_Event_To_Replay_File
-cextern Replay_Read_Frame_Func
-cextern Write_Chat_To_Replay
 
 cextern Extended_Events
 
@@ -223,7 +217,6 @@ cextern read_tut_from_map
 cextern OutOfSync
 cextern MapSnapshot_Execute
 cextern UsePNG
-cextern GameOptionsClass_GameSpeed
 
 cextern Init_Network
 cextern NameNodes_CurrentSize
@@ -231,7 +224,6 @@ cextern HumanPlayers
 cextern EventClass__EventClass_PlayerID
 cextern EventClass__EventClass_noarg
 cextern EventClass__EnqueueEvent
-cextern EventClass__EventClass_Execute
 cextern Queue_Exit
 cextern EventType_Offset
 cextern Print_CRCs

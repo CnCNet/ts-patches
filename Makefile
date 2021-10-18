@@ -157,10 +157,8 @@ MP_OBJS          = \
                     src/isomappack5_limit_extend.o \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
-                    src/replays/replays.o \
-		    src/replays/replay_game_patches.o \
                     src/write_jpg_png.o \
-
+                    src/mods/oil_derricks.o \
 
 
 ifdef WWDEBUG

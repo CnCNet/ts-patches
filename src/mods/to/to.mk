@@ -2,7 +2,7 @@
 TO_OBJS = \
                     src/mods/to/res/res.o \
                     src/main_menu_cursor_bug.o \
-					src/chat_ignore.o \
+                    src/chat_ignore.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -161,6 +161,28 @@ TO_OBJS = \
                     src/binkmovie/bink_patches.o \
                     src/binkmovie/bink_asm_patches.o \
                     src/binkmovie/binkmovie.o \
+                    src/fix_houseclass_checksws_crash.o \
+                    src/paradrop.o \
+                    src/alt_to_undeploy.o \
+                    src/hack_house_from_house_type.o \
+                    src/mods/oil_derricks.o \
+                    src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
+                    src/mods/dta/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o \
+                    src/mods/mechanics.o \
+                    src/mods/smarter_firesale.o \
+                    src/mods/dont_replace_player_name_with_computer.o \
+                    src/mods/no_crate_respawn_with_crates_disabled.o \
+                    src/mods/fix_burst_exploit.o \
+                    src/mods/smarter_harvesters.o \
+                    src/mods/sidebar_cameo_sort_helper.o \
+                    src/mods/sidebar_cameo_sort.o \
+                    src/mods/fix_building_damage_state_crash.o \
+                    src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+                    src/no_charge_power_needed.o\
+                    src/tiberium_stuff.o \
+                    src/isomappack5_limit_extend.o \
+                    src/tileset255_bridgerepairfix.o \
+                    src/mods/tsclient/move_team_group_number.o \
 					
 ifdef WWDEBUG
                     NFLAGS += -D WWDEBUG

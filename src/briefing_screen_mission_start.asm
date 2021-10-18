@@ -42,9 +42,10 @@ _Start_Scenario_Print_Difficulty_And_Force_Briefing_Screen:
 
     ; Print difficulty
 	pushad
-    mov eax, dword [SelectedDifficulty]
+    mov ecx, [ScenarioStuff]
+    mov eax, dword [ecx+0x60C]  ; Scenario.CDifficulty (aka DifficultyModeComputer)
 
-    cmp eax, 2
+    cmp eax, 0
     je .Print_Hard
     
     cmp eax, 1

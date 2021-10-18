@@ -9,7 +9,6 @@ cglobal Load_Spectators_Spawner
 
 cextern INIClass_SPAWN
 cextern SpawnerActive
-cextern ReplayPlayback
 
 section .bss
     IsSpectatorArray           RESD 8
@@ -25,29 +24,6 @@ section .rdata
     str_Multi7          db "Multi7",0
     str_Multi8          db "Multi8",0
     str_IsSpectator     db "IsSpectator",0
-
-
-hack 0x005BC108 
-_sub_5BC080_Deactivate_Radar:
-	mov ecx, [PlayerPtr]
-	call HouseClass__Is_Spectator
-	cmp al, 1
-	jz .Ret
-
-	mov dword [esi+14B4h], 2
-.Ret:
-	jmp 0x005BC112 
-
-hack 0x05BC011 
-_Set_Zoom_Mode_Deactivate_Radar:
-	mov ecx, [PlayerPtr]
-	call HouseClass__Is_Spectator
-	cmp al, 1
-	jz .Ret
-
-	mov dword [esi+14B4h], 2
-.Ret:
-	jmp 0x005BC01B
 
 hack 0x0047988B
 _DisplayClass__Encroach_Shadow_Spectator:
@@ -143,15 +119,11 @@ _sub_4C9560_Spectator_Stuff:
     cmp dword [PlayerPtr], esi
     jnz .Ret
 
-	cmp byte [ReplayPlayback], 1
-	jz .Activate_Radar
-
     mov esi, [PlayerPtr]
     mov esi, [esi+0x20]
     cmp dword [IsSpectatorArray+esi*4], 1
     jz .Ret
 
-.Activate_Radar:
     call 0x005BC080
     jmp 0x004C9693
 
@@ -178,15 +150,11 @@ _HouseClass__AI_Spectator_Stuff:
     jnz .Ret
 
 
-	cmp byte [ReplayPlayback], 1
-	jz .Reveal_Map
-
     mov ecx, [PlayerPtr]
     mov ecx, [ecx+0x20]
     cmp dword [IsSpectatorArray+ecx*4], 0
     jz .Ret
 
-.Reveal_Map:
     mov byte [0x00749808], 1
 
     push 1
@@ -215,9 +183,6 @@ _sub_5B9B90_Set_Up_Spectator_Player_Stuff:
 
     mov byte [SpectatorStuffInit], 0
 
-	cmp byte [ReplayPlayback], 1
-	jz .Reveal_Map2
-
     mov  ecx, [PlayerPtr]
     call HouseClass__Is_Coach
     test al, al
@@ -232,7 +197,6 @@ _sub_5B9B90_Set_Up_Spectator_Player_Stuff:
     cmp byte [ecx+0x0CB], 1
     jnz .Ret
 
-.Reveal_Map2:
     mov dword [Message_Input_Player_Dead], 1
 
     mov ecx, MouseClass_Map

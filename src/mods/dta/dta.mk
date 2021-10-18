@@ -3,7 +3,7 @@ DTA_OBJS = \
                     src/mods/dta/res/res.o \
                     src/main_menu_cursor_bug.o \
                     src/mods/dont_save_without_all_players.o \
-					src/chat_ignore.o \
+                    src/chat_ignore.o \
                     src/tiberium_on_slope_crash.o \
                     src/no_movie_and_score_mix_dependency.o \
                     src/IonBlastClass_crash.o \
@@ -18,6 +18,7 @@ DTA_OBJS = \
                     src/remove_16bit_windowed_check.o \
                     src/hp03.o \
                     src/fix_mouse_not_found_error.o \
+                    src/fix_houseclass_checksws_crash.o \
                     src/single-proc-affinity.o \
                     src/graphics_patch.o \
                     src/no_window_frame.o \
@@ -185,6 +186,8 @@ DTA_OBJS = \
                     src/binkmovie/bink_patches.o \
                     src/binkmovie/bink_asm_patches.o \
                     src/binkmovie/binkmovie.o \
+                    src/isomappack5_limit_extend.o \
+                    src/tileset255_bridgerepairfix.o \
 					
 ifdef WWDEBUG
                     NFLAGS += -D WWDEBUG
