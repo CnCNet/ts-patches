@@ -162,7 +162,7 @@ TI_OBJS = \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
-                    src/mods/ti/alt_to_undeploy.o \
+                    src/alt_to_undeploy.o \
                     src/mods/ti/hack_house_from_house_type.o \
                     src/vinifera_unhardcode.o \
 					src/tileset255_bridgerepairfix.o \
