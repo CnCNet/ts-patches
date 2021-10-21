@@ -6,7 +6,8 @@
  * into the global CommandClass vector and those are then loaded in
  * Load_Keyboard_Hotkeys
  */
-CALL(0x004E6FA9, _HookInitCommands);
+// Vinifera hijacks this address, we instead call HookInitCommands from hotkeys_asm.asm instead now
+// CALL(0x004E6FA9, _HookInitCommands);
 
 void __stdcall
 HookInitCommands() {
@@ -16,7 +17,7 @@ HookInitCommands() {
                                  &TextBackgroundColorCommand,
                                  &GrantControlCommand,
                                  &ToggleInfoPanelCommand,
-                                 &PlaceBuildingCommand,
+                                 // &PlaceBuildingCommand, implemented in Vinifera
                                  &RepeatBuildingCommand,
                                  &ShowHelpCommand,
                                  &SelectOneLessCommand,

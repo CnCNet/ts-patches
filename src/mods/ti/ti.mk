@@ -64,6 +64,7 @@ TI_OBJS = \
                     src/mpdebug.o \
                     src/Hook_Main_Loop.o \
                     src/hotkeys.o \
+                    src/hotkeys_asm.o \
                     src/chatallies.o \
                     src/disable_alt_tab.o \
                     src/spawner/auto_ally_by_spawn_loc.o \
