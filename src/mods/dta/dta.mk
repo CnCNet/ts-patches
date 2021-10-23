@@ -152,6 +152,7 @@ DTA_OBJS = \
                     src/mods/max_pip_counts.o \
                     src/mods/sideindex_improvements_v2.o \
                     src/mods/ai_target_emp_like_multimissile.o \
+                    src/mods/ai_target_chemmissile_like_multimissile.o \
                     src/mods/fix_burst_exploit.o \
                     src/mods/sidebar_cameo_sort_helper.o \
                     src/mods/sidebar_cameo_sort.o \
