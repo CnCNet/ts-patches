@@ -148,8 +148,6 @@ TSCLIENT_OBJS = \
                     3rdparty/s_floorf.o \
                     3rdparty/lodepng.o \
                     src/write_jpg_png.o \
-                    src/replays/replays.o \
-                    src/replays/replay_game_patches.o \
                     src/mods/dont_save_without_all_players.o \
                     src/basic_theme_fix.o \
                     src/harvesters_guardcommand.o \

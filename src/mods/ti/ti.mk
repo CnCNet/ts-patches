@@ -173,8 +173,6 @@ TI_OBJS = \
                     src/mods/ti/waypoint_enhancements.o \
                     src/mods/mechanics.o \
                     src/mods/smarter_firesale.o \
-                    src/replays/replays.o \
-                    src/replays/replay_game_patches.o \
                     src/binkmovie/bink_load_dll.o \
                     src/binkmovie/bink_patches.o \
                     src/binkmovie/bink_asm_patches.o \
