@@ -159,11 +159,11 @@ TSCLIENT_OBJS = \
                     src/hack_house_from_house_type.o \
                     src/minimum_burst.o \
                     src/mods/dta/cloakstop_to_toobigforcarryalls.o \
-                    src/mods/dta/oil_derricks.o \
+                    src/mods/oil_derricks.o \
                     src/mods/dta/add_animation_to_factories_without_weaponsfactory.o \
                     src/mods/dta/unit_self_heal_repair_step.o \
                     src/mods/dta/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o \
-                    src/mods/dta/mechanics.o \
+                    src/mods/mechanics.o \
                     src/mods/dta/no_guard_cursor_for_repair_vehicles.o \
                     src/mods/smarter_firesale.o \
                     src/mods/dont_replace_player_name_with_computer.o \
