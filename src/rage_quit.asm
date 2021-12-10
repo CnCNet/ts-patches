@@ -8,21 +8,33 @@
 section .text
 _Handle_ALT_F4_Rage_Quit:
         cmp dword ecx, VK_F4
-        jnz 0x00685FA0          ; Go to Keyboard stuff
+        jnz 0x00685FA0              ; Go to Keyboard stuff
+        
+        cmp dword [SessionType], 0  ; Skip for singleplayer
+        jz  0x00685FA0              ; Go to Keyboard stuff
 
         pusha
         call Queue_RemovePlayer
         call Queue_Exit
         popa
-        jmp 0x00685E44          ; Return 0 from Windows_Procedure
+        jmp 0x00685E44              ; Return 0 from Windows_Procedure
+
 
 hack 0x00685E50
 _Handle_X_Close:
+
         pusha
+        cmp dword [SessionType], 0  ; Skip for singleplayer
+        jz  .NoRemovePlayer
+        
         call Queue_RemovePlayer
+        
+.NoRemovePlayer:
+
         call Queue_Exit
         popa
         jmp hackend
+        
 
 section .text
 Queue_RemovePlayer:
