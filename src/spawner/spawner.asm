@@ -60,6 +60,11 @@ cextern AutoSurrender
 @LJMP 0x005DBCC3, _Read_Scenario_Custom_Load_Screen_Spawner
 @LJMP 0x005DD523, _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting
 
+@LJMP 0x005DB415, _Start_Scenario_Assign_Global_Flags
+; Stop EndGameClass_Apply from overwriting global variable values set by our code on scenario start
+; We know them better
+@CLEAR 0x00493932, 0x90, 0x00493939
+
 ;always write mp stats
 @CLEAR 0x0046353C, 0x90, 0x00463542
 
@@ -882,6 +887,18 @@ Assign_Scenario_Global_Flags_From_Spawner_Global_Flags:
     pop  ebx
     
     retn
+
+
+; Assigns client-defined global flag values on scenario start, hooked to 0x005DB415
+_Start_Scenario_Assign_Global_Flags:
+    call Assign_Scenario_Global_Flags_From_Spawner_Global_Flags
+    
+    ; original code
+    mov  ecx, 0x007E4720   ; "this" pointer, GameOptionsClass Options
+    call 0x0058A4E0        ; void __thiscall GameOptionsClass.Set(void)
+    
+    ; continue scenario initialization
+    jmp  0x005DB41A
     
 
 Load_SPAWN_INI:
@@ -1281,7 +1298,6 @@ Initialize_Spawn:
     mov edx, 1
     mov ecx, ScenarioName
     call Start_Scenario
-    call Assign_Scenario_Global_Flags_From_Spawner_Global_Flags
 
     jmp .Past_Start_Scenario
 
