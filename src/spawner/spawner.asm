@@ -30,6 +30,7 @@ cextern AutoDeployMCV
 cextern SharedControl
 cextern SkipScoreScreen
 cextern AutoSurrender
+cextern SkipBriefingOnMissionStart
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -1262,6 +1263,7 @@ Initialize_Spawn:
     mov dword [HumanPlayers], eax
 
     SpawnINI_Get_Bool str_Settings, str_LoadSaveGame, 0
+    mov byte [SkipBriefingOnMissionStart], al
     cmp al, 0
     jz  .Dont_Load_Savegame
 
