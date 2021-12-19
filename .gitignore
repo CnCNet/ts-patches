@@ -3,12 +3,20 @@ tibsun.exe
 dta.exe
 ti.exe
 singleplayer.exe
+online.exe
 tsclientgame.exe
 dtagame.exe
 tigame.exe
 togame.exe
+
 # *local* configuration file, seriously
 config.mk
 custom.mk
 test.cmd
 
+# Build output directories.
+build/
+
+# Win builds temp directory
+win-builds/
+win-builds-32/
