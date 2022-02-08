@@ -30,6 +30,7 @@ cextern AutoDeployMCV
 cextern SharedControl
 cextern SkipScoreScreen
 cextern AutoSurrender
+cextern SkipBriefingOnMissionStart
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -59,6 +60,11 @@ cextern AutoSurrender
 @LJMP 0x0065860D, _UnitClass__Read_INI_Jump_Out_When_Units_Section_Missing
 @LJMP 0x005DBCC3, _Read_Scenario_Custom_Load_Screen_Spawner
 @LJMP 0x005DD523, _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting
+
+@LJMP 0x005DB415, _Start_Scenario_Assign_Global_Flags
+; Stop EndGameClass_Apply from overwriting global variable values set by our code on scenario start
+; We know them better
+@CLEAR 0x00493932, 0x90, 0x00493939
 
 ;always write mp stats
 @CLEAR 0x0046353C, 0x90, 0x00463542
@@ -92,6 +98,8 @@ section .bss
     SaveGameLoadPathWide       RESB 512
     SaveGameLoadPath           RESB 256
     SpawnerTeamName            RESB 128
+    
+    GlobalFlags                RESB 50
 
 gstring MapHash, "", 256
 
@@ -235,6 +243,9 @@ section .rdata
     str_SaveGameFolderFormat2   db"Saved Games\SAVE%04lX.%3s",0
     str_SaveGamesFolder        db"Saved Games",0
 
+    str_GlobalFlags       db "GlobalFlags",0
+    str_GlobalFlagFormat  db "GlobalFlag%d",0
+    
     str_bue_li24_pcx      db"bue_li24.pcx",0
     str_bue_mi24_pcx      db"bue_mi24.pcx",0
     str_bue_ri24_pcx      db"bue_ri24.pcx",0
@@ -736,7 +747,7 @@ Load_House_Handicaps_Spawner:
     mov dword [HouseHandicapsArray+28], eax
 
     retn
-
+    
 _Read_Scenario_INI_Assign_Houses_And_Spawner_House_Settings:
     pushad
     call Assign_Houses
@@ -806,6 +817,90 @@ _Read_Scenario_INI_Assign_Houses_And_Spawner_House_Settings:
 .Ret:
     popad
     jmp 0x005E08E8
+
+
+Load_Global_Flags_Spawner:
+    ; we use ebx for global flag index counter
+    push ebx
+    
+    ; create stack space for buffer
+    sub  esp, 100
+    
+    xor  ebx, ebx
+
+.loop_begin:
+
+    ; sprintf arguments
+    lea  ecx, [esp+50]
+    push dword ebx            ; global flag index
+    push str_GlobalFlagFormat ; global flag format string pointer
+    push ecx                  ; output buffer address
+    
+    call _sprintf
+    add esp, 0x0C
+    
+    lea eax, [esp+50]
+    
+    ; the SpawnINI_Get_Bool macro doesn't replace eax before it gets used, so this should be fine
+    SpawnINI_Get_Bool str_GlobalFlags, eax, 0
+    
+    ; set global flag value
+    mov  ecx, GlobalFlags
+    add  ecx, ebx
+    mov  [ecx], ax
+    
+    cmp  ebx, 49
+    jge  .end
+    inc  ebx
+    jmp .loop_begin
+    
+.end:
+    add esp, 100
+    pop ebx
+    
+    retn
+
+
+Assign_Scenario_Global_Flags_From_Spawner_Global_Flags:
+    push ebx
+    
+    ; init ebx to be the global counter
+    xor  ebx, ebx
+    
+.loop_begin:
+    
+    ; load value of global from our spawner data
+    xor  edx, edx
+    lea  eax, [GlobalFlags+ebx]
+    mov  dl, byte [eax]
+    
+    ; assign value of global to in-game data
+    mov   eax, [ScenarioStuff]
+    imul  ecx, ebx, 29h
+    mov   [eax+ecx+0D90h], dl
+    
+    cmp  ebx, 49
+    jge  .end
+    inc  ebx
+    jmp .loop_begin
+    
+.end:
+    pop  ebx
+    
+    retn
+
+
+; Assigns client-defined global flag values on scenario start, hooked to 0x005DB415
+_Start_Scenario_Assign_Global_Flags:
+    call Assign_Scenario_Global_Flags_From_Spawner_Global_Flags
+    
+    ; original code
+    mov  ecx, 0x007E4720   ; "this" pointer, GameOptionsClass Options
+    call 0x0058A4E0        ; void __thiscall GameOptionsClass.Set(void)
+    
+    ; continue scenario initialization
+    jmp  0x005DB41A
+    
 
 Load_SPAWN_INI:
 %push
@@ -888,7 +983,9 @@ Initialize_Spawn:
     call Load_House_Handicaps_Spawner
     call Load_Spawn_Locations_Spawner
     call Load_Spectators_Spawner
-
+    
+    call Load_Global_Flags_Spawner
+    
     mov byte [GameActive], 1 ; needs to be set here or the game gets into an infinite loop trying to create spawning units
 
     ; set session
@@ -1166,6 +1263,7 @@ Initialize_Spawn:
     mov dword [HumanPlayers], eax
 
     SpawnINI_Get_Bool str_Settings, str_LoadSaveGame, 0
+    mov byte [SkipBriefingOnMissionStart], al
     cmp al, 0
     jz  .Dont_Load_Savegame
 
