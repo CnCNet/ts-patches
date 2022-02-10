@@ -10,8 +10,14 @@ gmake clean singleplayer.exe
 gmake -j4 singleplayer.exe
 move /Y singleplayer.exe ./build/singleplayer.exe
 
+set /P c=Generate debug executable [Y/N]?
+if /I "%c%" EQU "N" goto :exit
+
 gmake clean singleplayer.exe
 gmake -j4 WWDEBUG=1 singleplayer.exe
 move /Y singleplayer.exe ./build/singleplayer_debug.exe
 
 pause
+
+:exit
+exit

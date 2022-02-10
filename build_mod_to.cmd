@@ -10,8 +10,14 @@ gmake clean togame.exe
 gmake -j4 togame.exe
 move /Y togame.exe ./build/togame.exe
 
+set /P c=Generate debug executable [Y/N]?
+if /I "%c%" EQU "N" goto :exit
+
 gmake clean togame.exe
 gmake -j4 WWDEBUG=1 STATS=1 togame.exe
 move /Y togame.exe ./build/togame_debug.exe
 
 pause
+
+:exit
+exit

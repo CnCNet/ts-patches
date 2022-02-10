@@ -10,8 +10,14 @@ gmake clean tigame.exe
 gmake -j4 tigame.exe
 move /Y tigame.exe ./build/tigame.exe
 
+set /P c=Generate debug executable [Y/N]?
+if /I "%c%" EQU "N" goto :exit
+
 gmake clean tigame.exe
 gmake -j4 WWDEBUG=1 tigame.exe
 move /Y tigame.exe ./build/tigame_debug.exe
 
 pause
+
+:exit
+exit
