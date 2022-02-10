@@ -173,6 +173,7 @@ TSCLIENT_OBJS = \
                     src/mods/fix_burst_exploit.o \
                     src/mods/fix_building_damage_state_crash.o \
                     src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+                    src/mods/fix_unitclass_can_enter_cell_ignoring_terraintype_immunity.o \
                     src/c4_repairable_fix.o \
                     src/no_charge_power_needed.o\
                     src/video_mode_hacks.o \

@@ -176,6 +176,7 @@ TO_OBJS = \
                     src/mods/sidebar_cameo_sort.o \
                     src/mods/fix_building_damage_state_crash.o \
                     src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+                    src/mods/fix_unitclass_can_enter_cell_ignoring_terraintype_immunity.o \
                     src/no_charge_power_needed.o\
                     src/tiberium_stuff.o \
                     src/isomappack5_limit_extend.o \

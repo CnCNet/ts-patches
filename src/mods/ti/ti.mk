@@ -149,6 +149,7 @@ TI_OBJS = \
                     src/mods/sidebar_cameo_sort.o \
                     src/mods/fix_building_damage_state_crash.o \
                     src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+                    src/mods/fix_unitclass_can_enter_cell_ignoring_terraintype_immunity.o \
 					src/mods/scriptaction4.o \
                     src/fix_allied_decloaking.o \
                     src/c4_repairable_fix.o \

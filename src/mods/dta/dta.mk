@@ -145,6 +145,7 @@ DTA_OBJS = \
                     src/mods/dta/extra_difficulty.o \
                     src/mods/dta/change_projectile_degeneration_speed.o \
                     src/mods/dta/dump_globals.o \
+                    src/mods/fix_unitclass_can_enter_cell_ignoring_terraintype_immunity.o \
                     src/mods/smarter_firesale.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
