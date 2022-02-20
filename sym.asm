@@ -18,6 +18,7 @@ setcglob 0x004BD9E0, HouseClass__Is_Ally
 setcglob 0x004BD9E0, HouseClass__Is_Ally_HI
 setcglob 0x004BDA20, HouseClass__Is_Ally_HH
 setcglob 0x004BDA60, HouseClass__Is_Ally_Techno
+setcglob 0x004BDAC0, HouseClass__Is_Ally_Abstract
 setcglob 0x004CB950, HouseClass__Is_Player
 setcglob 0x004BEEA0, HouseClass__Manual_Place
 setcglob 0x004BE200, HouseClass__Begin_Production
