@@ -170,6 +170,7 @@ DTA_OBJS = \
                     src/mods/fix_building_damage_state_crash.o \
                     src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
                     src/mods/fix_ai_retaliating_against_its_own_stuff.o \
+                    src/mods/allow_building_placement_over_overlay.o \
                     src/fix_allied_decloaking.o \
                     src/force_conversion_type.o \
                     src/c4_repairable_fix.o \
