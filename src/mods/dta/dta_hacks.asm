@@ -22,7 +22,7 @@ sstring str_BriefingPCX, "BRIEFING.PCX"
 sstring str_BattleEINI, "BATTLEE.INI"
 sstring str_SidencMIX, "SIDENC%02d.MIX"
 sstring str_SideMIXRoot, "SIDE%02dE.MIX"
-sstring str_MPMapsINI, "MPMAPS.INI"
+sstring str_MPMapsINI, "OBSOLETE.000"
 sstring str_MoviesMIX, "MOVIES.MIX"
 sstring str_DTAAlreadyRunning, "DTA is already running!"
 sstring str_D1, "D1"
@@ -231,4 +231,7 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 
 ; Increase subterranean movement speed
 @SET 0x006D8A9E, {db 0x40}
+
+; Skip setting CD when loading multiplayer scenario
+@SJMP 0x005DB25E, 0x005DB288
 
