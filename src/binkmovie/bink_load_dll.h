@@ -9,7 +9,7 @@
 #define _BINK_LOAD_DLL_H_
 
 #include "bink.h"
-#include <Windows.h>
+#include <windows.h>
 
 
 extern BOOL BinkImportsLoaded;
