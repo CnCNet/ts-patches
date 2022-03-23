@@ -25,9 +25,15 @@ jobs:
       with:
         fetch-depth: 0
         
-    - name: Set Git Variables
+    - name: Get Branch Name
+      id: branch-name
+      uses: tj-actions/branch-names@v5.2
+        
+    - name: Set Variables
       id: gitinfo
       run: |
+        echo "Branch name: '${{ steps.branch-name.outputs.current_branch }}'"
+        
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         echo "::set-output name=date::$(git show -s --date=format:'%Y-%m-%d' --format=%cd HEAD)"
         
@@ -92,8 +98,29 @@ jobs:
         Get-ChildItem -Path 'artifact\debug'
         Get-ChildItem -Path 'artifact\vinifera'
         
+        Get-ChildItem
+        Get-ChildItem -Path 'build'
+        Get-ChildItem -Path 'artifact'
+        
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ts-patches-${{ steps.gitinfo.outputs.sha_short }}-${{ steps.gitinfo.outputs.date }}
+        name: ts-patches-${{ matrix.build_type }}-${{ steps.branch-name.outputs.current_branch }}-${{ steps.gitinfo.outputs.sha_short }}-${{ steps.gitinfo.outputs.date }}
         path: artifact
+        
+    - name: Create Archive For Release
+      run: |
+        Get-ChildItem -Path 'build'
+        7z a ts-patches-${{ matrix.build_type }}-${{ steps.branch-name.outputs.current_branch }}-${{ steps.gitinfo.outputs.sha_short }}.zip .\artifact\*
+        
+    - name: Upload Release
+      if: ${{ github.event_name != 'pull_request' }}
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Latest Binaries [${{ steps.branch-name.outputs.current_branch }}]
+        tag_name: latest_${{ steps.branch-name.outputs.current_branch }}
+        body: Latest ts-patches binaries built from the '${{ steps.branch-name.outputs.current_branch }}' branch.
+        files: |
+          ts-patches-${{ matrix.build_type }}-${{ steps.branch-name.outputs.current_branch }}-${{ steps.gitinfo.outputs.sha_short }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
