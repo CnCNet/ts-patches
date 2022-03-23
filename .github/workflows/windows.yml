@@ -11,6 +11,17 @@ on:
     branches: [ master ]
 
 jobs:
+  create_release:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Delete Previous Release
+      uses: dev-drprasad/delete-tag-and-release@v0.2.0
+      with:
+        delete_release: true
+        tag_name: latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     name: Build
     runs-on: windows-latest
@@ -25,9 +36,15 @@ jobs:
       with:
         fetch-depth: 0
         
-    - name: Set Git Variables
+    - name: Get Branch Name
+      id: branch-name
+      uses: tj-actions/branch-names@v5.2
+        
+    - name: Set Variables
       id: gitinfo
       run: |
+        echo "Branch name: '${{ steps.branch-name.outputs.current_branch }}'"
+        
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         echo "::set-output name=date::$(git show -s --date=format:'%Y-%m-%d' --format=%cd HEAD)"
         
@@ -84,16 +101,37 @@ jobs:
         New-Item -Path 'artifact\debug' -ItemType Directory
         New-Item -Path 'artifact\vinifera' -ItemType Directory
         
-        Move-Item -Path 'build\release\${{ matrix.build_type }}.exe' -Destination 'artifact\release\${{ matrix.build_type }}.exe'
-        Move-Item -Path 'build\debug\${{ matrix.build_type }}.exe' -Destination 'artifact\debug\${{ matrix.build_type }}.exe'
-        Move-Item -Path 'build\vinifera\${{ matrix.build_type }}.exe' -Destination 'artifact\vinifera\${{ matrix.build_type }}.exe'
+        Move-Item -Path 'build\release\${{ matrix.build_type }}.exe' -Destination 'artifact\release\game.exe'
+        Move-Item -Path 'build\debug\${{ matrix.build_type }}.exe' -Destination 'artifact\debug\game.exe'
+        Move-Item -Path 'build\vinifera\${{ matrix.build_type }}.exe' -Destination 'artifact\vinifera\game.exe'
         
         Get-ChildItem -Path 'artifact\release'
         Get-ChildItem -Path 'artifact\debug'
         Get-ChildItem -Path 'artifact\vinifera'
         
+        Get-ChildItem
+        Get-ChildItem -Path 'build'
+        Get-ChildItem -Path 'artifact'
+        
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ts-patches-${{ steps.gitinfo.outputs.sha_short }}-${{ steps.gitinfo.outputs.date }}
+        name: ts-patches-${{ matrix.build_type }}-${{ steps.branch-name.outputs.current_branch }}-${{ steps.gitinfo.outputs.sha_short }}-${{ steps.gitinfo.outputs.date }}
         path: artifact
+        
+    - name: Create Archive For Release
+      run: |
+        Get-ChildItem -Path 'build'
+        7z a ts-patches-${{ matrix.build_type }}-${{ steps.branch-name.outputs.current_branch }}.zip .\artifact\*
+        
+    - name: Upload New Release
+      if: ${{ github.event_name != 'pull_request' }}
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Latest
+        tag_name: latest
+        body: Latest ts-patches binaries.
+        files: |
+          ts-patches-${{ matrix.build_type }}-${{ steps.branch-name.outputs.current_branch }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
