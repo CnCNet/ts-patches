@@ -1,0 +1,99 @@
+#
+#  Windows build action for ts-patches.
+#
+#  Authors: CCHyper, OmniBlade
+#
+
+name: Windows
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [ tsclientgame, togame, tigame, dtagame ]
+      
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        
+    - name: Set Git Variables
+      id: gitinfo
+      run: |
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        echo "::set-output name=date::$(git show -s --date=format:'%Y-%m-%d' --format=%cd HEAD)"
+        
+    - name: MSVC Dev Cmd
+      uses: ilammy/msvc-dev-cmd@v1.10.0
+      with:
+        arch: x86
+        
+    - name: Download WinBuilds
+      uses: suisei-cn/actions-download-file@v1
+      with:
+        url: "https://downloads.cncnet.org/WinBuilds32ForGitHubCI.zip"
+        
+    - name: Install WinBuilds
+      run: |
+        7z x WinBuilds32ForGitHubCI.zip -owin-builds-patch-32
+        Get-ChildItem
+        Get-ChildItem -Path 'win-builds-patch-32'
+        
+    - name: Add WinBuilds To PATH
+      run: |
+        echo "$env:GITHUB_WORKSPACE\win-builds-patch-32" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        echo "$env:GITHUB_WORKSPACE\win-builds-patch-32\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        
+    - name: Build Binaries
+      run: |
+        Get-ChildItem
+        
+        New-Item -Path 'build\release' -ItemType Directory
+        
+        gmake clean ${{ matrix.build_type }}.exe
+        gmake -j8 ${{ matrix.build_type }}.exe
+        Move-Item -Path '${{ matrix.build_type }}.exe' -Destination 'build\release\${{ matrix.build_type }}.exe'
+        
+        New-Item -Path 'build\debug' -ItemType Directory
+        
+        gmake clean ${{ matrix.build_type }}.exe
+        gmake -j8 WWDEBUG=1 ${{ matrix.build_type }}.exe
+        Move-Item -Path '${{ matrix.build_type }}.exe' -Destination 'build\debug\${{ matrix.build_type }}.exe'
+        
+        New-Item -Path 'build\vinifera' -ItemType Directory
+        
+        gmake clean ${{ matrix.build_type }}.exe
+        gmake -j8 VINIFERA=1 ${{ matrix.build_type }}.exe
+        Move-Item -Path '${{ matrix.build_type }}.exe' -Destination 'build\vinifera\${{ matrix.build_type }}.exe'
+        
+        Get-ChildItem -Path 'build\release'
+        Get-ChildItem -Path 'build\debug'
+        Get-ChildItem -Path 'build\vinifera'
+        
+    - name: Copy Binaries
+      run: |      
+        New-Item -Path 'artifact\release' -ItemType Directory
+        New-Item -Path 'artifact\debug' -ItemType Directory
+        New-Item -Path 'artifact\vinifera' -ItemType Directory
+        
+        Move-Item -Path 'build\release\${{ matrix.build_type }}.exe' -Destination 'artifact\release\${{ matrix.build_type }}.exe'
+        Move-Item -Path 'build\debug\${{ matrix.build_type }}.exe' -Destination 'artifact\debug\${{ matrix.build_type }}.exe'
+        Move-Item -Path 'build\vinifera\${{ matrix.build_type }}.exe' -Destination 'artifact\vinifera\${{ matrix.build_type }}.exe'
+        
+        Get-ChildItem -Path 'artifact\release'
+        Get-ChildItem -Path 'artifact\debug'
+        Get-ChildItem -Path 'artifact\vinifera'
+        
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ts-patches-${{ steps.gitinfo.outputs.sha_short }}-${{ steps.gitinfo.outputs.date }}
+        path: artifact
