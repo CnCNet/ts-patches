@@ -1144,7 +1144,16 @@ Initialize_Spawn:
 
     mov ecx, SessionClass_this
     call SessionClass__Read_Scenario_Descriptions
-
+	
+	; BUGFIX: In rare cases where no local scenarios were loaded from PKT files, MPlayerLocalID should
+	;         be set to -1 to ensure the Read_Scenario code executes correctly.
+	mov eax, dword [0x007E28B0] ; Session.MPlayerScenarios.ActiveCount
+	test eax, eax
+	jnz .Read_Scenario_Name
+	
+	mov dword [0x007E2468], 0xFFFFFFFF ; Session.MPlayerLocalID
+	
+.Read_Scenario_Name:
     ; scenario
     lea eax, [ScenarioName]
     SpawnINI_Get_String str_Settings, str_Scenario, str_Empty, eax, 32
