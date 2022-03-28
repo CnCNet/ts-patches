@@ -22,6 +22,12 @@ WINDRES    ?= windres
 #
 # conditions
 #
+ifdef VINIFERA
+$(info VINIFERA defined)
+NFLAGS += -DVINIFERA
+CFLAGS += -DVINIFERA
+endif
+
 ifdef WWDEBUG
 $(info WWDEBUG defined)
 NFLAGS += -DWWDEBUG
