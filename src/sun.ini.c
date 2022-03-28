@@ -16,9 +16,12 @@ bool AddTeamStyle2 = false;
 bool AltToRally = false;
 bool ForceConversionType4 = true;
 bool UsingTSDDRAW = false;
+bool UseGraphicsPatch = true;
 int32_t MouseRenderInterval = 16;
 int32_t MouseIntervalResolution = 1;
 bool UsePNG = false;
+bool IsNoCD = false;
+int TextBackgroundColor = 0;
 
 void LoadSunIni()
 {

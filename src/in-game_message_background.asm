@@ -4,7 +4,7 @@
 ; Set the background color of in-game messages to solid black.
 ; Default 0 = transparent. C = black, D = grey, E = light grey, F = white
 
-gint TextBackgroundColor, 0
+cextern TextBackgroundColor
 
 hack 0x0064D15A
         ; Normal code
