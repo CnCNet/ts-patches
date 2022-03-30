@@ -28,5 +28,17 @@ hack 0x004EAF2A, 0x004EAF30
 .no_waypoint:
         jmp     0x004EAFDE
 
+
+; Removed for TS Client as it was also activating/toggled firestorm defense.
+%ifndef TSCLIENT
+
 ;;; Move the waypoint when you click it.
 @LJMP 0x00478E7E, 0x00478E8C
+
+%endif
+
+
+
+
+;;; Move the waypoint when you click it.
+@LJMP 0x00478E7E, 0x004790D1
