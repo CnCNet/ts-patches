@@ -1,13 +1,4 @@
 *.o
-tibsun.exe
-dta.exe
-ti.exe
-singleplayer.exe
-online.exe
-tsclientgame.exe
-dtagame.exe
-tigame.exe
-togame.exe
 
 # *local* configuration file, seriously
 config.mk
