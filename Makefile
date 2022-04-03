@@ -58,18 +58,19 @@ include src/mods/dta/dta.mk
 include src/mods/ti/ti.mk
 include src/mods/to/to.mk
 include src/mods/tsclient/tsclient.mk
+include src/mods/rubicon/rubicon.mk
 
 #
 # targets
 #
 all:
-	tibsun.exe singleplayer.exe dtagame.exe tigame.exe togame.exe tsclientgame.exe
+	tibsun.exe singleplayer.exe dtagame.exe tigame.exe togame.exe tsclientgame.exe rubicongame.exe
 
 clean:
 	$(RM) $(OUTPUT)
 	$(RM) $(COMMON_OBJS)
 	$(RM) $(SP_OBJS) $(MP_OBJS)
-	$(RM) $(DTA_OBJS) $(TI_OBJS) $(TO_OBJS) $(TSCLIENT_OBJS)
+	$(RM) $(DTA_OBJS) $(TI_OBJS) $(TO_OBJS) $(TSCLIENT_OBJS) $(RUBICON_OBJS)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
@@ -132,6 +133,16 @@ src/mods/tsclient/res/res.o: src/mods/tsclient/res/res.rc
 
 tsclientgame.exe: $(LDS) $(INPUT) $(TSCLIENT_OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(TSCLIENT_OBJS)
+	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
+	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
+	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
+	$(PETOOL) dump $@
+
+src/mods/rubicon/res/res.o: src/mods/rubicon/res/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/rubicon/res/ -Ires/  $< $@
+
+rubicongame.exe: $(LDS) $(INPUT) $(RUBICON_OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(RUBICON_OBJS)
 	$(PETOOL) setdd $@ 1 $(IMPORTS) || ($(RM) $@ && exit 1)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
