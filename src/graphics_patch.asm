@@ -1,15 +1,12 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
-cglobal UseGraphicsPatch
+cextern UseGraphicsPatch
 
 ; AlexB's graphics patch
 ; Source: http://www.stuffhost.de/files/cnc/
 
 @LJMP 0x0048AC2F, _Graphics_Patch
-
-section .bss
-    UseGraphicsPatch: resb 1
 
 section .text
 

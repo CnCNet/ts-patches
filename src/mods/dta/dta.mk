@@ -66,6 +66,7 @@ DTA_OBJS = \
                     src/mpdebug.o \
                     src/Hook_Main_Loop.o \
                     src/hotkeys.o \
+                    src/hotkeys_asm.o \
                     src/chatallies.o \
                     src/disable_alt_tab.o \
                     src/spawner/auto_ally_by_spawn_loc.o \
@@ -145,6 +146,7 @@ DTA_OBJS = \
                     src/mods/dta/extra_difficulty.o \
                     src/mods/dta/change_projectile_degeneration_speed.o \
                     src/mods/dta/dump_globals.o \
+                    src/mods/fix_unitclass_can_enter_cell_ignoring_terraintype_immunity.o \
                     src/mods/smarter_firesale.o \
                     src/mods/dont_replace_player_name_with_computer.o \
                     src/mods/remove_iscoredefender_emp_immunity.o \
@@ -168,6 +170,8 @@ DTA_OBJS = \
                     src/mods/sidebar_cameo_sort.o \
                     src/mods/fix_building_damage_state_crash.o \
                     src/mods/fix_infantryclass_take_damage_null_warhead_crash.o \
+                    src/mods/fix_ai_retaliating_against_its_own_stuff.o \
+                    src/mods/allow_building_placement_over_overlay.o \
                     src/fix_allied_decloaking.o \
                     src/force_conversion_type.o \
                     src/c4_repairable_fix.o \

@@ -46,6 +46,7 @@ cextern CoachMode
 cextern HouseClass__Is_Ally_Or_Spec_HH
 cextern HouseClass__Is_Ally_HH
 cextern HouseClass__Is_Ally_Techno
+cextern HouseClass__Is_Ally_Abstract
 cextern HouseClass__Is_Coach
 cextern HouseClass__Is_Spectator
 

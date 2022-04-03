@@ -1,5 +1,9 @@
 -include config.mk
+-include custom.mk
 
+#
+# defines
+#
 INPUT       = Game.exe
 LDS         = tibsun.lds
 IMPORTS     = 0x2EC050 280
@@ -10,193 +14,62 @@ REV         = $(shell git rev-parse --short @{0})
 VERSION     = SOFT_VERSION-CnCNet-patch-$(REV)
 WINDRES_FLAGS = --preprocessor-arg -DVERSION="$(VERSION)"
 
-COMMON_OBJS = \
-              src/main_menu_cursor_bug.o \
-              src/wndproc.o \
-              src/scale_movie_fix.o \
-              src/scale_movie_fix_hack.o \
-              src/scrollrate_fix.o \
-              src/tiberium_on_slope_crash.o \
-              src/no_movie_and_score_mix_dependency.o \
-              src/IonBlastClass_crash.o \
-              src/singleplayer_objects_on_multiplayer_map_crash.o \
-              src/laser_draw_it_crash.o \
-              src/no_blowfish_dll.o \
-              src/high_res_crash.o \
-              src/disable_max_windowed_mode.o \
-              src/disable_dpi_scaling.o \
-              src/win8_compat-func.o \
-              src/remove_16bit_windowed_check.o \
-              src/hp03.o \
-              src/fix_mouse_not_found_error.o \
-              src/single-proc-affinity.o \
-              src/graphics_patch.o \
-              src/no_window_frame.o \
-              src/exception_catch.o \
-              src/force_conversion_type.o \
-              src/video_mode_hacks.o \
-              src/binkmovie/bink_load_dll.o \
-              src/binkmovie/bink_patches.o \
-              src/binkmovie/bink_asm_patches.o \
-              src/binkmovie/binkmovie.o \
-              res/res.o \
-              sym.o
-
-SP_OBJS = src/no-cd_tfd.o src/sun.ini.sp.o
-
-MP_OBJS          = \
-                    src/chat_ignore.o \
-                    src/online_optimizations.o \
-                    src/mods/dont_save_without_all_players.o \
-                    src/sun.ini.o \
-                    src/no-cd_iran.o \
-                    src/in-game_message_background.o \
-                    src/savegame.o \
-                    src/trigger_actions_extended.o \
-                    src/briefing_screen_mission_start.o \
-                    src/briefing_restate_map_file.o \
-                    src/multiplayer_units_placing.o \
-                    src/display_messages_typed_by_yourself.o \
-                    src/reinforcements_player_specific.o \
-                    src/internet_cncnet.o \
-                    src/tiberium_stuff.o \
-                    src/no_options_menu_animation.o \
-                    src/short_connection_timeout.o \
-                    src/spawner/is_ally_or_spec.o \
-                    src/spawner/spawner.o \
-                    src/spawner/protocol_zero.o \
-                    src/spawner/protocol_zero_c.o \
-                    src/spawner/nethack.o \
-                    src/spawner/selectable_spawns.o \
-                    src/spawner/spectators.o \
-                    src/spawner/statistics.o \
-                    src/spawner/auto-surrender.o \
-                    src/spawner/build_off_ally.o \
-                    src/spawner/auto_ss.o \
-                    src/spawner/random_map.o \
-                    src/coach_mode.o \
-                    src/jj_barracks_glitch_fix.o \
-                    src/ts_util.o \
-                    src/alt_scout_fix.o \
-                    src/aircraft_not_reloading_fix.o \
-                    src/carryall_click_under_glitch.o \
-                    src/disable_edge_scrolling.o \
-                    src/harvester_block_ref_exploit.o \
-                    src/fix_depot_explosion_glitch.o \
-                    src/harvester_truce.o \
-                    src/crate_patches.o \
-                    src/Hook_Main_Loop.o \
-                    src/hotkeys.o \
-                    src/chatallies.o \
-                    src/disable_alt_tab.o \
-                    src/spawner/auto_ally_by_spawn_loc.o \
-                    src/mumblelink.o \
-                    src/wcsncpy.o \
-                    src/manual_aim_sams.o \
-                    src/gamespeed.o \
-                    src/mouse_behavior.o \
-                    src/text_triggers.o \
-                    src/attack_neutral_units.o \
-                    src/mouse_always_in_focus.o \
-                    src/waypoint_enhancements.o \
-                    src/easy_shroud.o \
-                    src/new_search_dir.o \
-                    src/only_the_host_may_change_gamespeed.o \
-                    src/override_colors.o \
-                    src/mods/dta/scrap_metal_explosion.o \
-                    src/mods/dta/auto_deploy_mcv.o \
-                    src/minimap_crash.o \
-                    src/EventClass.o \
-                    src/event_declarations.o \
-                    src/new_events_s.o \
-                    src/log_more_oos.o \
-                    src/record_rng_func.o \
-                    src/shared_control.o \
-                    src/recon_kick.o \
-                    src/hover_show_health.o \
-                    src/autosave.o \
-                    src/show_stats.o \
-                    src/sidebar.o \
-                    src/response_time_func.o \
-                    src/fix_100_unit_bug.o \
-                    src/veterancy_crate_check_trainable.o \
-                    src/alt_to_undeploy.o \
-                    src/factory_rallypoints.o \
-                    src/harvesters_autoharvest.o \
-                    src/harvesters_guardcommand.o \
-                    src/veterancy_from_allies.o \
-                    src/flickering_shadow_fix.o \
-                    src/voxelanim_damage_bug.o \
-                    src/buildingtype_initialization.o \
-                    src/destroytrigger_crash.o \
-                    src/basic_theme_fix.o \
-                    src/aircraft_repair.o \
-                    src/add_team_better.o \
-                    src/center_team.o \
-                    src/hack_house_from_house_type.o \
-                    src/place_building_hotkey.o \
-                    src/repeat_last_building_hotkey.o \
-                    src/spy_fix.o \
-                    src/hotkey_help.o \
-                    src/draw_all_action_lines.o \
-                    src/radar_event_hacks.o \
-                    src/guard_mode_patch2.o \
-                    src/random_loop_delay.o \
-                    src/rage_quit.o \
-                    src/move_team_group_number.o \
-                    src/skip_score.o \
-                    src/hide_names_qm.o \
-                    src/minimum_burst.o \
-                    src/cache_alot.o \
-                    src/no_charge_power_needed.o\
-                    src/fix_allied_decloaking.o \
-                    src/config.o \
-                    src/multiple_factory_hack.o \
-                    src/vinifera_unhardcode.o \
-                    src/freeunit_enhancements.o \
-                    src/isomappack5_limit_extend.o \
-                    3rdparty/s_floorf.o \
-                    3rdparty/lodepng.o \
-                    src/write_jpg_png.o \
-                    src/mods/oil_derricks.o \
-
-
-ifdef WWDEBUG
-    NFLAGS += -D WWDEBUG
-    CFLAGS += -D WWDEBUG
-    MP_OBJS        +=  src/debugging_help.o \
-	                   src/tactical_zoom.o
-
-	COMMON_OBJS    +=  src/ts_debug.o
-endif
-
-ifdef STATS
-   # stats causes savegames to crash. Use STATS only for cncnet online.
-   NFLAGS += -D STATS
-   CFLAGS += -D STATS
-endif
-
-ifdef EXPERIMENTAL
-    NFLAGS += -D EXPERIMENTAL
-    CLFAGS += -D EXPERIMENTAL
-#    OBJS        +=  src/new_armor_types.o \
-#                    src/new_armor_types_s.o \
-
-endif
-
-
 PETOOL     ?= petool
 STRIP      ?= strip
 NASM       ?= nasm
 WINDRES    ?= windres
 
--include custom.mk
+#
+# conditions
+#
+ifdef VINIFERA
+$(info VINIFERA defined)
+NFLAGS += -DVINIFERA
+CFLAGS += -DVINIFERA
+endif
 
-all: tibsun.exe dtagame.exe tigame.exe togame.exe singleplayer.exe tsclientgame.exe
+ifdef WWDEBUG
+$(info WWDEBUG defined)
+NFLAGS += -DWWDEBUG
+CFLAGS += -DWWDEBUG
+endif
+
+# stats causes savegames to crash. Use STATS only for cncnet online.
+ifdef STATS
+$(info STATS defined)
+NFLAGS += -DSTATS
+CFLAGS += -DSTATS
+endif
+
+ifdef EXPERIMENTAL
+$(info EXPERIMENTAL defined)
+NFLAGS += -DEXPERIMENTAL
+CLFAGS += -DEXPERIMENTAL
+endif
+
+#
+# includes
+#
+include src/common.mk
+include src/mp.mk
+include src/sp.mk
+
+include src/mods/dta/dta.mk
+include src/mods/ti/ti.mk
+include src/mods/to/to.mk
+include src/mods/tsclient/tsclient.mk
+
+#
+# targets
+#
+all:
+	tibsun.exe singleplayer.exe dtagame.exe tigame.exe togame.exe tsclientgame.exe
 
 clean:
-	$(RM) $(OUTPUT) $(COMMON_OBJS)
-	$(RM) $(SP_OBJS) $(MP_OBJS) $(DTA_OBJS) $(TI_OBJS) $(TO_OBJS) $(TSCLIENT_OBJS)
+	$(RM) $(OUTPUT)
+	$(RM) $(COMMON_OBJS)
+	$(RM) $(SP_OBJS) $(MP_OBJS)
+	$(RM) $(DTA_OBJS) $(TI_OBJS) $(TO_OBJS) $(TSCLIENT_OBJS)
 
 %.o: %.asm
 	$(NASM) $(NFLAGS) -o $@ $<
@@ -224,7 +97,6 @@ singleplayer.exe: $(LDS) $(INPUT) $(COMMON_OBJS) $(SP_OBJS)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
 
-include src/mods/dta/dta.mk
 src/mods/dta/res/res.o: src/mods/dta/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/dta/res/ -Ires/  $< $@
 
@@ -235,7 +107,6 @@ dtagame.exe: $(LDS) $(INPUT) $(DTA_OBJS)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
 
-include src/mods/ti/ti.mk
 src/mods/ti/res/res.o: src/mods/ti/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/ti/res/ -Ires/  $< $@
 
@@ -246,7 +117,6 @@ tigame.exe: $(LDS) $(INPUT) $(TI_OBJS)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
 
-include src/mods/to/to.mk
 src/mods/to/res/res.o: src/mods/to/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/to/res/ -Ires/  $< $@
 
@@ -257,7 +127,6 @@ togame.exe: $(LDS) $(INPUT) $(TO_OBJS)
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
 
-include src/mods/tsclient/tsclient.mk
 src/mods/tsclient/res/res.o: src/mods/tsclient/res/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Isrc/mods/tsclient/res/ -Ires/  $< $@
 

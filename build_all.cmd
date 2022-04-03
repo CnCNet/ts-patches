@@ -8,7 +8,6 @@ if not exist "build" mkdir build
 
 REM Standard Binaries
 call build_tibsun.cmd
-call build_online.cmd
 call build_singleplayer.cmd
 call build_tsclient.cmd
 

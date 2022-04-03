@@ -8,7 +8,7 @@
 #define _BINK_MOVIE_H_
 
 #include "TiberianSun.h"
-#include <Windows.h>
+#include <windows.h>
 
 
 BOOL __fastcall BinkMovie_Create(char * filename);

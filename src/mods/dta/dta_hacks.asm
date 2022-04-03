@@ -22,7 +22,7 @@ sstring str_BriefingPCX, "BRIEFING.PCX"
 sstring str_BattleEINI, "BATTLEE.INI"
 sstring str_SidencMIX, "SIDENC%02d.MIX"
 sstring str_SideMIXRoot, "SIDE%02dE.MIX"
-sstring str_MPMapsINI, "MPMAPS.INI"
+sstring str_MPMapsINI, "OBSOLETE.000"
 sstring str_MoviesMIX, "MOVIES.MIX"
 sstring str_DTAAlreadyRunning, "DTA is already running!"
 sstring str_D1, "D1"
@@ -197,8 +197,8 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @CLEAR 0x005DD79E, 0x90, 0x005DD7A2
 
 ; Load speech MIX files for new sides properly
-@SET 0x005DD822, {xor ecx, ecx}
 @CLEAR 0x005DD822, 0x90, 0x005DD828
+@SET 0x005DD822, {xor ecx, ecx}
 @SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 
 ; AI starting units will start in Unload mode instead of Area Guard mode (was 05 for Guard mode)
@@ -231,4 +231,7 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 
 ; Increase subterranean movement speed
 @SET 0x006D8A9E, {db 0x40}
+
+; Skip setting CD when loading multiplayer scenario
+@SJMP 0x005DB25E, 0x005DB288
 
