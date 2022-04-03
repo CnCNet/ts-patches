@@ -39,6 +39,10 @@ sstring str_DebugLog, "TI.LOG"
 sstring str_DebugLog, "TO.LOG"
 %endif
 
+%ifdef MOD_RUBICON
+sstring str_DebugLog, "RUBICON.LOG"
+%endif
+
 sstring str_a, "a"
 
 sstring str_OK, "OK?\n"

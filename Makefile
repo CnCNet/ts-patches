@@ -87,6 +87,12 @@ NFLAGS += -DMOD_TO
 CFLAGS += -DMOD_TO
 endif
 
+ifdef MOD_RUBICON
+$(info MOD_RUBICON defined)
+NFLAGS += -DMOD_RUBICON
+CFLAGS += -DMOD_RUBICON
+endif
+
 ifdef VINIFERA
 $(info VINIFERA defined)
 NFLAGS += -DVINIFERA
@@ -128,6 +134,12 @@ OBJS += src/IonBlastClass_crash.o
 OBJS += src/add_animation_to_factories_without_weaponsfactory.o
 OBJS += src/add_team_better.o
 OBJS += src/ai_target_emp_like_multimissile.o
+
+# Only include in: MOD_TI MOD_RUBICON
+ifneq ($(call ifdef_any_of,MOD_TI MOD_RUBICON),)
+OBJS += src/ai_target_droppods_like_multimissile.o
+endif
+
 OBJS += src/aircraft_not_reloading_fix.o
 OBJS += src/aircraft_repair.o
 OBJS += src/airtransport_undeployable_on_helipads.o
@@ -159,9 +171,14 @@ OBJS += src/event_declarations.o
 OBJS += src/factory_rallypoints.o
 OBJS += src/fix_100_unit_bug.o
 
-# Only include in: MOD_TO, MOD_DTA, TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_DTA TSCLIENT),)
+# Only include in: MOD_TO MOD_DTA MOD_RUBICON TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_DTA MOD_RUBICON TSCLIENT),)
 OBJS += src/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o
+endif
+
+# Only include in: MOD_DTA MOD_RUBICON
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_RUBICON),)
+OBJS += src/fix_ai_retaliating_against_its_own_stuff.o
 endif
 
 OBJS += src/fix_allied_decloaking.o
@@ -200,8 +217,8 @@ OBJS += src/minimum_burst.o
 OBJS += src/mouse_always_in_focus.o
 OBJS += src/mouse_behavior.o
 
-# Only include in: MOD_TO TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO TSCLIENT),)
+# Only include in: MOD_TO MOD_RUBICON TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON TSCLIENT),)
 OBJS += src/move_team_group_number.o
 endif
 
@@ -256,8 +273,8 @@ OBJS += src/unit_self_heal_repair_step.o
 OBJS += src/text_triggers.o
 OBJS += src/tiberium_on_slope_crash.o
 
-# Only include in: MOD_TO MOD_TI TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_TI TSCLIENT),)
+# Only include in: MOD_TO MOD_TI MOD_RUBICON TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON TSCLIENT),)
 OBJS += src/tiberium_stuff.o
 endif
 
@@ -283,7 +300,6 @@ OBJS += src/change_projectile_degeneration_speed.o
 OBJS += src/change_score_screen_music.o
 OBJS += src/dump_globals.o
 OBJS += src/extra_difficulty.o
-OBJS += src/fix_ai_retaliating_against_its_own_stuff.o
 OBJS += src/ingame_ui_text_color.o
 OBJS += src/remove_ion_storm_effects.o
 OBJS += src/vehicle_transports.o
@@ -291,7 +307,6 @@ endif
 
 # TI only sources.
 ifdef MOD_TI
-OBJS += src/ai_target_droppods_like_multimissile.o
 OBJS += src/team_number_position.o
 OBJS += src/vinifera_unhardcode.o
 endif
@@ -352,8 +367,8 @@ OBJS += src/scale_movie_fix_hack.o
 OBJS += src/screenshots_in_subdir.o
 OBJS += src/skip_score.o
 
-# Only included in: MOD_DTA MOD_TO TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO TSCLIENT),)
+# Only included in: MOD_DTA MOD_TO MOD_RUBICON TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO MOD_RUBICON TSCLIENT),)
 OBJS += src/veterancy_crate_check_trainable.o
 endif
 
@@ -470,6 +485,9 @@ endif
 ifdef MOD_TO
     OBJS += src/to_hacks.o
 endif
+ifdef MOD_RUBICON
+    OBJS += src/rubicon_hacks.o
+endif
 
 
 # =========================================================
@@ -492,6 +510,9 @@ ifdef MOD_TI
 endif
 ifdef MOD_TO
     OBJS += res/to/res.o
+endif
+ifdef MOD_RUBICON
+    OBJS += res/rubicon/res.o
 endif
 
 
@@ -548,4 +569,9 @@ endif
 ifdef MOD_TO
 res/to/res.o: res/to/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Ires/to/ $< $@
+endif
+
+ifdef MOD_RUBICON
+res/to/res.o: res/rubicon/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Ires/rubicon/ $< $@
 endif
