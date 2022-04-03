@@ -87,6 +87,12 @@ NFLAGS += -DMOD_TO
 CFLAGS += -DMOD_TO
 endif
 
+ifdef MOD_RUBICON
+$(info MOD_RUBICON defined)
+NFLAGS += -DMOD_RUBICON
+CFLAGS += -DMOD_RUBICON
+endif
+
 ifdef VINIFERA
 $(info VINIFERA defined)
 NFLAGS += -DVINIFERA
@@ -159,8 +165,8 @@ OBJS += src/event_declarations.o
 OBJS += src/factory_rallypoints.o
 OBJS += src/fix_100_unit_bug.o
 
-# Only include in: MOD_TO, MOD_DTA, TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_DTA TSCLIENT),)
+# Only include in: MOD_TO, MOD_DTA, MOD_RUBICON, TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_DTA, MOD_RUBICON, TSCLIENT),)
 OBJS += src/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o
 endif
 
@@ -200,8 +206,8 @@ OBJS += src/minimum_burst.o
 OBJS += src/mouse_always_in_focus.o
 OBJS += src/mouse_behavior.o
 
-# Only include in: MOD_TO TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO TSCLIENT),)
+# Only include in: MOD_TO MOD_RUBICON TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO, MOD_RUBICON, TSCLIENT),)
 OBJS += src/move_team_group_number.o
 endif
 
@@ -255,8 +261,8 @@ OBJS += src/unit_self_heal_repair_step.o
 OBJS += src/text_triggers.o
 OBJS += src/tiberium_on_slope_crash.o
 
-# Only include in: MOD_TO MOD_TI TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_TI TSCLIENT),)
+# Only include in: MOD_TO MOD_TI MOD_RUBICON TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_TI, MOD_RUBICON, TSCLIENT),)
 OBJS += src/tiberium_stuff.o
 endif
 
@@ -352,8 +358,8 @@ OBJS += src/scale_movie_fix_hack.o
 OBJS += src/screenshots_in_subdir.o
 OBJS += src/skip_score.o
 
-# Only included in: MOD_DTA MOD_TO TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO TSCLIENT),)
+# Only included in: MOD_DTA MOD_TO MOD_RUBICON TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO, MOD_RUBICON, TSCLIENT),)
 OBJS += src/veterancy_crate_check_trainable.o
 endif
 
@@ -470,6 +476,9 @@ endif
 ifdef MOD_TO
     OBJS += src/to_hacks.o
 endif
+ifdef MOD_RUBICON
+    OBJS += src/rubicon_hacks.o
+endif
 
 
 # =========================================================
@@ -492,6 +501,9 @@ ifdef MOD_TI
 endif
 ifdef MOD_TO
     OBJS += res/to/res.o
+endif
+ifdef MOD_RUBICON
+    OBJS += res/rubicon/res.o
 endif
 
 
@@ -548,4 +560,9 @@ endif
 ifdef MOD_TO
 res/to/res.o: res/to/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Ires/to/ $< $@
+endif
+
+ifdef MOD_RUBICON
+res/to/res.o: res/rubicon/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Ires/rubicon/ $< $@
 endif
