@@ -296,6 +296,11 @@ ifndef TSCLIENT
 OBJS += src/tiberium_damage.o
 endif 
 
+# Only include in: MOD_DTA MOD_FD
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_FD),)
+OBJS += src/vehicle_transports.o
+endif
+
 # DTA only sources.
 ifdef MOD_DTA
 OBJS += src/allow_building_placement_over_overlay.o
@@ -305,7 +310,6 @@ OBJS += src/dump_globals.o
 OBJS += src/extra_difficulty.o
 OBJS += src/ingame_ui_text_color.o
 OBJS += src/remove_ion_storm_effects.o
-OBJS += src/vehicle_transports.o
 endif
 
 # TI only sources.
