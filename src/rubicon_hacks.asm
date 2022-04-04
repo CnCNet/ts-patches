@@ -2,6 +2,23 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+; Change bullet trailer separation
+@SET 0x004447C5, {db 0x02}
+
+; Increase max. bounces of elastic projectiles [commented out, causes issues on high bridges]
+;@SET 0x00445516, {db 0x04}
+
+; Change the distribution of cluster weapons [only inner radius changed for now]
+;@SET 0x004465D6, {db 0x02} ; outer spread radius in leptons
+@SET 0x004465DB, {db 0x00} ; inner spread radius in leptons
+;@SET 0x004465EA, {db 0x01} ; [bool] should clusters hit the center of the cell?
+
+; Increase Ion Storm warning speech frequency
+@SET 0x004ED5AA, {db 0x4E, 0x01}
+
+; Decrease subterranean horizontal movement speed
+@SET 0x006D8A9E, {db 0x29}
+
 ; Erase NAWALL and GAWALL hardcoding
 @SET 0x00710DA4, {db 0,0,0,0,0,0}
 @SET 0x00710DAC, {db 0,0,0,0,0,0}
@@ -57,24 +74,24 @@
 ;
 %ifndef VINIFERA
 
-sstring str_TSCLong, "Tiberian Sun"
-sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianSun.exe and click Save in the Options menu."
+sstring src_RubiconLong, "Tiberian Sun: Rubicon"
+sstring str_LanguageDLLNotFound, "Language.dll not found, please start Rubicon.exe and click Save in the Options menu."
 
 ; String references
-@SET 0x00472567, push str_TSCLong
+@SET 0x00472567, push src_RubiconLong
 @SET 0x0047256C, push str_LanguageDLLNotFound
-@SET 0x005FF2C0, {cmp edx, str_TSCLong}
-@SET 0x005FF2C8, push str_TSCLong
-@SET 0x005FF2D9, push str_TSCLong
-@SET 0x005FF3AA, {cmp ecx, str_TSCLong}
-@SET 0x005FF3B2, push str_TSCLong
-@SET 0x005FF3C3, push str_TSCLong
-@SET 0x005FF4EC, push str_TSCLong
-@SET 0x006861ED, {mov dword [esp+48h], str_TSCLong}
-@SET 0x00686215, push str_TSCLong
-@SET 0x0068621A, push str_TSCLong
-@SET 0x006862BD, push str_TSCLong
-@SET 0x006862C2, push str_TSCLong
+@SET 0x005FF2C0, {cmp edx, src_RubiconLong}
+@SET 0x005FF2C8, push src_RubiconLong
+@SET 0x005FF2D9, push src_RubiconLong
+@SET 0x005FF3AA, {cmp ecx, src_RubiconLong}
+@SET 0x005FF3B2, push src_RubiconLong
+@SET 0x005FF3C3, push src_RubiconLong
+@SET 0x005FF4EC, push src_RubiconLong
+@SET 0x006861ED, {mov dword [esp+48h], src_RubiconLong}
+@SET 0x00686215, push src_RubiconLong
+@SET 0x0068621A, push src_RubiconLong
+@SET 0x006862BD, push src_RubiconLong
+@SET 0x006862C2, push src_RubiconLong
 
 ; Remove framework mode mmt/mms loading
 @LJMP 0x004F5182, 0x004F528C    ; jmp loc_4F528C
