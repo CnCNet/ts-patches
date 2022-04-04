@@ -176,11 +176,7 @@ ifneq ($(call ifdef_any_of,MOD_TO MOD_DTA MOD_RUBICON TSCLIENT),)
 OBJS += src/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o
 endif
 
-# Only include in: MOD_DTA MOD_RUBICON
-ifneq ($(call ifdef_any_of,MOD_DTA MOD_RUBICON),)
 OBJS += src/fix_ai_retaliating_against_its_own_stuff.o
-endif
-
 OBJS += src/fix_allied_decloaking.o
 OBJS += src/fix_building_damage_state_crash.o
 OBJS += src/fix_burst_exploit.o
