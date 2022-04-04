@@ -170,12 +170,7 @@ OBJS += src/easy_shroud.o
 OBJS += src/event_declarations.o
 OBJS += src/factory_rallypoints.o
 OBJS += src/fix_100_unit_bug.o
-
-# Only include in: MOD_TO MOD_DTA MOD_RUBICON TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_DTA MOD_RUBICON TSCLIENT),)
 OBJS += src/fix_ai_unit_scatter_for_factories_without_weaponsfactory.o
-endif
-
 OBJS += src/fix_ai_retaliating_against_its_own_stuff.o
 OBJS += src/fix_allied_decloaking.o
 OBJS += src/fix_building_damage_state_crash.o
