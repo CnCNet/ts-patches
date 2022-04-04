@@ -10,8 +10,8 @@ if /I "%c%" EQU "N" goto :debug
 if not exist "build\release" mkdir build\release
 
 gmake clean
-gmake TSCLIENT=1
-move /Y game.exe ./build/release/tsclient.exe
+gmake MOD_RUBICON=1
+move /Y game.exe ./build/release/rubicongame.exe
 
 :debug
 set /P c=Generate Debug executable [Y/N]?
@@ -20,8 +20,8 @@ if /I "%c%" EQU "N" goto :vinifera
 if not exist "build\debug" mkdir build\debug
 
 gmake clean
-gmake TSCLIENT=1 WWDEBUG=1
-move /Y game.exe ./build/debug/tsclient.exe
+gmake MOD_RUBICON=1 WWDEBUG=1
+move /Y game.exe ./build/debug/rubicongame.exe
 
 :vinifera
 set /P c=Generate Vinifera executable [Y/N]?
@@ -30,8 +30,8 @@ if /I "%c%" EQU "N" goto :exit
 if not exist "build\vinifera" mkdir build\vinifera
 
 gmake clean
-gmake TSCLIENT=1 VINIFERA=1
-move /Y game.exe ./build/vinifera/tsclient.exe
+gmake MOD_RUBICON=1 VINIFERA=1
+move /Y game.exe ./build/vinifera/rubicongame.exe
 
 pause
 
