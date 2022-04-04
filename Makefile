@@ -93,6 +93,12 @@ NFLAGS += -DMOD_RUBICON
 CFLAGS += -DMOD_RUBICON
 endif
 
+ifdef MOD_FD
+$(info MOD_FD defined)
+NFLAGS += -DMOD_FD
+CFLAGS += -DMOD_FD
+endif
+
 ifdef VINIFERA
 $(info VINIFERA defined)
 NFLAGS += -DVINIFERA
@@ -208,8 +214,8 @@ OBJS += src/minimum_burst.o
 OBJS += src/mouse_always_in_focus.o
 OBJS += src/mouse_behavior.o
 
-# Only include in: MOD_TO MOD_RUBICON TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON TSCLIENT),)
+# Only include in: MOD_TO MOD_RUBICON MOD_FD TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON MOD_FD TSCLIENT),)
 OBJS += src/move_team_group_number.o
 endif
 
@@ -264,8 +270,8 @@ OBJS += src/unit_self_heal_repair_step.o
 OBJS += src/text_triggers.o
 OBJS += src/tiberium_on_slope_crash.o
 
-# Only include in: MOD_TO MOD_TI MOD_RUBICON TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON TSCLIENT),)
+# Only include in: MOD_TO MOD_TI MOD_RUBICON MOD_FD TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD TSCLIENT),)
 OBJS += src/tiberium_stuff.o
 endif
 
@@ -474,6 +480,9 @@ endif
 ifdef MOD_RUBICON
     OBJS += src/rubicon_hacks.o
 endif
+ifdef MOD_FD
+    OBJS += src/fd_hacks.o
+endif
 
 
 # =========================================================
@@ -499,6 +508,9 @@ ifdef MOD_TO
 endif
 ifdef MOD_RUBICON
     OBJS += res/rubicon/res.o
+endif
+ifdef MOD_FD
+    OBJS += res/fd/res.o
 endif
 
 
@@ -560,4 +572,9 @@ endif
 ifdef MOD_RUBICON
 res/to/res.o: res/rubicon/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Ires/rubicon/ $< $@
+endif
+
+ifdef MOD_FD
+res/to/res.o: res/fd/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Ires/fd/ $< $@
 endif
