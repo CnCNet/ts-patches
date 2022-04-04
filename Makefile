@@ -357,12 +357,7 @@ OBJS += src/scale_movie_fix.o
 OBJS += src/scale_movie_fix_hack.o
 OBJS += src/screenshots_in_subdir.o
 OBJS += src/skip_score.o
-
-# Only included in: MOD_DTA MOD_TO MOD_RUBICON TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO MOD_RUBICON TSCLIENT),)
 OBJS += src/veterancy_crate_check_trainable.o
-endif
-
 OBJS += src/video_mode_hacks.o
 OBJS += src/wndproc.o
 endif
