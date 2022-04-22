@@ -59,7 +59,7 @@ CacheMixFile 0x004E418E         ; CONQUER.MIX
 
 ;CacheMixFile 0x004E7CA3         ; ISOTEMP.MIX
 
-CacheMixFile 0x004E840F         ; SIDECD%02d.MIX, E%02dSCD%02d.MIX
+;CacheMixFile 0x004E840F         ; SIDECD%02d.MIX, E%02dSCD%02d.MIX -caching this causes the background to be off-center
 
 CacheMixFile 0x004E8348         ; SIDENC%02d.MIX
 
