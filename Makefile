@@ -363,6 +363,11 @@ OBJS += src/oil_derricks.o
 OBJS += src/random_loop_delay.o
 OBJS += src/remove_16bit_windowed_check.o
 
+# The logger is needed for certain client features
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
+OBJS += src/logger.o
+endif
+
 # Only included in: MOD_DTA MOD_TO
 ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO),)
 OBJS += src/remove_iscoredefender_emp_immunity.o
@@ -422,7 +427,6 @@ ifdef WWDEBUG
 
 # Not to be included in Vinifera builds. 
 ifndef VINIFERA
-    OBJS += src/logger.o
     OBJS += src/mpdebug.o
     OBJS += src/debugging_help.o
     OBJS += src/tactical_zoom.o
