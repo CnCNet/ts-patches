@@ -42,8 +42,8 @@
 @CLEAR 0x005DD79E, 0x90, 0x005DD7A2
 
 ; Load speech MIX files for new sides properly
-@CLEAR 0x005DD822, 0x90, 0x005DD828
 @SET 0x005DD822, {xor ecx, ecx}
+@CLEAR 0x005DD824, 0x90, 0x005DD828
 @SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 
 ; Building selection box color change when affected by limpet from palette index yellow (5) to
