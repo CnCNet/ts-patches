@@ -62,9 +62,11 @@ cextern SkipBriefingOnMissionStart
 @LJMP 0x005DD523, _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting
 
 @LJMP 0x005DB415, _Start_Scenario_Assign_Global_Flags
+%ifdef MOD_DTA
 ; Stop EndGameClass_Apply from overwriting global variable values set by our code on scenario start
 ; We know them better
 @CLEAR 0x00493932, 0x90, 0x00493939
+%endif
 
 ;always write mp stats
 @CLEAR 0x0046353C, 0x90, 0x00463542
