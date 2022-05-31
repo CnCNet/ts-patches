@@ -46,6 +46,7 @@
 ; Author: AlexB
 ; Date: 2016-07-21 to 2016-07-27: initial release
 ;       2019-04-27 Changed to use ActsLike
+;       2022-05-31 Fixed a bug in dereferencing HarvesterUnit vector pointer (Rampastring)
 
 %include "macros/patch.inc"
 %include "macros/hack.inc"
@@ -636,19 +637,21 @@ _DamageArea2HarvesterUnit:
 ; Count the harvesters of the house
 hack 0x004A7A45
 _TechnoClassFindTiberiumCloseHarvesterUnit:
-    push ecx
+    ; 2022-05-31 Rampastring: why preserve ecx when it's modified afterwards?
+    ;push ecx
     push 1; param 3
     add ecx, 764h; RulesClass::HarvesterUnit
     push ecx; param 2
     mov ecx, [edi+0ECh]; TechnoClass::Owner
     push ecx; param 1
     call _FindFirstOwnedUnitTypeInVector
-    pop ecx
+    ;pop ecx
     test eax, eax
     jnz .Done
     mov ecx, DWORD [0x0074C488]; RulesClass::Instance
     add ecx, 768h; RulesClass::HarvesterUnit::Items
-    mov eax, [ecx]
+    mov edx, [ecx] ; 2022-05-31 Rampastring: Fix for bug in accessing vector, this line originally didn't exist
+    mov eax, [edx]
   .Done:
     jmp 0x004A7A4D
 
