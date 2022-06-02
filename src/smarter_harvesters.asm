@@ -181,88 +181,111 @@ gint OldHarvDistance, 0
 ; Hack BuildingClass::Receive_Message
 ; Skip check for returning RADIO_NEGATIVE if 
 ; (!ScenarioInit && In_Radio_Contact() && Contact_With_Whom() != from) for refineries
-hack 0x0042694A
-    mov  ecx, esi
-    mov  eax, [ecx+0x220] ; get BuildingTypeClass instance
-    mov  al,  [eax+81Bh]  ; BuildingTypeClass.Refinery
-    cmp  al, 0
-    jz   .Original_Behaviour
-    jmp  0x0042697B ; Skip check
-    
-.Original_Behaviour:
-    mov  eax, [ScenarioInit]
-    test eax, eax
-    jnz  0x00426962
-    mov  eax, [esi+78h] ; Get object in radio contact
-    test eax, eax
-    jz   0x00426962
-    cmp  eax, edi
-    jnz  0x00426BFD
-    jmp  0x00426962
-
-
-    
-
-; Queue jumping, part 2
-; Hack refinery-specific code in BuildingClass::Receive_Message
-hack 0x00426A71
-    mov  eax, [ScenarioInit]
-    test eax, eax
-    jnz  0x0042707B ; Return RADIO_ROGER if ScenarioInit is set
-    
-    mov  eax, [esi+04Ah] ; Is_Something_Attached
-    test eax, eax
-    jnz  .Cont
-    
-    ; We're not free, ghost them by returning RADIO_STATIC
-    pop  edi
-    pop  esi
-    pop  ebx
-    mov  eax, 0
-    pop  ebx
-    add  esp, 44h
-    retn 0Ch
-    
-.Cont:
-    ; Clear old memory
-    xor  eax, eax
-    mov  [OldHarvDistance], eax
-
-    ; Get object we're in radio contact with
-    mov  eax, [esi+78h]
-    test eax, eax
-    jz   .Return_OK
-    
-    mov  ebx, eax ; Save reference to ebx
-    
-    ; Get distance to object we're in contact with
-    mov  ecx, esi         ; "this" pointer
-    push eax              ; Pointer to object in contact
-    call 0x00586CC0       ; ObjectClass::Get_XY_Distance_From
-    
-    mov  [OldHarvDistance], eax
-    
-    mov  ecx, esi         ; "this" pointer
-    push edi              ; Pointer to object who sent us the radio message
-    call 0x00586CC0       ; ObjectClass::Get_XY_Distance_From
-    
-    add  eax, 1660000h    ; "random" value, as before
-    cmp  eax, [OldHarvDistance]
-    jge  .Return_Negative
-    
-    ; Drop the old harvester and return RADIO_ROGER
-    mov  edx, [esi]
-    push ebx          ; old harvester
-    push 3            ; RADIO_OVER_OUT (hopefully so also in TS)
-    mov  ecx, esi
-    call dword [edx+218h] ; RadioClass::Transmit_Message
-    jmp .Return_OK
-    
-.Return_Negative:
-    jmp 0x0042696C  ; Returns RADIO_NEGATIVE and exits the function properly as specified by the calling convention
-
-.Return_OK:
-    jmp 0x004269BD  ; Returns RADIO_ROGER and exits the function properly as specified by the calling convention
+;hack 0x0042694A
+;    cmp dword [SessionType], 0 ; GAME_NORMAL (aka campaign)
+;    je .Singleplayer
+;    
+;    cmp dword [SessionType], 5 ; GAME_SKIRMISH
+;    je .Singleplayer
+;    
+;    ; DO NOT run .Singleplayer code in multiplayer, it causes desyncs!
+;    ; dropping of the old harvester is not synchronized between machines!
+;    jmp .Original_Behaviour
+;
+;.Singleplayer:
+;    mov  ecx, esi
+;    mov  eax, [ecx+0x220] ; get BuildingTypeClass instance
+;    mov  al,  [eax+81Bh]  ; BuildingTypeClass.Refinery
+;    cmp  al, 0
+;    jz   .Original_Behaviour
+;    jmp  0x0042697B ; Skip check
+;    
+;.Original_Behaviour:
+;    mov  eax, [ScenarioInit]
+;    test eax, eax
+;    jnz  0x00426962
+;    mov  eax, [esi+78h] ; Get object in radio contact
+;    test eax, eax
+;    jz   0x00426962
+;    cmp  eax, edi
+;    jnz  0x00426BFD
+;    jmp  0x00426962
+;
+;
+;    
+;
+;; Queue jumping, part 2
+;; Hack refinery-specific code in BuildingClass::Receive_Message
+;hack 0x00426A71
+;    mov  eax, [ScenarioInit]
+;    test eax, eax
+;    jnz  0x0042707B ; Return RADIO_ROGER if ScenarioInit is set
+;    
+;    mov  eax, [esi+04Ah] ; Is_Something_Attached
+;    test eax, eax
+;    jnz  .Cont
+;    
+;    ; We're not free, ghost them by returning RADIO_STATIC
+;    pop  edi
+;    pop  esi
+;    pop  ebx
+;    mov  eax, 0
+;    pop  ebx
+;    add  esp, 44h
+;    retn 0Ch
+;    
+;.Cont:
+;    ; Clear old memory
+;    xor  eax, eax
+;    mov  [OldHarvDistance], eax
+;
+;    ; Get object we're in radio contact with
+;    mov  eax, [esi+78h]
+;    test eax, eax
+;    jz   .Return_OK
+;    
+;    cmp dword [SessionType], 0 ; GAME_NORMAL (aka campaign)
+;    je .Singleplayer
+;    
+;    cmp dword [SessionType], 5 ; GAME_SKIRMISH
+;    je .Singleplayer
+;    
+;    ; DO NOT run .Singleplayer code in multiplayer, it causes desyncs!
+;    ; dropping of the old harvester is not synchronized between machines!
+;    jmp .Return_Negative
+;
+;.Singleplayer
+;    
+;    mov  ebx, eax ; Save reference to ebx
+;    
+;    ; Get distance to object we're in contact with
+;    mov  ecx, esi         ; "this" pointer
+;    push eax              ; Pointer to object in contact
+;    call 0x00586CC0       ; ObjectClass::Get_XY_Distance_From
+;    
+;    mov  [OldHarvDistance], eax
+;    
+;    mov  ecx, esi         ; "this" pointer
+;    push edi              ; Pointer to object who sent us the radio message
+;    call 0x00586CC0       ; ObjectClass::Get_XY_Distance_From
+;    
+;    add  eax, 1660000h    ; "random" value, as before
+;    cmp  eax, [OldHarvDistance]
+;    jge  .Return_Negative
+;    
+;    ; Drop the old harvester and return RADIO_ROGER
+;    mov  edx, [esi]
+;    push ebx          ; old harvester
+;    push 3            ; RADIO_OVER_OUT (hopefully so also in TS)
+;    mov  ecx, esi
+;    call dword [edx+218h] ; RadioClass::Transmit_Message
+;    jmp .Return_OK
+;    
+;.Return_Negative:
+;    jmp 0x0042696C  ; Returns RADIO_NEGATIVE and exits the function properly as specified by the calling convention
+;
+;.Return_OK:
+;    jmp 0x004269BD  ; Returns RADIO_ROGER and exits the function properly as specified by the calling convention
 
 
 ; Hack FootClass::Mission_Enter to make harvesters seek for a new refinery to
