@@ -10,8 +10,12 @@
 
 unsigned int __cdecl __MINGW_NOTHROW _controlfp (unsigned int unNew, unsigned int unMask);
 
+#ifndef VINIFERA
+
 CALL(0x005B5AD2, _fprintf_log_more_stuff);
 CALL(0x005B5CA0, _fprintf_no_name_localization);
+
+#endif
 
 void print_OutList(FILE * restrict stream, int32_t count);
 void print_DoList(FILE * restrict stream, int32_t count);

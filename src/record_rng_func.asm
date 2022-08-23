@@ -7,6 +7,8 @@ cextern record_rng_void
 
 gbool NoRNG, 0
 
+%ifndef VINIFERA
+
 hack 0x005BE080, 0x005BE086
         push ecx
         call record_rng_ii
@@ -60,5 +62,5 @@ hack 0x0005BE04B
         inc edx
         inc esi
         jmp 0x005BE051
-        
-        
+
+%endif
