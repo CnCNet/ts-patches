@@ -95,10 +95,10 @@
 @SET 0x0064C8CF, {db 0x6D}
 
 ; Decrease subterranean pitch speed before digging down
-@SET 0x006D8A96, {db 0xC5}
+@SET 0x006D8A96, {db 0xB6}
 
 ; Decrease subterranean pitch speed after digging up
-@SET 0x006D8AA6, {db 0x77}
+@SET 0x006D8AA6, {db 0x90}
 
 ; Increase subterranean movement speed
 @SET 0x006D8A9E, {db 0x40}

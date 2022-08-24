@@ -2,6 +2,10 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+;; Don't add random extra cash to the money crate value specified in Rules.ini
+@CLEAR 0x0045839D, 0x90, 0x004583A3
+@SET 0x0045839D, {lea edx, [eax]}
+
 ; Erase NAWALL and GAWALL hardcoding
 @SET 0x00710DA4, {db 0,0,0,0,0,0}
 @SET 0x00710DAC, {db 0,0,0,0,0,0}
@@ -15,7 +19,7 @@
 ; "Overlay tiberium fix thing, 4th etc"
 @SET 0x00644DF9, {mov dword [esi+0ACh], 0Ch}
 
-;; Rules.ini key, WalkFrames= default value
+;; Art.ini key, WalkFrames= default value
 @SET 0x0065B9E6, {mov byte [esi+4D0h], 1} ;byte ptr
 @SET 0x0065BF3D, {mov [esi+21h], eax}
 
