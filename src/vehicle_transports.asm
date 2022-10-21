@@ -53,6 +53,13 @@ hack 0x0065648F
     cmp  eax, 1
     jne  .Restore_Original_Value_And_Return
     
+    ; Verify that the object under the cursor is a Techno
+    ; !! experimental crash bug fix
+    mov  ecx, ebx
+    call 0x00403570 ; Is_Techno(AbstractType)
+    test eax, eax
+    jz   .End
+    
     ; Check that the object under the cursor is owned by us
     mov  ecx, [esi+0ECh] ; 0ECh = Owner
     mov  eax, [ebx+0ECh]
