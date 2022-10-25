@@ -150,7 +150,7 @@ record_rng_ii(Random2Class *rc, uint32_t caller, int32_t min, int32_t max)
 {
     RngCallNode *node = &rngCallBuffer.CallHistory[rngCallBuffer.Index];
     node->type = RngCallType_Ranged;
-    node->Critical = rc == &ScenarioStuff->CriticalRandomNumber;
+    node->Critical = rc == &Scen->CriticalRandomNumber;
     node->Seed = rc->Seed;
     node->Index = rc->Index;
     node->Caller = caller;
@@ -166,7 +166,7 @@ record_rng_void(Random2Class *rc, uint32_t caller)
 {
     RngCallNode *node = &rngCallBuffer.CallHistory[rngCallBuffer.Index];
     node->type = RngCallType_Unranged;
-    node->Critical = rc == &ScenarioStuff->CriticalRandomNumber;
+    node->Critical = rc == &Scen->CriticalRandomNumber;
     node->Seed = rc->Seed;
     node->Index = rc->Index;
     node->Caller = caller;

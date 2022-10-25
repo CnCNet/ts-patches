@@ -10,7 +10,7 @@ cextern AntiCheatArray
 
 _Save_Game_Pre_Save_Game_Hook:
     mov byte bl, [0x007E2500]
-    mov eax, [ScenarioStuff]
+    mov eax, [Scen]
     mov byte [eax+0x1D91], bl
      
 ;    push (StripClass_Size * 2)
@@ -27,7 +27,7 @@ _Load_Game_Post_Load_Game_Hook:
     
     mov [NextAutoSave], eax
     
-    mov eax, [ScenarioStuff]
+    mov eax, [Scen]
     mov al, byte [eax+0x1D91]
     mov byte [0x007E2500], al
 

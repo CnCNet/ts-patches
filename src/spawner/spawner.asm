@@ -12,6 +12,7 @@ cglobal SpawnLocationsHouses
 gbool SavesDisabled, true
 gbool QuickMatch, false
 gbool IsHost, true
+gint CampaignID, 0
 
 cextern Load_Spectators_Spawner
 cextern PortHack
@@ -184,6 +185,7 @@ section .rdata
     str_AutoSurrender   db "AutoSurrender",0
     str_GameNameTitle   db "Tiberian Sun",0
     str_PleaseRunClient db "Please run the game client instead.",0
+    str_CampaignID     db "CampaignID",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -268,13 +270,14 @@ _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
     SpawnINI_Get_Bool str_Settings, str_IsSinglePlayer, 0
     cmp al, 0
     jz .out
+
     SpawnINI_Get_Int str_Settings, str_DifficultyModeComputer, 1
     push eax
 
     SpawnINI_Get_Int str_Settings, str_DifficultyModeHuman, 1
 
     pop edx
-    mov ebx, [ScenarioStuff]
+    mov ebx, [Scen]
 
     mov dword [ebx+0x60C], edx ; DifficultyModeComputer
     mov dword [ebx+0x608], eax ; DifficultyModeHuman
@@ -288,7 +291,7 @@ _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
     ; Normal after completing a mission from a loaded campaign save
     ;mov eax, dword [SelectedDifficulty]
     ;mov dword [0x7a2f0c], eax
-    mov eax, [ScenarioStuff]
+    mov eax, [Scen]
     jmp 0x005DD528
 
 _Read_Scenario_Custom_Load_Screen_Spawner:
@@ -879,7 +882,7 @@ Assign_Scenario_Global_Flags_From_Spawner_Global_Flags:
     mov  dl, byte [eax]
     
     ; assign value of global to in-game data
-    mov   eax, [ScenarioStuff]
+    mov   eax, [Scen]
     imul  ecx, ebx, 29h
     mov   [eax+ecx+0D90h], dl
     
@@ -1179,6 +1182,9 @@ Initialize_Spawn:
 
     mov dword [SessionType], 0 ; single player
 
+    SpawnINI_Get_Int str_Settings, str_CampaignID, 0
+    mov dword [CampaignID], eax
+
 .Not_Single_Player:
 
     ; Needs to be done after SessionClass is set, or the seed value will be overwritten
@@ -1311,9 +1317,17 @@ Initialize_Spawn:
     mov eax, [ecx]
     call dword [eax+10h]
 
+    mov eax, dword [CampaignID]
+    mov ecx, [Scen]
+    mov dword [ecx+0x1DA4], eax ; CampaignID
+
+    mov ecx, [Scen]
+    mov eax, dword [ecx+0x1DA4] ; CampaignID
+    push eax
+    xor edx, edx
+    mov dl, 1 ; play_intro
+
     ; start scenario for singleplayer
-    push 0
-    mov edx, 1
     mov ecx, ScenarioName
     call Start_Scenario
 
@@ -1497,7 +1511,7 @@ Add_Human_Player:
 .Past_AL_Invert:
 .Sidebar_Hack:
     mov byte [0x7E2500], al ; For side specific mix files loading and stuff, without sidebar and speech hack
-    mov ebx, [ScenarioStuff]
+    mov ebx, [Scen]
     mov byte [ebx+1D91h], al
 
     SpawnINI_Get_Int str_Settings, str_Color, 0

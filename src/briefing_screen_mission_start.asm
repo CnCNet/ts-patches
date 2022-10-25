@@ -67,7 +67,7 @@ hack 0x005DB49C
     
     ; Print difficulty
 	pushad
-    mov ecx, [ScenarioStuff]
+    mov ecx, [Scen]
     mov eax, dword [ecx+0x60C]  ; Scenario.CDifficulty (aka DifficultyModeComputer)
 
     cmp eax, 0
@@ -172,7 +172,7 @@ SHL word [0x8093B8],CL
 ;    push    eax
 ;    call    0x005912E0
     
-    mov     ecx, [ScenarioStuff]
+    mov     ecx, [Scen]
     call    0x005C0230
 
     

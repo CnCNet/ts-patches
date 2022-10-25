@@ -219,7 +219,7 @@ setcglob 0x005DB170, Start_Scenario
 setcglob 0x007E3E90, NameNodeVector
 setcglob 0x0044D690, NameNodeVector_Add
 setcglob 0x005EE7D0, SessionClass__Read_Scenario_Descriptions
-setcglob 0x007E2438, ScenarioStuff
+setcglob 0x007E2438, Scen
 setcglob 0x007E4724, SelectedDifficulty
 setcglob 0x007E4548, SpecialClass__Special
 setcglob 0x005DE580, Create_Units

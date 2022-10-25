@@ -82,7 +82,7 @@ extern bool ChatToAllFlag;
 extern bool ChatToSpectatorsFlag;
 extern uint32_t IsSpectatorArray[8];
 extern size_t HouseClassArray_Count;
-extern ScenarioClass *ScenarioStuff;
+extern ScenarioClass *Scen;
 extern uint32_t Frame;
 extern uint32_t GameIDNumber;
 extern int32_t DragDistance;

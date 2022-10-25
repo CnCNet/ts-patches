@@ -10,7 +10,7 @@ sstring str_GlobalVariables, "Global variables: %s"
 ; Hack Do_Win to call our function
 hack 0x005DC966
     call 0x00643F20 ; ThemeClass::Queue_Song(ThemeType)
-    mov  ecx, [ScenarioStuff]
+    mov  ecx, [Scen]
     call ScenarioClass__Dump_Globals
     jmp 0x005DC96B
     
