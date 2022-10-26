@@ -256,11 +256,6 @@ OBJS += src/saved_games_in_subdir.o
 OBJS += src/savegame.o
 OBJS += src/scrap_metal_explosion.o
 
-# Only include in: MOD_TO MOD_TI
-ifneq ($(call ifdef_any_of,MOD_TO MOD_TI),)
-OBJS += src/scriptaction4.o
-endif
-
 OBJS += src/shared_control.o
 OBJS += src/short_connection_timeout.o
 OBJS += src/show_stats.o
@@ -377,6 +372,12 @@ OBJS += src/rules_process.o
 OBJS += src/scale_movie_fix.o
 OBJS += src/scale_movie_fix_hack.o
 OBJS += src/screenshots_in_subdir.o
+
+# Only include in: MOD_TO MOD_TI
+ifneq ($(call ifdef_any_of,MOD_TO MOD_TI),)
+OBJS += src/scriptaction4.o
+endif
+
 OBJS += src/skip_score.o
 OBJS += src/veterancy_crate_check_trainable.o
 OBJS += src/video_mode_hacks.o
