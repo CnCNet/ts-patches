@@ -120,7 +120,7 @@ sstring str_SettingsINI, "Settings.ini"
 %ifndef VINIFERA
 
 sstring str_EnhanceINI, "ENHANCE.INI"
-;sstring str_SoundsMIX, "SOUNDS.MIX"
+sstring str_SoundsMIX, "SOUNDS.MIX"
 sstring str_DTALong, "Dawn of the Tiberium Age"
 sstring str_DTAGameWindow, "DTA (Game Window)"
 sstring str_LanguageDLLNotFound, "Language.dll not found, please start DTA.exe and click Save in the Options menu."
@@ -128,7 +128,7 @@ sstring str_LanguageDLLNotFound, "Language.dll not found, please start DTA.exe a
 sstring str_ArtEINI, "ARTE.INI"
 sstring str_AIEINI, "AIE.INI"
 sstring str_CacheMIX, "CACHE.MIX"
-;sstring str_Sounds01MIX, "SOUNDS01.MIX"
+sstring str_Sounds01MIX, "SOUNDS01.MIX"
 sstring str_Isodes, "ISODES"
 sstring str_IsodesMIX, "ISODES.MIX"
 ;sstring str_SideMIX, "SIDE%02d.MIX"
@@ -169,8 +169,8 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x004E11E6, push str_EnhanceINI
 @SET 0x004E1547, push str_AIEINI
 @SET 0x004E4078, push str_CacheMIX
-;@SET 0x004E430F, push str_SoundsMIX ; Sounds01.MIX?
-;@SET 0x004E4360, push str_SoundsMIX ; Sounds01.MIX?
+@SET 0x004E430F, push str_SoundsMIX ; Sounds01.MIX?
+@SET 0x004E4360, push str_SoundsMIX ; Sounds01.MIX?
 ;@SET 0x004E439C, push str_SoundsMIX
 ;@SET 0x004E43ED, push str_SoundsMIX
 ;@SET 0x004E80D8, push str_SideMIX
