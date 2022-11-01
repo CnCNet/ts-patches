@@ -193,6 +193,7 @@ OBJS += src/fix_infantryclass_take_damage_null_warhead_crash.o
 OBJS += src/fix_unitclass_can_enter_cell_ignoring_terraintype_immunity.o
 OBJS += src/fix_score_logging_typo.o
 OBJS += src/flickering_shadow_fix.o
+OBJS += src/force_firestorm_installed.o
 OBJS += src/freeunit_enhancements.o
 OBJS += src/gamespeed.o
 OBJS += src/guard_mode_patch.o
