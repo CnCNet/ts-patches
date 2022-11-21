@@ -7,6 +7,9 @@ sstring HouseNameNeutral, "Neutral"
 
 hack 0x004C4733, 0x004C4739
 _HouseClase__House_From_HouseType:
+        cmp  ecx, 58
+        jg   .return_null
+
         cmp  ecx, 50
         jge  .house_by_spawn
 
@@ -38,6 +41,9 @@ _HouseClase__House_From_HouseType:
         jmp  hackend
  .out:
         jmp 0x004C4759
+        
+ .return_null:
+        jmp 0x004C4757
 
 
 ;hack 0x006428B8
