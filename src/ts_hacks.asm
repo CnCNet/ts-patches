@@ -2,15 +2,6 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-; Erase NAWALL and GAWALL hardcoding
-@SET 0x00710DA4, {db 0,0,0,0,0,0}
-@SET 0x00710DAC, {db 0,0,0,0,0,0}
-
-; Erase GAFSDF, HMEC, 155mm and ARTYHE hardcoding
-@SET 0x00710DB4, {db 0,0,0,0,0,0}
-@SET 0x00706A8C, {db 0,0,0,0}
-@SET 0x00715E78, {db 0,0,0,0,0}
-@SET 0x00714C70, {db 0,0,0,0,0,0}
 
 ; "Overlay tiberium fix thing, 4th etc"
 @SET 0x00644DF9, {mov dword [esi+0ACh], 0Ch}
@@ -84,5 +75,15 @@ sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianS
 @SET 0x005DD822, {xor ecx, ecx}
 @CLEAR 0x005DD824, 0x90, 0x005DD828
 @SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
+
+; Erase NAWALL and GAWALL hardcoding
+@SET 0x00710DA4, {db 0,0,0,0,0,0}
+@SET 0x00710DAC, {db 0,0,0,0,0,0}
+
+; Erase GAFSDF, HMEC, 155mm and ARTYHE hardcoding
+@SET 0x00710DB4, {db 0,0,0,0,0,0}
+@SET 0x00706A8C, {db 0,0,0,0}
+@SET 0x00715E78, {db 0,0,0,0,0}
+@SET 0x00714C70, {db 0,0,0,0,0,0}
 
 %endif

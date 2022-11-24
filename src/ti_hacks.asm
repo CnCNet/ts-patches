@@ -24,10 +24,6 @@
 ; Change subterranean horizontal movement speed
 @SET 0x006D8A9E, {db 0x29}
 
-; Erase NAWALL and GAWALL
-@SET 0x00710DA4, {db 0,0,0,0,0,0}
-@SET 0x00710DAC, {db 0,0,0,0,0,0}
-
 ;; Trackbar Border Color change
 @SET 0x0059138B, {db 0x09, 0x92, 0x0F}
 
@@ -179,5 +175,9 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x005DD822, {xor ecx, ecx}
 @CLEAR 0x005DD824, 0x90, 0x005DD828
 @SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
+
+; Erase NAWALL and GAWALL
+@SET 0x00710DA4, {db 0,0,0,0,0,0}
+@SET 0x00710DAC, {db 0,0,0,0,0,0}
 
 %endif
