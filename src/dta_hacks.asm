@@ -45,33 +45,6 @@
 @SET 0x0065B9E6, {mov byte [esi+4D0h], 1} ;byte ptr
 @SET 0x0065BF3D, {mov [esi+21h], eax}
 
-; Set global variable byte containing side ID to load files for
-@SET 0x004E2CFA, {mov byte [0x7E2500], al}
-@SET 0x004E2CFF, nop
-@SET 0x004E2D00, {add esp, 4}
-@SJMP 0x004E2D03, 0x004E2D13 ; jmp short
-@SET 0x004E2D05, nop
-
-; Load sidebar MIX files for new sides properly (for saved games)
-@SET 0x005D6C4F, {mov cl, [eax+1D91h]}
-@CLEAR 0x005D6C55, 0x90, 0x005D6C58
-
-; Load speech MIX files for new sides properly (for saved games)
-@SJMP 0x005D6DB8, 0x005D6DCE     ;jmp short
-
-@SET 0x005D6DCE, {xor ecx, ecx}
-@SET 0x005D6DD0, {mov cl, [eax+1D91h]}
-@CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
-
-; Load sidebar MIX files for new sides properly
-@SET 0x005DD798, {mov cl, byte [0x007E2500]}
-@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
-
-; Load speech MIX files for new sides properly
-@SET 0x005DD822, {xor ecx, ecx}
-@CLEAR 0x005DD824, 0x90, 0x005DD828
-@SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
-
 ; AI starting units will start in Unload mode instead of Area Guard mode (was 05 for Guard mode)
 @SET 0x005DEE36, push 0Fh
 
@@ -240,5 +213,32 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 
 ; Remove framework mode mmt/mms loading
 @LJMP 0x004F5182, 0x004F528C    ; jmp loc_4F528C
+
+; Set global variable byte containing side ID to load files for
+@SET 0x004E2CFA, {mov byte [0x7E2500], al}
+@SET 0x004E2CFF, nop
+@SET 0x004E2D00, {add esp, 4}
+@SJMP 0x004E2D03, 0x004E2D13 ; jmp short
+@SET 0x004E2D05, nop
+
+; Load sidebar MIX files for new sides properly (for saved games)
+@SET 0x005D6C4F, {mov cl, [eax+1D91h]}
+@CLEAR 0x005D6C55, 0x90, 0x005D6C58
+
+; Load speech MIX files for new sides properly (for saved games)
+@SJMP 0x005D6DB8, 0x005D6DCE     ;jmp short
+
+@SET 0x005D6DCE, {xor ecx, ecx}
+@SET 0x005D6DD0, {mov cl, [eax+1D91h]}
+@CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
+
+; Load sidebar MIX files for new sides properly
+@SET 0x005DD798, {mov cl, byte [0x007E2500]}
+@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
+
+; Load speech MIX files for new sides properly
+@SET 0x005DD822, {xor ecx, ecx}
+@CLEAR 0x005DD824, 0x90, 0x005DD828
+@SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 
 %endif

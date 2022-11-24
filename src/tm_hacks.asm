@@ -19,33 +19,6 @@
 @SET 0x0065B9E6, {mov byte [esi+4D0h], 1} ;byte ptr
 @SET 0x0065BF3D, {mov [esi+21h], eax}
 
-; Set global variable byte containing side ID to load files for
-@SET 0x004E2CFA, {mov byte [0x7E2500], al}
-@SET 0x004E2CFF, nop
-@SET 0x004E2D00, {add esp, 4}
-@SJMP 0x004E2D03, 0x004E2D13 ; jmp short
-@SET 0x004E2D05, nop
-
-; Load sidebar MIX files for new sides properly (for saved games)
-@SET 0x005D6C4F, {mov cl, [eax+1D91h]}
-@CLEAR 0x005D6C55, 0x90, 0x005D6C58
-
-; Load speech MIX files for new sides properly (for saved games)
-@SJMP 0x005D6DB8, 0x005D6DCE     ;jmp short
-
-@SET 0x005D6DCE, {xor ecx, ecx}
-@SET 0x005D6DD0, {mov cl, [eax+1D91h]}
-@CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
-
-; Load sidebar MIX files for new sides properly
-@SET 0x005DD798, {mov cl, byte [0x007E2500]}
-@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
-
-; Load speech MIX files for new sides properly
-@SET 0x005DD822, {xor ecx, ecx}
-@CLEAR 0x005DD824, 0x90, 0x005DD828
-@SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
-
 ; Building selection box color change when affected by limpet from palette index yellow (5) to
 ; orange (6). Used with unit selection box (select.shp) color change for limpet affected frame.
 @SET 0x0062B2E4, {mov dword [esp+1Ch], 0x06}
@@ -84,5 +57,32 @@ sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianS
 @SET 0x005899F5, nop
 @SET 0x005899F6, nop
 @SET 0x005899F7, nop
+
+; Set global variable byte containing side ID to load files for
+@SET 0x004E2CFA, {mov byte [0x7E2500], al}
+@SET 0x004E2CFF, nop
+@SET 0x004E2D00, {add esp, 4}
+@SJMP 0x004E2D03, 0x004E2D13 ; jmp short
+@SET 0x004E2D05, nop
+
+; Load sidebar MIX files for new sides properly (for saved games)
+@SET 0x005D6C4F, {mov cl, [eax+1D91h]}
+@CLEAR 0x005D6C55, 0x90, 0x005D6C58
+
+; Load speech MIX files for new sides properly (for saved games)
+@SJMP 0x005D6DB8, 0x005D6DCE     ;jmp short
+
+@SET 0x005D6DCE, {xor ecx, ecx}
+@SET 0x005D6DD0, {mov cl, [eax+1D91h]}
+@CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
+
+; Load sidebar MIX files for new sides properly
+@SET 0x005DD798, {mov cl, byte [0x007E2500]}
+@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
+
+; Load speech MIX files for new sides properly
+@SET 0x005DD822, {xor ecx, ecx}
+@CLEAR 0x005DD824, 0x90, 0x005DD828
+@SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 
 %endif
