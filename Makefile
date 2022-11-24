@@ -311,7 +311,6 @@ endif
 # TI only sources.
 ifdef MOD_TI
 OBJS += src/team_number_position.o
-OBJS += src/vinifera_unhardcode.o
 endif
 
 # TO only sources.
@@ -331,6 +330,7 @@ OBJS += src/cache_alot.o
 # Only included in: MOD_TI
 ifdef MOD_TI
 OBJS += src/cloakstop_to_empimmunity.o
+OBJS += src/vinifera_unhardcode.o
 endif
 
 OBJS += src/cloakstop_to_toobigforcarryalls.o

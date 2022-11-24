@@ -3,11 +3,14 @@
 %include "TiberianSun.inc"
 
 
-%ifdef MOD_DTA
-
-
+%ifndef VINIFERA
 ; Remove hardcoded Power=17 from "Vinifera" by changing the last character of the string
 @SET 0x00711143, {db "."}
+%endif
+
+
+%ifdef MOD_DTA
+
 
 ; The damage inflicted by the tiberium is Power= multiplied by the number at 0x000D3F75 (originally divided by 0A)
 ; Also makes tiberium do 0 damage with Power=0 and at least 1 for anything higher
@@ -33,9 +36,6 @@ hack 0x004D3F6E ; replacement for lack of @JLE macro
 
 %else
 
-
-; Remove hardcoded Power=17 from "Vinifera" by changing the last character of the string
-@SET 0x00711143, {db "."}
 
 ; The damage inflicted by the tiberium is Power= divided by the number at 0x000D3F75 (originally 0A)
 ; Also makes tiberium do 0 damage with Power=0 and at least 1 for anything higher
