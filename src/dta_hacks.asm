@@ -80,8 +80,22 @@
 @SJMP 0x005DB25E, 0x005DB288
 
 sstring str_SettingsINI, "Settings.ini"
+sstring str_EnhanceINI, "ENHANCE.INI"
+sstring str_ArtEINI, "ARTE.INI"
+sstring str_AIEINI, "AIE.INI"
+sstring str_BriefingPCX, "BRIEFING.PCX"
+
+; String references
+@SET 0x00407081, push str_EnhanceINI ; push offset str_EnhanceINI?
 @SET 0x004E0605, push str_SettingsINI
+@SET 0x004E1196, push str_ArtEINI
+@SET 0x004E11E6, push str_EnhanceINI
+@SET 0x004E1547, push str_AIEINI
 @SET 0x0058A146, push str_SettingsINI
+@SET 0x005C04AF, {mov ecx, str_BriefingPCX}
+@SET 0x005C649C, push str_ArtEINI
+@SET 0x005D1B26, push str_ArtEINI
+@SET 0x005D6D45, push str_ArtEINI
 @SET 0x005ED7F3, push str_SettingsINI
 @SET 0x005EE47B, push str_SettingsINI
 @SET 0x00601093, push str_SettingsINI
@@ -92,14 +106,11 @@ sstring str_SettingsINI, "Settings.ini"
 ;
 %ifndef VINIFERA
 
-sstring str_EnhanceINI, "ENHANCE.INI"
 sstring str_SoundsMIX, "SOUNDS.MIX"
 sstring str_DTALong, "Dawn of the Tiberium Age"
 sstring str_DTAGameWindow, "DTA (Game Window)"
 sstring str_LanguageDLLNotFound, "Language.dll not found, please start DTA.exe and click Save in the Options menu."
 ;sstring str_SoundsINI, "SOUNDS.INI"
-sstring str_ArtEINI, "ARTE.INI"
-sstring str_AIEINI, "AIE.INI"
 sstring str_CacheMIX, "CACHE.MIX"
 sstring str_Sounds01MIX, "SOUNDS01.MIX"
 sstring str_Isodes, "ISODES"
@@ -107,7 +118,6 @@ sstring str_IsodesMIX, "ISODES.MIX"
 ;sstring str_SideMIX, "SIDE%02d.MIX"
 sstring str_SideCDMIX, "SIDECD%02d.MIX"
 sstring str_MenuINI, "MENU.INI"
-sstring str_BriefingPCX, "BRIEFING.PCX"
 sstring str_BattleEINI, "BATTLEE.INI"
 sstring str_SidencMIX, "SIDENC%02d.MIX"
 ;sstring str_SideMIXRoot, "SIDE%02dE.MIX"
@@ -132,15 +142,11 @@ sstring str_DesertPAL, "DESERT.PAL"
 sstring str_TemperatPAL, "TEMPERAT.PAL"
 
 ; String references
-@SET 0x00407081, push str_EnhanceINI ; push offset str_EnhanceINI?
 ;@SET 0x0044EBF3, push str_SoundsMIX
 @SET 0x00472567, push str_DTALong
 @SET 0x0047256C, push str_LanguageDLLNotFound
 ;@SET 0x004E0912, push str_SoundsINI
 ;@SET 0x004E0919, push str_SoundsINI
-@SET 0x004E1196, push str_ArtEINI
-@SET 0x004E11E6, push str_EnhanceINI
-@SET 0x004E1547, push str_AIEINI
 @SET 0x004E4078, push str_CacheMIX
 @SET 0x004E430F, push str_SoundsMIX ; Sounds01.MIX?
 @SET 0x004E4360, push str_SoundsMIX ; Sounds01.MIX?
@@ -150,10 +156,6 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x004E838C, push esi
 @SET 0x004E8391, push str_SideCDMIX	; Search for SideCD##.mix instead of E01SC##.mix
 @SET 0x005801BB, push str_MenuINI
-@SET 0x005C04AF, {mov ecx, str_BriefingPCX}
-@SET 0x005C649C, push str_ArtEINI
-@SET 0x005D1B26, push str_ArtEINI
-@SET 0x005D6D45, push str_ArtEINI
 @SET 0x005FF2C0, {cmp edx, str_DTALong}
 @SET 0x005FF2C8, push str_DTALong
 @SET 0x005FF2D9, push str_DTALong
