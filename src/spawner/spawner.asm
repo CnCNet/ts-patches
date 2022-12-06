@@ -256,6 +256,11 @@ section .rdata
     str_bue_mi24_pcx      db"bue_mi24.pcx",0
     str_bue_ri24_pcx      db"bue_ri24.pcx",0
 
+    str_Spawner_Init      db"Initializing spawner...",10,0
+    str_Rule_Houses       db"Rule->Houses(*RuleINI)...",10,0
+    str_Rule_Sides        db"Rule->Sides(*RuleINI)...",10,0
+
+
 section .text
 
 _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
@@ -974,6 +979,10 @@ Initialize_Spawn:
     call Load_SPAWN_INI
     cmp eax, 0
     jz .Exit_Error
+    
+    push str_Spawner_Init
+    call 0x004082D0 ;; WWDebugPrintf
+    add esp, 0x4
 
     ; get pointer to inet_addr
     push str_wsock32_dll
@@ -994,7 +1003,52 @@ Initialize_Spawn:
     call Load_Global_Flags_Spawner
     
     mov byte [GameActive], 1 ; needs to be set here or the game gets into an infinite loop trying to create spawning units
+    
+    ;
+    ; Load the Houses and Sides section from the RuleINI. We need to do
+    ; this before the loading screen is shown so side specific artwork
+    ; can be chosen by using the houses Side= value.
+    ;
+    push str_Rule_Houses
+    call 0x004082D0 ;; WWDebugPrintf
+    add esp, 0x4
+    
+    mov eax, [0x0074C2F0] ; RuleINI
+    push eax
+    mov ecx, [0x0074C488] ; RulesClass pointer
+    call 0x005CC490 ; RulesClass::Houses
+    
+    push str_Rule_Sides
+    call 0x004082D0 ;; WWDebugPrintf
+    add esp, 0x4
+    
+    mov eax, [0x0074C2F0] ; RuleINI
+    push eax
+    mov ecx, [0x0074C488] ; RulesClass pointer
+    call 0x005CC5E0 ; RulesClass::Sides
+    
+    ;
+    ; Iterate HouseTypes, call Read_INI.
+    ;
+    mov eax, [0x007E21E0] ; HouseTypes.ActiveCount
+    xor esi, esi
+    test eax, eax
+    jle .set_session
 
+.house_read_ini_loop:
+    mov edx, [0x007E21D4] ; HouseTypes.Vector
+    mov ecx, [edx+esi*0x4] ; 
+    mov edx, [0x0074C2F0] ; RuleINI
+    push edx
+    mov eax, [ecx]
+    call dword [eax+0x68] ; Read_INI
+    
+    mov eax, [0x007E21E0] ; HouseTypes.ActiveCount
+    inc esi
+    cmp esi, eax
+    jl .house_read_ini_loop
+
+.set_session:
     ; set session
     mov dword [SessionType], 5
 
