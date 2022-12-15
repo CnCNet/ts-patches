@@ -315,6 +315,7 @@ setcglob 0x00685BC0, WndProc
 setcglob 0x00865040, MainWindow
 setcglob 0x007E4920, GameInFocus
 setcglob 0x007E48FC, InScenario
+setcglob 0x00648CD0, Remove_All_Inactive
 
 ; Sidebar
 setcglob 0x0080C3BC, SidebarClass_Redraw_Buttons

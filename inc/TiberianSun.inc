@@ -228,6 +228,7 @@ cextern EventClass__EnqueueEvent
 cextern Queue_Exit
 cextern EventType_Offset
 cextern Print_CRCs
+cextern Remove_All_Inactive
 cextern HumanNode_ActiveCount
 
 ; Scenario

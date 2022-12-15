@@ -7,6 +7,7 @@
 #define MAX_SP_AUTOSAVES 3
 
 CALL(0x005091A5, _MainLoop_AfterRender);
+CALL(0x00509388, _MainLoop_PreRemoveAllInactive);
 
 bool HaventSetSpecTeam = true;
 
@@ -31,7 +32,7 @@ MainLoop_AfterRender(MessageListClass *msg) {
   MessageListClass__Manage(msg);
 
 	if (SpawnerActive) {
-		
+        
 		if (SessionClass_this.GameSession != 0) { // GAME_CAMPAIGN
 		
 			if (PlayerPtr->Defeated == true && HaventSetSpecTeam) {
@@ -68,9 +69,15 @@ MainLoop_AfterRender(MessageListClass *msg) {
 				if (AutoSSInterval < AutoSSIntervalMax)
 					AutoSSInterval += AutoSSGrowth;
 			}
-
 		}
-        else {
+	}
+}
+
+void __fastcall MainLoop_PreRemoveAllInactive() {
+    Remove_All_Inactive();
+    
+    if (SpawnerActive) {
+        if (SessionClass_this.GameSession == 0) { // GAME_CAMPAIGN
             // Auto-save for singleplayer missions
             
             if (AutoSaveGame > 0) {
@@ -99,6 +106,6 @@ MainLoop_AfterRender(MessageListClass *msg) {
                 }
             }
         }
-
-	}
+    }
 }
+
