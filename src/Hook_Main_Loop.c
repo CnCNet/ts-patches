@@ -27,6 +27,9 @@ int32_t AutoSSInterval = 4;
 int32_t AutoSSGrowth = 4;
 int32_t AutoSSIntervalMax = 30;
 
+char AutoSaveNameBuf[256];
+char AutoSaveDescrBuf[256];
+
 void __thiscall
 MainLoop_AfterRender(MessageListClass *msg) {
   MessageListClass__Manage(msg);
@@ -90,19 +93,25 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
                 }
                 
                 if (Frame > NextAutoSave) {
+
+                    // desperate attempt to save corruption issues
+                    Pause_Scenario_Timer();
+                    Call_Back();
+
                     NextAutoSave = Frame + AutoSaveGame;
                     NextSPAutoSaveId++;
                     if (NextSPAutoSaveId > MAX_SP_AUTOSAVES)
                         NextSPAutoSaveId = 1;
                     
-                    char nameBuf[16];
-                    char descrBuf[32];
-                    int sprintf_result = sprintf(nameBuf, "AUTOSAVE%d.SAV", NextSPAutoSaveId);
-                    int sprintf_result2 = sprintf(descrBuf, "Mission Auto-Save (Slot %d)", NextSPAutoSaveId);
+                    int sprintf_result = sprintf(AutoSaveNameBuf, "AUTOSAVE%d.SAV", NextSPAutoSaveId);
+                    int sprintf_result2 = sprintf(AutoSaveDescrBuf, "Mission Auto-Save (Slot %d)", NextSPAutoSaveId);
                 
                     if (sprintf_result > 0 && sprintf_result2 > 0) {
-                        Save_Game(nameBuf, descrBuf, false);
+                        Save_Game(AutoSaveNameBuf, AutoSaveDescrBuf, false);
                     }
+
+                    // desperate attempt to fix save corruption issues
+                    Resume_Scenario_Timer();
                 }
             }
         }

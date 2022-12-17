@@ -316,6 +316,9 @@ setcglob 0x00865040, MainWindow
 setcglob 0x007E4920, GameInFocus
 setcglob 0x007E48FC, InScenario
 setcglob 0x00648CD0, Remove_All_Inactive
+setcglob 0x005DB4C0, Pause_Scenario_Timer
+setcglob 0x005DB590, Resume_Scenario_Timer
+setcglob 0x00462C60, Call_Back
 
 ; Sidebar
 setcglob 0x0080C3BC, SidebarClass_Redraw_Buttons
