@@ -286,6 +286,7 @@ OBJS += src/voxelanim_damage_bug.o
 OBJS += src/waypoint_enhancements.o
 OBJS += src/wcsncpy.o
 OBJS += src/whiteboy_cameo_bugfix.o
+OBJS += src/basic_theme_fix.o
 
 # Sources included in mods but NOT the client.
 ifndef TSCLIENT
@@ -323,7 +324,6 @@ endif
 # These sources will be omitted from Vinifera compatible builds.
 # =========================================================
 ifndef VINIFERA
-OBJS += src/basic_theme_fix.o
 OBJS += src/buildingtype_initialization.o
 OBJS += src/cache_alot.o
 
