@@ -1357,6 +1357,8 @@ Initialize_Spawn:
     lea ecx, [SaveGameNameBuf]
     call Load_Game
 
+    mov byte [SkipBriefingOnMissionStart], 0
+
     jmp .Dont_Load_Scenario
 
 .Dont_Load_Savegame:

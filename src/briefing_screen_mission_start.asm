@@ -38,23 +38,6 @@ section .text
 %endmacro
 
 
-; Do_Restart_Disable_Briefing_Screen_Skip
-;
-; When the spawner loads a saved game on startup, 
-; it first starts a normal session on the mission to
-; initialize some internal game systems.
-; The mission briefing screen is forcefully displayed normally,
-; but we want to skip it when we're loading the game on session start.
-; However, if the user restarts the mission after loading,
-; we want to display the briefing screen on restart.
-;
-; Author: Rampastring (rest of the code in this file is mostly by Iran)
-hack 0x005DCEE1
-    mov byte [SkipBriefingOnMissionStart], 0
-    call 0x00643F20 ; ThemeClass::Queue_Song(ThemeType)
-    jmp  0x005DCEE6
-
-
 ; _Start_Scenario_Print_Difficulty_And_Force_Briefing_Screen:
 hack 0x005DB49C
 
