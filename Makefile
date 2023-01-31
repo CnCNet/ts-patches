@@ -227,6 +227,7 @@ OBJS += src/move_team_group_number.o
 endif
 
 OBJS += src/multi_engineer_ignore_neutral.o
+OBJS += src/multiplayer_ai_base_nodes.o
 OBJS += src/multiplayer_units_placing.o
 OBJS += src/multiple_factory_hack.o
 OBJS += src/mumblelink.o

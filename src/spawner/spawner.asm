@@ -12,6 +12,7 @@ cglobal SpawnLocationsHouses
 gbool SavesDisabled, true
 gbool QuickMatch, false
 gbool IsHost, true
+gbool UseMPAIBaseNodes, false
 gint CampaignID, 0
 
 cextern Load_Spectators_Spawner
@@ -185,7 +186,8 @@ section .rdata
     str_AutoSurrender   db "AutoSurrender",0
     str_GameNameTitle   db "Tiberian Sun",0
     str_PleaseRunClient db "Please run the game client instead.",0
-    str_CampaignID     db "CampaignID",0
+    str_CampaignID      db "CampaignID",0
+    str_UseMPAIBaseNodes db "UseMPAIBaseNodes", 0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -319,6 +321,68 @@ _UnitClass__Read_INI_Jump_Out_When_Units_Section_Missing:
 .Jump_Out:
     jmp 0x00658A10
 
+
+; Loops through houses on predetermined spawn locations (UsedSpawnsArray)
+; and reads their base nodes in multiplayer.
+;
+; We need this because while HouseClass::Read_INI calls
+; BaseClass::Read_INI to read base nodes, we don't yet know
+; which players occupy which player locations at that
+; point, meaning we need to re-read the base nodes after we know
+; which player locations are occupied.
+;
+; Author: Rampastring
+_Read_Scenario_INI_Read_Base_Nodes_After_Creation_Of_Units:
+
+    push ebx
+    push edi
+    push esi
+    push ebp
+
+    mov  ebp, ecx ; save CCIniClass (scenario INI) pointer
+
+    cmp dword [SessionType], 0
+    jz  .Ret
+
+; args <Spawn number>, <Spawn house name string>
+%macro Read_BaseNodes_For 2
+    mov  eax, %1
+
+    mov  eax, [UsedSpawnsArray+eax*4]
+    cmp  eax, -1
+    jz   .Past_BaseNodes_For_Spawn%1 ; No player associated with this starting location
+
+    ; Player exists for this starting location,
+    ; fetch house pointer
+    mov  esi, [HouseClassArray_Vector]
+    mov  eax, [esi+eax*4]
+
+    push %2  ; spawn house name
+    push ebp ; scenario INI
+    lea  ecx, [eax+4F4h] ; fetch Base instance from House
+    call 0x0041F970 ; BaseClass::Read_INI(CCINIClass &, char const *)
+
+.Past_BaseNodes_For_Spawn%1:
+%endmacro
+
+    Read_BaseNodes_For 0, str_Spawn1
+    Read_BaseNodes_For 1, str_Spawn2
+    Read_BaseNodes_For 2, str_Spawn3
+    Read_BaseNodes_For 3, str_Spawn4
+    Read_BaseNodes_For 4, str_Spawn5
+    Read_BaseNodes_For 5, str_Spawn6
+    Read_BaseNodes_For 6, str_Spawn7
+    Read_BaseNodes_For 7, str_Spawn8
+
+.Ret:
+    pop  ebp
+    pop  esi
+    pop  edi
+    pop  ebx
+    retn
+
+
+
 _Read_Scenario_INI_Dont_Create_Units_Earlier:
     call 0x0058C980
 
@@ -342,6 +406,9 @@ _Read_Scenario_INI_Dont_Create_Units_Earlier:
     call    _ally_by_spawn_location
 
     call    initMumble
+
+    mov     ecx, ebp
+    call    _Read_Scenario_INI_Read_Base_Nodes_After_Creation_Of_Units
 
 .Ret:
     jmp 0x005DDAF6
@@ -1162,6 +1229,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_AutoSurrender, 1
     mov byte [AutoSurrender], al
+
+    SpawnINI_Get_Bool str_Settings, str_UseMPAIBaseNodes, 0
+    mov byte [UseMPAIBaseNodes], al
 
     ; tunnel ip
     lea eax, [TempBuf]
