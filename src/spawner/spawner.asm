@@ -13,6 +13,7 @@ gbool SavesDisabled, true
 gbool QuickMatch, false
 gbool IsHost, true
 gbool UseMPAIBaseNodes, false
+gbool PlayMoviesInMultiplayer, false
 gint CampaignID, 0
 
 cextern Load_Spectators_Spawner
@@ -69,6 +70,7 @@ cextern NoRNG
 ; Stop EndGameClass_Apply from overwriting global variable values set by our code on scenario start
 ; We know them better
 @CLEAR 0x00493932, 0x90, 0x00493939
+@CLEAR 0x005636CC, 0x90, 0x005636D2 ; allow playing VQAs in multiplayer
 %endif
 
 ;always write mp stats
@@ -188,6 +190,7 @@ section .rdata
     str_PleaseRunClient db "Please run the game client instead.",0
     str_CampaignID      db "CampaignID",0
     str_UseMPAIBaseNodes db "UseMPAIBaseNodes", 0
+    str_PlayMoviesInMultiplayer db "PlayMoviesInMultiplayer",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -1233,6 +1236,9 @@ Initialize_Spawn:
     SpawnINI_Get_Bool str_Settings, str_UseMPAIBaseNodes, 0
     mov byte [UseMPAIBaseNodes], al
 
+    SpawnINI_Get_Bool str_Settings, str_PlayMoviesInMultiplayer, 0
+    mov byte [PlayMoviesInMultiplayer], al
+
     ; tunnel ip
     lea eax, [TempBuf]
     SpawnINI_Get_String str_Tunnel, str_Ip, str_Empty, eax, 32
@@ -1465,6 +1471,12 @@ Initialize_Spawn:
     push -1
     xor edx, edx
     mov ecx, ScenarioName
+
+    cmp  byte [PlayMoviesInMultiplayer], 1
+    jne  .Past_MP_Movie_Setting
+    mov  dl, 1 ; play_intro
+
+.Past_MP_Movie_Setting:
     call Start_Scenario
 
 .Past_Start_Scenario:
