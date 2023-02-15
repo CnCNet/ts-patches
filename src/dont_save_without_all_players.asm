@@ -7,6 +7,7 @@
 ; Author: Rampastring
 
 cextern SavesDisabled
+cextern IsDoingMPAutoSaveThisFrame
 
 sstring str_CantSaveWithoutAllPlayers, "All players need to be present for saving multiplayer games."
 
@@ -17,7 +18,7 @@ hack 0x00494DCE
     mov ax, [SavesDisabled]
     cmp ax, 1
 
-    jne .Original_Code
+    jne .Post_Players_Present_Check
 
     pushad
 
@@ -42,9 +43,17 @@ hack 0x00494DCE
 
     jmp 0x00494EB3
 
-.Original_Code:
-    mov eax, dword [0x007E4940]
-    xor edi, edi
-    cmp eax, edi
-    jnz 0x00494E9C
-    jmp 0x00494DDD
+.Post_Players_Present_Check:
+
+    ; Don't save mid-frame in multiplayer to prevent saves from getting corrupted
+    ; We instead save after the game's main loop
+    mov  byte [IsDoingMPAutoSaveThisFrame], 1
+    jmp  0x00494EB3 ; exit function
+
+; original Westwood code
+;    mov eax, dword [0x007E4940]
+;    xor edi, edi
+;    cmp eax, edi
+;    jnz 0x00494E9C
+;    jmp 0x00494DDD
+

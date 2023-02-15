@@ -10,6 +10,7 @@ CALL(0x005091A5, _MainLoop_AfterRender);
 CALL(0x00509388, _MainLoop_PreRemoveAllInactive);
 
 bool HaventSetSpecTeam = true;
+bool IsDoingMPAutoSaveThisFrame = false;
 
 int32_t PlayerEventCounts[8];
 int32_t PlayerEventExecs[8];
@@ -94,7 +95,6 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
                 
                 if (Frame > NextAutoSave) {
 
-                    // desperate attempt to save corruption issues
                     Pause_Scenario_Timer();
                     Call_Back();
 
@@ -110,9 +110,20 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
                         Save_Game(AutoSaveNameBuf, AutoSaveDescrBuf, false);
                     }
 
-                    // desperate attempt to fix save corruption issues
                     Resume_Scenario_Timer();
                 }
+            }
+        } else if (SessionClass_this.GameSession == 3) {
+            // Auto-save for multiplayer
+
+            // We do it by ourselves here instead of letting original Westwood save when 
+            // the event is executed, because saving mid-frame before Remove_All_Inactive()
+            // has been called can lead to save corruption
+            // In other words, by doing it here we fix a Westwood bug/oversight
+
+            if (IsDoingMPAutoSaveThisFrame) {
+                Save_Game("SAVEGAME.NET", "Multiplayer Game", false);
+                IsDoingMPAutoSaveThisFrame = false;
             }
         }
     }
