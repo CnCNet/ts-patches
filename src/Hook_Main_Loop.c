@@ -10,7 +10,8 @@ CALL(0x005091A5, _MainLoop_AfterRender);
 CALL(0x00509388, _MainLoop_PreRemoveAllInactive);
 
 bool HaventSetSpecTeam = true;
-bool IsDoingMPAutoSaveThisFrame = false;
+bool IsDoingMPSaveNextFrame = false;
+bool IsSavingThisFrame = false;
 
 int32_t PlayerEventCounts[8];
 int32_t PlayerEventExecs[8];
@@ -121,9 +122,19 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
             // has been called can lead to save corruption
             // In other words, by doing it here we fix a Westwood bug/oversight
 
-            if (IsDoingMPAutoSaveThisFrame) {
+            if (IsSavingThisFrame) {
                 Save_Game("SAVEGAME.NET", "Multiplayer Game", false);
-                IsDoingMPAutoSaveThisFrame = false;
+                IsSavingThisFrame = false;
+            }
+
+            if (IsDoingMPSaveNextFrame) {
+                MessageListClass__Add_Message(&MessageListClass_this, 0, 0,
+                "Saving game...",
+                4, 0x4046,
+                (int)(Rules->MessageDuration * FramesPerMinute)/2);
+
+                IsSavingThisFrame = true;
+                IsDoingMPSaveNextFrame = false;
             }
         }
     }
