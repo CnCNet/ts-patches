@@ -9,6 +9,7 @@ cextern PlayerSide
 
 section .text
 
+%ifndef VINIFERA
 hack 0x004E7EC2 ; Store_Side:
    ; Read and store the side index when the game prepares mixfiles for the side
    mov dword [PlayerSide], ecx
@@ -16,20 +17,22 @@ hack 0x004E7EC2 ; Store_Side:
                    ; that we're skipping by replacing the call instruction at
                    ; 0x004E7EC2 with jmp
    jmp 0x004E7EC7 ; original code after logging function call
+%endif
+
 
 hack 0x00591367 ; Set_Color:
    pushad
    
-   cmp dword [PlayerSide], 0
+   cmp byte [0x007E2500], 0
    jz .Default_Color
    
-   cmp dword [PlayerSide], 1
+   cmp byte [0x007E2500], 1
    jz .Default_Color
    
-   cmp dword [PlayerSide], 2
+   cmp byte [0x007E2500], 2
    jz .Allied_Color
    
-   cmp dword [PlayerSide], 3
+   cmp byte [0x007E2500], 3
    jz .Soviet_Color
    
 .Default_Color:

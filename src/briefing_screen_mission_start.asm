@@ -91,16 +91,16 @@ hack 0x005DB49C
     MOV DWORD [0x8093A4],0x221B0B
     MOV DWORD [0x808E30],0x00443716
 
-    cmp dword [PlayerSide], 0
+    cmp byte [0x007E2500], 0
     jz .Default_Color
-    
-    cmp dword [PlayerSide], 1
+
+    cmp byte [0x007E2500], 1
     jz .Default_Color
-    
-    cmp dword [PlayerSide], 2
+
+    cmp byte [0x007E2500], 2
     jz .Allied_Color
-    
-    cmp dword [PlayerSide], 3
+
+    cmp byte [0x007E2500], 3
     jz .Soviet_Color
     
 .Default_Color:
