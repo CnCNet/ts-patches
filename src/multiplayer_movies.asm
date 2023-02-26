@@ -10,6 +10,7 @@
 cextern PlayMoviesInMultiplayer
 
 sint NextNetworkRefreshTime, 0
+gbool NetworkRefreshStarted, false
 
 ; Players skipping movies in multiplayer leads to disconnects.
 ; Prevent players from skipping movies in MP.
@@ -40,14 +41,31 @@ hack 0x0066BA56
     cmp  eax, [NextNetworkRefreshTime]
     jl   .No_Network_Processing
 
-    ; Update network refresh time
-    add  ecx, 1000
+    ; Update network refresh time, only update
+    ; once every 10 seconds
+    add  ecx, 10000
     mov  [NextNetworkRefreshTime], ecx
 
+    ; Skip first iteration
+    cmp  byte [NetworkRefreshStarted], 0
+    jne  .Send_Message
+
+    mov  al, 1
+    mov  byte [NetworkRefreshStarted], al
+    jmp  .No_Network_Processing
+
+
+.Send_Message:
     ; Send message
     ; TODO could do something else to send a message here
     ; instead of abusing the session loading message
-    push 64h
+    mov  ecx, [Scen]
+    mov  al, [ecx+1D93h]
+    neg  al
+    sbb  eax, eax
+    and  eax, 64h
+    add  eax, 64h
+    push eax
     mov  ecx, SessionClass_this
     call 0x005EF930 ; SessionClass::Loading_Callback(int)
 
