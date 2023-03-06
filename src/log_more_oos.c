@@ -16,6 +16,8 @@ CALL(0x005B5CA0, _fprintf_no_name_localization);
 void print_OutList(FILE * restrict stream, int32_t count);
 void print_DoList(FILE * restrict stream, int32_t count);
 void print_RNG(FILE * restrict stream, int32_t count);
+void print_Facings(FILE * restrict stream, int32_t count);
+void print_TarComChanges(FILE * restrict stream, int32_t count);
 
 int32_t
 fprintf_log_more_stuff(FILE * restrict stream, const char * restrict format, int32_t pct_lost)
@@ -27,6 +29,8 @@ fprintf_log_more_stuff(FILE * restrict stream, const char * restrict format, int
     fprintf(stream, "FPU State: %x\n", _controlfp(0, 0));
     print_DoList(stream, 4096);
     print_RNG(stream, 4096);
+    print_Facings(stream, 4096);
+    print_TarComChanges(stream, 4096);
     return ret;
 }
 
@@ -113,6 +117,10 @@ fprintf_no_name_localization(FILE * restrict stream, const char * restrict forma
 
     return fprintf(stream, format, name, isHuman, color, id, houseType);
 }
+
+/************************
+ * Random Number Generator
+ ************************/
 
 typedef enum RngCallType {
     RngCallType_None = 0,
@@ -204,6 +212,118 @@ print_RNG(FILE * restrict stream, int32_t count)
             break;
         }
         index = (index - 1) & RNGCALLBUFFER_MASK;
+    }
+    fprintf(stream, "\n", 0);
+}
+
+
+/***********************
+ * Object facing setters
+ ***********************/
+
+
+typedef struct FacingCallNode {
+    uint32_t DirStructValue;
+    uint32_t Frame;
+    uint32_t Caller;
+} FacingCallNode;
+
+#define FACINGCALLBUFFER_SZ 4096
+#define FACINGCALLBUFFER_MASK FACINGCALLBUFFER_SZ - 1
+
+typedef struct FacingCallBuffer {
+    uint32_t Index;
+    FacingCallNode CallHistory[FACINGCALLBUFFER_SZ];
+} FacingCallBuffer;
+
+FacingCallBuffer facingCallBuffer = {0};
+
+void __cdecl
+record_facing_void(uint32_t caller, uint32_t dirStructValue)
+{
+    FacingCallNode *node = &facingCallBuffer.CallHistory[facingCallBuffer.Index];
+    node->DirStructValue = dirStructValue;
+    node->Frame = Frame;
+    node->Caller = caller;
+
+    facingCallBuffer.Index = (facingCallBuffer.Index + 1) & FACINGCALLBUFFER_MASK;
+}
+
+void
+print_Facings(FILE * restrict stream, int32_t count)
+{
+    fprintf(stream, "--- BEGIN FACINGS ---\n", 0);
+
+    int index = (facingCallBuffer.Index - 1) & FACINGCALLBUFFER_MASK;
+    while (index != facingCallBuffer.Index && count-- > 0)
+    {
+        fprintf(stream, "FACING: %08x CALLER: %08x  FRAME: %-10d\n",
+        facingCallBuffer.CallHistory[index].DirStructValue,
+        facingCallBuffer.CallHistory[index].Caller,
+        facingCallBuffer.CallHistory[index].Frame);
+
+        index = (index - 1) & FACINGCALLBUFFER_MASK;
+    }
+    fprintf(stream, "\n", 0);
+}
+
+
+/****************
+ * TarCom setters
+ * (Assign_Target)
+ ****************/
+
+
+typedef struct TarComCallNode {
+    int32_t MyRTTI;
+    int32_t MyID;
+    int32_t TargetRTTI;
+    int32_t TargetID;
+    uint32_t Caller;
+    uint32_t Frame;
+} TarComCallNode;
+
+#define TARCOMCALLBUFFER_SZ 4096
+#define TARCOMCALLBUFFER_MASK TARCOMCALLBUFFER_SZ - 1
+
+typedef struct TarComCallBuffer {
+    uint32_t Index;
+    TarComCallNode CallHistory[TARCOMCALLBUFFER_SZ];
+} TarComCallBuffer;
+
+TarComCallBuffer tarcomCallBuffer = {0};
+
+void __cdecl
+record_tarcom_void(int32_t myRTTI, int32_t myID, int32_t targetRTTI, int32_t targetID, uint32_t caller)
+{
+    TarComCallNode *node = &tarcomCallBuffer.CallHistory[tarcomCallBuffer.Index];
+    node->MyRTTI = myRTTI;
+    node->MyID = myID;
+    node->TargetRTTI = targetRTTI;
+    node->TargetID = targetID;
+    node->Caller = caller;
+    node->Frame = Frame;
+
+    tarcomCallBuffer.Index = (tarcomCallBuffer.Index + 1) & TARCOMCALLBUFFER_MASK;
+}
+
+void
+print_TarComChanges(FILE * restrict stream, int32_t count)
+{
+    fprintf(stream, "--- BEGIN TARCOM CHANGES ---\n", 0);
+
+    int index = (tarcomCallBuffer.Index - 1) & TARCOMCALLBUFFER_MASK;
+    while (index != tarcomCallBuffer.Index && count-- > 0)
+    {
+        fprintf(stream, "TARCOM: MyRTTI: %d MyID: %d TargetRTTI: %d TargetID: %d Caller: %08x  Frame: %-10d\n",
+        tarcomCallBuffer.CallHistory[index].MyRTTI,
+        tarcomCallBuffer.CallHistory[index].MyID,
+        tarcomCallBuffer.CallHistory[index].TargetRTTI,
+        tarcomCallBuffer.CallHistory[index].TargetID,
+        tarcomCallBuffer.CallHistory[index].Caller,
+        tarcomCallBuffer.CallHistory[index].Frame);
+
+        index = (index - 1) & TARCOMCALLBUFFER_MASK;
     }
     fprintf(stream, "\n", 0);
 }
