@@ -80,7 +80,7 @@ void LoadSunIni()
     }
 
     MouseIntervalResolution = SunIni_GetInt("Video", "MouseResolution", 1);
-    MouseRenderInterval = SunIni_GetInt("Video", "MouseRenderInterval", 16);
+    MouseRenderInterval = SunIni_GetInt("Video", "MouseRenderInterval", 8);
 
 #ifndef SINGLEPLAYER
 
