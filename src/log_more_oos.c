@@ -18,6 +18,8 @@ void print_DoList(FILE * restrict stream, int32_t count);
 void print_RNG(FILE * restrict stream, int32_t count);
 void print_Facings(FILE * restrict stream, int32_t count);
 void print_TarComChanges(FILE * restrict stream, int32_t count);
+void print_OverrideMissionChanges(FILE * restrict stream, int32_t count);
+void print_AnimationConstructorCalls(FILE * restrict stream, int32_t count);
 
 int32_t
 fprintf_log_more_stuff(FILE * restrict stream, const char * restrict format, int32_t pct_lost)
@@ -29,8 +31,10 @@ fprintf_log_more_stuff(FILE * restrict stream, const char * restrict format, int
     fprintf(stream, "FPU State: %x\n", _controlfp(0, 0));
     print_DoList(stream, 4096);
     print_RNG(stream, 4096);
-    print_Facings(stream, 4096);
-    print_TarComChanges(stream, 4096);
+    print_Facings(stream, 1024);
+    print_TarComChanges(stream, 1024);
+    print_OverrideMissionChanges(stream, 512);
+    print_AnimationConstructorCalls(stream, 512);
     return ret;
 }
 
@@ -228,7 +232,7 @@ typedef struct FacingCallNode {
     uint32_t Caller;
 } FacingCallNode;
 
-#define FACINGCALLBUFFER_SZ 4096
+#define FACINGCALLBUFFER_SZ 1024
 #define FACINGCALLBUFFER_MASK FACINGCALLBUFFER_SZ - 1
 
 typedef struct FacingCallBuffer {
@@ -283,7 +287,7 @@ typedef struct TarComCallNode {
     uint32_t Frame;
 } TarComCallNode;
 
-#define TARCOMCALLBUFFER_SZ 4096
+#define TARCOMCALLBUFFER_SZ 1024
 #define TARCOMCALLBUFFER_MASK TARCOMCALLBUFFER_SZ - 1
 
 typedef struct TarComCallBuffer {
@@ -324,6 +328,109 @@ print_TarComChanges(FILE * restrict stream, int32_t count)
         tarcomCallBuffer.CallHistory[index].Frame);
 
         index = (index - 1) & TARCOMCALLBUFFER_MASK;
+    }
+    fprintf(stream, "\n", 0);
+}
+
+
+/******************
+ * Override_Mission
+ ******************/
+
+typedef struct OverrideMissionCallNode {
+    int32_t RTTI;
+    int32_t Owner;
+    uint32_t Caller;
+    uint32_t Frame;
+} OverrideMissionCallNode;
+
+#define OVERRIDEMISSIONCALLBUFFER_SZ 256
+#define OVERRIDEMISSIONCALLBUFFER_MASK OVERRIDEMISSIONCALLBUFFER_SZ - 1
+
+typedef struct OverrideMissionCallBuffer {
+    uint32_t Index;
+    OverrideMissionCallNode CallHistory[OVERRIDEMISSIONCALLBUFFER_SZ];
+} OverrideMissionCallBuffer;
+
+OverrideMissionCallBuffer overrideMissionCallBuffer = {0};
+
+void __cdecl
+record_override_mission_void(FootClass *foot, uint32_t rtti, uint32_t owner, uint32_t caller)
+{
+    OverrideMissionCallNode *node = &overrideMissionCallBuffer.CallHistory[overrideMissionCallBuffer.Index];
+    node->RTTI = rtti;
+    node->Owner = owner;
+    node->Caller = caller;
+    node->Frame = Frame;
+
+    overrideMissionCallBuffer.Index = (overrideMissionCallBuffer.Index + 1) & OVERRIDEMISSIONCALLBUFFER_MASK;
+}
+
+void
+print_OverrideMissionChanges(FILE * restrict stream, int32_t count)
+{
+    fprintf(stream, "--- BEGIN OVERRIDE_MISSION CALLS ---\n", 0);
+
+    int index = (overrideMissionCallBuffer.Index - 1) & OVERRIDEMISSIONCALLBUFFER_MASK;
+    while (index != overrideMissionCallBuffer.Index && count-- > 0)
+    {
+        fprintf(stream, "Mission Override: RTTI: %06d Owner: %06d Caller: %08x Frame: %-10d\n",
+        overrideMissionCallBuffer.CallHistory[index].RTTI,
+        overrideMissionCallBuffer.CallHistory[index].Owner,
+        overrideMissionCallBuffer.CallHistory[index].Caller,
+        overrideMissionCallBuffer.CallHistory[index].Frame);
+
+        index = (index - 1) & OVERRIDEMISSIONCALLBUFFER_MASK;
+    }
+    fprintf(stream, "\n", 0);
+}
+
+
+/***********************
+ * AnimClass constructor
+ ***********************/
+
+typedef struct AnimationConstructorCallNode {
+    uint32_t Coord;
+    uint32_t Caller;
+    uint32_t Frame;
+} AnimationConstructorCallNode;
+
+#define ANIMCONSTRUCTORCALLBUFFER_SZ 512
+#define ANIMCONSTRUCTORCALLBUFFER_MASK ANIMCONSTRUCTORCALLBUFFER_SZ - 1
+
+typedef struct AnimationConstructorCallBuffer {
+    uint32_t Index;
+    AnimationConstructorCallNode CallHistory[ANIMCONSTRUCTORCALLBUFFER_SZ];
+} AnimationConstructorCallBuffer;
+
+AnimationConstructorCallBuffer animationConstructorCallBuffer = {0};
+
+void __cdecl
+record_animation_constructor_void(uint32_t coord, void *animtype, uint32_t caller)
+{
+    AnimationConstructorCallNode *node = &animationConstructorCallBuffer.CallHistory[animationConstructorCallBuffer.Index];
+    node->Coord = coord;
+    node->Caller = caller;
+    node->Frame = Frame;
+
+    animationConstructorCallBuffer.Index = (animationConstructorCallBuffer.Index + 1) & ANIMCONSTRUCTORCALLBUFFER_MASK;
+}
+
+void
+print_AnimationConstructorCalls(FILE * restrict stream, int32_t count)
+{
+    fprintf(stream, "--- BEGIN ANIMATION CONSTRUCTOR CALLS ---\n", 0);
+
+    int index = (animationConstructorCallBuffer.Index - 1) & ANIMCONSTRUCTORCALLBUFFER_MASK;
+    while (index != animationConstructorCallBuffer.Index && count-- > 0)
+    {
+        fprintf(stream, "Anim creation: Coord:%14d  Caller: %08x  Frame: %-10d\n",
+        animationConstructorCallBuffer.CallHistory[index].Coord,
+        animationConstructorCallBuffer.CallHistory[index].Caller,
+        animationConstructorCallBuffer.CallHistory[index].Frame);
+
+        index = (index - 1) & ANIMCONSTRUCTORCALLBUFFER_MASK;
     }
     fprintf(stream, "\n", 0);
 }
