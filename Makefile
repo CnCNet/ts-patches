@@ -147,8 +147,8 @@ OBJS += src/add_animation_to_factories_without_weaponsfactory.o
 OBJS += src/add_team_better.o
 OBJS += src/ai_target_emp_like_multimissile.o
 
-# Only include in: MOD_TI MOD_RUBICON
-ifneq ($(call ifdef_any_of,MOD_TI MOD_RUBICON),)
+# Only include in: MOD_TI MOD_FD MOD_RUBICON
+ifneq ($(call ifdef_any_of,MOD_TI MOD_FD MOD_RUBICON),)
 OBJS += src/ai_target_droppods_like_multimissile.o
 endif
 
