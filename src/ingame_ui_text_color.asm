@@ -35,5 +35,9 @@ hack 0x00591367
   
 .out:
     ; the game has a jnz for this comparison at 0x005913AD, our code breaks it
+
+    ; NOTE: if you want the game to reload in-game menu PCX graphics after loading
+    ; a saved game (currently it doesn't do that), invalidating this check
+    ; after a save has been loaded would do it
     cmp eax, ebx
     jmp 0x00591371
