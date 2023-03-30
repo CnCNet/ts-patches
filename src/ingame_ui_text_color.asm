@@ -5,29 +5,11 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-cextern PlayerSide
-
 section .text
 
-%ifndef VINIFERA
-hack 0x004E7EC2 ; Store_Side:
-   ; Read and store the side index when the game prepares mixfiles for the side
-   mov dword [PlayerSide], ecx
-   call 0x004082D0 ; logging function, log the "Preparing Mixfiles for Side %02d" line
-                   ; that we're skipping by replacing the call instruction at
-                   ; 0x004E7EC2 with jmp
-   jmp 0x004E7EC7 ; original code after logging function call
-%endif
+hack 0x00591367
 
-
-hack 0x00591367 ; Set_Color:
-   pushad
-   
-   cmp byte [0x007E2500], 0
-   jz .Default_Color
-   
-   cmp byte [0x007E2500], 1
-   jz .Default_Color
+   mov dword [0x00808B7C], 0FF70h
    
    cmp byte [0x007E2500], 2
    jz .Allied_Color
@@ -38,7 +20,6 @@ hack 0x00591367 ; Set_Color:
 .Default_Color:
 
    ; For GDI and Nod (sides 0 and 1) we'll use the usual color
-   mov dword [0x00808B7C], 0FF70h
    jmp .out
    
 .Allied_Color:
@@ -53,5 +34,6 @@ hack 0x00591367 ; Set_Color:
     mov dword [0x00808B7C], 0FFh
   
 .out:
-    popad
+    ; the game has a jnz for this comparison at 0x005913AD, our code breaks it
+    cmp eax, ebx
     jmp 0x00591371
