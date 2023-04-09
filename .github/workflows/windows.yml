@@ -12,7 +12,7 @@ on:
 
 jobs:
   create_release:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - name: Delete Previous Release
       uses: dev-drprasad/delete-tag-and-release@v0.2.1
