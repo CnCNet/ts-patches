@@ -777,6 +777,17 @@ Load_House_Colors_Spawner:
     retn
 
 Load_Spawn_Locations_Spawner:
+
+    ; Init memory of used spawn locations
+    xor eax, eax
+    mov ecx, 0FFFFFFFFh
+
+.Loop:
+    mov dword [UsedSpawnsArray+4*eax], ecx
+    inc eax
+    cmp eax, 8
+    jl  .Loop
+
     SpawnINI_Get_Int str_SpawnLocations, str_Multi1, -1
     mov dword [SpawnLocationsArray+0], eax
 
