@@ -380,8 +380,8 @@ OBJS += src/scale_movie_fix.o
 OBJS += src/scale_movie_fix_hack.o
 OBJS += src/screenshots_in_subdir.o
 
-# Only include in: MOD_TO MOD_TI
-ifneq ($(call ifdef_any_of,MOD_TO MOD_TI),)
+# Only include in: MOD_DTA MOD_TO MOD_TI
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO MOD_TI),)
 OBJS += src/scriptaction4.o
 endif
 
