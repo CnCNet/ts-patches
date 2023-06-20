@@ -42,8 +42,8 @@ hack 0x0066BA56
     jl   .No_Network_Processing
 
     ; Update network refresh time, only update
-    ; once every 10 seconds
-    add  ecx, 10000
+    ; once every 1 second
+    add  ecx, 1000
     mov  [NextNetworkRefreshTime], ecx
 
     ; Skip first iteration
@@ -59,13 +59,7 @@ hack 0x0066BA56
     ; Send message
     ; TODO could do something else to send a message here
     ; instead of abusing the session loading message
-    mov  ecx, [Scen]
-    mov  al, [ecx+1D93h]
-    neg  al
-    sbb  eax, eax
-    and  eax, 64h
-    add  eax, 64h
-    push eax
+    push 64h
     mov  ecx, SessionClass_this
     call 0x005EF930 ; SessionClass::Loading_Callback(int)
 
