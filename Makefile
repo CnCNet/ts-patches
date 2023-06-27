@@ -307,6 +307,7 @@ endif
 # DTA only sources.
 ifdef MOD_DTA
 OBJS += src/allow_building_placement_over_overlay.o
+OBJS += src/allow_crate_overlay_in_multiplayer.o
 OBJS += src/change_projectile_degeneration_speed.o
 OBJS += src/change_score_screen_music.o
 OBJS += src/dump_globals.o
