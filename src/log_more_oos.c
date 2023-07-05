@@ -261,8 +261,9 @@ print_Facings(FILE * restrict stream, int32_t count)
     int index = (facingCallBuffer.Index - 1) & FACINGCALLBUFFER_MASK;
     while (index != facingCallBuffer.Index && count-- > 0)
     {
-        fprintf(stream, "FACING: %08x CALLER: %08x  FRAME: %-10d\n",
-        facingCallBuffer.CallHistory[index].DirStructValue,
+        fprintf(stream, "FACING CHANGE, CALLER: %08x  FRAME: %-10d\n",
+        // doesn't seem to be identical between systems, not sure why
+        // facingCallBuffer.CallHistory[index].DirStructValue,
         facingCallBuffer.CallHistory[index].Caller,
         facingCallBuffer.CallHistory[index].Frame);
 
@@ -319,7 +320,7 @@ print_TarComChanges(FILE * restrict stream, int32_t count)
     int index = (tarcomCallBuffer.Index - 1) & TARCOMCALLBUFFER_MASK;
     while (index != tarcomCallBuffer.Index && count-- > 0)
     {
-        fprintf(stream, "TARCOM: MyRTTI: %d MyID: %d TargetRTTI: %d TargetID: %d Caller: %08x  Frame: %-10d\n",
+        fprintf(stream, "TARCOM: MyRTTI: %02d MyID: %08d TargetRTTI: %02d TargetID: %08d Caller: %08x  Frame: %-10d\n",
         tarcomCallBuffer.CallHistory[index].MyRTTI,
         tarcomCallBuffer.CallHistory[index].MyID,
         tarcomCallBuffer.CallHistory[index].TargetRTTI,
@@ -374,9 +375,10 @@ print_OverrideMissionChanges(FILE * restrict stream, int32_t count)
     int index = (overrideMissionCallBuffer.Index - 1) & OVERRIDEMISSIONCALLBUFFER_MASK;
     while (index != overrideMissionCallBuffer.Index && count-- > 0)
     {
-        fprintf(stream, "Mission Override: RTTI: %06d Owner: %06d Caller: %08x Frame: %-10d\n",
+        fprintf(stream, "Mission Override: RTTI: %02d Caller: %08x Frame: %-10d\n",
         overrideMissionCallBuffer.CallHistory[index].RTTI,
-        overrideMissionCallBuffer.CallHistory[index].Owner,
+        // doesn't work properly currently, raw pointer value that is different on each system?
+        // overrideMissionCallBuffer.CallHistory[index].Owner,
         overrideMissionCallBuffer.CallHistory[index].Caller,
         overrideMissionCallBuffer.CallHistory[index].Frame);
 
@@ -407,7 +409,7 @@ typedef struct AnimationConstructorCallBuffer {
 AnimationConstructorCallBuffer animationConstructorCallBuffer = {0};
 
 void __cdecl
-record_animation_constructor_void(uint32_t coord, void *animtype, uint32_t caller)
+record_animation_constructor_void(void *animtype, uint32_t caller, uint32_t coord)
 {
     AnimationConstructorCallNode *node = &animationConstructorCallBuffer.CallHistory[animationConstructorCallBuffer.Index];
     node->Coord = coord;
