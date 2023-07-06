@@ -36,3 +36,12 @@ _Load_Game_Post_Load_Game_Hook:
     
     call 0x004082D0
     jmp 0x005D6B97
+
+; Reset auto-save timer on scenario restart
+; Hooks beginning of Do_Restart function
+hack 0x005DCE60
+    mov  eax, [AutoSaveGame]
+    mov  [NextAutoSave], eax
+    ; original code
+    mov  eax, [Scen]
+    jmp  0x005DCE65
