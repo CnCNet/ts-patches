@@ -15,6 +15,8 @@ _HouseClase__House_From_HouseType:
 
  .house_by_spawn:
         sub  ecx, 50
+        cmp  ecx, 8
+        jg   .set_neutral
 
         mov eax, [UsedSpawnsArray+ecx*4]
         cmp eax, -1

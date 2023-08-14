@@ -29,4 +29,5 @@ hack 0x004EAF2A, 0x004EAF30
         jmp     0x004EAFDE
 
 ;;; Move the waypoint when you click it.
-@LJMP 0x00478E7E, 0x00478E8C
+; @LJMP 0x00478E7E, 0x00478E8C
+; Commented as it was also activating/toggled firestorm defense.
