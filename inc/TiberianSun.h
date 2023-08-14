@@ -82,7 +82,7 @@ extern bool ChatToAllFlag;
 extern bool ChatToSpectatorsFlag;
 extern uint32_t IsSpectatorArray[8];
 extern size_t HouseClassArray_Count;
-extern ScenarioClass *ScenarioStuff;
+extern ScenarioClass *Scen;
 extern uint32_t Frame;
 extern uint32_t GameIDNumber;
 extern int32_t DragDistance;
@@ -312,6 +312,11 @@ void __fastcall MovieClass_Update(void);
 void __fastcall Movie_Handle_Focus(bool state);
 
 void __thiscall Print_CRCs(int a1);
+
+void __fastcall Remove_All_Inactive(void);
+void __fastcall Call_Back(void);
+void __fastcall Pause_Scenario_Timer(void);
+void __fastcall Resume_Scenario_Timer(void);
 
 bool __fastcall Save_Game(const char *file_name, const char *descr, bool bargraph);
 

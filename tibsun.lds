@@ -3,11 +3,11 @@ start = 0x6B7E21;
 ENTRY(start);
 SECTIONS
 {
-    .text             0x401000 : { Game.exe(.text); }
-    .rdata            0x6CA000 : { Game.exe(.rdata); }
-    .data             0x6EE000 : { Game.exe(.data); . = ALIGN(0x1000); }
+    .text             0x401000 : { input.dat(.text); }
+    .rdata            0x6CA000 : { input.dat(.rdata); }
+    .data             0x6EE000 : { input.dat(.data); . = ALIGN(0x1000); }
     .bss         ALIGN(0x1000) : { . = . + 0x120F74; }
-    /DISCARD/                  : { Game.exe(.rsrc); }
+    /DISCARD/                  : { input.dat(.rsrc); }
 
     .idata       ALIGN(0x1000) : { *(.idata); }
     .eh_frame    ALIGN(0x1000) : { *(.eh_frame); }

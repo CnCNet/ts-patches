@@ -12,6 +12,9 @@ cglobal SpawnLocationsHouses
 gbool SavesDisabled, true
 gbool QuickMatch, false
 gbool IsHost, true
+gbool UseMPAIBaseNodes, false
+gbool PlayMoviesInMultiplayer, false
+gint CampaignID, 0
 
 cextern Load_Spectators_Spawner
 cextern PortHack
@@ -31,6 +34,7 @@ cextern SharedControl
 cextern SkipScoreScreen
 cextern AutoSurrender
 cextern SkipBriefingOnMissionStart
+cextern NoRNG
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -61,10 +65,13 @@ cextern SkipBriefingOnMissionStart
 @LJMP 0x005DBCC3, _Read_Scenario_Custom_Load_Screen_Spawner
 @LJMP 0x005DD523, _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting
 
+%ifdef MOD_DTA
 @LJMP 0x005DB415, _Start_Scenario_Assign_Global_Flags
 ; Stop EndGameClass_Apply from overwriting global variable values set by our code on scenario start
 ; We know them better
 @CLEAR 0x00493932, 0x90, 0x00493939
+@CLEAR 0x005636CC, 0x90, 0x005636D2 ; allow playing VQAs in multiplayer
+%endif
 
 ;always write mp stats
 @CLEAR 0x0046353C, 0x90, 0x00463542
@@ -170,6 +177,7 @@ section .rdata
     str_NextSPAutoSaveId db "NextSPAutoSaveId", 0
     str_TeamName        db "TeamName",0
     str_AimableSams     db "AimableSams",0
+    str_NoRNG           db "NoRNG",0
     str_IntegrateMumble db "IntegrateMumble",0
     str_AttackNeutralUnits db "AttackNeutralUnits", 0
     str_ScrapMetal      db "ScrapMetal",0
@@ -180,6 +188,9 @@ section .rdata
     str_AutoSurrender   db "AutoSurrender",0
     str_GameNameTitle   db "Tiberian Sun",0
     str_PleaseRunClient db "Please run the game client instead.",0
+    str_CampaignID      db "CampaignID",0
+    str_UseMPAIBaseNodes db "UseMPAIBaseNodes", 0
+    str_PlayMoviesInMultiplayer db "PlayMoviesInMultiplayer",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -250,6 +261,11 @@ section .rdata
     str_bue_mi24_pcx      db"bue_mi24.pcx",0
     str_bue_ri24_pcx      db"bue_ri24.pcx",0
 
+    str_Spawner_Init      db"Initializing spawner...",10,0
+    str_Rule_Houses       db"Rule->Houses(*RuleINI)...",10,0
+    str_Rule_Sides        db"Rule->Sides(*RuleINI)...",10,0
+
+
 section .text
 
 _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
@@ -264,13 +280,14 @@ _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
     SpawnINI_Get_Bool str_Settings, str_IsSinglePlayer, 0
     cmp al, 0
     jz .out
+
     SpawnINI_Get_Int str_Settings, str_DifficultyModeComputer, 1
     push eax
 
     SpawnINI_Get_Int str_Settings, str_DifficultyModeHuman, 1
 
     pop edx
-    mov ebx, [ScenarioStuff]
+    mov ebx, [Scen]
 
     mov dword [ebx+0x60C], edx ; DifficultyModeComputer
     mov dword [ebx+0x608], eax ; DifficultyModeHuman
@@ -284,7 +301,7 @@ _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
     ; Normal after completing a mission from a loaded campaign save
     ;mov eax, dword [SelectedDifficulty]
     ;mov dword [0x7a2f0c], eax
-    mov eax, [ScenarioStuff]
+    mov eax, [Scen]
     jmp 0x005DD528
 
 _Read_Scenario_Custom_Load_Screen_Spawner:
@@ -306,6 +323,68 @@ _UnitClass__Read_INI_Jump_Out_When_Units_Section_Missing:
 
 .Jump_Out:
     jmp 0x00658A10
+
+
+; Loops through houses on predetermined spawn locations (UsedSpawnsArray)
+; and reads their base nodes in multiplayer.
+;
+; We need this because while HouseClass::Read_INI calls
+; BaseClass::Read_INI to read base nodes, we don't yet know
+; which players occupy which player locations at that
+; point, meaning we need to re-read the base nodes after we know
+; which player locations are occupied.
+;
+; Author: Rampastring
+_Read_Scenario_INI_Read_Base_Nodes_After_Creation_Of_Units:
+
+    push ebx
+    push edi
+    push esi
+    push ebp
+
+    mov  ebp, ecx ; save CCIniClass (scenario INI) pointer
+
+    cmp dword [SessionType], 0
+    jz  .Ret
+
+; args <Spawn number>, <Spawn house name string>
+%macro Read_BaseNodes_For 2
+    mov  eax, %1
+
+    mov  eax, [UsedSpawnsArray+eax*4]
+    cmp  eax, -1
+    jz   .Past_BaseNodes_For_Spawn%1 ; No player associated with this starting location
+
+    ; Player exists for this starting location,
+    ; fetch house pointer
+    mov  esi, [HouseClassArray_Vector]
+    mov  eax, [esi+eax*4]
+
+    push %2  ; spawn house name
+    push ebp ; scenario INI
+    lea  ecx, [eax+4F4h] ; fetch Base instance from House
+    call 0x0041F970 ; BaseClass::Read_INI(CCINIClass &, char const *)
+
+.Past_BaseNodes_For_Spawn%1:
+%endmacro
+
+    Read_BaseNodes_For 0, str_Spawn1
+    Read_BaseNodes_For 1, str_Spawn2
+    Read_BaseNodes_For 2, str_Spawn3
+    Read_BaseNodes_For 3, str_Spawn4
+    Read_BaseNodes_For 4, str_Spawn5
+    Read_BaseNodes_For 5, str_Spawn6
+    Read_BaseNodes_For 6, str_Spawn7
+    Read_BaseNodes_For 7, str_Spawn8
+
+.Ret:
+    pop  ebp
+    pop  esi
+    pop  edi
+    pop  ebx
+    retn
+
+
 
 _Read_Scenario_INI_Dont_Create_Units_Earlier:
     call 0x0058C980
@@ -330,6 +409,9 @@ _Read_Scenario_INI_Dont_Create_Units_Earlier:
     call    _ally_by_spawn_location
 
     call    initMumble
+
+    mov     ecx, ebp
+    call    _Read_Scenario_INI_Read_Base_Nodes_After_Creation_Of_Units
 
 .Ret:
     jmp 0x005DDAF6
@@ -695,6 +777,17 @@ Load_House_Colors_Spawner:
     retn
 
 Load_Spawn_Locations_Spawner:
+
+    ; Init memory of used spawn locations
+    xor eax, eax
+    mov ecx, 0FFFFFFFFh
+
+.Loop:
+    mov dword [UsedSpawnsArray+4*eax], ecx
+    inc eax
+    cmp eax, 8
+    jl  .Loop
+
     SpawnINI_Get_Int str_SpawnLocations, str_Multi1, -1
     mov dword [SpawnLocationsArray+0], eax
 
@@ -875,7 +968,7 @@ Assign_Scenario_Global_Flags_From_Spawner_Global_Flags:
     mov  dl, byte [eax]
     
     ; assign value of global to in-game data
-    mov   eax, [ScenarioStuff]
+    mov   eax, [Scen]
     imul  ecx, ebx, 29h
     mov   [eax+ecx+0D90h], dl
     
@@ -967,6 +1060,10 @@ Initialize_Spawn:
     call Load_SPAWN_INI
     cmp eax, 0
     jz .Exit_Error
+    
+    push str_Spawner_Init
+    call 0x004082D0 ;; WWDebugPrintf
+    add esp, 0x4
 
     ; get pointer to inet_addr
     push str_wsock32_dll
@@ -987,7 +1084,52 @@ Initialize_Spawn:
     call Load_Global_Flags_Spawner
     
     mov byte [GameActive], 1 ; needs to be set here or the game gets into an infinite loop trying to create spawning units
+    
+    ;
+    ; Load the Houses and Sides section from the RuleINI. We need to do
+    ; this before the loading screen is shown so side specific artwork
+    ; can be chosen by using the houses Side= value.
+    ;
+    push str_Rule_Houses
+    call 0x004082D0 ;; WWDebugPrintf
+    add esp, 0x4
+    
+    mov eax, [0x0074C2F0] ; RuleINI
+    push eax
+    mov ecx, [0x0074C488] ; RulesClass pointer
+    call 0x005CC490 ; RulesClass::Houses
+    
+    push str_Rule_Sides
+    call 0x004082D0 ;; WWDebugPrintf
+    add esp, 0x4
+    
+    mov eax, [0x0074C2F0] ; RuleINI
+    push eax
+    mov ecx, [0x0074C488] ; RulesClass pointer
+    call 0x005CC5E0 ; RulesClass::Sides
+    
+    ;
+    ; Iterate HouseTypes, call Read_INI.
+    ;
+    mov eax, [0x007E21E0] ; HouseTypes.ActiveCount
+    xor esi, esi
+    test eax, eax
+    jle .set_session
 
+.house_read_ini_loop:
+    mov edx, [0x007E21D4] ; HouseTypes.Vector
+    mov ecx, [edx+esi*0x4] ; 
+    mov edx, [0x0074C2F0] ; RuleINI
+    push edx
+    mov eax, [ecx]
+    call dword [eax+0x68] ; Read_INI
+    
+    mov eax, [0x007E21E0] ; HouseTypes.ActiveCount
+    inc esi
+    cmp esi, eax
+    jl .house_read_ini_loop
+
+.set_session:
     ; set session
     mov dword [SessionType], 5
 
@@ -1075,6 +1217,9 @@ Initialize_Spawn:
     SpawnINI_Get_Bool str_Settings, str_AimableSams, 0
     mov byte [AimableSams], al
 
+    SpawnINI_Get_Bool str_Settings, str_NoRNG, 0
+    mov byte [NoRNG], al
+    
     SpawnINI_Get_Bool str_Settings, str_IntegrateMumble, 0
     mov byte [IntegrateMumbleSpawn], al
 
@@ -1098,6 +1243,12 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_AutoSurrender, 1
     mov byte [AutoSurrender], al
+
+    SpawnINI_Get_Bool str_Settings, str_UseMPAIBaseNodes, 0
+    mov byte [UseMPAIBaseNodes], al
+
+    SpawnINI_Get_Bool str_Settings, str_PlayMoviesInMultiplayer, 0
+    mov byte [PlayMoviesInMultiplayer], al
 
     ; tunnel ip
     lea eax, [TempBuf]
@@ -1171,6 +1322,9 @@ Initialize_Spawn:
     jz .Not_Single_Player
 
     mov dword [SessionType], 0 ; single player
+
+    SpawnINI_Get_Int str_Settings, str_CampaignID, 0
+    mov dword [CampaignID], eax
 
 .Not_Single_Player:
 
@@ -1290,6 +1444,8 @@ Initialize_Spawn:
     lea ecx, [SaveGameNameBuf]
     call Load_Game
 
+    mov byte [SkipBriefingOnMissionStart], 0
+
     jmp .Dont_Load_Scenario
 
 .Dont_Load_Savegame:
@@ -1304,9 +1460,17 @@ Initialize_Spawn:
     mov eax, [ecx]
     call dword [eax+10h]
 
+    mov eax, dword [CampaignID]
+    mov ecx, [Scen]
+    mov dword [ecx+0x1DA4], eax ; CampaignID
+
+    mov ecx, [Scen]
+    mov eax, dword [ecx+0x1DA4] ; CampaignID
+    push eax
+    xor edx, edx
+    mov dl, 1 ; play_intro
+
     ; start scenario for singleplayer
-    push 0
-    mov edx, 1
     mov ecx, ScenarioName
     call Start_Scenario
 
@@ -1318,6 +1482,12 @@ Initialize_Spawn:
     push -1
     xor edx, edx
     mov ecx, ScenarioName
+
+    cmp  byte [PlayMoviesInMultiplayer], 1
+    jne  .Past_MP_Movie_Setting
+    mov  dl, 1 ; play_intro
+
+.Past_MP_Movie_Setting:
     call Start_Scenario
 
 .Past_Start_Scenario:
@@ -1490,7 +1660,7 @@ Add_Human_Player:
 .Past_AL_Invert:
 .Sidebar_Hack:
     mov byte [0x7E2500], al ; For side specific mix files loading and stuff, without sidebar and speech hack
-    mov ebx, [ScenarioStuff]
+    mov ebx, [Scen]
     mov byte [ebx+1D91h], al
 
     SpawnINI_Get_Int str_Settings, str_Color, 0

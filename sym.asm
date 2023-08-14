@@ -219,7 +219,7 @@ setcglob 0x005DB170, Start_Scenario
 setcglob 0x007E3E90, NameNodeVector
 setcglob 0x0044D690, NameNodeVector_Add
 setcglob 0x005EE7D0, SessionClass__Read_Scenario_Descriptions
-setcglob 0x007E2438, ScenarioStuff
+setcglob 0x007E2438, Scen
 setcglob 0x007E4724, SelectedDifficulty
 setcglob 0x007E4548, SpecialClass__Special
 setcglob 0x005DE580, Create_Units
@@ -315,6 +315,10 @@ setcglob 0x00685BC0, WndProc
 setcglob 0x00865040, MainWindow
 setcglob 0x007E4920, GameInFocus
 setcglob 0x007E48FC, InScenario
+setcglob 0x00648CD0, Remove_All_Inactive
+setcglob 0x005DB4C0, Pause_Scenario_Timer
+setcglob 0x005DB590, Resume_Scenario_Timer
+setcglob 0x00462C60, Call_Back
 
 ; Sidebar
 setcglob 0x0080C3BC, SidebarClass_Redraw_Buttons

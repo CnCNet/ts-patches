@@ -10,8 +10,8 @@ if /I "%c%" EQU "N" goto :debug
 if not exist "build\release" mkdir build\release
 
 gmake clean
-gmake -j4 singleplayer.exe
-move /Y singleplayer.exe ./build/release/singleplayer.exe
+gmake SINGLEPLAYER=1
+move /Y game.exe ./build/release/game.exe
 
 :debug
 set /P c=Generate Debug executable [Y/N]?
@@ -20,8 +20,8 @@ if /I "%c%" EQU "N" goto :vinifera
 if not exist "build\debug" mkdir build\debug
 
 gmake clean
-gmake -j4 WWDEBUG=1 singleplayer.exe
-move /Y singleplayer.exe ./build/debug/singleplayer.exe
+gmake SINGLEPLAYER=1 WWDEBUG=1
+move /Y game.exe ./build/debug/game.exe
 
 :vinifera
 set /P c=Generate Vinifera executable [Y/N]?
@@ -30,8 +30,8 @@ if /I "%c%" EQU "N" goto :exit
 if not exist "build\vinifera" mkdir build\vinifera
 
 gmake clean
-gmake -j4 VINIFERA=1 singleplayer.exe
-move /Y singleplayer.exe ./build/vinifera/singleplayer.exe
+gmake SINGLEPLAYER=1 VINIFERA=1
+move /Y game.exe ./build/vinifera/game.exe
 
 pause
 

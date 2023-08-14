@@ -131,7 +131,7 @@ _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX:
 
     mov eax, [UsedSpawnsArray+eax*4]
     cmp eax, -1
-    jz .Normal_Code
+    jz .Spawn_House_Not_Present
 
     mov esi, [HouseClassArray_Vector]
     mov eax, [esi+eax*4]
@@ -152,6 +152,9 @@ _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX:
 .Normal_Code:
     call HouseType_From_Name
     jmp 0x0065865D
+
+.Spawn_House_Not_Present:
+    jmp 0x006589B0
 
 Check_For_Spawn_Fake_HouseType_Name:
     push ebx

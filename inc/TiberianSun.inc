@@ -228,6 +228,7 @@ cextern EventClass__EnqueueEvent
 cextern Queue_Exit
 cextern EventType_Offset
 cextern Print_CRCs
+cextern Remove_All_Inactive
 cextern HumanNode_ActiveCount
 
 ; Scenario
@@ -236,7 +237,7 @@ cextern Start_Scenario
 cextern NameNodeVector
 cextern NameNodeVector_Add
 cextern SessionClass__Read_Scenario_Descriptions
-cextern ScenarioStuff
+cextern Scen
 cextern SelectedDifficulty
 cextern SpecialClass__Special
 cextern Rules

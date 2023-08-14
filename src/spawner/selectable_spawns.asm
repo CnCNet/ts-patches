@@ -94,8 +94,6 @@ _Create_Units_Selectable_Spawning_Locations:
         
     cmp dword [SpawnLocationsArray+eax*4], -1
     jz .Set_Normal_Spawn_Then_Normal_Code
-    
-;    mov dword [UsedSpawnsArray+4*edi], -1 ; COMMENTED OUT TO FIX PRE-PLACED SPAWNS ISSUE, MIGHT CREATE NEW ISSUES
 
     mov edx, eax
     

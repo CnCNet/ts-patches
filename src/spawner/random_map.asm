@@ -37,7 +37,7 @@ hack 0x005DD5CB
     mov  al, bl
     jz   hackend
 
-    mov  ecx, [ScenarioStuff]
+    mov  ecx, [Scen]
     mov  byte[ecx+0x1D93], 1
 
     xor al, al
