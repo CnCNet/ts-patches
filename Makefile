@@ -304,14 +304,19 @@ ifneq ($(call ifdef_any_of,MOD_DTA MOD_FD),)
 OBJS += src/vehicle_transports.o
 endif
 
+# Only include in: MOD_DTA MOD_RUBICON
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_RUBICON),)
+OBJS += src/allow_crate_overlay_in_multiplayer.o
+OBJS += src/extra_difficulty.o
+endif
+
+
 # DTA only sources.
 ifdef MOD_DTA
 OBJS += src/allow_building_placement_over_overlay.o
-OBJS += src/allow_crate_overlay_in_multiplayer.o
 OBJS += src/change_projectile_degeneration_speed.o
 OBJS += src/change_score_screen_music.o
 OBJS += src/dump_globals.o
-OBJS += src/extra_difficulty.o
 OBJS += src/ingame_ui_text_color.o
 OBJS += src/remove_ion_storm_effects.o
 endif
@@ -381,8 +386,8 @@ OBJS += src/scale_movie_fix.o
 OBJS += src/scale_movie_fix_hack.o
 OBJS += src/screenshots_in_subdir.o
 
-# Only include in: MOD_DTA MOD_TO MOD_TI
-ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO MOD_TI),)
+# Only include in: MOD_DTA MOD_RUBICON MOD_TO MOD_TI
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_RUBICON MOD_TO MOD_TI),)
 OBJS += src/scriptaction4.o
 endif
 
