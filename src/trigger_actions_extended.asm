@@ -81,6 +81,10 @@ hack 0x0061913B ; Extend trigger action jump table
     jz .Blow_Up_House_Action
     cmp edx, 110
     jz .Make_Attached_Objects_Elite
+    cmp edx, 111
+    jz .Enable_AllyReveal_Action
+    cmp edx, 112
+    jz .Disable_AllyReveal_Action
 
     cmp edx, 68h
     ja 0x0061A9C5 ; default
@@ -263,3 +267,15 @@ hack 0x0061913B ; Extend trigger action jump table
 .PostLoop:
     jmp  0x0061A9C5 ; default
 
+; ***********************************
+; *** Enable / disable AllyReveal ***
+; ***********************************
+.Enable_AllyReveal_Action:
+    mov  eax, [Rules]
+    mov  byte [eax+0F4Fh], 1
+    jmp  0x0061A9C5 ; default
+
+.Disable_AllyReveal_Action:
+    mov  eax, [Rules]
+    mov  byte [eax+0F4Fh], 0
+    jmp  0x0061A9C5 ; default
