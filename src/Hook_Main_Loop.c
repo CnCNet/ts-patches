@@ -4,7 +4,7 @@
 #include "Classes/EventClass.h"
 #include "patch.h"
 
-#define MAX_SP_AUTOSAVES 3
+#define MAX_SP_AUTOSAVES 5
 
 CALL(0x005091A5, _MainLoop_AfterRender);
 CALL(0x00509388, _MainLoop_PreRemoveAllInactive);
@@ -87,6 +87,8 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
             
             if (AutoSaveGame > 0) {
                 
+                // Print message on earlier frame so it gets rendered before
+                // the save process starts
                 if (Frame == NextAutoSave) {
                     MessageListClass__Add_Message(&MessageListClass_this, 0, 0,
                               "Auto-saving...",
@@ -117,7 +119,7 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
         } else if (SessionClass_this.GameSession == 3) {
             // Auto-save for multiplayer
 
-            // We do it by ourselves here instead of letting original Westwood save when 
+            // We do it by ourselves here instead of letting original Westwood code save when
             // the event is executed, because saving mid-frame before Remove_All_Inactive()
             // has been called can lead to save corruption
             // In other words, by doing it here we fix a Westwood bug/oversight
@@ -127,6 +129,8 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
                 IsSavingThisFrame = false;
             }
 
+            // Print message on earlier frame so it gets rendered before
+            // the save process starts
             if (IsDoingMPSaveNextFrame) {
                 MessageListClass__Add_Message(&MessageListClass_this, 0, 0,
                 "Saving game...",
