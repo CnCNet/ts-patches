@@ -85,6 +85,8 @@ hack 0x0061913B ; Extend trigger action jump table
     jz .Enable_AllyReveal_Action
     cmp edx, 112
     jz .Disable_AllyReveal_Action
+    cmp edx, 113
+    jz .Create_AutoSave_Action
 
     cmp edx, 68h
     ja 0x0061A9C5 ; default
@@ -279,3 +281,14 @@ hack 0x0061913B ; Extend trigger action jump table
     mov  eax, [Rules]
     mov  byte [eax+0F4Fh], 0
     jmp  0x0061A9C5 ; default
+
+
+; ***********************************
+; ***      Create Auto-Save       ***
+; ***********************************
+.Create_AutoSave_Action:
+    mov  eax, [Frame]
+    inc  eax
+    mov  [NextAutoSave], eax
+    jmp  0x0061A9C5 ; default
+
