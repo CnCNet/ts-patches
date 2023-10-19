@@ -82,7 +82,7 @@ hack 0x00508B47
     jmp .speed_6
 
 .speed_0:
-    mov eax, 1000
+    mov eax, 5000
     jmp .Assign_Speed
 
 .speed_1:
