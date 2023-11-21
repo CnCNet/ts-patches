@@ -66,6 +66,76 @@ Spawn_Index50_To_House_Pointer:
     pop edi
     retn
 
+
+; Function. Silently deletes all objects that have a tag that is attached to a trigger.
+; Takes a pointer to TriggerClass instance in eax.
+TAction_Remove_Object:
+    push ebx
+    push ebp
+    push esi
+    push edi
+
+    xor  edx, edx
+    mov  ebx, eax ; Store TriggerClass pointer in ebx
+
+.Loop_Begin:
+    mov  eax, [0x007E4830] ; DynamicVectorClass<TechnoClass>.ActiveCount
+    test eax, eax
+    jle  .out
+
+    xor  ebp, ebp
+    xor  edi, edi
+
+.Loop_Body:
+    mov  eax, [0x007E4824]    ; DynamicVectorClass<TechnoClass>.Vector
+    mov  esi, [eax+edi*4]     ; Fetch object instance from vector
+    mov  al, byte [esi+35h]   ; ObjectClass.IsActive
+    test al, al
+    jz   .Loop_End
+    mov  al, byte [esi+2Ch]   ; ObjectClass.IsDown
+    test al, al
+    jz   .Loop_End
+    mov  al, byte [esi+2Fh]   ; ObjectClass.IsInLimbo
+    test al, al
+    jnz  .Loop_End
+    mov  ecx, dword [esi+24h] ; ObjectClass.Tag
+    test ecx, ecx
+    jz   .Loop_End
+    push ebx
+    call 0x0061E860           ; TagClass_IsAttachedToTrigger
+                              ; "this" parameter is already in ecx because we moved the tag to ecx earlier
+    test al, al
+    jz   .Loop_End
+
+    ; Tag matches, remove object from the game world
+    mov  ecx, esi          ; "this" ptr
+    mov  eax, [esi]        ; vtable
+    call dword [eax+0xE4]  ; Delete this game object
+
+    dec  edi         ; decrease index variable
+
+    mov  ebp, 1      ; mark that we destroyed something, will cause another iteration of the entire loop
+                     ; Westwood also did this in their TAction_Destroy_Object code, not sure why though
+
+    mov  edx, 1      ; we use edx as return value. 1 = we removed something, 0 = we couldn't find anything to remove
+
+.Loop_End:
+    mov  eax, [0x007E4830] ; DynamicVectorClass<TechnoClass>.ActiveCount
+    inc  edi
+    cmp  edi, eax
+    jl   .Loop_Body
+    test ebp, ebp
+    jne  .Loop_Begin
+
+.out:
+    mov  eax, edx
+    pop  edi
+    pop  esi
+    pop  ebp
+    pop  ebx
+    retn
+
+
 ; New actions
     
 hack 0x0061913B ; Extend trigger action jump table
@@ -87,6 +157,8 @@ hack 0x0061913B ; Extend trigger action jump table
     jz .Disable_AllyReveal_Action
     cmp edx, 113
     jz .Create_AutoSave_Action
+    cmp edx, 114
+    jz .Remove_Attached_Objects_Action
 
     cmp edx, 68h
     ja 0x0061A9C5 ; default
@@ -290,5 +362,14 @@ hack 0x0061913B ; Extend trigger action jump table
     mov  eax, [Frame]
     inc  eax
     mov  [NextAutoSave], eax
+    jmp  0x0061A9C5 ; default
+
+; ***********************************
+; ***   Delete Attached Object    ***
+; *** (just vanish, NOT destroy!) ***
+; ***********************************
+.Remove_Attached_Objects_Action:
+    mov  eax, [esp+1CCh] ; get TriggerClass pointer to eax
+    call TAction_Remove_Object
     jmp  0x0061A9C5 ; default
 
