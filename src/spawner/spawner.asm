@@ -14,6 +14,7 @@ gbool QuickMatch, false
 gbool IsHost, true
 gbool UseMPAIBaseNodes, false
 gbool PlayMoviesInMultiplayer, false
+gbool DifficultyBasedAINames, false
 gint CampaignID, 0
 
 cextern Load_Spectators_Spawner
@@ -56,6 +57,7 @@ cextern NoRNG
 @LJMP 0x005DE2AC, _Assign_Houses_Human_Countries
 
 @LJMP 0x005DE3D7, _Assign_Houses_AI_Countries
+@LJMP 0x005DE41F, _Assign_Houses_AI_Player_Names
 
 @LJMP 0x004C3630, _HouseClass__Computer_Paranoid_Disable_With_Spawner
 
@@ -191,6 +193,12 @@ section .rdata
     str_CampaignID      db "CampaignID",0
     str_UseMPAIBaseNodes db "UseMPAIBaseNodes", 0
     str_PlayMoviesInMultiplayer db "PlayMoviesInMultiplayer",0
+    str_DifficultyBasedAINames db "DifficultyBasedAINames",0
+    str_HardAI          db "Hard AI",0
+    str_MediumAI        db "Medium AI",0
+    str_EasyAI          db "Easy AI",0
+    str_BrutalAI        db "Brutal AI",0
+    str_UltimateAI      db "Ultimate AI",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -458,6 +466,49 @@ _Assign_Houses_AI_Countries:
     mov ecx, eax
     call 0x004BA0B0 ; HouseClass::HouseClass(HousesType)
     jmp 0x005DE3DF
+
+
+_Assign_Houses_AI_Player_Names:
+    mov  cl, byte [DifficultyBasedAINames]
+    test cl, cl
+    je   .Original_Code
+    mov  ecx, [HouseHandicapsArray+ebx*4] ; ebx contains house index
+
+    cmp  ecx, 0
+    je   .Hard_AI
+    cmp  ecx, 1
+    je   .Medium_AI
+    cmp  ecx, 2
+    je   .Easy_AI
+    cmp  ecx, 3
+    je   .Brutal_AI
+    cmp  ecx, 4
+    je   .Ultimate_AI
+    jmp  .Original_Code
+
+.Hard_AI:
+    mov  eax, str_HardAI
+    jmp  .Assign_AI_Player_Name
+.Medium_AI:
+    mov  eax, str_MediumAI
+    jmp  .Assign_AI_Player_Name
+.Easy_AI:
+    mov  eax, str_EasyAI
+    jmp  .Assign_AI_Player_Name
+.Brutal_AI:
+    mov  eax, str_BrutalAI
+    jmp  .Assign_AI_Player_Name
+.Ultimate_AI
+    mov  eax, str_UltimateAI
+    jmp  .Assign_AI_Player_Name
+
+.Original_Code:
+    mov  ecx, 0CFh  ; "Computer"
+    call 0x00472350 ; Fetch_String
+    jmp  0x005DE429
+
+.Assign_AI_Player_Name:
+    jmp  0x005DE433
 
 _HouseClass__AI_Attack_Stuff_Alliance_Check:
     cmp esi, edi
@@ -1249,6 +1300,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_PlayMoviesInMultiplayer, 0
     mov byte [PlayMoviesInMultiplayer], al
+
+    SpawnINI_Get_Bool str_Settings, str_DifficultyBasedAINames, 0
+    mov byte [DifficultyBasedAINames], al
 
     ; tunnel ip
     lea eax, [TempBuf]
