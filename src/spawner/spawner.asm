@@ -8,6 +8,7 @@ cglobal SpawnerActive
 cglobal INIClass_SPAWN
 cglobal SpawnLocationsArray
 cglobal SpawnLocationsHouses
+cglobal DifficultyName
 
 gbool SavesDisabled, true
 gbool QuickMatch, false
@@ -103,6 +104,7 @@ section .bss
     OldUnitClassArrayCount     RESD 1
 
     CustomLoadScreen           RESB 256
+    DifficultyName             RESB 30
 
     SaveGameLoadPathWide       RESB 512
     SaveGameLoadPath           RESB 256
@@ -199,6 +201,7 @@ section .rdata
     str_EasyAI          db "Easy AI",0
     str_BrutalAI        db "Brutal AI",0
     str_UltimateAI      db "Ultimate AI",0
+    str_DifficultyName  db "DifficultyName",0
 
     str_DifficultyModeComputer db "DifficultyModeComputer",0
     str_DifficultyModeHuman db "DifficultyModeHuman",0
@@ -498,7 +501,7 @@ _Assign_Houses_AI_Player_Names:
 .Brutal_AI:
     mov  eax, str_BrutalAI
     jmp  .Assign_AI_Player_Name
-.Ultimate_AI
+.Ultimate_AI:
     mov  eax, str_UltimateAI
     jmp  .Assign_AI_Player_Name
 
@@ -1303,6 +1306,9 @@ Initialize_Spawn:
 
     SpawnINI_Get_Bool str_Settings, str_DifficultyBasedAINames, 0
     mov byte [DifficultyBasedAINames], al
+
+    lea eax, [DifficultyName]
+    SpawnINI_Get_String str_Settings, str_DifficultyName, str_Empty, eax, 30
 
     ; tunnel ip
     lea eax, [TempBuf]

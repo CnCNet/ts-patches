@@ -4,14 +4,17 @@
 
 cglobal PlayerSide
 cglobal SkipBriefingOnMissionStart
+cextern DifficultyName
 
 sstring str_Hard, "Difficulty: Hard"
 sstring str_Medium, "Difficulty: Medium"
 sstring str_Easy, "Difficulty: Easy"
+sstring str_Difficulty, "Difficulty: "
 
 section .bss
     PlayerSide                 RESD 1
     SkipBriefingOnMissionStart RESB 1
+    DifficultyDisplayBuf       RESB 256
 
     
 section .text
@@ -50,6 +53,28 @@ hack 0x005DB49C
     
     ; Print difficulty
 	pushad
+
+    cmp byte [DifficultyName], 0
+    jz  .CDifficulty_Diff_Print
+
+    push str_Difficulty
+    push DifficultyDisplayBuf
+    call 0x006BE640 ; strcat
+    pop  ecx
+    pop  ecx
+
+    push DifficultyName
+    push DifficultyDisplayBuf
+    call 0x006BE640 ; strcat
+    pop  ecx
+    pop  ecx
+
+    Print_Message DifficultyDisplayBuf
+    jmp .Briefing
+
+.CDifficulty_Diff_Print:
+    ; custom diff name not defined, print difficulty the traditional way
+
     mov ecx, [Scen]
     mov eax, dword [ecx+0x60C]  ; Scenario.CDifficulty (aka DifficultyModeComputer)
 
