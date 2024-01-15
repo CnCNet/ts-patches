@@ -319,6 +319,7 @@ OBJS += src/change_score_screen_music.o
 OBJS += src/dump_globals.o
 OBJS += src/ingame_ui_text_color.o
 OBJS += src/remove_ion_storm_effects.o
+OBJS += src/score_screen_player_always_on_left.o
 endif
 
 # TI only sources.
