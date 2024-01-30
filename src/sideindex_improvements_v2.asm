@@ -12,6 +12,7 @@
 
 ; Author: AlexB
 ; Date: 2016-07-28
+; Some comments updated by Rampastring on 2024-01-30 to point to ActsLike instead of SideIndex
 
 %include "macros/patch.inc"
 %include "macros/hack.inc"
@@ -62,7 +63,7 @@ _HouseClass_CTOR_SideIndex:
     mov esi, [edi+64h]; HouseTypeClass::ArrayIndex
 
   .AssignCountryIndex:
-    mov [ebp+0C0h], esi; HouseClass::SideIndex
+    mov [ebp+0C0h], esi; HouseClass::ActsLike
     jmp 0x004BAE20
 
 @CLEAR 0x004BADE2, 0x90, 0x004BAE20
@@ -75,7 +76,7 @@ _HouseClass_CTOR_SideIndex:
 @SET 0x004109F2, {test eax, eax}
 @SJZ 0x004109F4, 0x00410A1F; 0 means all houses pass
 @SET 0x004109F6, {dec eax}
-@SET 0x004109F7, {cmp eax, [ebp+0C0h]}; HouseClass::SideIndex
+@SET 0x004109F7, {cmp eax, [ebp+0C0h]}; HouseClass::ActsLike
 @SJZ 0x004109FD, 0x00410A1F; Only specific side matches (1-based)
 @SET 0x004109FF, {nop}
 @CLEAR 0x00410A09, 0x90, 0x00410A1F
