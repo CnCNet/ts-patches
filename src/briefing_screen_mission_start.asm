@@ -54,6 +54,8 @@ hack 0x005DB49C
     ; Print difficulty
 	pushad
 
+    mov byte [DifficultyDisplayBuf], 0 ; clear the potential existing string in the difficulty display buffer
+
     cmp byte [DifficultyName], 0
     jz  .CDifficulty_Diff_Print
 
