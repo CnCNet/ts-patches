@@ -63,21 +63,9 @@ sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianS
 @SET 0x005D6C4F, {mov cl, [eax+1D91h]}
 @CLEAR 0x005D6C55, 0x90, 0x005D6C58
 
-; Load speech MIX files for new sides properly (for saved games)
-@SJMP 0x005D6DB8, 0x005D6DCE     ;jmp short
-
-@SET 0x005D6DCE, {xor ecx, ecx}
-@SET 0x005D6DD0, {mov cl, [eax+1D91h]}
-@CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
-
 ; Load sidebar MIX files for new sides properly
 @SET 0x005DD798, {mov cl, byte [0x007E2500]}
 @CLEAR 0x005DD79E, 0x90, 0x005DD7A2
-
-; Load speech MIX files for new sides properly
-@SET 0x005DD822, {xor ecx, ecx}
-@CLEAR 0x005DD824, 0x90, 0x005DD828
-@SET 0x005DD82B, {mov cl, byte [0x007E2500]} ; Compile warning: byte value exceeds bounds?
 
 ; Erase NAWALL and GAWALL hardcoding
 @SET 0x00710DA4, {db 0,0,0,0,0,0}
@@ -88,5 +76,19 @@ sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianS
 @SET 0x00706A8C, {db 0,0,0,0}
 @SET 0x00715E78, {db 0,0,0,0,0}
 @SET 0x00714C70, {db 0,0,0,0,0,0}
+
+; Load speech MIX files for new sides properly (for saved games)
+@SET 0x005D6DCE, {xor ecx, ecx}
+@SET 0x005D6DD0, {mov cl, [eax+1D91h]}
+@CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
+
+; Load speech MIX files for new sides properly
+; Defaults SpeechSide to our hijacked player side value
+hack 0x005DD75B
+    mov  eax, [Scen]
+    xor  ecx, ecx
+    mov  cl, byte [0x007E2500] ; PlayerSide (was Session.IsGDI)
+    mov  [eax+0x1E44], ecx ; set SpeechSide
+    jmp  0x005DD784        ; go back to game code for initializing side
 
 %endif
