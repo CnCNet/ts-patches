@@ -3,10 +3,8 @@
 %include "TiberianSun.inc"
 
 
-%ifndef VINIFERA
 ; Remove hardcoded Power=17 from "Vinifera" by changing the last character of the string
 @SET 0x00711143, {db "."}
-%endif
 
 
 %ifdef MOD_DTA
