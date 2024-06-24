@@ -183,7 +183,8 @@ hack 0x0061913B ; Extend trigger action jump table
     cmp eax, 0
     jnz .Give_Credits
     
-.Get_House_Pointer:    
+.Get_House_Pointer:
+    mov  ecx, eax   ; the function called below expects the housetype index to be in ecx instead of eax
     call 0x004C4730 ; House_Pointer_From_HouseType_Index
     
 .Give_Credits:
