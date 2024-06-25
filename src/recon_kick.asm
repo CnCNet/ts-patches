@@ -6,8 +6,9 @@
 ;;; broadcast a REMOVEPLAYER message to everyone.
 
 cextern SavesDisabled
+cextern IsDoingMPSaveNextFrame
 
-sstring str_PlayerOutOfSync, "Player has gone out of sync"
+sstring str_PlayerOutOfSync, "Player has gone out of sync and has been removed from the game."
 @LJNZ 0x005B4F5F, _Execute_DoList_dont_recon
 
 section .bss
@@ -73,6 +74,11 @@ _Execute_DoList_dont_recon:
     pop ebx
     pop esi
 
+    ; Disable auto-saving
+    mov  dword [AutoSaveGame], -1
+    mov  byte [SavesDisabled], 1
+    mov  byte [IsDoingMPSaveNextFrame], 0
+
     lea eax, [esi+ebx]          ; Write SYNC file
     and eax, dword 0xFFF
     lea ecx, [eax+eax*2]
@@ -89,6 +95,7 @@ _Execute_DoList_dont_recon:
 hack 0x00494EE4
     mov  dword [AutoSaveGame], -1
     mov  byte [SavesDisabled], 1
+    mov  byte [IsDoingMPSaveNextFrame], 0
     mov  eax, [esi+0x6]
     cmp  byte [OutOfSyncArray+eax], 1
     jz   0x00494F1D
