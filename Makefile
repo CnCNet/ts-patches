@@ -117,6 +117,12 @@ NFLAGS += -DWWDEBUG
 CFLAGS += -DWWDEBUG
 endif
 
+ifdef CNCNET
+$(info CNCNET defined)
+NFLAGS += -DCNCNET
+CFLAGS += -DCNCNET
+endif
+
 
 # =========================================================
 # Source files
@@ -415,6 +421,22 @@ OBJS += src/spawner/selectable_spawns.o
 OBJS += src/spawner/spawner.o
 OBJS += src/spawner/spectators.o
 OBJS += src/spawner/statistics.o
+
+
+# =========================================================
+# CnCNet sources.
+# =========================================================
+ifdef CNCNET
+
+include cncnet/makefile.mk
+OBJS += $(CNCNET_OBJS)
+
+# Not to be included in Vinifera builds. 
+ifndef VINIFERA
+    #OBJS += src/xyz.o
+endif
+
+endif
 
 
 # =========================================================

@@ -35,6 +35,8 @@ uint16_t TunnelId;
 uint32_t TunnelIp;
 uint16_t TunnelPort;
 int PortHack;
+int NetKey = 0;
+int StartNetKey = 0;
 
 WINAPI int Tunnel_SendTo(int sockfd, const void *buf, size_t len, int flags, struct sockaddr_in *dest_addr, int addrlen)
 {

@@ -35,7 +35,15 @@ jobs:
     - name: Clone Repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0
+        fetch-depth: 1
+        
+    - name: Clone CnCNet Repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+        repository: CnCNet/ts-patches-private
+        path: 'cncnet'
+        ssh-key: ${{ secrets.CNCNET_CI_SSH_PRIVATEKEY }}
         
     - name: Get Branch Name
       id: branch-name
@@ -92,6 +100,17 @@ jobs:
         gmake -j8 ${{ matrix.type }}=1 VINIFERA=1
         Move-Item -Path 'game.exe' -Destination 'build\vinifera\game.exe'
         
+        # Only build the CnCNet binaries for TSCLIENT
+        if ("${{ matrix.type }}" -eq "TSCLIENT") {
+            New-Item -Path 'build\cncnet' -ItemType Directory
+            
+            gmake clean
+            gmake -j8 ${{ matrix.type }}=1 CNCNET=1
+            Move-Item -Path 'game.exe' -Destination 'build\cncnet\game.exe'
+            
+            Get-ChildItem -Path 'build\cncnet'
+        }
+        
         Get-ChildItem -Path 'build\release'
         # Get-ChildItem -Path 'build\debug'
         Get-ChildItem -Path 'build\vinifera'
@@ -105,6 +124,13 @@ jobs:
         Move-Item -Path 'build\release\game.exe' -Destination 'artifact\release\game.exe'
         # Move-Item -Path 'build\debug\game.exe' -Destination 'artifact\debug\game.exe'
         Move-Item -Path 'build\vinifera\game.exe' -Destination 'artifact\vinifera\game.exe'
+        
+        # Only pack the CnCNet binaries for TSCLIENT
+        if ("${{ matrix.type }}" -eq "TSCLIENT") {
+            New-Item -Path 'artifact\cncnet' -ItemType Directory
+            Move-Item -Path 'build\cncnet\game.exe' -Destination 'artifact\cncnet\game.dat'
+            Get-ChildItem -Path 'artifact\cncnet'
+        }
         
         Get-ChildItem -Path 'artifact\release'
         # Get-ChildItem -Path 'artifact\debug'
