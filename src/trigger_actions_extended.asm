@@ -159,6 +159,8 @@ hack 0x0061913B ; Extend trigger action jump table
     jz .Create_AutoSave_Action
     cmp edx, 114
     jz .Remove_Attached_Objects_Action
+    cmp edx, 115
+    jz .Assign_Mission_To_All_Units_Action
 
     cmp edx, 68h
     ja 0x0061A9C5 ; default
@@ -373,4 +375,46 @@ hack 0x0061913B ; Extend trigger action jump table
     mov  eax, [esp+1CCh] ; get TriggerClass pointer to eax
     call TAction_Remove_Object
     jmp  0x0061A9C5 ; default
+
+
+; ***********************************
+; *** Assign Mission To All Units ***
+; ***********************************
+.Assign_Mission_To_All_Units_Action:
+
+    mov   edx, [esi+40h] ; first parameter
+    mov   eax, [0x007B32F0] ; DynamicVectorClass<FootClass>::EntryCount
+    xor   edi, edi
+    cmp   eax, ebp
+    jle   0x00619F9F        ; jump out, there are no units on the map
+    mov   ebx, [esp+1C4h]   ; Fetch owning house from trigger data
+
+    ; Begin of loop
+.AM_Loop_MainBody
+    mov   ecx, [0x007B32E4] ; DynamicVectorClass<FootClass>::Vector
+    mov   esi, [ecx+edi*4]
+    cmp   [esi+28h], ebp  ; Check that ObjectClass.Strength is above 0 (ebp is 0 here)
+    jle   .AM_Loop_NextIteration
+    mov   al, [esi+35h] ; ObjectClass.IsActive
+    test  al, al
+    jz    .AM_Loop_NextIteration
+    mov   al, [esi+2Ch] ; ObjectClass.IsDown
+    test  al, al
+    jz    .AM_Loop_NextIteration
+    mov   al, [esi+2Fh] ; ObjectClass.IsInLimbo
+    test  al, al
+    jnz   .AM_Loop_NextIteration
+    cmp   ebx, [esi+0ECh] ; TechnoClass.House
+    jz    .AM_Loop_NextIteration
+    mov   eax, [esi]
+    push  edx
+    mov   ecx, esi
+    call  [eax+158h] ; TechnoClass.Assign_Mission
+
+.AM_Loop_NextIteration
+    mov   eax, [0x007B32F0] ; DynamicVectorClass<FootClass>::EntryCount
+    inc   edi
+    cmp   edi, eax
+    jl    .AM_Loop_MainBody
+    jmp   0x00619F9F ; success
 
