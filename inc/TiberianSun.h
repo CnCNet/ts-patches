@@ -33,6 +33,7 @@
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
 #define GAME_CAMPAIGN 0
+#define GAME_IPX 3
 
 // This header works with sym.asm which defines the Vanilla symbols
 // This header will be split up as it becomes larger

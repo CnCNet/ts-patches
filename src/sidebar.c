@@ -5,8 +5,8 @@
 
 
 CALL(0x005F37BF, _SidebarClass__Draw_It_infopan_shp);
-//CALL(0x005F2A98, _SidebarClass__Init_For_House_infopan_shp);
-CALL(0x005F2725, _SidebarClass__Init_IO_infopan_shp);
+CALL(0x005F2A98, _SidebarClass__Init_For_House_infopan_shp);
+// CALL(0x005F2725, _SidebarClass__Init_IO_infopan_shp);
 extern Image *BottomInfoPanel;
 char InfoPanelStr[] = "INFOPAN.SHP";
 Rect InfoPrintLocation;

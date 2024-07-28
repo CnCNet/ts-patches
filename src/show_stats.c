@@ -215,69 +215,70 @@ ShowSelection(char **out, char **col2, int *width)
     {
         unit = CurrentObjectsArray.Vector[0];
         char *name = "";
-        ObjectTypeClass *type = (ObjectTypeClass *)unit->vftable->Class_Of(unit);
-        if (type)
-            name = type->a.UIName;
 
-        char *fmt = "%.17s\n"
-            "HP: %d/%d\n"
-            "Speed: %.2f\n"
-            "Weapon: %.2f\n"
-            "WpnBonus: %.2f\n"
-            "AmrType: %%s\n"
-            "ArmorBonus: %%.2f\n"
-            "Veteran: %%.2f\n";
-        sprintf(buf, fmt, name, unit->p.Strength, type->Strength);
-        if (Is_Techno((AbstractClass *)unit))
+        if (!HouseClass__Is_Ally_Techno(PlayerPtr, unit)) {
+            static char *enemyselected = "Enemy Selected\n";
+            *out = enemyselected;
+        }
+        else
         {
-            TechnoTypeClass *technotype = (TechnoTypeClass *)type;
-            TechnoClass *techno = (TechnoClass *)unit;
-            double p_speed = (double)technotype->Speed/2.5;
+            ObjectTypeClass *type = (ObjectTypeClass *)unit->vftable->Class_Of(unit);
 
-            if (Is_Foot((AbstractClass *)unit))
-                p_speed *= ((FootClass *)techno)->p.SpeedMultiplier;
+            if (type)
+                name = type->a.UIName;
 
-            if (technotype->Primary.WeaponType)
+            char *fmt = "%.17s\n"
+                "HP: %d/%d\n"
+                "Speed: %.2f\n"
+                "Weapon: %.2f\n"
+                "WpnBonus: %.2f\n"
+                "AmrType: %%s\n"
+                "ArmorBonus: %%.2f\n"
+                "Veteran: %%.2f\n";
+            sprintf(buf, fmt, name, unit->p.Strength, type->Strength);
+            if (Is_Techno((AbstractClass *)unit))
             {
+                TechnoTypeClass *technotype = (TechnoTypeClass *)type;
+                TechnoClass *techno = (TechnoClass *)unit;
+                double p_speed = (double)technotype->Speed/2.5;
 
-                sprintf(buf, fmt, name, techno->p.r.m.o.Strength,
-                        technotype->o.Strength,
-                        p_speed,
-                        (double)
-                        technotype->Primary.WeaponType->Damage *
-                        technotype->Primary.WeaponType->Burst /
-                        technotype->Primary.WeaponType->ROF * 45,
-                        techno->p.FirePowerBonus - 1.0);
-                sprintf(buf2, buf, ArmorNames[type->Armor],
-                        techno->p.ArmorBonus - 1.0,
-                        techno->p.Veterancy);
+                if (Is_Foot((AbstractClass *)unit))
+                    p_speed *= ((FootClass *)techno)->p.SpeedMultiplier;
+
+                if (technotype->Primary.WeaponType)
+                {
+                    sprintf(buf, fmt, name, techno->p.r.m.o.Strength,
+                            technotype->o.Strength,
+                            p_speed,
+                            (double)
+                            technotype->Primary.WeaponType->Damage *
+                            technotype->Primary.WeaponType->Burst /
+                            technotype->Primary.WeaponType->ROF * 45,
+                            techno->p.FirePowerBonus - 1.0);
+                    sprintf(buf2, buf, ArmorNames[type->Armor],
+                            techno->p.ArmorBonus - 1.0,
+                            techno->p.Veterancy);
+                }
+                else {
+                    sprintf(buf, fmt, name, techno->p.r.m.o.Strength,
+                            technotype->o.Strength,
+                            p_speed, 0,
+                            techno->p.FirePowerBonus - 1
+                            );
+                    sprintf(buf2, buf, ArmorNames[type->Armor],
+                            techno->p.ArmorBonus - 1.0,
+                            techno->p.Veterancy);
+                }
             }
             else {
-                sprintf(buf, fmt, name, techno->p.r.m.o.Strength,
-                        technotype->o.Strength,
-                        p_speed, 0,
-                        techno->p.FirePowerBonus - 1
-                        );
-                sprintf(buf2, buf, ArmorNames[type->Armor],
-                        techno->p.ArmorBonus - 1.0,
-                        techno->p.Veterancy);
+                sprintf(buf2, fmt, name, unit->p.Strength, type->Strength,
+                        0.0, 0.0, 0.0, ArmorNames[type->Armor], 0.0, 0.0);
             }
+            *out = buf2;
         }
-        else {
-            sprintf(buf2, fmt, name, unit->p.Strength, type->Strength,
-                    0.0, 0.0, 0.0, ArmorNames[type->Armor], 0.0, 0.0);
-        }
-        *out = buf2;
     }
     else {
-        static char *empty = "Nothing Selected\n"
-            "HP:    /\n"
-            "Speed:\n"
-            "Weapon:\n"
-            "WpnBonus:\n"
-            "AmrType:\n"
-            "ArmorBonus:\n"
-            "Veteran:\n";
+        static char *empty = "Nothing Selected";
         *out = empty;
     }
     return 0x6046;
@@ -295,7 +296,7 @@ int     __thiscall ToggleInfoPanel_Execute(void *a)     {
         FlagToReInit = 1;
     }
 
-    if (InfoPanel >= 2)
+    if (InfoPanel >= 2 || (InfoPanel >= 1 && SessionType.GameSession != GAME_IPX))
     {
         InfoPanel = -1;
         FlagToReInit = 1;
