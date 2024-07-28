@@ -32,11 +32,14 @@ cextern IntegrateMumbleSpawn
 cextern AttackNeutralUnits
 cextern ScrapMetal
 cextern AutoDeployMCV
-cextern SharedControl
 cextern SkipScoreScreen
 cextern AutoSurrender
 cextern SkipBriefingOnMissionStart
 cextern NoRNG
+
+%ifdef SHAREDCONTROL
+cextern SharedControl
+%endif
 
 @LJMP 0x004E1DE0, _Select_Game_Init_Spawner
 @LJMP 0x00609470, _Send_Statistics_Packet_Return_If_Skirmish
@@ -1233,8 +1236,10 @@ Initialize_Spawn:
     lea eax, [MapHash]
     SpawnINI_Get_String str_Settings, str_MapHash, str_Empty, eax, 255
 
+%ifdef SHAREDCONTROL
     SpawnINI_Get_Bool str_Settings, str_SharedControl, 0
     mov byte [SharedControl], al
+%endif
 
     SpawnINI_Get_Bool str_Settings, str_MCVRedeploy, 1
     mov byte [MCVRedeploy], al

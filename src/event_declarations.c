@@ -117,9 +117,11 @@ Extended_Events(EventClass *e)
     switch(e->Type) {
     case 0:
         break; // Empty Event
+#ifdef SHAREDCONTROL
     case 0x24:
         Toggle_Control(e);
         break;
+#endif
     case 0x25:
         Handle_Timing_Change(e);
         break;

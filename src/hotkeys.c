@@ -16,7 +16,9 @@ HookInitCommands() {
                                  &ChatToAllCommand,
                                  &ChatToPlayerCommand,
                                  &TextBackgroundColorCommand,
+#ifdef SHAREDCONTROL
                                  &GrantControlCommand,
+#endif
                                  &ToggleInfoPanelCommand,
                                  &PlaceBuildingCommand,
                                  &RepeatBuildingCommand,

@@ -269,7 +269,11 @@ OBJS += src/saved_games_in_subdir.o
 OBJS += src/savegame.o
 OBJS += src/scrap_metal_explosion.o
 
+# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
 OBJS += src/shared_control.o
+endif
+
 OBJS += src/short_connection_timeout.o
 OBJS += src/show_stats.o
 OBJS += src/sidebar.o

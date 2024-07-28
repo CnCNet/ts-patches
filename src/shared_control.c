@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#define SHAREDCONTROL 1
+
 CALL(0x00631732, _has_control);
 CALL(0x00631895, _has_control);
 CALL(0x006318D6, _has_control);
