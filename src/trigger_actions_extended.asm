@@ -382,18 +382,19 @@ hack 0x0061913B ; Extend trigger action jump table
 ; ***********************************
 .Assign_Mission_To_All_Units_Action:
 
-    mov   edx, [esi+40h] ; first parameter
+    mov   ebp, [esi+40h] ; first parameter
+
     mov   eax, [0x007B32F0] ; DynamicVectorClass<FootClass>::EntryCount
     xor   edi, edi
-    cmp   eax, ebp
+    cmp   eax, 0
     jle   0x00619F9F        ; jump out, there are no units on the map
     mov   ebx, [esp+1C4h]   ; Fetch owning house from trigger data
 
     ; Begin of loop
-.AM_Loop_MainBody
+.AM_Loop_MainBody:
     mov   ecx, [0x007B32E4] ; DynamicVectorClass<FootClass>::Vector
     mov   esi, [ecx+edi*4]
-    cmp   [esi+28h], ebp  ; Check that ObjectClass.Strength is above 0 (ebp is 0 here)
+    cmp   dword [esi+28h], 0  ; Check that ObjectClass.Strength is above 0
     jle   .AM_Loop_NextIteration
     mov   al, [esi+35h] ; ObjectClass.IsActive
     test  al, al
@@ -405,13 +406,13 @@ hack 0x0061913B ; Extend trigger action jump table
     test  al, al
     jnz   .AM_Loop_NextIteration
     cmp   ebx, [esi+0ECh] ; TechnoClass.House
-    jz    .AM_Loop_NextIteration
+    jnz   .AM_Loop_NextIteration
     mov   eax, [esi]
-    push  edx
+    push  ebp        ; push value for Assign_Mission
     mov   ecx, esi
     call  [eax+158h] ; TechnoClass.Assign_Mission
 
-.AM_Loop_NextIteration
+.AM_Loop_NextIteration:
     mov   eax, [0x007B32F0] ; DynamicVectorClass<FootClass>::EntryCount
     inc   edi
     cmp   edi, eax
