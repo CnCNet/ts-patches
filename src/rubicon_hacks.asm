@@ -8,7 +8,7 @@
 ; Increase max. bounces of elastic projectiles [commented out, causes issues on high bridges]
 ;@SET 0x00445516, {db 0x04}
 
-; Change the distribution of cluster weapons [only inner radius changed for now]
+; Change the distribution of cluster weapons [commented out for now]
 ;@SET 0x004465D6, {db 0x02} ; outer spread radius in leptons
 ;@SET 0x004465DB, {db 0x00} ; inner spread radius in leptons
 ;@SET 0x004465EA, {db 0x01} ; [bool] should clusters hit the center of the cell?
