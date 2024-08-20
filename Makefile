@@ -332,6 +332,11 @@ OBJS += src/remove_ion_storm_effects.o
 OBJS += src/score_screen_player_always_on_left.o
 endif
 
+# Rubicon only sources.
+ifdef MOD_RUBICON
+OBJS += src/prerequisites_refresh.o
+endif
+
 # TI only sources.
 ifdef MOD_TI
 OBJS += src/team_number_position.o
