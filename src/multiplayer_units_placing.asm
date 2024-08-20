@@ -5,9 +5,13 @@
 
 cglobal UsedSpawnsArray
 
+gbool IsSpawnXAircraft, false
+
 @LJMP 0x00658658, _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX
 @LJMP 0x00434843, _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX
 @LJMP 0x004D7B9A, _InfantryClass__Read_INI_Get_HouseType_From_Name_SpawnX
+@LJMP 0x0040E806, _AircraftClass__Read_INI_Get_HouseType_From_Name_SpawnX
+@LJMP 0x0040E839, _AircraftClass__Read_INI_Skip_HouseClass_As_Pointer_Call_For_SpawnXAircraft
 @LJMP 0x006585C0, _UnitClass__Read_INI_SpawnX_Get_UnitClassArray_Count_In_Prologue
 @LJMP 0x006589C8, _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition
 ;@JMP 0x005DD92A _Read_Scenario_INI_Dont_Load_Custom_Houses_List_In_Multiplayer
@@ -15,6 +19,8 @@ cglobal UsedSpawnsArray
 @LJMP 0x006589ED, _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index
 @LJMP 0x00658A05, _UnitClass__Read_INI_SpawnX_Fix_UnitClassArray_Loop_Condition2
 @LJMP 0x006589E1, _UnitClass__Read_INI_SpawnX_Fix_Up_LinkedTo_UnitClassArray_Index2
+
+@CLEAR 0x005636CC, 0x90, 0x005636D2
 
 section .rdata
     str_Spawn1              db "Spawn1",0
@@ -123,6 +129,37 @@ _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     pop eax
     call HouseType_From_Name
     jmp 0x00434848
+
+
+_AircraftClass__Read_INI_Get_HouseType_From_Name_SpawnX:
+    call Check_For_Spawn_Fake_HouseType_Name
+    cmp eax, -1
+    jz .Normal_Code
+
+    mov eax, [UsedSpawnsArray+eax*4]
+    cmp eax, -1
+    jz .Normal_Code
+
+    mov esi, [HouseClassArray_Vector]
+    mov eax, [esi+eax*4]
+
+    mov esi, eax
+    mov byte [IsSpawnXAircraft], 1
+    jmp 0x0040E80D
+
+.Normal_Code:
+    mov byte [IsSpawnXAircraft], 0
+    call HouseType_From_Name
+    jmp 0x0040E80B
+
+_AircraftClass__Read_INI_Skip_HouseClass_As_Pointer_Call_For_SpawnXAircraft:
+    cmp byte [IsSpawnXAircraft], 0
+    jz .Normal_Code
+    jmp 0x0040E840
+
+.Normal_Code:
+    call 0x004C4730 ; HouseClass::As_Pointer(HousesType)
+    jmp 0x0040E83E
 
 _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX:
     call Check_For_Spawn_Fake_HouseType_Name
