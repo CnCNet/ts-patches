@@ -141,7 +141,7 @@ jobs:
         Get-ChildItem -Path 'artifact'
         
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: ts-patches-${{ matrix.type }}-${{ steps.branch-name.outputs.current_branch }}-${{ steps.gitinfo.outputs.sha_short }}-${{ steps.gitinfo.outputs.date }}
         path: artifact
