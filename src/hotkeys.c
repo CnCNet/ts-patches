@@ -20,8 +20,10 @@ HookInitCommands() {
                                  &GrantControlCommand,
 #endif
                                  &ToggleInfoPanelCommand,
+#ifndef VINIFERA
                                  &PlaceBuildingCommand,
                                  &RepeatBuildingCommand,
+#endif
                                  &ShowHelpCommand,
                                  &SelectOneLessCommand,
 #ifdef WWDEBUG

@@ -247,7 +247,6 @@ OBJS += src/online_optimizations.o
 #OBJS += src/only_the_host_may_change_gamespeed.o
 OBJS += src/override_colors.o
 OBJS += src/paradrop.o
-OBJS += src/place_building_hotkey.o
 OBJS += src/radar_event_hacks.o
 OBJS += src/rage_quit.o
 OBJS += src/recon_kick.o
@@ -257,7 +256,6 @@ OBJS += src/record_facing_changes_func.o
 OBJS += src/record_tarcom_changes_func.o
 OBJS += src/record_override_mission_func.o
 OBJS += src/reinforcements_player_specific.o
-OBJS += src/repeat_last_building_hotkey.o
 OBJS += src/response_time_func.o
 
 # Only include in: MOD_TO MOD_TI
@@ -381,6 +379,8 @@ OBJS += src/no_sidecd_mix.o
 OBJS += src/oil_derricks.o
 OBJS += src/random_loop_delay.o
 OBJS += src/remove_16bit_windowed_check.o
+OBJS += src/place_building_hotkey.o
+OBJS += src/repeat_last_building_hotkey.o
 
 # The logger is needed for certain client features
 ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)

@@ -99,8 +99,10 @@ InfoPanelHotkeysInit()
         &TogglePowerCommandClass,
         &WaypointCommandClass,
         &DeleteWayPointCommandClass,
+#ifndef VINIFERA
         &vtPlaceBuildingCommand,
         &vtRepeatBuildingCommand,
+#endif
         &CenterBaseCommandClass,
         &SetView1CommandClass,
         &vtShowHelpCommand
