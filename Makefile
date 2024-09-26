@@ -286,12 +286,6 @@ OBJS += src/unit_self_heal_repair_step.o
 OBJS += src/text_triggers.o
 OBJS += src/tiberium_on_slope_crash.o
 
-# Only include in: MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
-OBJS += src/tiberium_stuff.o
-endif
-
-OBJS += src/tiberium4_blocks_infantry.o
 OBJS += src/tileset255_bridgerepairfix.o
 OBJS += src/trigger_actions_extended.o
 OBJS += src/ts_util.o
@@ -301,11 +295,6 @@ OBJS += src/waypoint_enhancements.o
 OBJS += src/wcsncpy.o
 OBJS += src/whiteboy_cameo_bugfix.o
 OBJS += src/basic_theme_fix.o
-
-# Sources included in mods but NOT the client.
-ifndef TSCLIENT
-OBJS += src/tiberium_damage.o
-endif 
 
 # Only include in: MOD_DTA MOD_FD
 ifneq ($(call ifdef_any_of,MOD_DTA MOD_FD),)
@@ -391,6 +380,18 @@ endif
 ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO),)
 OBJS += src/remove_iscoredefender_emp_immunity.o
 endif
+
+# Only include in: MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
+OBJS += src/tiberium_stuff.o
+endif
+
+OBJS += src/tiberium4_blocks_infantry.o
+
+# Sources included in mods but NOT the client.
+ifndef TSCLIENT
+OBJS += src/tiberium_damage.o
+endif 
 
 OBJS += src/rules_process.o
 OBJS += src/scale_movie_fix.o
