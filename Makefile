@@ -275,8 +275,6 @@ endif
 OBJS += src/short_connection_timeout.o
 OBJS += src/show_stats.o
 OBJS += src/sidebar.o
-OBJS += src/sidebar_cameo_sort.o
-OBJS += src/sidebar_cameo_sort_helper.o
 OBJS += src/sideindex_improvements_v2.o
 OBJS += src/singleplayer_objects_on_multiplayer_map_crash.o
 OBJS += src/smarter_firesale.o
@@ -293,7 +291,6 @@ OBJS += src/veterancy_from_allies.o
 OBJS += src/voxelanim_damage_bug.o
 OBJS += src/waypoint_enhancements.o
 OBJS += src/wcsncpy.o
-OBJS += src/whiteboy_cameo_bugfix.o
 OBJS += src/basic_theme_fix.o
 
 # Only include in: MOD_DTA MOD_FD
@@ -370,6 +367,9 @@ OBJS += src/random_loop_delay.o
 OBJS += src/remove_16bit_windowed_check.o
 OBJS += src/place_building_hotkey.o
 OBJS += src/repeat_last_building_hotkey.o
+OBJS += src/sidebar_cameo_sort.o
+OBJS += src/sidebar_cameo_sort_helper.o
+OBJS += src/whiteboy_cameo_bugfix.o
 
 # The logger is needed for certain client features
 ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
