@@ -40,6 +40,30 @@
 ; Prevent more than 75 cameos from appearing in a sidebar column and thus crashing the game
 ;; @SJGE 0x005F463B, 0x005F46A1    ;jge short loc_5F46A1
 
+;
+; The following Sidebar Hack-related patches are included in Vinifera compatible builds until the spawner is reimplemented.
+;
+
+; Set global variable byte containing side ID to load files for
+@SET 0x004E2CFA, {mov byte [0x7E2500], al}
+@SET 0x004E2CFF, nop
+@SET 0x004E2D00, {add esp, 4}
+@SJMP 0x004E2D03, 0x004E2D13 ; jmp short
+@SET 0x004E2D05, nop
+
+; Load sidebar MIX files for new sides properly
+@SET 0x005DD798, {mov cl, byte [0x007E2500]}
+@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
+
+; Load speech MIX files for new sides properly
+; Defaults SpeechSide to our hijacked player side value
+hack 0x005DD75B
+    mov  eax, [Scen]
+    xor  ecx, ecx
+    mov  cl, byte [0x007E2500] ; PlayerSide (was Session.IsGDI)
+    mov  [eax+0x1E44], ecx ; set SpeechSide
+    jmp  0x005DD784        ; go back to game code for initializing side
+
 
 ;
 ; The following patches will not be included in Vinifera compatible builds.
@@ -144,33 +168,13 @@ sstring str_DarkRed, "DarkRed"
 @SET 0x00710DA4, {db 0,0,0,0,0,0}
 @SET 0x00710DAC, {db 0,0,0,0,0,0}
 
-; Set global variable byte containing side ID to load files for
-@SET 0x004E2CFA, {mov byte [0x7E2500], al}
-@SET 0x004E2CFF, nop
-@SET 0x004E2D00, {add esp, 4}
-@SJMP 0x004E2D03, 0x004E2D13 ; jmp short
-@SET 0x004E2D05, nop
-
 ; Load sidebar MIX files for new sides properly (for saved games)
 @SET 0x005D6C4F, {mov cl, [eax+1D91h]}
 @CLEAR 0x005D6C55, 0x90, 0x005D6C58
-
-; Load sidebar MIX files for new sides properly
-@SET 0x005DD798, {mov cl, byte [0x007E2500]}
-@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
 
 ; Load speech MIX files for new sides properly (for saved games)
 @SET 0x005D6DCE, {xor ecx, ecx}
 @SET 0x005D6DD0, {mov cl, [eax+1D91h]}
 @CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
-
-; Load speech MIX files for new sides properly
-; Defaults SpeechSide to our hijacked player side value
-hack 0x005DD75B
-    mov  eax, [Scen]
-    xor  ecx, ecx
-    mov  cl, byte [0x007E2500] ; PlayerSide (was Session.IsGDI)
-    mov  [eax+0x1E44], ecx ; set SpeechSide
-    jmp  0x005DD784        ; go back to game code for initializing side
 
 %endif
