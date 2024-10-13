@@ -17,7 +17,7 @@ int32_t MultiFactoryCost = 0;
 bool RefundFreeUnit = false;
 
 #elif defined(MOD_RUBICON)
-int32_t MultiFactoryCost = 0;
+int32_t MultiFactoryCost = 1000;
 bool RefundFreeUnit = false;
 
 #elif defined(MOD_FD)
