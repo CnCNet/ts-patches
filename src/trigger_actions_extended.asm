@@ -161,6 +161,8 @@ hack 0x0061913B ; Extend trigger action jump table
     jz .Remove_Attached_Objects_Action
     cmp edx, 115
     jz .Assign_Mission_To_All_Units_Action
+    cmp edx, 116
+    jz .Make_Ally_One_Sided_Action
 
     cmp edx, 68h
     ja 0x0061A9C5 ; default
@@ -419,3 +421,24 @@ hack 0x0061913B ; Extend trigger action jump table
     jl    .AM_Loop_MainBody
     jmp   0x00619F9F ; success
 
+
+
+; ***********************************
+; ***    Make Ally (One-Sided)    ***
+; ***********************************
+.Make_Ally_One_Sided_Action:
+    mov     ecx, [esi+40h]  ; Fetch first parameter
+    cmp     ecx, 0FFFFFFFFh
+    jz      0x00619F9F      ; success
+    call    0x004C4730      ; HouseClass::As_Pointer(HousesType)
+    mov     ecx, [esp+1C4h] ; Fetch owning house from trigger data
+    push    eax
+    ; We need to increment ScenarioInit to allow houses to ally even if they would be the "last enemies" to each other in multiplayer
+    mov     edi, [ScenarioInit]
+    inc     edi
+    mov     [ScenarioInit], edi
+    call    0x004BDB50      ; HouseClass::Make_Ally(HouseClass *)
+    mov     edi, [ScenarioInit]
+    dec     edi
+    mov     [ScenarioInit], edi
+    jmp     0x00619F9F      ; success

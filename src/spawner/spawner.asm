@@ -601,9 +601,11 @@ _Init_Game_Check_Spawn_Arg_No_Intro:
 
 _HouseClass__Make_Ally_STFU_when_Allying_In_Loading_Screen_Spawner:
     cmp byte [IsDoingAlliancesSpawner], 1
-    jz 0x004BDE68
-    test al, al          ; hooked by patch
-    jz 0x4BDE68
+    je  0x004BDE68
+    cmp byte [AlliesAllowed], 0
+    je  0x004BDE68
+    test al, al          ; fix code that our jump-to-hook destroyed
+    jz  0x004BDE68
     jmp 0x004BDDB9
 
 _SessionClass__Free_Scenario_Descriptions_RETN_Patch:
