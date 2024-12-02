@@ -227,9 +227,20 @@ OBJS += src/minimum_burst.o
 OBJS += src/mouse_always_in_focus.o
 OBJS += src/mouse_behavior.o
 
-# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
+# Team number position.
+# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM
+ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON MOD_FD MOD_TM),)
 OBJS += src/move_team_group_number.o
+endif
+
+# TI Team number position.
+ifdef MOD_TI
+OBJS += src/team_number_position.o
+endif
+
+# TSCLIENT Team number position.
+ifdef TSCLIENT
+OBJS += src/team_number_position_tsc.o
 endif
 
 OBJS += src/multi_engineer_ignore_neutral.o
@@ -314,11 +325,6 @@ OBJS += src/dump_globals.o
 OBJS += src/ingame_ui_text_color.o
 OBJS += src/remove_ion_storm_effects.o
 OBJS += src/score_screen_player_always_on_left.o
-endif
-
-# TI only sources.
-ifdef MOD_TI
-OBJS += src/team_number_position.o
 endif
 
 # TO only sources.
