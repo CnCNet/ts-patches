@@ -117,7 +117,7 @@ sstring str_BriefingPCX, "BRIEFING.PCX"
 ; Load speech MIX files for new sides properly
 ; Defaults SpeechSide to our hijacked player side value
 ; (enabled until spawner has been reimplemented through Vinifera)
-hack 0x005DD75B
+hack 0x005DD732
     mov  eax, [Scen]
     xor  ecx, ecx
     mov  cl, byte [0x007E2500] ; PlayerSide (was Session.IsGDI)
