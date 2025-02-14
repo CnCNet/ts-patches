@@ -403,10 +403,13 @@ _Read_Scenario_INI_Read_Base_Nodes_After_Creation_Of_Units:
 _Read_Scenario_INI_Dont_Create_Units_Earlier:
     call 0x0058C980
 
+%ifndef VINIFERA
     push    eax
     push    ebp
     call    _read_tut_from_map
     pop     eax
+%endif
+
 
     cmp dword [SessionType], 0
     jz  .Ret

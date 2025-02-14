@@ -221,17 +221,10 @@ OBJS += src/laser_draw_it_crash.o
 OBJS += src/log_more_oos.o
 OBJS += src/main_menu_cursor_bug.o
 OBJS += src/manual_aim_sams.o
-OBJS += src/max_pip_counts.o
 OBJS += src/minimap_crash.o
 OBJS += src/minimum_burst.o
 OBJS += src/mouse_always_in_focus.o
 OBJS += src/mouse_behavior.o
-
-# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
-OBJS += src/move_team_group_number.o
-endif
-
 OBJS += src/multi_engineer_ignore_neutral.o
 OBJS += src/multiplayer_ai_base_nodes.o
 OBJS += src/multiplayer_movies.o
@@ -246,7 +239,6 @@ OBJS += src/no_options_menu_animation.o
 OBJS += src/online_optimizations.o
 #OBJS += src/only_the_host_may_change_gamespeed.o
 OBJS += src/override_colors.o
-OBJS += src/paradrop.o
 OBJS += src/radar_event_hacks.o
 OBJS += src/rage_quit.o
 OBJS += src/recon_kick.o
@@ -278,12 +270,9 @@ OBJS += src/sidebar.o
 OBJS += src/sideindex_improvements_v2.o
 OBJS += src/singleplayer_objects_on_multiplayer_map_crash.o
 OBJS += src/smarter_firesale.o
-OBJS += src/smarter_harvesters.o
 OBJS += src/spy_fix.o
 OBJS += src/unit_self_heal_repair_step.o
-OBJS += src/text_triggers.o
 OBJS += src/tiberium_on_slope_crash.o
-
 OBJS += src/tileset255_bridgerepairfix.o
 OBJS += src/trigger_actions_extended.o
 OBJS += src/ts_util.o
@@ -314,11 +303,6 @@ OBJS += src/dump_globals.o
 OBJS += src/ingame_ui_text_color.o
 OBJS += src/remove_ion_storm_effects.o
 OBJS += src/score_screen_player_always_on_left.o
-endif
-
-# TI only sources.
-ifdef MOD_TI
-OBJS += src/team_number_position.o
 endif
 
 # TO only sources.
@@ -355,7 +339,14 @@ OBJS += src/in-game_message_background.o
 OBJS += src/internet_cncnet.o
 OBJS += src/isomappack5_limit_extend.o
 OBJS += src/load_more_movies.o
+OBJS += src/max_pip_counts.o
 OBJS += src/mechanics.o
+
+# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
+OBJS += src/move_team_group_number.o
+endif
+
 OBJS += src/new_search_dir.o
 OBJS += src/no-cd_iran.o
 OBJS += src/no_blowfish_dll.o
@@ -363,12 +354,15 @@ OBJS += src/no_insignificant_death_announcement.o
 OBJS += src/no_movie_and_score_mix_dependency.o
 OBJS += src/no_sidecd_mix.o
 OBJS += src/oil_derricks.o
+OBJS += src/paradrop.o
 OBJS += src/random_loop_delay.o
 OBJS += src/remove_16bit_windowed_check.o
 OBJS += src/place_building_hotkey.o
 OBJS += src/repeat_last_building_hotkey.o
 OBJS += src/sidebar_cameo_sort.o
 OBJS += src/sidebar_cameo_sort_helper.o
+OBJS += src/smarter_harvesters.o
+OBJS += src/text_triggers.o
 OBJS += src/whiteboy_cameo_bugfix.o
 
 # The logger is needed for certain client features
@@ -384,6 +378,11 @@ endif
 # Only include in: MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT
 ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
 OBJS += src/tiberium_stuff.o
+endif
+
+# TI only sources.
+ifdef MOD_TI
+OBJS += src/team_number_position.o
 endif
 
 OBJS += src/tiberium4_blocks_infantry.o
