@@ -175,7 +175,7 @@ sstring str_DarkRed, "DarkRed"
 
 ; Load speech MIX files for new sides properly
 ; Defaults SpeechSide to our hijacked player side value
-hack 0x005DD75B
+hack 0x005DD6FB
     mov  eax, [Scen]
     xor  ecx, ecx
     mov  cl, byte [0x007E2500] ; PlayerSide (was Session.IsGDI)
