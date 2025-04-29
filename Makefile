@@ -361,7 +361,6 @@ OBJS += src/place_building_hotkey.o
 OBJS += src/repeat_last_building_hotkey.o
 OBJS += src/sidebar_cameo_sort.o
 OBJS += src/sidebar_cameo_sort_helper.o
-OBJS += src/smarter_harvesters.o
 OBJS += src/text_triggers.o
 OBJS += src/whiteboy_cameo_bugfix.o
 
@@ -389,6 +388,7 @@ OBJS += src/tiberium4_blocks_infantry.o
 
 # Sources included in mods but NOT the client.
 ifndef TSCLIENT
+OBJS += src/smarter_harvesters.o
 OBJS += src/tiberium_damage.o
 endif 
 
