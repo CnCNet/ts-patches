@@ -215,7 +215,6 @@ OBJS += src/hotkeys.o
 OBJS += src/hotkeys_asm.o
 OBJS += src/hover_show_health.o
 OBJS += src/hp03.o
-OBJS += src/ionstorm_jumpjet_crash.o
 OBJS += src/jj_barracks_glitch_fix.o
 OBJS += src/laser_draw_it_crash.o
 OBJS += src/log_more_oos.o
@@ -341,6 +340,7 @@ OBJS += src/isomappack5_limit_extend.o
 OBJS += src/load_more_movies.o
 OBJS += src/max_pip_counts.o
 OBJS += src/mechanics.o
+OBJS += src/ionstorm_jumpjet_crash.o
 
 # Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT
 ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
