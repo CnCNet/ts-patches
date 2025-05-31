@@ -70,7 +70,7 @@ hack 0x0065648F
     push ebx
     mov  ecx, [esi+0ECh]
     call HouseClass__Is_Ally_Techno
-    cmp  eax, 1
+    cmp  al, 1
     jne  .Restore_Original_Value_And_Return
     
 .Post_Ally_Check:
