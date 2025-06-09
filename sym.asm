@@ -510,6 +510,7 @@ setcglob 0x0048C140, DSurface_Conversion_Type
 setcglob 0x0069FAE0, Write_PCX_File
 
 setcglob 0x00563670, Play_Movie
+setcglob 0x005639A0, Play_Movie_VQType
 setcglob 0x00563B00, Play_Ingame_Movie
 setcglob 0x0066B230, VQA_Windows_Message_Loop
 

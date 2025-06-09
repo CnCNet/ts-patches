@@ -12,6 +12,53 @@ cextern PlayMoviesInMultiplayer
 sint NextNetworkRefreshTime, 0
 gbool NetworkRefreshStarted, false
 
+
+; Display lose movies in multiplayer.
+hack 0x005DCDB7
+    cmp byte [PlayMoviesInMultiplayer], 0
+    je   .Normal_Code
+
+    ; allow skipping the movie, network communication isn't relevant at this stage anymore
+    mov  byte [PlayMoviesInMultiplayer], 0
+
+    push 1
+    push 1
+    or   edx, 0xFFFFFFFF
+    mov  ecx, [Scen]
+    mov  ecx, [ecx+93Ch] ; ScenarioClass.LoseMovie
+    call Play_Movie_VQType
+
+.Normal_Code:
+    mov  ecx, [WWMouseClas_Mouse]
+    mov  byte [GameActive], 0
+    mov  eax, [ecx] ; vtable
+    call [eax+10h]  ; virtual call for Show_Mouse
+    jmp  0x005DCDC8
+
+
+; Display win movies in multiplayer.
+hack 0x005DC9F9
+    cmp byte [PlayMoviesInMultiplayer], 0
+    je   .Normal_Code
+
+    ; allow skipping the movie, network communication isn't relevant at this stage anymore
+    mov  byte [PlayMoviesInMultiplayer], 0
+
+    push 1
+    push 1
+    or   edx, 0xFFFFFFFF
+    mov  ecx, [Scen]
+    mov  ecx, [ecx+938h] ; ScenarioClass.WinMovie
+    call Play_Movie_VQType
+
+.Normal_Code:
+    mov  ecx, [WWMouseClas_Mouse]
+    mov  byte [GameActive], 0
+    mov  eax, [ecx] ; vtable
+    call [eax+10h]  ; virtual call for Show_Mouse
+    jmp  0x005DCA0B
+
+
 ; Players skipping movies in multiplayer leads to disconnects.
 ; Prevent players from skipping movies in MP.
 hack 0x0066BB61

@@ -298,6 +298,13 @@ cextern _sprintf
 cextern stristr_
 cextern strcpy
 
+; VQA
+cextern Play_Movie
+cextern Play_Movie_VQType
+cextern Play_Ingame_Movie
+cextern VQA_Windows_Message_Loop
+
+
 ; Mumble
 cextern initMumble
 cextern updateMumble
