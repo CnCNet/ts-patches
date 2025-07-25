@@ -47,7 +47,7 @@ jobs:
         
     - name: Get Branch Name
       id: branch-name
-      uses: tj-actions/branch-names@v7.0.7
+      uses: tj-actions/branch-names@v9.0.0
         
     - name: Set Variables
       id: gitinfo
