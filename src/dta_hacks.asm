@@ -8,9 +8,6 @@
 ;; Trackbar Border Color change
 @SET 0x0059138B, {db 0xA0, 0xA7, 0xA0}
 
-;; Hack to make tiberium get affected by lighting (at the cost of remappability)
-@NJNB 0x004557FF, 0x004559AE ;jnb loc_4559AE
-
 ;; Don't add random extra cash to the money crate value specified in Rules.ini
 @CLEAR 0x0045839D, 0x90, 0x004583A3
 @SET 0x0045839D, {lea edx, [eax]}
@@ -215,6 +212,9 @@ sstring str_TemperatPAL, "TEMPERAT.PAL"
 @SET 0x004E7D8A, {mov ecx, str_UnitdesPAL}
 ; TEMPERAT.PAL -> DESERT.PAL
 @SET 0x004DFDDF, {mov ecx, str_DesertPAL}
+
+;; Hack to make tiberium get affected by lighting (at the cost of remappability)
+@NJNB 0x004557FF, 0x004559AE ;jnb loc_4559AE
 
 ;; IsScoreShuffle on by default
 @SET 0x005899F1, {mov byte [eax+35h], 1} ;byte ptr
