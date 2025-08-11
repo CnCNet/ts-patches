@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 gstring str_ToAllies, "(Allies): "
 gstring str_ToAll, "(All): "
 gstring str_ToOne, "(one): "
@@ -118,3 +120,5 @@ hack 0x00509BDF, 0x00509BE5
         push    esi                              ; Restore clobbered code
         mov     ecx, IPXManagerClass_this
         jmp     hackend
+
+%endif ; SPAWNER

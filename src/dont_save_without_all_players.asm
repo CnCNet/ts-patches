@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 ; Prevents saving multiplayer games manually when not all players are present.
 ; SavesDisabled is set to 1 in recon_kick.asm when the REMOVEPLAYER event is executed.
 ; Author: Rampastring
@@ -57,3 +59,4 @@ hack 0x00494DCE
 ;    jnz 0x00494E9C
 ;    jmp 0x00494DDD
 
+%endif ; SPAWNER

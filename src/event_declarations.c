@@ -62,8 +62,12 @@ char *EventNames[] = {
     "PAGEUSER",
     "REMOVEPLAYER",
     "LATENCYFUNDGE",
+#ifdef SHAREDCONTROL
     "GRANTCONTROL",
+#endif
+#ifdef SPAWNER
     "RESPONSE_TIME2"
+#endif // SPAWNER
 };
 
 volatile
@@ -104,8 +108,12 @@ uint8_t EventLengths[] = {
     0,    //"PAGEUSER",
     4,    //"REMOVEPLAYER",
     4,    //"LATENCYFUNDGE",
+#ifdef SHAREDCONTROL
     4,    //"GRANTCONTROL",
+#endif
+#ifdef SPAWNER
     2,    //"RESPONSE_TIME2"
+#endif // SPAWNER
 };
 
 int CountEvents = _countof(EventLengths);
@@ -122,9 +130,11 @@ Extended_Events(EventClass *e)
         Toggle_Control(e);
         break;
 #endif
+#ifdef SPAWNER
     case 0x25:
         Handle_Timing_Change(e);
         break;
+#endif // SPAWNER
     default:
         WWDebug_Printf("Extended event not found %d\n", e->Type);
     }

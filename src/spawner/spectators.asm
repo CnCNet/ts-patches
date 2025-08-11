@@ -3,6 +3,8 @@
 %include "TiberianSun.inc"
 %include "ini.inc"
 
+%ifdef SPAWNER
+
 cglobal IsSpectatorArray
 cglobal SpectatorStuffInit
 cglobal Load_Spectators_Spawner
@@ -273,3 +275,5 @@ _Draw_Overlays_spectator_spy:
     jnz  0x00428A8E
 
     jmp  0x00428B13
+
+%endif ; SPAWNER

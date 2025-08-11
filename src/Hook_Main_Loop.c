@@ -36,6 +36,7 @@ void __thiscall
 MainLoop_AfterRender(MessageListClass *msg) {
   MessageListClass__Manage(msg);
 
+#ifdef SPAWNER
 	if (SpawnerActive) {
         
 		if (SessionClass_this.GameSession != 0) { // GAME_CAMPAIGN
@@ -76,11 +77,13 @@ MainLoop_AfterRender(MessageListClass *msg) {
 			}
 		}
 	}
+#endif
 }
 
 void __fastcall MainLoop_PreRemoveAllInactive() {
     Remove_All_Inactive();
     
+#ifdef SPAWNER
     if (SpawnerActive) {
         if (SessionClass_this.GameSession == 0) { // GAME_CAMPAIGN
             // Auto-save for singleplayer missions
@@ -142,5 +145,6 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
             }
         }
     }
+#endif
 }
 

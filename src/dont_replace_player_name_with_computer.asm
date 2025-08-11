@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 cextern AutoSurrender
 
 ; Patch HouseClass_Force_AI_Take_Control so it doesn't replace the player's 
@@ -11,3 +13,5 @@ hack 0x004CA8DC
 	je 0x004CA91A
 	call Fetch_String
 	jmp 0x004CA8E1
+
+%endif ; SPAWNER

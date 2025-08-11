@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 cglobal PlayerSide
 cglobal SkipBriefingOnMissionStart
 cextern DifficultyName
@@ -194,3 +196,5 @@ SHL word [0x8093B8],CL
     pop     ebp
     mov     byte [0x007E48FC], 1
     jmp     0x005DB4A6
+
+%endif ; SPAWNER

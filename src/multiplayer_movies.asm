@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 ; Patches to make it possible to view ingame videos
 ; in multiplayer.
 ; *******************
@@ -120,3 +122,5 @@ hack 0x0066BA56
     push ebx
     lea  edx, [esp+28h]
     jmp  0x0066BA5D
+
+%endif ; SPAWNER

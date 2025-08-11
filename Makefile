@@ -63,6 +63,12 @@ NFLAGS += -DSINGLEPLAYER
 CFLAGS += -DSINGLEPLAYER
 endif
 
+ifdef SPAWNER
+$(info SPAWNER defined)
+NFLAGS += -DSPAWNER
+CFLAGS += -DSPAWNER
+endif
+
 ifdef TSCLIENT
 $(info TSCLIENT defined)
 NFLAGS += -DTSCLIENT
@@ -407,6 +413,7 @@ endif
 # =========================================================
 # Spawner sources.
 # =========================================================
+ifdef SPAWNER
 OBJS += src/spawner/auto-surrender.o
 OBJS += src/spawner/auto_ally_by_spawn_loc.o
 OBJS += src/spawner/auto_ss.o
@@ -420,6 +427,7 @@ OBJS += src/spawner/selectable_spawns.o
 OBJS += src/spawner/spawner.o
 OBJS += src/spawner/spectators.o
 OBJS += src/spawner/statistics.o
+endif
 
 
 # =========================================================

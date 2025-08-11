@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 ; This file contains hacks to various AI-related functions 
 ; to behave like in singleplayer if we are in co-op mode.
 ; *******************
@@ -50,3 +52,4 @@ hack 0x004C08C5
 
     jmp  0x004C08D1
 
+%endif ; SPAWNER

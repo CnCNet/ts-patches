@@ -1,6 +1,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 cextern SkipBriefingOnMissionStart
 
 ; Fixes [Basic]Theme= so it does not stop playing
@@ -25,3 +27,5 @@ hack 0x005DB3F7
     mov  ecx, 0x007E2248 ; initialize ThemeClass "this" pointer
     call 0x00643F20 ; ThemeClass::Queue_Song(ThemeType), fix by AlexB
     jmp  0x005DB410 ; continue initializing game options
+
+%endif // SPAWNER

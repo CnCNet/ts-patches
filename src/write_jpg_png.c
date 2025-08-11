@@ -6,6 +6,8 @@
 #define TJE_IMPLEMENTATION
 #include "tiny_jpeg.h"
 
+#ifdef SPAWNER
+
 CALL(0x004EACC6, _Write_PCX_File_hack_png);
 
 int ScreenshotWidth = 0;
@@ -152,3 +154,5 @@ ScreenshotWriter()
     }
     return 1;
 }
+
+#endif // SPAWNER

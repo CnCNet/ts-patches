@@ -4,6 +4,8 @@
 %include "ini.inc"
 %include "patch.inc"
 
+%ifdef SPAWNER
+
 cglobal SpawnerActive
 cglobal INIClass_SPAWN
 cglobal SpawnLocationsArray
@@ -1877,3 +1879,5 @@ Add_Human_Opponents:
     pop ebp
     retn
 %pop
+
+%endif ; SPAWNER

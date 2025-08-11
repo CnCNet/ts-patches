@@ -2,6 +2,8 @@
 #include "TiberianSun.h"
 #include "patch.h"
 
+#ifdef SPAWNER
+
 /* Coach mode allows a spectator to be on the same team as someone and private message them
  * and view the same shroud as them. It also doesn't reveal the whole map for dead players.
  */
@@ -49,3 +51,5 @@ HouseClass__Is_Spectator(HouseClass *this)
     else
         return false;
 }
+
+#endif // SPAWNER

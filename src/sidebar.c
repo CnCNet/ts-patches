@@ -2,7 +2,7 @@
 #include "TiberianSun.h"
 #include "patch.h"
 
-
+#ifdef SPAWNER
 
 CALL(0x005F37BF, _SidebarClass__Draw_It_infopan_shp);
 CALL(0x005F2A98, _SidebarClass__Init_For_House_infopan_shp);
@@ -76,3 +76,5 @@ SidebarClass__Init_IO_infopan_shp(void *this)
         BottomInfoPanel = MixFileClass__CCFileClass__Retrieve(InfoPanelStr);
     return DisplayClass__Init_IO(this);
 }
+
+#endif // SPAWNER

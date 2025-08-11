@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#ifdef SPAWNER
+
 CALL(0x004B966C, _MessageListClass__Draw_show_stats2);
 
 // Disable the help overlay when the menu has been openened
@@ -216,3 +218,5 @@ CommandClass ShowHelpCommand = { &vtShowHelpCommand,0,17,17 };
    rightbar.pcx
    dbak6440.pcx
 */
+
+#endif // SPAWNER

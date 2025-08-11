@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+#ifdef SPAWNER
+
 cglobal BuildOffAlly
 
 @LJMP 0x004762EA, _Build_Off_Ally
@@ -74,3 +76,5 @@ _Build_Off_Ally:
     jz 0x00476308
 
     jmp 0x004762F3
+
+%endif ; SPAWNER

@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 cglobal AutoSurrender
 
 cextern SpawnerActive
@@ -60,3 +62,5 @@ SurrenderDialogOkClick2:
     mov byte[MeSurrendered], 1
     mov eax, dword[0x7E2284]
     jmp 0x004627F8
+
+%endif ; SPAWNER

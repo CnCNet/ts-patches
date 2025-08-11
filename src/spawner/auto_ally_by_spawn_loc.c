@@ -14,13 +14,14 @@
    AllyBySpawnLocation=1
 */
 
-
 #include "macros/patch.h"
 #include "TiberianSun.h"
 #include "macros/utlist.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+
+#ifdef SPAWNER
 
 typedef struct house_ll {
   HouseClass *house;
@@ -150,3 +151,5 @@ ParseIntLL(char *ent, int_ll **head) {
     LL_APPEND(*head, n);
   }
 }
+
+#endif // SPAWNER

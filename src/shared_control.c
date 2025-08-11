@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#ifdef SPAWNER
+
 #define SHAREDCONTROL 1
 
 CALL(0x00631732, _has_control);
@@ -171,3 +173,5 @@ vtCommandClass vtGrantControlCommand = {
   GrantControl_nothing
 };
 CommandClass GrantControlCommand = { &vtGrantControlCommand,0,17,17 };
+
+#endif // SPAWNER

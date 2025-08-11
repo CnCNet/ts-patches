@@ -4,6 +4,8 @@
 %include "TiberianSun.inc"
 %include "ini.inc"
 
+%ifdef SPAWNER
+
 gbool RandomMap, 0
 
 sstring str_Basic, "Basic"
@@ -69,3 +71,5 @@ hack 0x0053C828
    add esp, 12
    mov eax, [Seed]
    jmp hackend
+
+%endif

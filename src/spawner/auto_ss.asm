@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 cextern SpawnerActive
 gbool RunAutoSS, 0
 gint DoingAutoSS, 0
@@ -70,3 +72,5 @@ _ScreenCaptureCommand__Activate_AutoSS_File_Name:
     jmp 0x004EAC40
 
 ; DoingAutoSS
+
+%endif SPAWNER

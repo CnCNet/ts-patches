@@ -2,8 +2,9 @@
 #include "TiberianSun.h"
 #include "patch.h"
 
-extern bool CoachMode;
+#ifdef SPAWNER
 
+extern bool CoachMode;
 
 bool __thiscall
 HouseClass__Is_Ally_Or_Spec_HH(HouseClass *me, HouseClass *him)
@@ -21,3 +22,5 @@ HouseClass__Is_Ally_Or_Spec_HH(HouseClass *me, HouseClass *him)
     else
         return HouseClass__Is_Spectator(me) || HouseClass__Is_Spectator(him);
 }
+
+#endif // SPAWNER
