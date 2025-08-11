@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 cextern UsedSpawnsArray
 sstring HouseNameNeutral, "Neutral"
 
@@ -54,3 +56,5 @@ _HouseClase__House_From_HouseType:
 ;        jz   0x0064285C         ; Return False
 
 ;        jmp  hackend
+
+%endif ; SPAWNER

@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 ; 0x0062E6F6 - Do not spawn singleplayer objects in multiplayer games
 ; 0x005DC279 - Fill_In_Data
 
@@ -78,3 +80,5 @@ hack 0x0064A201, 0x0064A209 ;TriggerTypeClass::Read_INI(CCINIClass &)
     pop esi
     pop ebx
     jmp 0x0064A4AE
+
+%endif ; SPAWNER
