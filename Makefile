@@ -299,6 +299,7 @@ OBJS += src/allow_building_placement_over_overlay.o
 OBJS += src/change_projectile_degeneration_speed.o
 OBJS += src/change_score_screen_music.o
 OBJS += src/dump_globals.o
+OBJS += src/fix_ear_blast.o
 OBJS += src/ingame_ui_text_color.o
 OBJS += src/remove_ion_storm_effects.o
 OBJS += src/score_screen_player_always_on_left.o
