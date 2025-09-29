@@ -203,6 +203,7 @@ section .rdata
     str_MediumAI        db "Medium AI",0
     str_EasyAI          db "Easy AI",0
     str_BrutalAI        db "Brutal AI",0
+    str_ExtremeAI       db "Extreme AI",0
     str_UltimateAI      db "Ultimate AI",0
     str_DifficultyName  db "DifficultyName",0
 
@@ -492,6 +493,8 @@ _Assign_Houses_AI_Player_Names:
     cmp  ecx, 3
     je   .Brutal_AI
     cmp  ecx, 4
+    je   .Extreme_AI
+    cmp  ecx, 5
     je   .Ultimate_AI
     jmp  .Original_Code
 
@@ -506,6 +509,9 @@ _Assign_Houses_AI_Player_Names:
     jmp  .Assign_AI_Player_Name
 .Brutal_AI:
     mov  eax, str_BrutalAI
+    jmp  .Assign_AI_Player_Name
+.Extreme_AI:
+    mov  eax, str_ExtremeAI
     jmp  .Assign_AI_Player_Name
 .Ultimate_AI:
     mov  eax, str_UltimateAI
