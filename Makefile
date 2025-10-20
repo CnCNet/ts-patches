@@ -173,8 +173,6 @@ OBJS += src/buildlimit_fix.o
 OBJS += src/c4_repairable_fix.o
 OBJS += src/carryall_click_under_glitch.o
 OBJS += src/center_team.o
-OBJS += src/chat_ignore.o
-OBJS += src/chatallies.o
 OBJS += src/coach_mode.o
 OBJS += src/config.o
 OBJS += src/crate_patches.o
@@ -364,6 +362,8 @@ OBJS += src/sidebar_cameo_sort.o
 OBJS += src/sidebar_cameo_sort_helper.o
 OBJS += src/text_triggers.o
 OBJS += src/whiteboy_cameo_bugfix.o
+OBJS += src/chat_ignore.o
+OBJS += src/chatallies.o
 
 # The logger is needed for certain client features
 ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)

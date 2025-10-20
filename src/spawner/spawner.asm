@@ -1824,8 +1824,10 @@ Add_Human_Opponents:
     
     xor eax, eax
     mov al, byte[esi+0x39]
-    
+	
+%ifndef VINIFERA
     mov byte[eax+IgnoredColors], 1
+%endif
 
 .notIgnored:
 

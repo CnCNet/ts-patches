@@ -12,9 +12,12 @@
 
 void __stdcall
 HookInitCommands() {
-  CommandClass *NewHotkeys[] = { &ChatToAlliesCommand,
+  CommandClass *NewHotkeys[] = {
+#ifndef VINIFERA
+								 &ChatToAlliesCommand,
                                  &ChatToAllCommand,
                                  &ChatToPlayerCommand,
+#endif
                                  &TextBackgroundColorCommand,
 #ifdef SHAREDCONTROL
                                  &GrantControlCommand,
@@ -43,6 +46,7 @@ HookInitCommands() {
   // Loop through hotkeys and if chattoallis is not enabled then set it to backspace
   for (int i = 0; i < Hotkeys_ActiveCount; i++) {
     Hotkey key = Hotkeys_Vector[i];
+#ifndef VINIFERA
     if (key.Command == &ChatToAlliesCommand) {
       seen_allies = 1;
       WWDebug_Printf("****************************Seen ChatToAllies\n");
@@ -52,7 +56,7 @@ HookInitCommands() {
       seen_all = 1;
       WWDebug_Printf("****************************Seen ChatToAll\n");
     }
-
+#endif
     if (key.Command == &ShowHelpCommand)
     {
       seen_help = true;
@@ -68,6 +72,7 @@ HookInitCommands() {
     if (key.KeyCode == 0x20)
       seen_space = 1;
   }
+#ifndef VINIFERA
   if (!seen_allies && !seen_backspace) {
     WWDebug_Printf("****************************didn't see ChatToAllies adding as hotkey[%d]\n",Hotkeys_ActiveCount);
     if (Hotkeys_VectorMax <= Hotkeys_ActiveCount+1)
@@ -83,7 +88,7 @@ HookInitCommands() {
     Hotkeys_Vector[Hotkeys_ActiveCount].KeyCode = 0x0D;
     ++Hotkeys_ActiveCount;
   }
-
+#endif
   if (!seen_help && !seen_space) {
     if (Hotkeys_VectorMax <= Hotkeys_ActiveCount+1)
         CCINIClass_Vector_Resize(&Hotkeys, 10);
@@ -127,6 +132,7 @@ CommandClass MapSnapshotCommand = { &vtMapSnapshotCommand,0,17,17 };
 
 
 /* Start ChatAllies */
+#ifndef VINIFERA
 void    __thiscall ChatToAllies_nothing(void *a)  { }
 char *  __thiscall ChatToAllies_Description(void *a) { return "Send a message to all of your allies"; }
 char *  __thiscall ChatToAllies_INIname(void *a)     { return "ChatToAllies"; }
@@ -199,6 +205,7 @@ vtCommandClass vtChatToPlayerCommand = {
   ChatToPlayer_nothing
 };
 CommandClass ChatToPlayerCommand = { &vtChatToPlayerCommand,0,17,17 };
+#endif
 /* End ChatAll */
 
 /* Start MPDebugPrint */
