@@ -151,7 +151,11 @@ OBJS += src/Hook_Main_Loop.o
 OBJS += src/IonBlastClass_crash.o
 OBJS += src/add_animation_to_factories_without_weaponsfactory.o
 OBJS += src/add_team_better.o
+
+# Only include in: MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM),)
 OBJS += src/ai_target_emp_like_multimissile.o
+endif
 
 # Only include in: MOD_TI MOD_FD MOD_RUBICON
 ifneq ($(call ifdef_any_of,MOD_TI MOD_FD MOD_RUBICON),)
