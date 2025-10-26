@@ -32,13 +32,21 @@ void LoadSunIni()
         SetMultiProcAffinity();
 
     VideoBackBuffer = SunIni_GetBool("Video", "VideoBackBuffer", true);
+    UsePNG = SunIni_GetBool("Video", "UsePNG", UsePNG);
+    ScrollDelay = SunIni_GetInt("Options", "ScrollDelay", 0);
+	
+#ifndef VINIFERA
     NoWindowFrame = SunIni_GetBool("Video", "NoWindowFrame", false);
     UseGraphicsPatch = SunIni_GetBool("Video", "UseGraphicsPatch", true);
     VideoWindowed = SunIni_GetBool("Video", "Video.Windowed", false);
-    ScrollDelay = SunIni_GetInt("Options", "ScrollDelay", 0);
     ForceConversionType4 = SunIni_GetBool("Video", "ForceConversionType4", true);
-    UsePNG = SunIni_GetBool("Video", "UsePNG", UsePNG);
+#else // VINIFERA
+	NoWindowFrame = false;
+	UseGraphicsPatch = false;
+	ForceConversionType4 = false;
+#endif // VINIFERA
 
+#ifndef VINIFERA
     if (SunIni_GetBool("Video", "DisableHighDpiScaling", false))
         DisableHighDpiScaling();
     if (SunIni_GetBool("Video", "DisableMaxWindowedMode", true))
@@ -78,15 +86,18 @@ void LoadSunIni()
     {
         *ThreadSafe = true;
     }
+#endif // VINIFERA
 
     MouseIntervalResolution = SunIni_GetInt("Video", "MouseResolution", 1);
     MouseRenderInterval = SunIni_GetInt("Video", "MouseRenderInterval", 8);
 
 #ifndef SINGLEPLAYER
 
+#ifndef VINIFERA
     bool *handleClose = (bool *)GetProcAddress(hDDraw, "GameHandlesClose");
     if (handleClose)
         *handleClose = true;
+#endif // VINIFERA
 
     if (OverrideColors = SunIni_GetBool("Options","OverrideColors",false))
       ApplyUserColorOverrides();
@@ -110,5 +121,5 @@ void LoadSunIni()
     DoubleTapInterval = SunIni_GetInt("Options", "DoubleTapInterval", -1);
     AltToRally = SunIni_GetBool("Options", "AltToRally", false);
     AddTeamStyle2 = SunIni_GetBool("Options", "AddTeamStyle2", false);
-#endif
+#endif // SINGLEPLAYER
 }
