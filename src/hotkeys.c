@@ -17,8 +17,8 @@ HookInitCommands() {
 								 &ChatToAlliesCommand,
                                  &ChatToAllCommand,
                                  &ChatToPlayerCommand,
-#endif
                                  &TextBackgroundColorCommand,
+#endif // VINIFERA
 #ifdef SHAREDCONTROL
                                  &GrantControlCommand,
 #endif
@@ -26,7 +26,7 @@ HookInitCommands() {
 #ifndef VINIFERA
                                  &PlaceBuildingCommand,
                                  &RepeatBuildingCommand,
-#endif
+#endif // VINIFERA
                                  &ShowHelpCommand,
                                  &SelectOneLessCommand,
 #ifdef WWDEBUG
@@ -56,7 +56,7 @@ HookInitCommands() {
       seen_all = 1;
       WWDebug_Printf("****************************Seen ChatToAll\n");
     }
-#endif
+#endif // VINIFERA
     if (key.Command == &ShowHelpCommand)
     {
       seen_help = true;
@@ -88,7 +88,7 @@ HookInitCommands() {
     Hotkeys_Vector[Hotkeys_ActiveCount].KeyCode = 0x0D;
     ++Hotkeys_ActiveCount;
   }
-#endif
+#endif // VINIFERA
   if (!seen_help && !seen_space) {
     if (Hotkeys_VectorMax <= Hotkeys_ActiveCount+1)
         CCINIClass_Vector_Resize(&Hotkeys, 10);
@@ -205,7 +205,7 @@ vtCommandClass vtChatToPlayerCommand = {
   ChatToPlayer_nothing
 };
 CommandClass ChatToPlayerCommand = { &vtChatToPlayerCommand,0,17,17 };
-#endif
+#endif // VINIFERA
 /* End ChatAll */
 
 /* Start MPDebugPrint */
@@ -229,6 +229,7 @@ CommandClass MultiplayerDebugCommand = { &vtMultiplayerDebugCommand,0,17,17 };
 /* End MultiplayerDebug */
 
 /* TextBackgroundColor */
+#ifndef VINIFERA
 void    __thiscall TextBackgroundColor_nothing(void *a)  { }
 char *  __thiscall TextBackgroundColor_Description(void *a) { return "Toggle chat text background between clear and black"; }
 char *  __thiscall TextBackgroundColor_INIname(void *a)     { return "TextBackgroundColor"; }
@@ -253,6 +254,7 @@ vtCommandClass vtTextBackgroundColorCommand = {
   TextBackgroundColor_nothing
 };
 CommandClass TextBackgroundColorCommand = { &vtTextBackgroundColorCommand,0,17,17 };
+#endif // VINIFERA
 /* End */
 
 
