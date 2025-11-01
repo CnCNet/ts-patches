@@ -9,7 +9,7 @@
 ; Author: Rampastring
 
 sstring str_ProduceCashAmount, "ProduceCashAmount"
-gint ProduceCashFrameDelay, 180
+cextern ProduceCashFrameDelay
 
 ; BuildingTypeClass::Read_INI_Replace_ICBMLauncher_With_ProduceCashAmount
 hack 0x0044148A

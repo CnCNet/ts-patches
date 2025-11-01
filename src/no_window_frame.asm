@@ -2,7 +2,7 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-gbool NoWindowFrame, 1
+cextern NoWindowFrame
 
 hack 0x00686210
 SetNoWindowFrame:

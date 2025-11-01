@@ -2,7 +2,7 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-gbool ScrapMetal, false
+cextern ScrapMetal
 
 sstring str_ScrapExplosion, "ScrapExplosion"
 

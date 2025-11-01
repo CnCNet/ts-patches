@@ -3,7 +3,7 @@
 
 ; limit the height of the sidebar to max 1052 (equals 1920*1200 -> 19 icons). The game goes out of bounds with more icons and starts to corrupt memory
 cextern InfoPanel
-gint BottomInfoPanel, 0         ; Gets set in sidebar.c
+cextern BottomInfoPanel         ; Gets set in sidebar.c
 
 hack 0x005F2766
     cmp eax, 1052

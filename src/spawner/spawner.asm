@@ -4,19 +4,19 @@
 %include "ini.inc"
 %include "patch.inc"
 
-cglobal SpawnerActive
-cglobal INIClass_SPAWN
-cglobal SpawnLocationsArray
-cglobal SpawnLocationsHouses
-cglobal DifficultyName
+cextern SpawnerActive
+cextern INIClass_SPAWN
+cextern SpawnLocationsArray
+cextern SpawnLocationsHouses
+cextern DifficultyName
 
-gbool SavesDisabled, true
-gbool QuickMatch, false
-gbool IsHost, true
-gbool UseMPAIBaseNodes, false
-gbool PlayMoviesInMultiplayer, false
-gbool DifficultyBasedAINames, false
-gint CampaignID, 0
+cextern SavesDisabled
+cextern QuickMatch
+cextern IsHost
+cextern UseMPAIBaseNodes
+cextern PlayMoviesInMultiplayer
+cextern DifficultyBasedAINames
+cextern CampaignID
 
 cextern Load_Spectators_Spawner
 cextern PortHack
@@ -83,8 +83,6 @@ cextern SharedControl
 @CLEAR 0x0046353C, 0x90, 0x00463542
 
 section .bss
-    SpawnerActive              RESD 1
-    INIClass_SPAWN             RESB 256 ; FIXME: make this a local variable
     inet_addr                  RESD 1
 
     IsDoingAlliancesSpawner    RESB 1
@@ -94,8 +92,6 @@ section .bss
     HouseColorsArray           RESD 8
     HouseCountriesArray        RESD 8
     HouseHandicapsArray        RESD 8
-    SpawnLocationsArray        RESD 8
-    SpawnLocationsHouses       RESD 8
 
     SaveGameNameBuf            RESB 60
 
@@ -103,11 +99,9 @@ section .bss
     Anticheat1                 RESD 1
     AntiCheatArray             RESB (StripClass_Size * 2)
 
-    SpectatorStuffInit         RESB 1
     OldUnitClassArrayCount     RESD 1
 
     CustomLoadScreen           RESB 256
-    DifficultyName             RESB 30
 
     SaveGameLoadPathWide       RESB 512
     SaveGameLoadPath           RESB 256
@@ -115,7 +109,7 @@ section .bss
     
     GlobalFlags                RESB 50
 
-gstring MapHash, "", 256
+cextern MapHash
 
 section .rdata
     str_NoWindowFrame db "NoWindowFrame",0

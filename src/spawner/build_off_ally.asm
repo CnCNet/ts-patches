@@ -2,12 +2,9 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-cglobal BuildOffAlly
+cextern BuildOffAlly
 
 @LJMP 0x004762EA, _Build_Off_Ally
-
-section .bss
-    BuildOffAlly resb 1
 
 section .text
 

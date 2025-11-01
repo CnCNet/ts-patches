@@ -2,7 +2,7 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-gbool AutoDeployMCV, false
+cextern AutoDeployMCV
 
 ; Makes starting units (the MCV on some scenarios) automatically deploy on game start
 

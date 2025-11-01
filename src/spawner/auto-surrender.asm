@@ -2,7 +2,7 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-cglobal AutoSurrender
+cextern AutoSurrender
 
 cextern SpawnerActive
 
@@ -16,7 +16,6 @@ cextern SpawnerActive
 
 section .bss
     MeSurrendered                RESB 1
-    AutoSurrender                RESB 1
 
 section .text
 

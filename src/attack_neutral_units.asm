@@ -3,7 +3,7 @@
 %include "TiberianSun.inc"
 ;; @CLEAR 0x0062D4B2, 0x90, 0x0062D4BA
 
-gbool AttackNeutralUnits, 0
+cextern AttackNeutralUnits
 
 hack 0x0062D4B2, 0x0062D4BA
         test    al, al

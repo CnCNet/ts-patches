@@ -4,7 +4,7 @@
 %include "TiberianSun.inc"
 %include "ini.inc"
 
-gbool RandomMap, 0
+cextern RandomMap
 
 sstring str_Basic, "Basic"
 sstring str_RandomMap, "RandomMap"

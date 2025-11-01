@@ -9,7 +9,7 @@
 @CLEAR 0x005B3751, 0x90, 0x005B3753
 @CLEAR 0x005B3313, 0x90, 0x005B3319
 
-gbyte NewFrameSendRate, 2
+cextern NewFrameSendRate
 
 ; Clear out EventClass::Execute->TIMING
 ; Don't subtract 10 from MaxAhead

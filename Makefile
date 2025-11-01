@@ -131,6 +131,9 @@ endif
 # Global symbols.
 OBJS = sym.o
 
+# Global variables
+OBJS += src\globals.o
+
 # Source files included in ALL builds.
 OBJS += src/sun.ini.o
 OBJS += src/disable_dpi_scaling.o

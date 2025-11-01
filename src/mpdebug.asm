@@ -5,7 +5,7 @@
 ;;; Clean up some MPDEBUG weirdness and
 ;;; allow MPDEBUG mode to work with any resolution
 @SJMP 0x00601316, 0x00601335
-gbool already_filled_rect, false
+cextern already_filled_rect
 
 section .text
 _set_bg_color:

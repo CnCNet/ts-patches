@@ -3,8 +3,8 @@
 %include "macros/datatypes.inc"
 
 cextern SpawnerActive
-gbool RunAutoSS, 0
-gint DoingAutoSS, 0
+cextern RunAutoSS
+cextern DoingAutoSS
 
 sstring str_AutoSSDir, "AutoSS"
 sstring str_AutoSSFileNameFormat, "AutoSS/AutoSS-%d-%d_%d.PCX"

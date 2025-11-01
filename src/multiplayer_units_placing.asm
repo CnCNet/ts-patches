@@ -3,9 +3,9 @@
 %include "TiberianSun.inc"
 %include "string_macros.inc"
 
-cglobal UsedSpawnsArray
+cextern UsedSpawnsArray
 
-gbool IsSpawnXAircraft, false
+cextern IsSpawnXAircraft
 
 @LJMP 0x00658658, _UnitClass__Read_INI_Get_HouseType_From_Name_SpawnX
 @LJMP 0x00434843, _BuildingClass__Read_INI_Get_HouseType_From_Name_SpawnX
@@ -35,7 +35,6 @@ section .rdata
 
 section .bss
     OldUnitClassArrayCount:    RESD 1
-    UsedSpawnsArray:           RESD 8
 
 section .text
 
