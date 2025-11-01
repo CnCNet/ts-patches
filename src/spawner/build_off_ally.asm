@@ -2,7 +2,7 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
-#ifdef SPAWNER
+%ifdef SPAWNER
 
 cglobal BuildOffAlly
 

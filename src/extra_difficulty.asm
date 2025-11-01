@@ -7,21 +7,35 @@
 
 ; sizeof(DifficultyClass) == 80
 section .bss
+    UltimatelyEasyDifficultyData RESB 80
     ExtremelyEasyDifficultyData RESB 80
+    BrutallyEasyDifficultyData RESB 80
     VeryEasyDifficultyData RESB 80
     AINormalDifficultyData RESB 80
 
+sstring str_UltimatelyEasy, "UltimatelyEasy"
 sstring str_ExtremelyEasy, "ExtremelyEasy"
+sstring str_BrutallyEasy, "BrutallyEasy"
 sstring str_VeryEasy, "VeryEasy"
 sstring str_AINormal, "AINormal"
 sstring str_Easy, "Easy"
 
 
-; Hack RulesClass::Difficulty to read in the new difficulty setting
+; Hack RulesClass::Difficulty to read in the new difficulty settings
 hack 0x005CE198
+    push str_UltimatelyEasy
+    mov  ecx, edi   ; CCINIClass pointer
+    mov  edx, UltimatelyEasyDifficultyData
+    call 0x005CE1E0 ; Difficulty_Get(CCINIClass & ini, DifficultyClass & diff, char const * section)
+
     push str_ExtremelyEasy
     mov  ecx, edi   ; CCINIClass pointer
     mov  edx, ExtremelyEasyDifficultyData
+    call 0x005CE1E0 ; Difficulty_Get(CCINIClass & ini, DifficultyClass & diff, char const * section)
+
+    push str_BrutallyEasy
+    mov  ecx, edi   ; CCINIClass pointer
+    mov  edx, BrutallyEasyDifficultyData
     call 0x005CE1E0 ; Difficulty_Get(CCINIClass & ini, DifficultyClass & diff, char const * section)
 
     push str_VeryEasy
@@ -186,14 +200,29 @@ hack 0x004BB479
 
     ; Check if the requested difficulty type matches any the difficulty
     ; values that we should process
-    ; (4 = Extremely Easy, 3 = Very Easy, 1 = AINormal only if the house is an AI house)
-    cmp  edi, 4
+    ; (5 = Ultimately Easy, 4 = Extremely Easy, 3 = Very Easy, 1 = AINormal only if the house is an AI house)
+    cmp  edi, 6
+    je   .Ultimately_Easy_Diff
+    cmp  edi, 5
     je   .Extremely_Easy_Diff
+    cmp  edi, 4
+    je   .Brutally_Easy_Diff
     cmp  edi, 3
     je   .Very_Easy_Diff
     cmp  edi, 1
     je   .AINormal_Diff
     jmp  .Normal_Code     ; if not, jump to original code
+
+.Ultimately_Easy_Diff:
+    ; Set the 'difficulty index' of the house to 0 (Hard AI)
+    mov  dword [ecx+58h], 0
+
+    ; This difficulty level can only show up in MP
+    Set_Difficulty_Modifiers_Multiplayer UltimatelyEasyDifficultyData
+
+    mov  eax, [0x0074C488] ; RulesClass pointer
+    mov  edi, 0            ; Hard difficulty
+    jmp  0x004BB654        ; let the original game code handle the rest
 
 .Extremely_Easy_Diff:
     ; Set the 'difficulty index' of the house to 0 (Hard AI)
@@ -201,6 +230,17 @@ hack 0x004BB479
 
     ; This difficulty level can only show up in MP
     Set_Difficulty_Modifiers_Multiplayer ExtremelyEasyDifficultyData
+
+    mov  eax, [0x0074C488] ; RulesClass pointer
+    mov  edi, 0            ; Hard difficulty
+    jmp  0x004BB654        ; let the original game code handle the rest
+
+.Brutally_Easy_Diff:
+    ; Set the 'difficulty index' of the house to 0 (Hard AI)
+    mov  dword [ecx+58h], 0
+
+    ; This difficulty level can only show up in MP
+    Set_Difficulty_Modifiers_Multiplayer BrutallyEasyDifficultyData
 
     mov  eax, [0x0074C488] ; RulesClass pointer
     mov  edi, 0            ; Hard difficulty

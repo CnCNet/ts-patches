@@ -157,7 +157,11 @@ OBJS += src/Hook_Main_Loop.o
 OBJS += src/IonBlastClass_crash.o
 OBJS += src/add_animation_to_factories_without_weaponsfactory.o
 OBJS += src/add_team_better.o
+
+# Only include in: MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM),)
 OBJS += src/ai_target_emp_like_multimissile.o
+endif
 
 # Only include in: MOD_TI MOD_FD MOD_RUBICON
 ifneq ($(call ifdef_any_of,MOD_TI MOD_FD MOD_RUBICON),)
@@ -179,8 +183,6 @@ OBJS += src/buildlimit_fix.o
 OBJS += src/c4_repairable_fix.o
 OBJS += src/carryall_click_under_glitch.o
 OBJS += src/center_team.o
-OBJS += src/chat_ignore.o
-OBJS += src/chatallies.o
 OBJS += src/coach_mode.o
 OBJS += src/config.o
 OBJS += src/crate_patches.o
@@ -305,6 +307,7 @@ OBJS += src/allow_building_placement_over_overlay.o
 OBJS += src/change_projectile_degeneration_speed.o
 OBJS += src/change_score_screen_music.o
 OBJS += src/dump_globals.o
+OBJS += src/fix_ear_blast.o
 OBJS += src/ingame_ui_text_color.o
 OBJS += src/remove_ion_storm_effects.o
 OBJS += src/score_screen_player_always_on_left.o
@@ -369,6 +372,8 @@ OBJS += src/sidebar_cameo_sort.o
 OBJS += src/sidebar_cameo_sort_helper.o
 OBJS += src/text_triggers.o
 OBJS += src/whiteboy_cameo_bugfix.o
+OBJS += src/chat_ignore.o
+OBJS += src/chatallies.o
 
 # The logger is needed for certain client features
 ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
