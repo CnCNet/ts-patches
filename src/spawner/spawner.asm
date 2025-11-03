@@ -188,7 +188,21 @@ section .rdata
     str_CoachMode       db "CoachMode",0
     str_AutoSurrender   db "AutoSurrender",0
     str_GameNameTitle   db "Tiberian Sun",0
+
+	%ifdef MOD_DTA
+    str_PleaseRunClient db "Please run DTA.exe instead.",0
+    %elifdef MOD_TI
+    str_PleaseRunClient db "Please run TwistedInsurrection.exe instead.",0
+    %elifdef MOD_TO
+    str_PleaseRunClient db "Please run TiberianOdyssey.exe instead.",0
+    %elifdef MOD_RUBICON
+    str_PleaseRunClient db "Please run Rubicon.exe instead.",0
+    %elifdef TSCLIENT
+    str_PleaseRunClient db "Please run TiberianSun.exe instead.",0
+    %else
     str_PleaseRunClient db "Please run the game client instead.",0
+    %endif
+
     str_CampaignID      db "CampaignID",0
     str_UseMPAIBaseNodes db "UseMPAIBaseNodes", 0
     str_PlayMoviesInMultiplayer db "PlayMoviesInMultiplayer",0
