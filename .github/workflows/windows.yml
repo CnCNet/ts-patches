@@ -28,8 +28,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        type: [ TSCLIENT, MOD_DTA, MOD_TI, MOD_TO, MOD_RUBICON, MOD_FD ]
-        #type: [ SINGLEPLAYER, TIBSUN, TSCLIENT, MOD_DTA, MOD_TI, MOD_TO, MOD_RUBICON, MOD_FD, MOD_TM ]
+        type: [ TSCLIENT, MOD_DTA, MOD_TI, MOD_TO, MOD_RUBICON, MOD_FD, MOD_SD ]
+        #type: [ SINGLEPLAYER, TIBSUN, TSCLIENT, MOD_DTA, MOD_TI, MOD_TO, MOD_RUBICON, MOD_FD, MOD_TM, MOD_SD ]
       
     steps:
     - name: Clone Repository

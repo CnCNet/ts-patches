@@ -105,6 +105,12 @@ NFLAGS += -DMOD_TM
 CFLAGS += -DMOD_TM
 endif
 
+ifdef MOD_SD
+$(info MOD_SD defined)
+NFLAGS += -DMOD_SD
+CFLAGS += -DMOD_SD
+endif
+
 ifdef VINIFERA
 $(info VINIFERA defined)
 NFLAGS += -DVINIFERA
@@ -263,8 +269,8 @@ OBJS += src/saved_games_in_subdir.o
 OBJS += src/savegame.o
 OBJS += src/scrap_metal_explosion.o
 
-# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
+# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM MOD_SD TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM MOD_SD TSCLIENT),)
 OBJS += src/shared_control.o
 endif
 
@@ -286,8 +292,8 @@ OBJS += src/waypoint_enhancements.o
 OBJS += src/wcsncpy.o
 OBJS += src/basic_theme_fix.o
 
-# Only include in: MOD_DTA MOD_FD
-ifneq ($(call ifdef_any_of,MOD_DTA MOD_FD),)
+# Only include in: MOD_DTA MOD_FD MOD_SD
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_FD MOD_SD),)
 OBJS += src/vehicle_transports.o
 endif
 
@@ -348,8 +354,8 @@ OBJS += src/max_pip_counts.o
 OBJS += src/mechanics.o
 OBJS += src/ionstorm_jumpjet_crash.o
 
-# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
+# Only include in: MOD_TO MOD_RUBICON MOD_FD MOD_TM MOD_SD TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_RUBICON MOD_FD MOD_TM MOD_SD TSCLIENT),)
 OBJS += src/move_team_group_number.o
 endif
 
@@ -373,7 +379,7 @@ OBJS += src/chat_ignore.o
 OBJS += src/chatallies.o
 
 # The logger is needed for certain client features
-ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
+ifneq ($(call ifdef_any_of,MOD_DTA MOD_TI MOD_TO MOD_RUBICON MOD_FD MOD_TM MOD_SD TSCLIENT),)
 OBJS += src/logger.o
 endif
 
@@ -382,8 +388,8 @@ ifneq ($(call ifdef_any_of,MOD_DTA MOD_TO),)
 OBJS += src/remove_iscoredefender_emp_immunity.o
 endif
 
-# Only include in: MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT
-ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM TSCLIENT),)
+# Only include in: MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM MOD_SD TSCLIENT
+ifneq ($(call ifdef_any_of,MOD_TO MOD_TI MOD_RUBICON MOD_FD MOD_TM MOD_SD TSCLIENT),)
 OBJS += src/tiberium_stuff.o
 endif
 
@@ -544,6 +550,9 @@ endif
 ifdef MOD_TM
     OBJS += src/tm_hacks.o
 endif
+ifdef MOD_SD
+    OBJS += src/sd_hacks.o
+endif
 
 
 # =========================================================
@@ -575,6 +584,9 @@ ifdef MOD_FD
 endif
 ifdef MOD_TM
     OBJS += res/tm/res.o
+endif
+ifdef MOD_SD
+    OBJS += res/sd/res.o
 endif
 
 
@@ -646,4 +658,9 @@ endif
 ifdef MOD_TM
 res/to/res.o: res/tm/res.rc
 	$(WINDRES) $(WINDRES_FLAGS) -Ires/tm/ $< $@
+endif
+
+ifdef MOD_SD
+res/to/res.o: res/sd/res.rc
+	$(WINDRES) $(WINDRES_FLAGS) -Ires/sd/ $< $@
 endif
