@@ -28,6 +28,10 @@ bool RefundFreeUnit = false;
 int32_t MultiFactoryCost = 2000;
 bool RefundFreeUnit = false;
 
+#elif defined(MOD_TSA)
+int32_t MultiFactoryCost = 2000;
+bool RefundFreeUnit = false;
+
 #elif defined(TSCLIENT)
 int32_t MultiFactoryCost = 2000;
 bool RefundFreeUnit = false;
