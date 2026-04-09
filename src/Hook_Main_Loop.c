@@ -125,6 +125,7 @@ void __fastcall MainLoop_PreRemoveAllInactive() {
             // In other words, by doing it here we fix a Westwood bug/oversight
 
             if (IsSavingThisFrame) {
+                NextAutoSave = Frame + AutoSaveGame;
                 Save_Game("SAVEGAME.NET", "Multiplayer Game", false);
                 IsSavingThisFrame = false;
             }
