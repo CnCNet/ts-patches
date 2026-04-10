@@ -500,10 +500,12 @@ endif
 # =========================================================
 # Bink movie support
 # =========================================================
-OBJS += src/binkmovie/bink_load_dll.o
-OBJS += src/binkmovie/bink_patches.o
-OBJS += src/binkmovie/bink_asm_patches.o
-OBJS += src/binkmovie/binkmovie.o
+ifndef VINIFERA
+    OBJS += src/binkmovie/bink_load_dll.o
+    OBJS += src/binkmovie/bink_patches.o
+    OBJS += src/binkmovie/bink_asm_patches.o
+    OBJS += src/binkmovie/binkmovie.o
+endif
 
 
 # =========================================================
