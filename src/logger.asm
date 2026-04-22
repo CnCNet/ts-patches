@@ -47,8 +47,12 @@ sstring str_DebugLog, "RUBICON.LOG"
 sstring str_DebugLog, "FD.LOG"
 %endif
 
-%ifdef MOD_TM
-sstring str_DebugLog, "TM.LOG"
+%ifdef MOD_SD
+sstring str_DebugLog, "SD.LOG"
+%endif
+
+%ifdef MOD_TSA
+sstring str_DebugLog, "TSA.LOG"
 %endif
 
 sstring str_a, "a"

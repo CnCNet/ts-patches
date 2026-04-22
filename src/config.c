@@ -24,7 +24,11 @@ bool RefundFreeUnit = false;
 int32_t MultiFactoryCost = 2000;
 bool RefundFreeUnit = false;
 
-#elif defined(MOD_TM)
+#elif defined(MOD_SD)
+int32_t MultiFactoryCost = 2000;
+bool RefundFreeUnit = false;
+
+#elif defined(MOD_TSA)
 int32_t MultiFactoryCost = 2000;
 bool RefundFreeUnit = false;
 

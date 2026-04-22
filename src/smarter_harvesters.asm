@@ -16,10 +16,10 @@
 ; Author: Rampastring
 
 ; Dock building object pointers and distances
-gint ClosestFreeRefinery, 0
-gint ClosestFreeRefineryDistance, 0
-gint ClosestPossiblyOccupiedRefinery, 0
-gint ClosestPossiblyOccupiedRefineryDistance, 0
+cextern ClosestFreeRefinery
+cextern ClosestFreeRefineryDistance
+cextern ClosestPossiblyOccupiedRefinery
+cextern ClosestPossiblyOccupiedRefineryDistance
 
 
 ; UnitClass::Mission_Harvest, case FINDHOME
@@ -176,7 +176,7 @@ Find_Closest_Refinery:
 ; *****************************************************************************
 ; Queue jumping code starts here
 
-gint OldHarvDistance, 0
+cextern OldHarvDistance
 
 ; Hack BuildingClass::Receive_Message
 ; Skip check for returning RADIO_NEGATIVE if 

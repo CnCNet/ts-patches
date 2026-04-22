@@ -5,9 +5,9 @@
 ;;; Double tap the team selection key to center team on screen.
 ;;; Current way is to press alt+1 or alt+2 etc, to center team
 
-gint DoubleTapFrame, 0x7fffffff
-gint LastTeamNumber, 0
-gint DoubleTapInterval, 30
+cextern DoubleTapFrame
+cextern LastTeamNumber
+cextern DoubleTapInterval
 
 hack 0x004E8E80, 0x004E8E86
 _SelectTeamCommandClass_Execute_after:

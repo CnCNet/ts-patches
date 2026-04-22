@@ -10,7 +10,7 @@
 
 sstring str_UnitSelfHealRepairStep, "UnitSelfHealRepairStep"
 
-gint UnitSelfHealRepairStep, 1
+cextern UnitSelfHealRepairStep
 
 
 ; RulesClass::Read_General_Read_UnitSelfHealRepairStep

@@ -3,8 +3,8 @@
 %include "TiberianSun.inc"
 
 
-gint LastRenderTime, 0
-gint WFPRenderInterval, 16
+cextern LastRenderTime
+cextern WFPRenderInterval
 
 ;;; Hack GscreenClass::Render, inspect the return pointer. If it's within Wait_for_players, then throttle
 ;;; Wait_For_Players function 5B2320 - 5B3235

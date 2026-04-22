@@ -4,15 +4,15 @@
 
 %ifdef SPAWNER
 
-gstring str_ToAllies, "(Allies): "
-gstring str_ToAll, "(All): "
-gstring str_ToOne, "(one): "
-gstring str_ToSpectators, "(Specs): "
+cextern str_ToAllies
+cextern str_ToAll
+cextern str_ToOne
+cextern str_ToSpectators
 
-gbool ChatToAlliesFlag, 0
-gbool ChatToAllFlag, 0
-gbool ChatToOneFlag, 0
-gbool ChatToSpectatorsFlag, 0
+cextern ChatToAlliesFlag
+cextern ChatToAllFlag
+cextern ChatToOneFlag
+cextern ChatToSpectatorsFlag
 
 cextern IsSpectatorArray
 

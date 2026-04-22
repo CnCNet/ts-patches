@@ -12,8 +12,8 @@
 ; Author: Rampastring
 
 
-gbool LeaveABuilding, false
-gint  ObjectCount, 0
+cextern LeaveABuilding
+cextern ObjectCount
 
 ; don't push esi here, we do it in our hack code
 @SET 0x004C3464, nop

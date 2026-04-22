@@ -22,6 +22,7 @@ int32_t MouseIntervalResolution = 1;
 bool UsePNG = false;
 bool IsNoCD = false;
 int TextBackgroundColor = 0;
+bool DisableScoreScreenAudio = true;
 
 void LoadSunIni()
 {
@@ -34,7 +35,8 @@ void LoadSunIni()
     VideoBackBuffer = SunIni_GetBool("Video", "VideoBackBuffer", true);
     UsePNG = SunIni_GetBool("Video", "UsePNG", UsePNG);
     ScrollDelay = SunIni_GetInt("Options", "ScrollDelay", 0);
-	
+    DisableScoreScreenAudio = SunIni_GetBool("Audio", "DisableScoreScreenAudio", true);
+
 #ifndef VINIFERA
     NoWindowFrame = SunIni_GetBool("Video", "NoWindowFrame", false);
     UseGraphicsPatch = SunIni_GetBool("Video", "UseGraphicsPatch", true);

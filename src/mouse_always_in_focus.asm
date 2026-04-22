@@ -2,8 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
-gbool MouseAlwaysInFocus, 0
-gbool MouseInFocusOnce, 0
+cextern MouseAlwaysInFocus
+cextern MouseInFocusOnce
 
 hack 0x00685E7F
 

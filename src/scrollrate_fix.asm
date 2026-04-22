@@ -2,7 +2,7 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
-gint ScrollDelay, 0
+cextern ScrollDelay
 
 sint LastScrollTick, 0
 

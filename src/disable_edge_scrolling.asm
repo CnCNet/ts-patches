@@ -2,7 +2,7 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
-gbool DisableEdgeScrolling, false      ; Read from sun.ini in sun.ini.c
+cextern DisableEdgeScrolling      ; Read from sun.ini in sun.ini.c
 ;;; Disable Edge scrolling
 hack 0x005E9058, 0x005E905E
         mov     al, [DisableEdgeScrolling]

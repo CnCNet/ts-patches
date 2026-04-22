@@ -4,8 +4,8 @@
 
 %ifdef SPAWNER
 
-cglobal PlayerSide
-cglobal SkipBriefingOnMissionStart
+cextern PlayerSide
+cextern SkipBriefingOnMissionStart
 cextern DifficultyName
 
 sstring str_Hard, "Difficulty: Hard"
@@ -14,8 +14,6 @@ sstring str_Easy, "Difficulty: Easy"
 sstring str_Difficulty, "Difficulty: "
 
 section .bss
-    PlayerSide                 RESD 1
-    SkipBriefingOnMissionStart RESB 1
     DifficultyDisplayBuf       RESB 256
 
     

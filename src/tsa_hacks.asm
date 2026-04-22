@@ -2,10 +2,11 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+
 ; "Overlay tiberium fix thing, 4th etc"
 @SET 0x00644DF9, {mov dword [esi+0ACh], 0Ch}
 
-;; Rules.ini key, WalkFrames= default value
+; Art.ini key, WalkFrames= default value
 @SET 0x0065B9E6, {mov byte [esi+4D0h], 1} ;byte ptr
 @SET 0x0065BF3D, {mov [esi+21h], eax}
 
@@ -14,13 +15,41 @@
 @SET 0x0062B2E4, {mov dword [esp+1Ch], 0x06}
 @SET 0x0062C0C1, {mov edi, 0x06}
 
+sstring str_BriefingPCX, "BRIEFING.PCX"
+
+; String references
+@SET 0x005C04AF, {mov ecx, str_BriefingPCX}
+
+;
+; The following Sidebar Hack-related patches are included in Vinifera compatible builds until the spawner is reimplemented.
+;
+
+; Set global variable byte containing side ID to load files for
+@SET 0x004E2CFA, {mov byte [0x7E2500], al}
+@SET 0x004E2CFF, nop
+@SET 0x004E2D00, {add esp, 4}
+@SJMP 0x004E2D03, 0x004E2D13 ; jmp short
+@SET 0x004E2D05, nop
+
+; Load sidebar MIX files for new sides properly
+@SET 0x005DD798, {mov cl, byte [0x007E2500]}
+@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
+
+; Load speech MIX files for new sides properly
+; Defaults SpeechSide to our hijacked player side value
+hack 0x005DD6FB
+    mov  eax, [Scen]
+    xor  ecx, ecx
+    mov  cl, byte [0x007E2500] ; PlayerSide (was Session.IsGDI)
+    mov  [eax+0x1E44], ecx ; set SpeechSide
+    jmp  0x005DD784        ; go back to game code for initializing side
 
 ;
 ; The following patches will not be included in Vinifera compatible builds.
 ;
 %ifndef VINIFERA
 
-sstring str_TSCLong, "Tiberium Metamorphosis"
+sstring str_TSCLong, "Tiberian Sun: Aftermath"
 sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianSun.exe and click Save in the Options menu."
 
 ; String references
@@ -48,20 +77,9 @@ sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianS
 @SET 0x005899F6, nop
 @SET 0x005899F7, nop
 
-; Set global variable byte containing side ID to load files for
-@SET 0x004E2CFA, {mov byte [0x7E2500], al}
-@SET 0x004E2CFF, nop
-@SET 0x004E2D00, {add esp, 4}
-@SJMP 0x004E2D03, 0x004E2D13 ; jmp short
-@SET 0x004E2D05, nop
-
 ; Load sidebar MIX files for new sides properly (for saved games)
 @SET 0x005D6C4F, {mov cl, [eax+1D91h]}
 @CLEAR 0x005D6C55, 0x90, 0x005D6C58
-
-; Load sidebar MIX files for new sides properly
-@SET 0x005DD798, {mov cl, byte [0x007E2500]}
-@CLEAR 0x005DD79E, 0x90, 0x005DD7A2
 
 ; Erase NAWALL and GAWALL hardcoding
 @SET 0x00710DA4, {db 0,0,0,0,0,0}
@@ -77,14 +95,5 @@ sstring str_LanguageDLLNotFound, "Language.dll not found, please start TiberianS
 @SET 0x005D6DCE, {xor ecx, ecx}
 @SET 0x005D6DD0, {mov cl, [eax+1D91h]}
 @CLEAR 0x005D6DD6, 0x90, 0x005D6DDB
-
-; Load speech MIX files for new sides properly
-; Defaults SpeechSide to our hijacked player side value
-hack 0x005DD6FB
-    mov  eax, [Scen]
-    xor  ecx, ecx
-    mov  cl, byte [0x007E2500] ; PlayerSide (was Session.IsGDI)
-    mov  [eax+0x1E44], ecx ; set SpeechSide
-    jmp  0x005DD784        ; go back to game code for initializing side
 
 %endif

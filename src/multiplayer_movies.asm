@@ -12,7 +12,7 @@
 cextern PlayMoviesInMultiplayer
 
 sint NextNetworkRefreshTime, 0
-gbool NetworkRefreshStarted, false
+cextern NetworkRefreshStarted
 
 
 ; Display lose movies in multiplayer.

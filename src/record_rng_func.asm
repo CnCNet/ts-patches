@@ -5,7 +5,7 @@
 cextern record_rng_ii           ; Defined in log_more_oos.c
 cextern record_rng_void
 
-gbool NoRNG, 0
+cextern NoRNG
 
 hack 0x005BE080, 0x005BE086
         push ecx

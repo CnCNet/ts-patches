@@ -54,11 +54,8 @@
 
 section .data
 
-cglobal AlexB_HarvesterUnit
-AlexB_HarvesterUnit dd 0
-
-cglobal AlexB_BuildRefinery
-AlexB_BuildRefinery dd 0
+cextern AlexB_HarvesterUnit
+cextern AlexB_BuildRefinery
 
 section .text
 

@@ -5,16 +5,12 @@
 
 %ifdef SPAWNER
 
-cglobal IsSpectatorArray
-cglobal SpectatorStuffInit
+cextern IsSpectatorArray
+cextern SpectatorStuffInit
 cglobal Load_Spectators_Spawner
 
 cextern INIClass_SPAWN
 cextern SpawnerActive
-
-section .bss
-    IsSpectatorArray           RESD 8
-    SpectatorStuffInit         RESB 1
 
 section .rdata
     str_Multi1          db "Multi1",0
