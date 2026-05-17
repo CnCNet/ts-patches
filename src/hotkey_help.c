@@ -84,8 +84,8 @@ void
 InfoPanelHotkeysInit()
 {
     static vtCommandClass *search_keys[] = {
-        &vtToggleInfoPanelCommand,
 #ifndef VINIFERA
+        &vtToggleInfoPanelCommand,
         &vtChatToAlliesCommand,
         &vtChatToAllCommand,
 #endif

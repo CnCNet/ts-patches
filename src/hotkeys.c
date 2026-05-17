@@ -22,8 +22,8 @@ HookInitCommands() {
 #ifdef SHAREDCONTROL
                                  &GrantControlCommand,
 #endif
-                                 &ToggleInfoPanelCommand,
 #ifndef VINIFERA
+                                 &ToggleInfoPanelCommand,
                                  &PlaceBuildingCommand,
                                  &RepeatBuildingCommand,
 #endif // VINIFERA
