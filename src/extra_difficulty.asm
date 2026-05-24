@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 ; Adds more difficulty levels.
 ; Author: Rampastring
 
@@ -291,3 +293,5 @@ hack 0x004BB479
     test eax, eax
     jz   0x004BB570
     jmp  0x004BB486
+
+%endif ; SPAWNER
