@@ -22,12 +22,8 @@ HookInitCommands() {
 #ifdef SHAREDCONTROL
                                  &GrantControlCommand,
 #endif
-
-#ifdef SPAWNER
-                                 &ToggleInfoPanelCommand,
-#endif // SPAWNER
-
 #ifndef VINIFERA
+                                 &ToggleInfoPanelCommand,
                                  &PlaceBuildingCommand,
                                  &RepeatBuildingCommand,
 #endif // VINIFERA
