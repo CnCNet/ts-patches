@@ -27,10 +27,13 @@ bool DisableScoreScreenAudio = true;
 void LoadSunIni()
 {
     IsNoCD = SunIni_GetBool("Options", "NoCD", true);
+
+#ifndef VINIFERA
     if (SunIni_GetBool("Options", "SingleProcAffinity", true))
         SetSingleProcAffinity();
     else
         SetMultiProcAffinity();
+#endif // VINIFERA
 
     VideoBackBuffer = SunIni_GetBool("Video", "VideoBackBuffer", true);
     UsePNG = SunIni_GetBool("Video", "UsePNG", UsePNG);
