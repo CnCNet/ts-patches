@@ -3,6 +3,8 @@
 #include "Classes/EventClass.h"
 #include "patch.h"
 
+#ifdef SPAWNER
+
 int32_t WorstMaxAhead = 24;
 
 int32_t LastSentResponseTime = 100;
@@ -138,3 +140,5 @@ Handle_Timing_Change(EventClass *e)
         PreCalcFrameRate = 60;
     }
 }
+
+#endif // SPAWNER

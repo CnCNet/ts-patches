@@ -14,6 +14,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#ifdef SPAWNER
+
 #include <winsock2.h>
 #include <windows.h>
 #include "macros/patch.h"
@@ -130,3 +132,5 @@ WINAPI int NetHack_RecvFrom(int sockfd, void *buf, size_t len, int flags, struct
 
     return ret;
 }
+
+#endif // SPAWNER

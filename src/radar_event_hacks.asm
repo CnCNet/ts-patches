@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 ;;; Don't create a radar event for a new unit or building being placed
 @CLEAR 0x004BED18, 0x90, 0x004BED1E
 
@@ -15,3 +17,5 @@ _HouseClass__Attacked_spectator_events:
         jz  0x004BD43E
 
         jmp 0x004BD4C5
+
+%endif ; SPAWNER

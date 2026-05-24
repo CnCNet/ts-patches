@@ -10,7 +10,7 @@ if /I "%c%" EQU "N" goto :debug
 if not exist "build\release" mkdir build\release
 
 gmake clean
-gmake MOD_FD=1
+gmake MOD_FD=1 SPAWNER=1
 move /Y game.exe ./build/release/game.exe
 
 :debug
@@ -20,18 +20,28 @@ if /I "%c%" EQU "N" goto :vinifera
 if not exist "build\debug" mkdir build\debug
 
 gmake clean
-gmake MOD_FD=1 WWDEBUG=1
+gmake MOD_FD=1 SPAWNER=1 WWDEBUG=1
 move /Y game.exe ./build/debug/game.exe
 
 :vinifera
 set /P c=Generate Vinifera executable [Y/N]?
-if /I "%c%" EQU "N" goto :exit
+if /I "%c%" EQU "N" goto :vinifera_no_spawner
 
 if not exist "build\vinifera" mkdir build\vinifera
 
 gmake clean
-gmake MOD_FD=1 VINIFERA=1
+gmake MOD_FD=1 SPAWNER=1 VINIFERA=1
 move /Y game.exe ./build/vinifera/game.exe
+
+:vinifera_no_spawner
+set /P c=Generate Vinifera [Without Spawner Code] executable [Y/N]?
+if /I "%c%" EQU "N" goto :exit
+
+if not exist "build\vinifera_no_spawner" mkdir build\vinifera_no_spawner
+
+gmake clean
+gmake MOD_FD=1 VINIFERA=1
+move /Y game.exe ./build/vinifera_no_spawner/game.exe
 
 pause
 

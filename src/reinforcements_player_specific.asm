@@ -3,6 +3,8 @@
 %include "TiberianSun.inc"
 %include "string_macros.inc"
 
+%ifdef SPAWNER
+
 cextern UsedSpawnsArray
 
 ;; @JMP 0x05DD9BB 0x005DD9C4 ; Call TeamTypes__Read_INI later
@@ -173,3 +175,5 @@ Check_For_Reinforcements_Fake_HouseType_Name:
     pop ecx
     pop edi
     retn
+
+%endif ; SPAWNER

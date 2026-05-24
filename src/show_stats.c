@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-
+#ifdef SPAWNER
 
 //CALL(0x0064D187, _show_stats);
 CALL(0x0060E681, _MessageListClass__Draw_show_stats);
@@ -318,3 +318,5 @@ vtCommandClass vtToggleInfoPanelCommand = {
   ToggleInfoPanel_nothing
 };
 CommandClass ToggleInfoPanelCommand = { &vtToggleInfoPanelCommand,0,17,17 };
+
+#endif // SPAWNER

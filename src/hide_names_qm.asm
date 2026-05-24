@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/string.inc"
 
+%ifdef SPAWNER
+
 cextern QuickMatch
 cextern HiddenSurface
 StringZ str_Player, "Player"
@@ -33,3 +35,5 @@ ProgressMgrClass__Draw_It_Hide_Names:
  .Reg:
     mov edx, [esi]
     jmp hackend
+
+%endif ; SPAWNER

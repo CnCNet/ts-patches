@@ -6,6 +6,8 @@ cextern SpawnerActive
 cextern AimableSams
 
 hack 0x0042ED42, 0x0042ED4C
+
+%ifdef SPAWNER
         cmp DWORD[SpawnerActive], 1
         jne .regular
 
@@ -13,6 +15,8 @@ hack 0x0042ED42, 0x0042ED4C
         jne .regular
 
         jmp .past_test_al
+%endif ; SPAWNER
+        
 .regular:
         test al, al
         jz 0x0042ED60

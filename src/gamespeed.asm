@@ -8,8 +8,11 @@ cextern SpawnerActive
 ;;; Set Game Speed 6 to 55 FPS rather than 45 FPS
 @SET 0x005B1AAA, dd 55
 hack 0x005B1A9F
+
+%ifdef SPAWNER
         cmp DWORD [SpawnerActive], 1
         je  .speed_1
+%endif ; SPAWNER
 
         mov eax, 60
         jmp 0x005B1AA4

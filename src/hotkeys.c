@@ -13,12 +13,12 @@
 void __stdcall
 HookInitCommands() {
   CommandClass *NewHotkeys[] = {
-#ifndef VINIFERA
+#if !defined(VINIFERA) && !defined(SPAWNER)
 								 &ChatToAlliesCommand,
                                  &ChatToAllCommand,
-                                 &ChatToPlayerCommand,
+                                 &ChatToPlayerCommand,                                
                                  &TextBackgroundColorCommand,
-#endif // VINIFERA
+#endif // VINIFERA || SPAWNER
 #ifdef SHAREDCONTROL
                                  &GrantControlCommand,
 #endif
@@ -27,13 +27,19 @@ HookInitCommands() {
                                  &PlaceBuildingCommand,
                                  &RepeatBuildingCommand,
 #endif // VINIFERA
+
+#ifdef SPAWNER
                                  &ShowHelpCommand,
+#endif // SPAWNER
+
                                  &SelectOneLessCommand,
+                                 
 #ifdef WWDEBUG
                                  &MultiplayerDebugCommand,
                                  &MapSnapshotCommand,
                                  &ToggleTacticalZoomCommand
 #endif
+
                                };
   size_t len = sizeof(NewHotkeys)/sizeof((NewHotkeys)[0]);
 
@@ -42,6 +48,7 @@ HookInitCommands() {
   }
   Load_Keyboard_Hotkeys();
 
+#ifdef SPAWNER
   bool seen_all = 0, seen_allies = 0, seen_return = 0, seen_backspace = 0, seen_space = 0, seen_help = 0;
   // Loop through hotkeys and if chattoallis is not enabled then set it to backspace
   for (int i = 0; i < Hotkeys_ActiveCount; i++) {
@@ -81,7 +88,7 @@ HookInitCommands() {
     Hotkeys_Vector[Hotkeys_ActiveCount].KeyCode = 0x8;
     ++Hotkeys_ActiveCount;
   }
-
+  
   if (!seen_all && !seen_return) {
     WWDebug_Printf("****************************didn't see ChatToAll adding as hotkey[%d]\n",Hotkeys_ActiveCount);
     Hotkeys_Vector[Hotkeys_ActiveCount].Command = &ChatToAllCommand;
@@ -99,6 +106,8 @@ HookInitCommands() {
   }
 
   InfoPanelHotkeysInit();
+#endif // SPAWNER
+
 }
 
 /* Start MapSnapshot */
@@ -130,6 +139,8 @@ CommandClass MapSnapshotCommand = { &vtMapSnapshotCommand,0,17,17 };
 
 /* End MapSnapshot */
 
+
+#ifdef SPAWNER
 
 /* Start ChatAllies */
 #ifndef VINIFERA
@@ -207,6 +218,9 @@ vtCommandClass vtChatToPlayerCommand = {
 CommandClass ChatToPlayerCommand = { &vtChatToPlayerCommand,0,17,17 };
 #endif // VINIFERA
 /* End ChatAll */
+
+#endif // SPAWNER
+
 
 /* Start MPDebugPrint */
 void    __thiscall MultiplayerDebug_nothing(void *a)  { }

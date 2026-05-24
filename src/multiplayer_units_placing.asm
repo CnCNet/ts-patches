@@ -3,6 +3,8 @@
 %include "TiberianSun.inc"
 %include "string_macros.inc"
 
+%ifdef SPAWNER
+
 cextern UsedSpawnsArray
 
 cextern IsSpawnXAircraft
@@ -254,3 +256,5 @@ Check_For_Spawn_Fake_HouseType_Name:
     pop edi
     pop ebx
     retn
+
+%endif ; SPAWNER

@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 ;;; If a wrong CRC comes in from a player, we try to
 ;;; broadcast a REMOVEPLAYER message to everyone.
 
@@ -102,3 +104,5 @@ hack 0x00494EE4
 
     mov  eax, [Frame]
     jmp  hackend
+
+%endif ; SPAWNER

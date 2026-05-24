@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 cextern UsedSpawnsArray
 
 sstring str_Hard, "Difficulty: Hard"
@@ -442,3 +444,5 @@ hack 0x0061913B ; Extend trigger action jump table
     dec     edi
     mov     [ScenarioInit], edi
     jmp     0x00619F9F      ; success
+
+%endif ; SPAWNER

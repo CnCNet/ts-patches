@@ -2,6 +2,8 @@
 #include "TiberianSun.h"
 #include "patch.h"
 
+#ifdef SPAWNER
+
 /*
   typedef struct TutorialStruct {
     int32_t ID;
@@ -76,3 +78,5 @@ resize_tut_vector(size_t addElems) {
   return new_size;
 
 }
+
+#endif // SPAWNER

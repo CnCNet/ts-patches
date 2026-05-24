@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 @CLEAR 0x00508B0C, 0x90, 0x00508B19
 @CLEAR 0x005B1A2D, 0x90, 0x005B1A3B
 
@@ -96,3 +98,5 @@ hack 0x005B1AC1
  .Reg:
    call [edx+0x30]              ;Response_Time
    jmp  hackend
+
+%endif ; SPAWNER

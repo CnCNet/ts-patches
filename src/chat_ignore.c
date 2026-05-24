@@ -3,6 +3,8 @@
 #include "TiberianSun.h"
 #include "patch.h"
 
+#ifdef SPAWNER
+
 CALL(0x00462EEB, _fake_MessageListClass__Concat_Message);
 
 bool IgnoredColors[256];
@@ -71,3 +73,5 @@ BOOL __thiscall fake_MessageListClass__Concat_Message(
     
     return FALSE;
 }
+
+#endif // SPAWNER

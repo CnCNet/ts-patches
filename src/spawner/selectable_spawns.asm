@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 cextern IsSpectatorArray
 cextern SpawnLocationsArray
 cextern SpawnerActive
@@ -127,4 +129,4 @@ _Create_Units_Selectable_Spawning_Locations:
     mov edx, edi
     jmp .Normal_Code
     
-    
+%endif ; SPAWNER    

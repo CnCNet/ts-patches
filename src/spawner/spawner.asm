@@ -4,6 +4,8 @@
 %include "ini.inc"
 %include "patch.inc"
 
+%ifdef SPAWNER
+
 cextern SpawnerActive
 cextern INIClass_SPAWN
 cextern SpawnLocationsArray
@@ -1899,3 +1901,5 @@ Add_Human_Opponents:
     pop ebp
     retn
 %pop
+
+%endif ; SPAWNER

@@ -85,27 +85,33 @@ jobs:
         New-Item -Path 'build\release' -ItemType Directory
         
         gmake clean
-        gmake -j8 ${{ matrix.type }}=1
+        gmake -j8 ${{ matrix.type }}=1 SPAWNER=1
         Move-Item -Path 'game.exe' -Destination 'build\release\game.exe'
         
         # New-Item -Path 'build\debug' -ItemType Directory
         
         # gmake clean
-        # gmake -j8 ${{ matrix.type }}=1 WWDEBUG=1
+        # gmake -j8 ${{ matrix.type }}=1 SPAWNER=1 WWDEBUG=1
         # Move-Item -Path 'game.exe' -Destination 'build\debug\game.exe'
         
         New-Item -Path 'build\vinifera' -ItemType Directory
         
         gmake clean
-        gmake -j8 ${{ matrix.type }}=1 VINIFERA=1
+        gmake -j8 ${{ matrix.type }}=1 SPAWNER=1 VINIFERA=1
         Move-Item -Path 'game.exe' -Destination 'build\vinifera\game.exe'
+        
+        New-Item -Path 'build\vinifera_no_spawner' -ItemType Directory
+        
+        gmake clean
+        gmake -j8 ${{ matrix.type }}=1 VINIFERA=1
+        Move-Item -Path 'game.exe' -Destination 'build\vinifera_no_spawner\game.exe'
         
         # Only build the CnCNet binaries for TSCLIENT
         if ("${{ matrix.type }}" -eq "TSCLIENT") {
             New-Item -Path 'build\cncnet' -ItemType Directory
             
             gmake clean
-            gmake -j8 ${{ matrix.type }}=1 CNCNET=1
+            gmake -j8 ${{ matrix.type }}=1 SPAWNER=1 CNCNET=1
             Move-Item -Path 'game.exe' -Destination 'build\cncnet\game.exe'
             
             Get-ChildItem -Path 'build\cncnet'
@@ -114,16 +120,19 @@ jobs:
         Get-ChildItem -Path 'build\release'
         # Get-ChildItem -Path 'build\debug'
         Get-ChildItem -Path 'build\vinifera'
+        Get-ChildItem -Path 'build\vinifera_no_spawner'
         
     - name: Copy Binaries
       run: |      
         New-Item -Path 'artifact\release' -ItemType Directory
         # New-Item -Path 'artifact\debug' -ItemType Directory
         New-Item -Path 'artifact\vinifera' -ItemType Directory
+        New-Item -Path 'artifact\vinifera_no_spawner' -ItemType Directory
         
         Move-Item -Path 'build\release\game.exe' -Destination 'artifact\release\game.exe'
         # Move-Item -Path 'build\debug\game.exe' -Destination 'artifact\debug\game.exe'
         Move-Item -Path 'build\vinifera\game.exe' -Destination 'artifact\vinifera\game.exe'
+        Move-Item -Path 'build\vinifera_no_spawner\game.exe' -Destination 'artifact\vinifera_no_spawner\game.exe'
         
         # Only pack the CnCNet binaries for TSCLIENT
         if ("${{ matrix.type }}" -eq "TSCLIENT") {
@@ -135,6 +144,7 @@ jobs:
         Get-ChildItem -Path 'artifact\release'
         # Get-ChildItem -Path 'artifact\debug'
         Get-ChildItem -Path 'artifact\vinifera'
+        Get-ChildItem -Path 'artifact\vinifera_no_spawner'
         
         Get-ChildItem
         Get-ChildItem -Path 'build'

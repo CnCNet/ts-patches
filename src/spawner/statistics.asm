@@ -2,6 +2,8 @@
 %include "macros/datatypes.inc"
 %include "TiberianSun.inc"
 
+%ifdef SPAWNER
+
 cextern SpawnerActive
 cextern IsSpectatorArray
 cextern SpawnLocationsArray
@@ -437,3 +439,5 @@ _HouseClass__HouseClass_Allocate_UnitTrackerClass_Stuff:
 @SET 0x0063395C, { cmp dword[SessionType], 3 }
 @SET 0x00633928, { cmp dword[SessionType], 3 }
 %endif
+
+%endif ; SPAWNER
