@@ -535,6 +535,7 @@ endif
 # =========================================================
 ifdef TSCLIENT
     OBJS += src/ts_hacks.o
+    OBJS += src/spawn_arg_check.o
 endif
 ifdef TIBSUN
     OBJS += src/ts_hacks.o
@@ -544,24 +545,31 @@ ifdef SINGLEPLAYER
 endif
 ifdef MOD_DTA
     OBJS += src/dta_hacks.o
+    OBJS += src/spawn_arg_check.o
 endif
 ifdef MOD_TI
     OBJS += src/ti_hacks.o
+    OBJS += src/spawn_arg_check.o
 endif
 ifdef MOD_TO
     OBJS += src/to_hacks.o
+    OBJS += src/spawn_arg_check.o
 endif
 ifdef MOD_RUBICON
     OBJS += src/rubicon_hacks.o
+    OBJS += src/spawn_arg_check.o
 endif
 ifdef MOD_FD
     OBJS += src/fd_hacks.o
+    OBJS += src/spawn_arg_check.o
 endif
 ifdef MOD_SD
     OBJS += src/sd_hacks.o
+    OBJS += src/spawn_arg_check.o
 endif
 ifdef MOD_TSA
     OBJS += src/tsa_hacks.o
+    OBJS += src/spawn_arg_check.o
 endif
 
 

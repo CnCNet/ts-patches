@@ -49,8 +49,6 @@ cextern SharedControl
 @LJMP 0x004BDDB1, _HouseClass__Make_Ally_STFU_when_Allying_In_Loading_Screen_Spawner
 @LJMP 0x004E078C, _Init_Game_Check_Spawn_Arg_No_Intro
 
-@LJMP 0x005FFDBF, _WinMain_Read_Check_Spawn_Arg
-
 ; Inside HouseClass::Mplayer_Defeated skip some checks which makes game continue
 ; even if there are only allied AI players left, in skirmish
 @LJMP 0x004BF7B6, 0x004BF7BF
@@ -88,7 +86,6 @@ section .bss
     inet_addr                  RESD 1
 
     IsDoingAlliancesSpawner    RESB 1
-    IsSpawnArgPresent           RESD 1
     AllyBySpawnLocation        RESD 1
 
     HouseColorsArray           RESD 8
@@ -191,20 +188,6 @@ section .rdata
     str_AutoSurrender   db "AutoSurrender",0
     str_GameNameTitle   db "Tiberian Sun",0
 
-	%ifdef MOD_DTA
-    str_PleaseRunClient db "Please run DTA.exe instead.",0
-    %elifdef MOD_TI
-    str_PleaseRunClient db "Please run TwistedInsurrection.exe instead.",0
-    %elifdef MOD_TO
-    str_PleaseRunClient db "Please run TiberianOdyssey.exe instead.",0
-    %elifdef MOD_RUBICON
-    str_PleaseRunClient db "Please run Rubicon.exe instead.",0
-    %elifdef TSCLIENT
-    str_PleaseRunClient db "Please run TiberianSun.exe instead.",0
-    %else
-    str_PleaseRunClient db "Please run the game client instead.",0
-    %endif
-
     str_CampaignID      db "CampaignID",0
     str_UseMPAIBaseNodes db "UseMPAIBaseNodes", 0
     str_PlayMoviesInMultiplayer db "PlayMoviesInMultiplayer",0
@@ -295,9 +278,6 @@ section .rdata
 section .text
 
 _Read_Scenario_INI_Fix_Spawner_DifficultyMode_Setting:
-    cmp dword [IsSpawnArgPresent], 0
-    jz  .Ret
-
     cmp dword [SessionType], 0
     jnz .Ret
 
@@ -450,16 +430,8 @@ _Read_Scenario_INI_Dont_Create_Units_Earlier_Dont_Create_Twice:
     jmp 0x005DDEF8
 
 _HouseClass__Computer_Paranoid_Disable_With_Spawner:
-    cmp dword [IsSpawnArgPresent], 1
-    jz  .Ret
-
-.Normal_Code:
-    mov ecx, [HouseClassArray_Count]
-    jmp 0x004C3636
-
-.Ret:
     jmp 0x004C3700 ; jump to RETN instruction
-	
+
 _Assign_Houses_Human_Countries:
 	mov ebp, [HouseClassArray_Count]
     cmp dword [HouseCountriesArray+ebp*4], -1
@@ -555,44 +527,8 @@ _HouseClass__AI_Attack_Stuff_Alliance_Check:
     jmp 0x004C06F7
 
 _sub_5ED470_Dont_Read_Scenario_Descriptions_When_Spawner_Active:
-    cmp dword [IsSpawnArgPresent], 1
-    jz  .Ret
-
-    call SessionClass__Read_Scenario_Descriptions
-
-.Ret:
     call [_imp__timeGetTime]
     jmp 0x005ED482
-
-_WinMain_Read_Check_Spawn_Arg:
-    pushad
-
-    call [_imp__GetCommandLineA]
-    push str_SpawnArg
-    push eax
-    call stristr_
-    add esp, 8
-    xor ebx, ebx
-    cmp eax, 0
-    setne bl
-    mov [IsSpawnArgPresent], ebx
-    popad
-
-    cmp dword [IsSpawnArgPresent], 1
-    je .Normal_Code
-
-    ; -SPAWN arg not found, display error message asking to run the client instead
-
-    push 16 ; uType
-    push str_GameNameTitle ; Title
-    push str_PleaseRunClient ; Text
-    push 0 ; hWnd
-    call [0x006CA458] ; ds:MessageBoxA
-    jmp 0x005FFCB0
-
-.Normal_Code:
-    call 0x00472540 ; Init_Language
-    jmp 0x005FFDC4
 
 Init_Game_Spawner:
     lea eax, [UsedSpawnsArray]
@@ -611,12 +547,7 @@ _Init_Game_Check_Spawn_Arg_No_Intro:
 
     popad
 
-    cmp dword [IsSpawnArgPresent], 0
-    jz .Normal_Code
-
-.No_Intro:
     jmp 0x004E0848
-
 
 .Normal_Code:
     and ecx, 4
@@ -1130,10 +1061,6 @@ Initialize_Spawn:
     sub esp,128
 
 %define TempBuf     ebp-128
-
-
-    cmp dword [IsSpawnArgPresent], 0
-    je .Exit_Error
 
     cmp dword [SpawnerActive], 1
     jz .Ret_Exit
