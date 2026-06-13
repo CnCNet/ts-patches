@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 ; Records Override_Mission calls for sync logging
 
 cextern record_override_mission_void
@@ -29,3 +31,5 @@ hack 0x004A44F0
         push esi
         push edi
         jmp  0x004A44F6
+
+%endif ; SPAWNER

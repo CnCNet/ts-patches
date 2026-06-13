@@ -10,6 +10,8 @@
 
 unsigned int __cdecl __MINGW_NOTHROW _controlfp (unsigned int unNew, unsigned int unMask);
 
+#ifdef SPAWNER
+
 CALL(0x005B5AD2, _fprintf_log_more_stuff);
 CALL(0x005B5CA0, _fprintf_no_name_localization);
 
@@ -436,3 +438,5 @@ print_AnimationConstructorCalls(FILE * restrict stream, int32_t count)
     }
     fprintf(stream, "\n", 0);
 }
+
+#endif /* SPAWNER */

@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 ; Records TarCom changes for sync logging
 
 cextern record_tarcom_void
@@ -162,4 +164,6 @@ hack 0x004D4770
         push edi
         mov  edi, [esp+0Ch]
         jmp  0x004D4778
+
+%endif ; SPAWNER
 

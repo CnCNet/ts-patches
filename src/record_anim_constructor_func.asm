@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 ; Records animation constructor calls for sync logging
 
 cextern record_animation_constructor_void
@@ -22,4 +24,6 @@ hack 0x00413AE0
         mov  ebp, esp
         and  esp, 0FFFFFFF8h
         jmp  0x00413AE6
+
+%endif ; SPAWNER
 

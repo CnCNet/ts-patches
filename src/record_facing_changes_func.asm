@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 ; Records facing changes for sync logging
 
 cextern record_facing_void
@@ -27,3 +29,5 @@ hack 0x00496670
         push esi
         mov  esi, ecx
         jmp  0x00496677
+
+%endif ; SPAWNER

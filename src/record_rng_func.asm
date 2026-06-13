@@ -2,6 +2,8 @@
 %include "macros/patch.inc"
 %include "macros/datatypes.inc"
 
+%ifdef SPAWNER
+
 cextern record_rng_ii           ; Defined in log_more_oos.c
 cextern record_rng_void
 
@@ -60,4 +62,6 @@ hack 0x0005BE04B
         inc edx
         inc esi
         jmp 0x005BE051
+
+%endif ; SPAWNER
 
