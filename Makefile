@@ -188,7 +188,6 @@ OBJS += src/autosave.o
 OBJS += src/briefing_restate_map_file.o
 OBJS += src/briefing_screen_mission_start.o
 OBJS += src/buildconst_harvesterunit_baseunit.o
-OBJS += src/buildlimit_fix.o
 OBJS += src/c4_repairable_fix.o
 OBJS += src/carryall_click_under_glitch.o
 OBJS += src/center_team.o
@@ -334,6 +333,7 @@ endif
 ifndef VINIFERA
 OBJS += src/buildingtype_initialization.o
 OBJS += src/cache_alot.o
+OBJS += src/buildlimit_fix.o
 
 # Only included in: MOD_TI
 ifdef MOD_TI
