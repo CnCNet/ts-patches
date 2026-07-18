@@ -286,7 +286,6 @@ OBJS += src/sideindex_improvements_v2.o
 OBJS += src/singleplayer_objects_on_multiplayer_map_crash.o
 OBJS += src/smarter_firesale.o
 OBJS += src/spy_fix.o
-OBJS += src/unit_self_heal_repair_step.o
 OBJS += src/tiberium_on_slope_crash.o
 OBJS += src/tileset255_bridgerepairfix.o
 OBJS += src/trigger_actions_extended.o
@@ -334,6 +333,7 @@ ifndef VINIFERA
 OBJS += src/buildingtype_initialization.o
 OBJS += src/cache_alot.o
 OBJS += src/buildlimit_fix.o
+OBJS += src/unit_self_heal_repair_step.o
 
 # Only included in: MOD_TI
 ifdef MOD_TI
