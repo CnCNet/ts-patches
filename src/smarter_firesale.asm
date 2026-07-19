@@ -32,6 +32,7 @@ hack 0x004C345B
     
     mov  al, [ShortGame]
     cmp  al, 1
+    jne  .Original_Code
     jmp  .Calculate_Object_Count 
 
 .Original_Code:
