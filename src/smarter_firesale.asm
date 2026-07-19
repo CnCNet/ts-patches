@@ -32,7 +32,7 @@ hack 0x004C345B
     
     mov  al, [ShortGame]
     cmp  al, 1
-    jmp  .Calculate_Object_Count 
+    je  .Calculate_Object_Count 
 
 .Original_Code:
     ; Short Game is disabled or we have too few units for them to form a respectable threat,
