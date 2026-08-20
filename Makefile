@@ -17,6 +17,10 @@ INPUT       = input.dat
 OUTPUT      = game.exe
 LDS         = tibsun.lds
 IMPORTS     = 0x2EC050 280
+
+ifdef VINIFERA
+IMPORTS     = 0x2EC050 260
+endif
 LDFLAGS     = --file-alignment=0x1000 --section-alignment=0x1000 --subsystem=windows --enable-stdcall-fixup
 NFLAGS      = -f elf -Iinc/
 CFLAGS      = -std=c99 -Iinc/ -I3rdparty/ -DLODEPNG_NO_COMPILE_DISK
@@ -325,6 +329,10 @@ ifdef MOD_TO
 #OBJS += 
 endif
 
+# Vinifera only sources.
+ifdef VINIFERA
+OBJS += src/remove_ddraw_import.o
+endif
 
 # =========================================================
 # These sources will be omitted from Vinifera compatible builds.
